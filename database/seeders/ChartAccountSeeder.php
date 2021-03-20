@@ -93,7 +93,7 @@ class ChartAccountSeeder extends Seeder
         ]);
 
         $type = ChartType::create([
-        	'name' => 'Revenue'
+        	'name' => 'Income'
         ]); 
 
         $type->accounts()->create([
