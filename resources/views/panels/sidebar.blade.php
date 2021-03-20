@@ -32,7 +32,7 @@
                             </g>
                         </svg>
                     </span>
-                    <h2 class="brand-text">The Section 32</h2>
+                    <h2 class="brand-text">The Society 32</h2>
                 </a>
             </li>
             <li class="nav-item nav-toggle">
