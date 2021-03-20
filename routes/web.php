@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\StaterkitController;
 use App\Http\Controllers\LanguageController;
 use App\Http\Controllers\WebController;
+use App\Http\Controllers\DashboardController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,7 +24,7 @@ Auth::routes(['register' => false]);
 Route::get('/', [WebController::class, 'index'])->name('index');
 
 Route::middleware('auth')->group(function() {
-	Route::get('home', [StaterkitController::class, 'home'])->name('home');
+	Route::get('home', [DashboardController::class, 'index'])->name('home');
 });
 
 // Route Components

@@ -33,12 +33,13 @@ $(window).on('load', function () {
   var supportTrackerChart;
   var salesVisitChart;
   var isRtl = $('html').attr('data-textdirection') === 'rtl';
+  var name = document.getElementById('useraccountname');
 
   // On load Toast
   setTimeout(function () {
     toastr['success'](
-      'You have successfully logged in to Vuexy. Now you can start to explore!',
-      '👋 Welcome John Doe!',
+      'You have successfully logged in to The Section 32. Now you can start to explore!',
+      '👋 Welcome '+ name.getAttribute('data-text') +'!',
       {
         closeButton: true,
         tapToDismiss: false,
