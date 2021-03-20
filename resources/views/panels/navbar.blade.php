@@ -105,7 +105,12 @@
             <a class="dropdown-item" href="javascript:void(0)">
               <i class="mr-50" data-feather="help-circle"></i> FAQ
             </a>
-            <a class="dropdown-item" href="javascript:void(0)">
+            <a class="dropdown-item" href="{{ route('logout') }}"
+                                           onclick="event.preventDefault();
+                                                         document.getElementById('logout-form').submit();">
+              <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                  @csrf
+              </form>
               <i class="mr-50" data-feather="power"></i> Logout
             </a>
           </div>
