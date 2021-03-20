@@ -16,7 +16,8 @@ class ChartAccountSeeder extends Seeder
     public function run()
     {
         $type = ChartType::create([
-        	'name' => 'Assets'
+        	'name'   => 'Assets',
+            'color'  => 'primary',
         ]);
 
         $type->accounts()->create([
@@ -45,7 +46,8 @@ class ChartAccountSeeder extends Seeder
         ]);
 
         $type = ChartType::create([
-        	'name' => 'Liabilities'
+        	'name'   => 'Liabilities',
+            'color'  => 'success'
         ]); 
 
         $type->accounts()->create([
@@ -74,7 +76,8 @@ class ChartAccountSeeder extends Seeder
         ]);
 
         $type = ChartType::create([
-        	'name' => 'Equity'
+        	'name'   => 'Equity',
+            'color'  => 'info'
         ]); 
 
         $type->accounts()->create([
@@ -93,7 +96,8 @@ class ChartAccountSeeder extends Seeder
         ]);
 
         $type = ChartType::create([
-        	'name' => 'Income'
+        	'name'   => 'Income',
+            'color'  => 'warning'
         ]); 
 
         $type->accounts()->create([
@@ -107,7 +111,8 @@ class ChartAccountSeeder extends Seeder
         ]);
 
         $type = ChartType::create([
-        	'name' => 'Expenses'
+        	'name'   => 'Expenses',
+            'color'  => 'danger'
         ]);
 
         $type->accounts()->create([

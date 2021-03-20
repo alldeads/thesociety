@@ -16,6 +16,7 @@ class CreateChartTypesTable extends Migration
         Schema::create('chart_types', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->string('color')->default('primary');
             $table->timestamps();
         });
     }

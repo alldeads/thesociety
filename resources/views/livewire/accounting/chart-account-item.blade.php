@@ -1,7 +1,7 @@
 <tr>
 	<td>{{ $account->code }}</td>
 	<td>{{ $account->name }}</td>
-	<td>{{ $account->type->name }}</td>
+	<td><span class="badge badge-pill badge-light-{{ $account->type->color }} mr-1">{{ $account->type->name }}</td>
 	<td>
         <div class="dropdown">
             <button type="button" class="btn btn-sm dropdown-toggle hide-arrow" data-toggle="dropdown">
