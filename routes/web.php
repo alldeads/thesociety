@@ -5,6 +5,7 @@ use App\Http\Controllers\StaterkitController;
 use App\Http\Controllers\LanguageController;
 use App\Http\Controllers\WebController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\AccountingController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,5 +25,10 @@ Auth::routes(['register' => false]);
 Route::get('/', [WebController::class, 'index'])->name('index');
 
 Route::middleware('auth')->group(function() {
+
 	Route::get('home', [DashboardController::class, 'index'])->name('home');
+
+	Route::prefix('accounting')->group( function() {
+		Route::get('chart-of-accounts', [AccountingController::class, 'chart_accounts'])->name('chart-of-accounts');
+	});
 });
