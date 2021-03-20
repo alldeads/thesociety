@@ -18,19 +18,19 @@ class UserSeeder extends Seeder
         User::create([
         	'name'     => 'John Rexter Flores',
         	'email'    => 'john@test.com',
-        	'password' => 'password'
+        	'password' => bcrypt('password')
         ]);
 
         User::create([
         	'name'     => 'Rojennette Ann Alivio',
         	'email'    => 'roj@test.com',
-        	'password' => 'password'
+        	'password' => bcrypt('password')
         ]);
 
         User::create([
         	'name'     => 'Dave Scott Wong',
         	'email'    => 'dave@test.com',
-        	'password' => 'password'
+        	'password' => bcrypt('password')
         ]);
     }
 }
