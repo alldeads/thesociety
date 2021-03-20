@@ -57,7 +57,7 @@
 
                 @foreach($header as $menu)
                     <li class="nav-item {{ Route::currentRouteName() === $menu->slug ? 'active' : '' }} {{ $menu->classList }}">
-                        <a href="{{isset($menu->url)? url($menu->url):'javascript:void(0)'}}" class="d-flex align-items-center" target="{{isset($menu->newTab) ? '_blank':'_self'}}">
+                        <a href="{{isset($menu->url)? url($menu->url):'javascript:void(0)'}}" class="d-flex align-items-center" target="{{$menu->newTab ? '_blank':'_self'}}">
                             <i data-feather="{{ $menu->icon }}"></i>
                             <span class="menu-title text-truncate">{{ $menu->name }}</span>
                             @if (isset($menu->badge))
