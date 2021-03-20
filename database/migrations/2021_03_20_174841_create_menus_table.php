@@ -22,6 +22,9 @@ class CreateMenusTable extends Migration
             $table->string('icon')->nullable();
             $table->string('badge')->nullable();
             $table->string('badgeClass')->nullable();
+            $table->boolean('newTab')->default(false);
+            $table->string('classList')->nullable();
+            $table->bigInteger('parent_menu_id')->nullable();
             $table->timestamps();
         });
     }

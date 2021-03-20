@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Menu extends Model
 {
     use HasFactory;
+
+    public function submenus()
+    {
+    	return $this->hasMany(Menu::class, 'id', 'parent_menu_id');
+    }
 }

@@ -17,6 +17,7 @@ class CreateHeadersTable extends Migration
             $table->id();
             $table->string('name');
             $table->string('slug')->nullable();
+            $table->integer('order')->default(-1);
             $table->timestamps();
         });
     }

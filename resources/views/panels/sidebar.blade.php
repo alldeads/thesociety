@@ -48,37 +48,29 @@
 
     <div class="main-menu-content">
         <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation">
-            @if(isset($menuData[0]))
-                @foreach($menuData[0]->menu as $menu)
-                    @if(isset($menu->navheader))
-                        <li class="navigation-header">
-                            <span>{{ $menu->navheader }}</span>
-                            <i data-feather="more-horizontal"></i>
-                        </li>
-                    @else
-                        @php
-                            $custom_classes = "";
-                            if(isset($menu->classlist)) {
-                                $custom_classes = $menu->classlist;
-                            }
-                        @endphp
 
-                        <li class="nav-item {{ Route::currentRouteName() === $menu->slug ? 'active' : '' }} {{ $custom_classes }}">
-                            <a href="{{isset($menu->url)? url($menu->url):'javascript:void(0)'}}" class="d-flex align-items-center" target="{{isset($menu->newTab) ? '_blank':'_self'}}">
-                                <i data-feather="{{ $menu->icon }}"></i>
-                                <span class="menu-title text-truncate">{{ __('locale.'.$menu->name) }}</span>
-                                @if (isset($menu->badge))
-                                    <?php $badgeClasses = "badge badge-pill badge-light-primary ml-auto mr-1" ?>
-                                        <span class="{{ isset($menu->badgeClass) ? $menu->badgeClass : $badgeClasses }} ">{{$menu->badge}}</span>
-                                @endif
-                            </a>
-                            @if(isset($menu->submenu))
-                                @include('panels/submenu', ['menu' => $menu->submenu])
+            @foreach($headers as $key => $header)
+                <li class="navigation-header">
+                    <span>{{ ucwords($key) }}</span>
+                    <i data-feather="more-horizontal"></i>
+                </li>
+
+                @foreach($header as $menu)
+                    <li class="nav-item {{ Route::currentRouteName() === $menu->slug ? 'active' : '' }} {{ $menu->classList }}">
+                        <a href="{{isset($menu->url)? url($menu->url):'javascript:void(0)'}}" class="d-flex align-items-center" target="{{isset($menu->newTab) ? '_blank':'_self'}}">
+                            <i data-feather="{{ $menu->icon }}"></i>
+                            <span class="menu-title text-truncate">{{ $menu->name }}</span>
+                            @if (isset($menu->badge))
+                                <?php $badgeClasses = "badge badge-pill badge-light-primary ml-auto mr-1" ?>
+                                    <span class="{{ isset($menu->badgeClass) ? $menu->badgeClass : $badgeClasses }} ">{{$menu->badge}}</span>
                             @endif
-                        </li>
-                    @endif
+                        </a>
+                        @if(isset($menu->submenu))
+                            @include('panels/submenu', ['menu' => $menu->submenu])
+                        @endif
+                    </li>
                 @endforeach
-            @endif
+            @endforeach
         </ul>
     </div>
 </div>

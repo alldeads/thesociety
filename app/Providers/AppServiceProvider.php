@@ -4,6 +4,8 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 
+use App\Models\Header;
+
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -23,6 +25,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        view()->composer(['panels.sidebar'], function ($view) {
+            $view->with('headers', Header::get_menus());
+        });
     }
 }
