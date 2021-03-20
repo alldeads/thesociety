@@ -42,16 +42,42 @@ class MenuSeeder extends Seeder
 
         $header->menus()->create([
         	'name'  => 'Cash Flow',
-        	'slug'  => 'chart-of-accounts',
-        	'url'   => 'accounting/chart-of-accounts',
+        	'slug'  => 'cash-flow',
+        	'url'   => 'accounting/cash-flow',
         	'icon'  => 'edit-3'
         ]);
 
         $header->menus()->create([
         	'name'  => 'Ledger',
-        	'slug'  => 'chart-of-accounts',
-        	'url'   => 'accounting/chart-of-accounts',
+        	'slug'  => 'ledger',
+        	'url'   => 'accounting/ledger',
         	'icon'  => 'book-open'
+        ]);
+
+        $header = Header::create([
+        	'name'  => 'Inventory',
+        	'order' => 3
+        ]);
+
+        $header->menus()->create([
+        	'name'  => 'Purchase Orders',
+        	'slug'  => 'purchase-orders',
+        	'url'   => 'inventory/purchase-orders',
+        	'icon'  => 'clipboard'
+        ]);
+
+        $header->menus()->create([
+        	'name'  => 'Supplies',
+        	'slug'  => 'supplies',
+        	'url'   => 'inventory/supplies',
+        	'icon'  => 'package'
+        ]);
+
+        $header->menus()->create([
+        	'name'  => 'Suppliers',
+        	'slug'  => 'suppliers',
+        	'url'   => 'inventory/suppliers',
+        	'icon'  => 'user-check'
         ]);
     }
 }
