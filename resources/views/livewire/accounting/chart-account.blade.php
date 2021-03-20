@@ -10,7 +10,7 @@
 						<tr>
 							<th>Code</th>
 							<th>Name</th>
-							<th>Category</th>
+							<th>Account Type</th>
 							<th>Actions</th>
 						</tr>
 					</thead>
