@@ -22,7 +22,11 @@ class CompanyFactory extends Factory
     public function definition()
     {
         return [
-            'name' => $this->faker->company,
+            'name'    => $this->faker->company,
+            'email'   => $this->faker->email,
+            'phone'   => $this->faker->phoneNumber,
+            'status'  => 'active',
+            'avatar'  => 'https://loremflickr.com/600/400?random=" . rand(0, 999)',
         ];
     }
 }

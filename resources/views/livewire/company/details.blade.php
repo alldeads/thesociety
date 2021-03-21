@@ -10,10 +10,10 @@
 			  				<div class="user-avatar-section">
 								<div class="d-flex justify-content-start">
 				  					<img class="img-fluid rounded"
-										src="{{asset('images/avatars/7.png')}}"
+										src="{{ $company->avatar ?? '' }}"
 										height="104"
 										width="104"
-										alt="User avatar"/>
+										alt="Company logo"/>
 
 				  					<div class="d-flex flex-column ml-1">
 										<div class="user-info mb-1">
@@ -84,7 +84,7 @@
 								<div class="d-flex flex-wrap">
 				  					<div class="user-info-title">
 										<i data-feather="phone" class="mr-1"></i>
-										<span class="card-text user-info-title font-weight-bold mb-0">Contact</span>
+										<span class="card-text user-info-title font-weight-bold mb-0">Phone</span>
 				  					</div>
 				  					<p class="card-text mb-0">{{ $company->phone ?? '' }}</p>
 								</div>
