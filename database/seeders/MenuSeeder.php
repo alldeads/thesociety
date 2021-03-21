@@ -81,13 +81,13 @@ class MenuSeeder extends Seeder
         ]);
 
         $header = Header::create([
-            'name'  => 'Company & Settings',
+            'name'  => 'Settings',
             'order' => 4
         ]);
 
         $header->menus()->create([
             'name'  => 'Company Details',
-            'slug'  => 'company-details',
+            'slug'  => 'company',
             'url'   => 'company/details',
             'icon'  => 'info'
         ]);
