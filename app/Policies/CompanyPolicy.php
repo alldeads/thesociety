@@ -28,12 +28,8 @@ class CompanyPolicy
      * @param  \App\Models\Company  $company
      * @return mixed
      */
-    public function view(User $user, Company $company)
+    public function view(User $user)
     {
-        if ( $user->id !== $company->id ) {
-            return false;
-        }
-
         return $user->can('company.view');
     }
 

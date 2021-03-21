@@ -79,5 +79,17 @@ class MenuSeeder extends Seeder
         	'url'   => 'inventory/suppliers',
         	'icon'  => 'user-check'
         ]);
+
+        $header = Header::create([
+            'name'  => 'Company & Settings',
+            'order' => 4
+        ]);
+
+        $header->menus()->create([
+            'name'  => 'Company Details',
+            'slug'  => 'company-details',
+            'url'   => 'company/details',
+            'icon'  => 'info'
+        ]);
     }
 }
