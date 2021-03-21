@@ -47,4 +47,9 @@ class User extends Authenticatable
     {
         return $this->first_name . ' ' . $this->last_name;
     }
+
+    public function empCard()
+    {
+        return $this->belongsTo(Employee::class, 'id', 'user_id');
+    }
 }

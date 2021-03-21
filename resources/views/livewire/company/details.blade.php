@@ -17,8 +17,8 @@
 
 				  					<div class="d-flex flex-column ml-1">
 										<div class="user-info mb-1">
-					  						<h4 class="mb-0">Eleanor Aguilar</h4>
-					  						<span class="card-text">eleanor.aguilar@gmail.com</span>
+					  						<h4 class="mb-0">{{ $company->name ?? '' }}</h4>
+					  						<span class="card-text">{{ $company->email ?? '' }}</span>
 										</div>
 
 										<div class="d-flex flex-wrap">
@@ -56,37 +56,37 @@
 								<div class="d-flex flex-wrap">
 				  					<div class="user-info-title">
 										<i data-feather="user" class="mr-1"></i>
-										<span class="card-text user-info-title font-weight-bold mb-0">Username</span>
+										<span class="card-text user-info-title font-weight-bold mb-0">Company</span>
 				  					</div>
-				  					<p class="card-text mb-0">eleanor.aguilar</p>
+				  					<p class="card-text mb-0">{{ $company->name ?? '' }}</p>
 								</div>
 								<div class="d-flex flex-wrap my-50">
 				  					<div class="user-info-title">
 										<i data-feather="check" class="mr-1"></i>
 										<span class="card-text user-info-title font-weight-bold mb-0">Status</span>
 				  					</div>
-				  					<p class="card-text mb-0">Active</p>
+				  					<p class="card-text mb-0">{{ $company->status ?? '' }}</p>
 								</div>
 								<div class="d-flex flex-wrap my-50">
 				  					<div class="user-info-title">
 										<i data-feather="star" class="mr-1"></i>
-										<span class="card-text user-info-title font-weight-bold mb-0">Role</span>
+										<span class="card-text user-info-title font-weight-bold mb-0">Nature</span>
 				  					</div>
-				  					<p class="card-text mb-0">Admin</p>
+				  					<p class="card-text mb-0">{{ $company->nature ?? '' }}</p>
 								</div>
 								<div class="d-flex flex-wrap my-50">
 				  					<div class="user-info-title">
 										<i data-feather="flag" class="mr-1"></i>
 										<span class="card-text user-info-title font-weight-bold mb-0">Country</span>
 				  					</div>
-				  					<p class="card-text mb-0">England</p>
+				  					<p class="card-text mb-0">Philippines</p>
 								</div>
 								<div class="d-flex flex-wrap">
 				  					<div class="user-info-title">
 										<i data-feather="phone" class="mr-1"></i>
 										<span class="card-text user-info-title font-weight-bold mb-0">Contact</span>
 				  					</div>
-				  					<p class="card-text mb-0">(123) 456-7890</p>
+				  					<p class="card-text mb-0">{{ $company->phone ?? '' }}</p>
 								</div>
 			  				</div>
 						</div>
