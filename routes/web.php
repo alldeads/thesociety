@@ -17,7 +17,7 @@ Route::middleware('auth')->group(function() {
 	Route::get('home', [DashboardController::class, 'index'])->name('home');
 
 	Route::prefix('company')->group( function() {
-		Route::get('details', [CompanyController::class, 'details'])->name('company');
+		Route::get('details', [CompanyController::class, 'details'])->name('company-details');
 	});
 
 	Route::prefix('accounting')->group( function() {
