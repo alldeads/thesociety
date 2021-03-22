@@ -25,6 +25,7 @@ class CompanyFactory extends Factory
             'name'    => $this->faker->company,
             'email'   => $this->faker->email,
             'phone'   => $this->faker->phoneNumber,
+            'fax'     => $this->faker->tollFreePhoneNumber,
             'status'  => 'active',
             'avatar'  => 'https://loremflickr.com/600/400?random=" . rand(0, 999)',
         ];

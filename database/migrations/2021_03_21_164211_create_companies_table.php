@@ -18,7 +18,12 @@ class CreateCompaniesTable extends Migration
             $table->string('name');
             $table->string('email')->nullable();
             $table->string('phone')->nullable();
+            $table->string('fax')->nullable();
             $table->string('avatar')->nullable();
+            $table->string('bir')->nullable();
+            $table->string('dti')->nullable();
+            $table->string('sss')->nullable();
+            $table->string('business_permit')->nullable();
             $table->string('status')->default('active');
             $table->timestamps();
         });
