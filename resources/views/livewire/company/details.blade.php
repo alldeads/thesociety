@@ -22,8 +22,7 @@
 										</div>
 
 										<div class="d-flex flex-wrap">
-					  						<a href="{{url('app/user/edit')}}" class="btn btn-primary">Edit</a>
-					  						<button class="btn btn-outline-danger ml-1">Delete</button>
+					  						<a href="{{ route('company-edit') }}" class="btn btn-primary">Edit</a>
 										</div>
 				  					</div>
 								</div>
