@@ -19,7 +19,7 @@
             @yield('title') - The Society 32
         </title>
 
-        <link rel="shortcut icon" type="image/x-icon" href="{{asset('images/logo/favicon.ico')}}">
+        <link rel="shortcut icon" type="image/x-icon" href="{{ asset('images/logo/symbol.jpg') }}">
 
         {{-- Include core + vendor Styles --}}
         @include('panels/styles')
