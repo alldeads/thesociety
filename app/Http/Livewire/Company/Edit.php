@@ -22,14 +22,25 @@ class Edit extends Component
 			$this->company = auth()->user()->empCard->company;
 
 			$this->inputs = [
-				'name'  => $this->company->name,
-				'email' => $this->company->email,
-				'phone' => $this->company->phone,
-				'fax'   => $this->company->fax,
-				'bir'   => $this->company->bir,
-				'dti'   => $this->company->dti,
-				'sss'   => $this->company->sss,
+				'name'            => $this->company->name,
+				'email'           => $this->company->email,
+				'phone'           => $this->company->phone,
+				'fax'             => $this->company->fax,
+				'bir'             => $this->company->bir,
+				'dti'             => $this->company->dti,
+				'sss'             => $this->company->sss,
 				'business_permit' => $this->company->business_permit,
+				'state'           => $this->company->state,
+				'street'          => $this->company->street,
+				'address_line_2'  => $this->company->address_line_2,
+				'city'            => $this->company->city,
+				'postal'          => $this->company->postal,
+				'facebook'        => $this->company->facebook,
+				'twitter'         => $this->company->twitter,
+				'instagram'       => $this->company->instagram,
+				'linkedin'        => $this->company->linkedin,
+				'pinterest'       => $this->company->pinterest,
+				'youtube'         => $this->company->youtube,
 			];
 		}
 	}
@@ -44,6 +55,17 @@ class Edit extends Component
             'dti'             => ['nullable'],
             'sss'             => ['nullable'],
             'bir'             => ['nullable'],
+            'state'           => ['nullable'],
+            'street'          => ['nullable'],
+            'address_line_2'  => ['nullable'],
+            'city'            => ['nullable'],
+            'postal'          => ['nullable'],
+            'facebook'        => ['nullable', 'url'],
+            'twitter'         => ['nullable', 'url'],
+            'instagram'       => ['nullable', 'url'],
+            'linkedin'        => ['nullable', 'url'],
+            'youtube'         => ['nullable', 'url'],
+            'pinterest'       => ['nullable', 'url'],
             'business_permit' => ['nullable'],
         ])->validate();
 
@@ -51,6 +73,7 @@ class Edit extends Component
 
         	$company = Company::find($this->company->id);
 
+        	dd($this->inputs);
 			$company->fill($this->inputs);
 			$company->save();
 

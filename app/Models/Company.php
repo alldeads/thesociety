@@ -22,7 +22,18 @@ class Company extends Model
         'dti',
         'bir',
         'sss',
-        'business_permit'
+        'business_permit',
+        'state',
+        'city',
+        'address_line_2',
+        'postal',
+        'street',
+        'facebook',
+        'instagram',
+        'linkedin',
+        'youtube',
+        'twitter',
+        'pinterest',
     ];
 
     public function employees()

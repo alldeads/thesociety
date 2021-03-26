@@ -150,25 +150,32 @@
 
 				<div class="row">
 		  			<div class="form-group col-md-6">
-						<label class="form-label" for="vertical-username">Company Name</label>
-						<input type="text" id="vertical-username" class="form-control" placeholder="johndoe" />
+						<label class="form-label" for="street">Street Address</label>
+						<input type="text" id="street" class="form-control" placeholder="Enter Street Address" wire:model="inputs.street" />
 		  			</div>
 
 		  			<div class="form-group col-md-6">
-						<label class="form-label" for="vertical-email">Email</label>
-						<input type="email" id="vertical-email" class="form-control" placeholder="john.doe@email.com" aria-label="john.doe"/>
+						<label class="form-label" for="address-2">Address Line 2</label>
+						<input type="text" id="address-2" class="form-control" placeholder="Enter Address Line 2" wire:model="inputs.address_line_2"/>
 		  			</div>
 				</div>
 
 				<div class="row">
 		  			<div class="form-group col-md-6">
-						<label class="form-label" for="vertical-username">Phone No.</label>
-						<input type="text" id="vertical-username" class="form-control" placeholder="johndoe" />
+						<label class="form-label" for="city">City</label>
+						<input type="text" id="city" class="form-control" placeholder="Enter City" wire:model="inputs.city"/>
 		  			</div>
 
 		  			<div class="form-group col-md-6">
-						<label class="form-label" for="vertical-email">Fax No.</label>
-						<input type="email" id="vertical-email" class="form-control" placeholder="john.doe@email.com" aria-label="john.doe"/>
+						<label class="form-label" for="state">State / Province</label>
+						<input type="email" id="state" class="form-control" placeholder="Enter State or Province" wire:model="inputs.state"/>
+		  			</div>
+				</div>
+
+				<div class="row">
+		  			<div class="form-group col-md-6">
+						<label class="form-label" for="postal">Zip / Postal Code</label>
+						<input type="text" id="postal" class="form-control" placeholder="Enter Zip Code" wire:model="inputs.postal"/>
 		  			</div>
 				</div>
 
@@ -193,22 +200,33 @@
 				<div class="row">
 		  			<div class="form-group col-md-6">
 						<label class="form-label" for="vertical-twitter">Twitter</label>
-						<input type="text" id="vertical-twitter" class="form-control" placeholder="https://twitter.com/abc" />
+						<input type="text" id="vertical-twitter" class="form-control" placeholder="https://twitter.com/abc" wire:model="inputs.twitter"/>
 		  			</div>
 		  			<div class="form-group col-md-6">
 						<label class="form-label" for="vertical-facebook">Facebook</label>
-						<input type="text" id="vertical-facebook" class="form-control" placeholder="https://facebook.com/abc" />
+						<input type="text" id="vertical-facebook" class="form-control" placeholder="https://facebook.com/abc" wire:model="inputs.facebook"/>
 		  			</div>
 				</div>
 
 				<div class="row">
 		  			<div class="form-group col-md-6">
-						<label class="form-label" for="vertical-google">Google+</label>
-						<input type="text" id="vertical-google" class="form-control" placeholder="https://plus.google.com/abc" />
+						<label class="form-label" for="vertical-instagram">Instagram</label>
+						<input type="text" id="vertical-instagram" class="form-control" placeholder="https://instagram.com/abc" wire:model="inputs.instagram"/>
 		  			</div>
 		  			<div class="form-group col-md-6">
 						<label class="form-label" for="vertical-linkedin">Linkedin</label>
-						<input type="text" id="vertical-linkedin" class="form-control" placeholder="https://linkedin.com/abc" />
+						<input type="text" id="vertical-linkedin" class="form-control" placeholder="https://linkedin.com/abc" wire:model="inputs.linkedin"/>
+		  			</div>
+				</div>
+
+				<div class="row">
+		  			<div class="form-group col-md-6">
+						<label class="form-label" for="vertical-pinterest">Pinterest</label>
+						<input type="text" id="vertical-pinterest" class="form-control" placeholder="https://pinterest.com/abc" wire:model="inputs.pinterest"/>
+		  			</div>
+		  			<div class="form-group col-md-6">
+						<label class="form-label" for="vertical-youtube">Youtube</label>
+						<input type="text" id="vertical-youtube" class="form-control" placeholder="https://youtube.com/abc" wire:model="inputs.youtube"/>
 		  			</div>
 				</div>
 				<div class="d-flex justify-content-between">

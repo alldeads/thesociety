@@ -127,7 +127,7 @@
   	<!-- User Timeline & Permissions Starts -->
   	<div class="row">
 		<!-- information starts -->
-		<div class="col-md-6">
+		<div class="col-6">
 	  		<div class="card">
 				<div class="card-header">
 		  			<h4 class="card-title mb-2">User Timeline</h4>
