@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class RoleController extends Controller
 {
@@ -16,7 +17,7 @@ class RoleController extends Controller
 	    ];
 
 		if ( $response->allowed() ) {
-		    return view('company.details', ['breadcrumbs' => $breadcrumbs]);
+		    return view('role.index', ['breadcrumbs' => $breadcrumbs]);
 		} else {
 		    return view('misc.not-authorized');
 		}
