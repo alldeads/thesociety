@@ -11,7 +11,7 @@
 @endsection
 
 @section('content')
-
+	@livewire('role.index')
 @endsection
 
 @section('vendor-script')
