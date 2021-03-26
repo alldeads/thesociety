@@ -22,62 +22,85 @@ class MenuSeeder extends Seeder
         ]);
 
         $header->menus()->create([
-        	'name'  => 'Dashboard',
-        	'slug'  => 'home',
-        	'url'   => 'home',
-        	'icon'  => 'home'
+        	'name'       => 'Dashboard',
+        	'slug'       => 'home',
+        	'url'        => 'home',
+        	'icon'       => 'home',
+            'permission' => 'dashboard'
         ]);
+
+        // $header = Header::create([
+        // 	'name'  => 'Accounting',
+        // 	'order' => 2
+        // ]);
+
+        // $header->menus()->create([
+        // 	'name'       => 'Chart Of Accounts',
+        // 	'slug'       => 'chart-of-accounts',
+        // 	'url'        => 'accounting/chart-of-accounts',
+        // 	'icon'       => 'book',
+        //     'permission' => 'dashboard'
+        // ]);
+
+        // $header->menus()->create([
+        // 	'name'  => 'Cash Flow',
+        // 	'slug'  => 'cash-flow',
+        // 	'url'   => 'accounting/cash-flow',
+        // 	'icon'  => 'edit-3'
+        // ]);
+
+        // $header->menus()->create([
+        // 	'name'  => 'Ledger',
+        // 	'slug'  => 'ledger',
+        // 	'url'   => 'accounting/ledger',
+        // 	'icon'  => 'book-open'
+        // ]);
+
+        // $header = Header::create([
+        // 	'name'  => 'Inventory',
+        // 	'order' => 3
+        // ]);
+
+        // $header->menus()->create([
+        // 	'name'  => 'Purchase Orders',
+        // 	'slug'  => 'purchase-orders',
+        // 	'url'   => 'inventory/purchase-orders',
+        // 	'icon'  => 'clipboard'
+        // ]);
+
+        // $header->menus()->create([
+        // 	'name'  => 'Supplies',
+        // 	'slug'  => 'supplies',
+        // 	'url'   => 'inventory/supplies',
+        // 	'icon'  => 'package'
+        // ]);
+
+        // $header->menus()->create([
+        // 	'name'  => 'Suppliers',
+        // 	'slug'  => 'suppliers',
+        // 	'url'   => 'inventory/suppliers',
+        // 	'icon'  => 'user-check'
+        // ]);
 
         $header = Header::create([
-        	'name'  => 'Accounting',
-        	'order' => 2
+            'name'  => 'Employees Management',
+            'order' => 3
         ]);
 
         $header->menus()->create([
-        	'name'  => 'Chart Of Accounts',
-        	'slug'  => 'chart-of-accounts',
-        	'url'   => 'accounting/chart-of-accounts',
-        	'icon'  => 'book'
+            'name'       => 'Employees',
+            'slug'       => 'employees',
+            'url'        => 'employee/view',
+            'icon'       => 'users',
+            'permission' => 'employee.view'
         ]);
 
         $header->menus()->create([
-        	'name'  => 'Cash Flow',
-        	'slug'  => 'cash-flow',
-        	'url'   => 'accounting/cash-flow',
-        	'icon'  => 'edit-3'
-        ]);
-
-        $header->menus()->create([
-        	'name'  => 'Ledger',
-        	'slug'  => 'ledger',
-        	'url'   => 'accounting/ledger',
-        	'icon'  => 'book-open'
-        ]);
-
-        $header = Header::create([
-        	'name'  => 'Inventory',
-        	'order' => 3
-        ]);
-
-        $header->menus()->create([
-        	'name'  => 'Purchase Orders',
-        	'slug'  => 'purchase-orders',
-        	'url'   => 'inventory/purchase-orders',
-        	'icon'  => 'clipboard'
-        ]);
-
-        $header->menus()->create([
-        	'name'  => 'Supplies',
-        	'slug'  => 'supplies',
-        	'url'   => 'inventory/supplies',
-        	'icon'  => 'package'
-        ]);
-
-        $header->menus()->create([
-        	'name'  => 'Suppliers',
-        	'slug'  => 'suppliers',
-        	'url'   => 'inventory/suppliers',
-        	'icon'  => 'user-check'
+            'name'       => 'Roles',
+            'slug'       => 'roles',
+            'url'        => 'roles/view',
+            'icon'       => 'key',
+            'permission' => 'role.view'
         ]);
 
         $header = Header::create([
@@ -86,10 +109,11 @@ class MenuSeeder extends Seeder
         ]);
 
         $header->menus()->create([
-            'name'  => 'Company Details',
-            'slug'  => 'company',
-            'url'   => 'company/details',
-            'icon'  => 'info'
+            'name'       => 'Company Details',
+            'slug'       => 'company',
+            'url'        => 'company/details',
+            'icon'       => 'info',
+            'permission' => 'company.view'
         ]);
     }
 }
