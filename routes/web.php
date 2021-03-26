@@ -5,6 +5,7 @@ use App\Http\Controllers\WebController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\AccountingController;
 use App\Http\Controllers\CompanyController;
+use App\Http\Controllers\RoleController;
 
 
 Auth::routes(['register' => false]);
@@ -23,5 +24,9 @@ Route::middleware('auth')->group(function() {
 
 	Route::prefix('accounting')->group( function() {
 		Route::get('chart-of-accounts', [AccountingController::class, 'chart_accounts'])->name('chart-of-accounts');
+	});
+
+	Route::prefix('roles')->group( function() {
+		Route::get('view', [RoleController::class, 'get_all'])->name('roles-view');
 	});
 });
