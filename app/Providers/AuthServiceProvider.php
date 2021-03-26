@@ -31,7 +31,7 @@ class AuthServiceProvider extends ServiceProvider
                 return null;
             }
 
-            return $user->hasRole('super-admin') ? true : null;
+            return $user->hasRole('owner') ? true : null;
         });
     }
 }
