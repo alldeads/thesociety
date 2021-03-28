@@ -1,5 +1,4 @@
 <section>
-
 	<div class="alert alert-danger" style="display: {{ count($errors) > 0 ? 'block' : 'none' }}" role="alert">
 		<div class="alert-body">
 			<i data-feather="info"></i>

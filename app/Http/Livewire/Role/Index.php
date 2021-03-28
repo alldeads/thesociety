@@ -13,6 +13,10 @@ class Index extends Component
 	public $company_id;
 	public $search = '';
 
+    public $listeners = [
+        'refreshItem' => 'render'
+    ];
+
 	public function mount()
 	{
 		$this->company_id = auth()->user()->empCard->company_id;
@@ -26,6 +30,7 @@ class Index extends Component
     		return $q->where('name', 'like', "%". $search ."%");
     	})->where('company_id', $this->company_id)
     	->where('role_id', '!=', 1)
+        ->orderBy('created_at', 'desc')
     	->get();
     	
         return view('livewire.role.index', [

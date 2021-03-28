@@ -73,13 +73,11 @@ class Edit extends Component
 
         	$company = Company::find($this->company->id);
 
-        	dd($this->inputs);
 			$company->fill($this->inputs);
 			$company->save();
 
 			$this->message('Company Information has been changed.', 'success');
         } catch (\Exception $e) {
-        	dd($e);
         	$this->message('Oops! Something went wrong, please refresh the page.', 'error');
         }
 	}

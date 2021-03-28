@@ -11,7 +11,7 @@
 	  				</div>
 
 	  				<div class="col-md-3 col-lg-2 col-xl-2 col-sm-3 mt-1">
-	  					<button type="button" class="btn btn-primary" wire:ignore>
+	  					<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-1" wire:ignore>
 		          			<i data-feather="plus" class="mr-25"></i>
 		              		<span>Create</span>
 		            	</button>
@@ -62,3 +62,5 @@
 		</div>
   	</div>
 </div>
+
+@livewire('role.create', ['company_id' => $company_id])
