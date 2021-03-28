@@ -1,24 +1,18 @@
 $(function () {
   	'use strict';
 
-  	var dt_basic_table = $('.datatables-basic'),
-		dt_date_table = $('.dt-date'),
-		dt_complex_header_table = $('.dt-complex-header'),
-		dt_row_grouping_table = $('.dt-row-grouping'),
-		dt_multilingual_table = $('.dt-multilingual'),
-		assetPath = '../../../app-assets/';
+  	var dt_basic_table = $('.datatables-basic');
+  	var data = $('#role-table').data('text');
 
   	if (dt_basic_table.length) {
 		var dt_basic = dt_basic_table.DataTable({
-	  		ajax: assetPath + 'data/table-datatable.json',
+	  		data: data,
   			columns: [
-				{ data: 'responsive_id' },
+  				{ data: 'id' },
 				{ data: 'id' },
 				{ data: 'id' }, // used for sorting so will hide this column
-				{ data: 'full_name' },
-				{ data: 'email' },
-				{ data: 'start_date' },
-				{ data: 'salary' },
+				{ data: 'name' },
+				{ data: 'created_at' },
 				{ data: '' }
 			],
   			columnDefs: [
@@ -31,10 +25,6 @@ $(function () {
 				{
 					targets: 2,
 					visible: false
-				},
-				{
-					responsivePriority: 1,
-					targets: 4
 				},
 				{
 					targets: -1,
@@ -93,6 +83,18 @@ $(function () {
 								className: 'dropdown-item',
 								exportOptions: { columns: [3, 4, 5, 6, 7] }
 							},
+							{
+				              	extend: 'pdf',
+				              	text: feather.icons['clipboard'].toSvg({ class: 'font-small-4 mr-50' }) + 'Pdf',
+				              	className: 'dropdown-item',
+				              	exportOptions: { columns: [3, 4, 5, 6, 7] }
+				            },
+				            {
+				              	extend: 'copy',
+				              	text: feather.icons['copy'].toSvg({ class: 'font-small-4 mr-50' }) + 'Copy',
+				              	className: 'dropdown-item',
+				              	exportOptions: { columns: [3, 4, 5, 6, 7] }
+				            }
 	  				],
 	  				init: function (api, node, config) {
 						$(node).removeClass('btn-secondary');
@@ -103,7 +105,7 @@ $(function () {
 	  				}
 				},
 				{
-					text: feather.icons['plus'].toSvg({ class: 'mr-50 font-small-4' }) + 'Add New Record',
+					text: feather.icons['plus'].toSvg({ class: 'mr-50 font-small-4' }) + 'Add New Role',
 					className: 'create-new btn btn-primary',
 					attr: {
 						'data-toggle': 'modal',

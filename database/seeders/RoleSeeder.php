@@ -4,6 +4,8 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Role;
+use App\Models\Company;
+use App\Models\CompanyRole;
 
 class RoleSeeder extends Seeder
 {
@@ -23,7 +25,7 @@ class RoleSeeder extends Seeder
         ]);
 
         Role::create([
-        	'name' => 'hr'
+        	'name' => 'hr associate'
         ]);
 
         Role::create([
@@ -33,5 +35,26 @@ class RoleSeeder extends Seeder
         Role::create([
         	'name' => 'sales associate'
         ]);
+
+        Role::create([
+            'name' => 'inventory analyst'
+        ]);
+
+        Role::create([
+            'name' => 'web developer'
+        ]);
+
+        $roles = Role::all();
+        $companies = Company::all();
+
+        foreach ($companies as $company) {
+            foreach ($roles as $role) {
+                CompanyRole::create([
+                    'company_id' => $company->id,
+                    'role_id'    => $role->id,
+                    'created_by' => 1,
+                ]);
+            }
+        }
     }
 }
