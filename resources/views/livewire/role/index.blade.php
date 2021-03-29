@@ -6,12 +6,12 @@
 	  			
 	  				<div class="col-md-6 col-lg-8 col-xl-8 col-sm-12 mt-1">
 	  					<div class="form-group">
-		                  <input type="text" class="form-control" placeholder="Search role name" wire:model="search"/>
+		                  	<input type="text" class="form-control" placeholder="Search role name" wire:model="search"/>
                 		</div>
 	  				</div>
 
 	  				<div class="col-md-3 col-lg-2 col-xl-2 col-sm-3 mt-1">
-	  					<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-1" wire:ignore>
+	  					<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-role-create" wire:ignore>
 		          			<i data-feather="plus" class="mr-25"></i>
 		              		<span>Create</span>
 		            	</button>

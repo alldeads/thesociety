@@ -134,7 +134,7 @@
                             <i data-feather="users" class="font-medium-5"></i>
                         </div>
                     </div>
-                    <h2 class="font-weight-bolder mt-1">18</h2>
+                    <h2 class="font-weight-bolder mt-1">{{ $employees }}</h2>
                     <p class="card-text">Employees</p>
                 </div>
                 <div id="employee-chart"></div>
