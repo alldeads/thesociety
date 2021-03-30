@@ -14,7 +14,7 @@ class Index extends Component
 	public $search = '';
 
     public $listeners = [
-        'refreshItem' => 'render'
+        'refreshItem' => '$refresh'
     ];
 
 	public function mount()
@@ -26,11 +26,10 @@ class Index extends Component
     {
     	$search = $this->search;
 
-    	$results = CompanyRole::whereHas('role', function($q) use ($search) {
-    		return $q->where('name', 'like', "%". $search ."%");
-    	})->where('company_id', $this->company_id)
-    	->where('role_id', '!=', 1)
-        ->orderBy('created_at', 'desc')
+    	$results = CompanyRole::where('role_name', 'like', "%". $search ."%")
+        ->where('company_id', $this->company_id)
+    	->where('role_name', 'not like', "%owner%")
+        ->orderBy('id', 'desc')
     	->get();
     	
         return view('livewire.role.index', [

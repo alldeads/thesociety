@@ -18,6 +18,11 @@ class Item extends Component
 		$this->emit('deleteRoleItem', ['item' => $this->item]);
 	}
 
+	public function edit()
+	{
+		$this->emit('updateRoleItem', ['item' => $this->item]);
+	}
+
     public function render()
     {
         return view('livewire.role.item');

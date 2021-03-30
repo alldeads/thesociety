@@ -24,7 +24,7 @@
 	            		<label class="form-label" for="edit-role">Role Name</label>
 	            		<input type="text" class="form-control" id="edit-role" required placeholder="Enter Role Name" wire:model="inputs.name"/>
 	          		</div>
-					<button wire:click.prevent="submit" class="btn btn-primary data-submit mr-1">Create</button>
+					<button wire:click.prevent="submit" class="btn btn-primary data-submit mr-1">Update</button>
 					<button type="reset" class="btn btn-outline-secondary" data-dismiss="modal">Cancel</button>
 	        	</div>
 	      	</form>

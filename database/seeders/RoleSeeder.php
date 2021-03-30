@@ -51,7 +51,7 @@ class RoleSeeder extends Seeder
             foreach ($roles as $role) {
                 CompanyRole::create([
                     'company_id' => $company->id,
-                    'role_id'    => $role->id,
+                    'role_name'  => $role->name,
                     'created_by' => 1,
                 ]);
             }

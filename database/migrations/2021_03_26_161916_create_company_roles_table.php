@@ -16,8 +16,9 @@ class CreateCompanyRolesTable extends Migration
         Schema::create('company_roles', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('company_id')->unsigned();
-            $table->bigInteger('role_id')->unsigned();
+            $table->string('role_name');
             $table->bigInteger('created_by')->unsigned();
+            $table->bigInteger('updated_by')->nullable()->unsigned();
             $table->timestamps();
         });
     }

@@ -6,7 +6,6 @@ use Livewire\Component;
 
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
-use Spatie\Permission\Models\Role;
 use App\Models\CompanyRole;
 use App\Traits\ResponseTrait;
 
@@ -33,22 +32,21 @@ class Create extends Component
 		try {
 			DB::beginTransaction();
 
-			$role = Role::firstOrCreate([
-	        	'name' => strtolower($this->inputs['name'])
-	        ]);
-
 	        CompanyRole::create([
 	        	'company_id' => $this->company_id,
-	        	'role_id'    => $role->id,
+	        	'role_name'  => strtolower($this->inputs['name']),
 	        	'created_by' => auth()->id()
 	        ]);
 
 	        DB::commit();
 
 	        $this->emit('refreshItem');
-	        $this->inputs['name'] = '';
 
 	        $this->message('New Role has been created', 'success');
+
+	        $this->inputs['name'] = '';
+
+	        $this->emit('dissmissModal', ['el' => 'modal-role-create']);
 		} catch (\Exception $e) {
 			DB::rollback();
 			$this->message('Oops! Something went wrong, please refresh the page.', 'error');
