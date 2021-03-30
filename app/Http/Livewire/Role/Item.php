@@ -8,10 +8,9 @@ class Item extends Component
 {
 	public $item;
 
-	public function mount($item)
-	{
-		$this->item = $item;
-	}
+	public $listeners = [
+        'refreshItem' => '$refresh'
+    ];
 
 	public function delete()
 	{
