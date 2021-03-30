@@ -16,9 +16,9 @@
     <div class="auth-wrapper auth-v2">
         <div class="auth-inner row m-0">
             <!-- Brand logo-->
-                <a class="brand-logo" href="javascript:void(0);">
-                    <img src="{{ asset('images/logo/logo.png') }}" width="200">
-                </a>
+            <a class="brand-logo d-none d-lg-block d-xl-block d-md-block d-sm-none" href="javascript:void(0);">
+                <img src="{{ asset('images/logo/logo.png') }}" width="200">
+            </a>
             <!-- /Brand logo-->
 
             <!-- Left Text-->
