@@ -6,7 +6,7 @@
 		<button type="button" class="btn btn-sm btn-primary" wire:ignore>
       		<span>Edit</span>
     	</button>
-    	<button type="button" class="btn btn-sm btn-danger" wire:ignore>
+    	<button wire:click="delete" type="button" class="btn btn-sm btn-danger" wire:ignore>
       		<span>Delete</span>
     	</button>
 	</td>

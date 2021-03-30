@@ -73,6 +73,14 @@
 			toastr[param['type']](param['message']);
 		});
 
+		window.livewire.on('showModal', param => {
+			$("#" + param['el']).modal('show');
+		});
+
+		window.livewire.on('dissmissModal', param => {
+			$("#" + param['el']).modal('hide');
+		});
+
 		window.livewire.on('sweet', param => {
 			Swal.fire({
 		  		title: param['title'],

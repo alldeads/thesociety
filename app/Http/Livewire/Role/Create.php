@@ -33,7 +33,7 @@ class Create extends Component
 		try {
 			DB::beginTransaction();
 
-			$role = Role::create([
+			$role = Role::firstOrCreate([
 	        	'name' => strtolower($this->inputs['name'])
 	        ]);
 
