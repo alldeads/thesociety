@@ -13,4 +13,9 @@ class Employee extends Model
     {
     	return $this->belongsTo(Company::class);
     }
+
+    public function role()
+    {
+    	return $this->belongsTo(CompanyRole::class, 'role_id', 'id');
+    }
 }

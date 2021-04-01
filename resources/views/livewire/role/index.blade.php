@@ -51,6 +51,7 @@
 							<th>ID</th>
 							<th>Name</th>
 							<th>Date Created</th>
+							<th>Updated By</th>
 							@if( auth()->user()->can('role.update') || auth()->user()->can('role.delete') )
 								<th>Actions</th>
 							@endif

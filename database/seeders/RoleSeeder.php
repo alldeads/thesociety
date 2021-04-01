@@ -52,6 +52,7 @@ class RoleSeeder extends Seeder
                 CompanyRole::create([
                     'company_id' => $company->id,
                     'role_name'  => $role->name,
+                    'updated_by' => 1,
                     'created_by' => 1,
                 ]);
             }

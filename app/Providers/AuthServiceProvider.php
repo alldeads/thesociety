@@ -31,7 +31,7 @@ class AuthServiceProvider extends ServiceProvider
                 return null;
             }
 
-            return $user->hasRole('owner') ? true : null;
+            return $user->empCard->role->role_name == "owner" ? true : null;
         });
     }
 }
