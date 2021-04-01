@@ -14,7 +14,7 @@ class Index extends Component
 	public $search = '';
 
     public $listeners = [
-        'refreshItem' => '$refresh'
+        'refreshItemParent' => '$refresh'
     ];
 
 	public function mount()

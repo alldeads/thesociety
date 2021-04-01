@@ -35,7 +35,7 @@ class Delete extends Component
 
     	$this->emit('dissmissModal', ['el' => $this->el]);
     	$this->message('Success! Role has been deleted.', 'success');
-    	$this->emit('refreshItem');
+    	$this->emit('refreshItemParent');
     }
 
     public function render()

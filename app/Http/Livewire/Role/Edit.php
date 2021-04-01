@@ -54,11 +54,11 @@ class Edit extends Component
 
 	        DB::commit();
 
+	        $this->emit('refreshItem');
+
 	        $this->emit('dissmissModal', ['el' => $this->el]);
 
 	        $this->message('Role has been updated.', 'success');
-
-	        $this->emit('refreshItem');
 		} catch (\Exception $e) {
 			DB::rollback();
 			$this->message('Oops! Something went wrong, please refresh the page.', 'error');
