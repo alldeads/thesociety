@@ -6,6 +6,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\AccountingController;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\RoleController;
+use App\Http\Controllers\EmployeeController;
 
 
 Auth::routes(['register' => false]);
@@ -20,6 +21,10 @@ Route::middleware('auth')->group(function() {
 	Route::prefix('company')->group( function() {
 		Route::get('details', [CompanyController::class, 'details'])->name('company-details');
 		Route::get('edit', [CompanyController::class, 'edit'])->name('company-edit');
+	});
+
+	Route::prefix('employees')->group( function() {
+		Route::get('view', [EmployeeController::class, 'get_all'])->name('employee-view');
 	});
 
 	Route::prefix('accounting')->group( function() {

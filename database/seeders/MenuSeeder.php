@@ -90,7 +90,7 @@ class MenuSeeder extends Seeder
         $header->menus()->create([
             'name'       => 'Employees',
             'slug'       => 'employees',
-            'url'        => 'employee/view',
+            'url'        => 'employees/view',
             'icon'       => 'users',
             'permission' => 'employee.view'
         ]);
