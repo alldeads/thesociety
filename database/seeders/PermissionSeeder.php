@@ -38,6 +38,10 @@ class PermissionSeeder extends Seeder
         ]);
 
         Permission::create([
+            'name' => 'employee.read'
+        ]);
+
+        Permission::create([
         	'name' => 'employee.update'
         ]);
 
