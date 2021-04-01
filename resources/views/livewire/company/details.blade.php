@@ -20,10 +20,12 @@
 					  						<h4 class="mb-0">{{ $company->name ?? '' }}</h4>
 					  						<span class="card-text">{{ $company->email ?? '' }}</span>
 										</div>
-
-										<div class="d-flex flex-wrap">
-					  						<a href="{{ route('company-edit') }}" class="btn btn-primary">Edit</a>
-										</div>
+										
+										@can('company.update')
+											<div class="d-flex flex-wrap">
+						  						<a href="{{ route('company-edit') }}" class="btn btn-primary">Edit</a>
+											</div>
+										@endcan
 				  					</div>
 								</div>
 			  				</div>

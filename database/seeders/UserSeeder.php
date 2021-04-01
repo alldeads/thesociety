@@ -6,6 +6,7 @@ use Illuminate\Database\Seeder;
 
 use App\Models\User;
 use App\Models\Employee;
+use App\Models\CompanyRole;
 
 use Spatie\Permission\Models\Role;
 
@@ -18,34 +19,51 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-        $role = Role::where(['name' => 'owner'])->first();
+        $company = CompanyRole::where('company_id', 1)->get();
 
-        $user = User::create([
-        	'first_name' => 'John Rexter',
-            'last_name'  => 'Flores',
-        	'email'      => 'john@test.com',
-        	'password'   => bcrypt('password')
-        ]);
+        foreach ($company as $role) {
+            
+            if ( $role->role_name == "owner" ) {
+                $user = User::create([
+                    'first_name' => 'John Rexter',
+                    'last_name'  => 'Flores',
+                    'email'      => 'john@test.com',
+                    'password'   => bcrypt('password')
+                ]);
 
-        $user->assignRole($role);
+                Employee::create([
+                    'user_id'    => $user->id,
+                    'role_id'    => $role->id,
+                    'company_id' => 1
+                ]);
+            }
 
-        Employee::create([
-            'user_id'    => $user->id,
-            'company_id' => 1
-        ]);
+            if ( $role->role_name == "accountant" ) {
+                $user = User::create([
+                    'first_name' => 'Rojennette Ann',
+                    'last_name'  => 'Alivio',
+                    'email'      => 'roj@test.com',
+                    'password'   => bcrypt('password')
+                ]);
 
-        User::create([
-        	'first_name' => 'Rojennette Ann',
-            'last_name'  => 'Alivio',
-        	'email'      => 'roj@test.com',
-        	'password'   => bcrypt('password')
-        ]);
+                Employee::create([
+                    'user_id'    => $user->id,
+                    'role_id'    => $role->id,
+                    'company_id' => 1
+                ]);
 
-        User::create([
-        	'first_name' => 'Dave Scott',
-            'last_name'  => 'Wong',
-        	'email'      => 'dave@test.com',
-        	'password'   => bcrypt('password')
-        ]);
+                $user->givePermissionTo('role.view');
+                $user->givePermissionTo('role.update');
+                $user->givePermissionTo('company.view');
+                $user->givePermissionTo('company.update');
+            }
+        }
+
+        // User::create([
+        // 	'first_name' => 'Dave Scott',
+        //     'last_name'  => 'Wong',
+        // 	'email'      => 'dave@test.com',
+        // 	'password'   => bcrypt('password')
+        // ]);
     }
 }

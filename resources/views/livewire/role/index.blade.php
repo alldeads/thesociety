@@ -10,12 +10,14 @@
                 		</div>
 	  				</div>
 
-	  				<div class="col-md-3 col-lg-2 col-xl-2 col-sm-3 mt-1">
-	  					<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-role-create" wire:ignore>
-		          			<i data-feather="plus" class="mr-25"></i>
-		              		<span>Create</span>
-		            	</button>
-	  				</div>
+	  				@can('role.create')
+		  				<div class="col-md-3 col-lg-2 col-xl-2 col-sm-3 mt-1">
+		  					<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-role-create" wire:ignore>
+			          			<i data-feather="plus" class="mr-25"></i>
+			              		<span>Create</span>
+			            	</button>
+		  				</div>
+	  				@endcan
 
 	  				<div class="col-md-3 col-lg-2 col-xl-2 col-sm-3 mt-1">
 	  					<div class="btn-group" wire:ignore>
@@ -49,13 +51,21 @@
 							<th>ID</th>
 							<th>Name</th>
 							<th>Date Created</th>
-							<th>Actions</th>
+							@if( auth()->user()->can('role.update') || auth()->user()->can('role.delete') )
+								<th>Actions</th>
+							@endif
 						</tr>
 		  			</thead>
 		  			<tbody>
 			  			@foreach($results as $result)
 			  				@livewire('role.item', ['item' => $result], key($result->id))
 			  			@endforeach
+
+			  			@if( count($results->toArray()) == 0 )
+			  				<tr class="text-center">
+			  					<td colspan="4"> No items found.</td>
+			  				</tr>
+			  			@endif
 		  			</tbody>
 				</table>
 	  		</div>

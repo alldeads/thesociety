@@ -27,7 +27,7 @@ class CompanyController extends Controller
 
     public function edit()
     {
-    	$response = Gate::inspect('company.edit');
+    	$response = Gate::inspect('company.update');
 
     	$breadcrumbs = [
 	        ['link'=> route('home'), 'name'=>"Dashboard"], 

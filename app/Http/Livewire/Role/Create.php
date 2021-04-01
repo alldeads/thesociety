@@ -40,7 +40,7 @@ class Create extends Component
 
 	        DB::commit();
 
-	        $this->emit('refreshItem');
+	        $this->emit('refreshItemParent');
 
 	        $this->message('New Role has been created', 'success');
 
