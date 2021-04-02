@@ -6,13 +6,13 @@
 	  			
 	  				<div class="col-md-6 col-lg-8 col-xl-8 col-sm-12 mt-1">
 	  					<div class="form-group">
-		                  	<input type="text" class="form-control" placeholder="Search role name" wire:model="search"/>
+		                  	<input type="text" class="form-control" placeholder="Search employee name, email, role, and status" wire:model="search"/>
                 		</div>
 	  				</div>
 
 	  				@can('role.create')
 		  				<div class="col-md-3 col-lg-2 col-xl-2 col-sm-3 mt-1">
-		  					<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-role-create" wire:ignore>
+		  					<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-employee-create" wire:ignore>
 			          			<i data-feather="plus" class="mr-25"></i>
 			              		<span>Create</span>
 			            	</button>
@@ -50,16 +50,26 @@
 						<tr>
 							<th>ID</th>
 							<th>Name</th>
-							<th>Date Created</th>
-							<th>Updated By</th>
-							@if( auth()->user()->can('role.update') || auth()->user()->can('role.delete') )
+							<th>Role</th>
+							<th>Date Hired</th>
+							<th>Status</th>
+							@if( auth()->user()->can('employee.update') || auth()->user()->can('employee.delete') )
 								<th>Actions</th>
 							@endif
 						</tr>
 		  			</thead>
 		  			<tbody>
 			  			@foreach($results as $result)
-			  				@livewire('role.item', ['item' => $result], key($result->id))
+			  				{{-- @livewire('role.item', ['item' => $result], key($result->id)) --}}
+
+			  				<tr>
+			  					<td>{{ $result->id }}</td>
+			  					<td>{{ $result->user->name }}</td>
+			  					<td>{{ $result->role->role_name }}</td>
+			  					<td>{{ $result->created_at }}</td>
+			  					<td>{{ $result->user->status }}</td>
+			  					<td></td>
+			  				</tr>
 			  			@endforeach
 
 			  			@if( count($results->toArray()) == 0 )

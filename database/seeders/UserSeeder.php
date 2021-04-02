@@ -28,7 +28,8 @@ class UserSeeder extends Seeder
                     'first_name' => 'John Rexter',
                     'last_name'  => 'Flores',
                     'email'      => 'john@test.com',
-                    'password'   => bcrypt('password')
+                    'password'   => bcrypt('password'),
+                    'status'     => 'active'
                 ]);
 
                 Employee::create([
@@ -43,7 +44,8 @@ class UserSeeder extends Seeder
                     'first_name' => 'Rojennette Ann',
                     'last_name'  => 'Alivio',
                     'email'      => 'roj@test.com',
-                    'password'   => bcrypt('password')
+                    'password'   => bcrypt('password'),
+                    'status'     => 'active'
                 ]);
 
                 Employee::create([
@@ -59,11 +61,11 @@ class UserSeeder extends Seeder
             }
         }
 
-        // User::create([
-        // 	'first_name' => 'Dave Scott',
-        //     'last_name'  => 'Wong',
-        // 	'email'      => 'dave@test.com',
-        // 	'password'   => bcrypt('password')
-        // ]);
+        User::create([
+        	'first_name' => 'Dave Scott',
+            'last_name'  => 'Wong',
+        	'email'      => 'dave@test.com',
+        	'password'   => bcrypt('password')
+        ]);
     }
 }
