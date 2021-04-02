@@ -60,16 +60,7 @@
 		  			</thead>
 		  			<tbody>
 			  			@foreach($results as $result)
-			  				{{-- @livewire('role.item', ['item' => $result], key($result->id)) --}}
-
-			  				<tr>
-			  					<td>{{ $result->id }}</td>
-			  					<td>{{ $result->user->name }}</td>
-			  					<td>{{ $result->role->role_name }}</td>
-			  					<td>{{ $result->created_at }}</td>
-			  					<td>{{ $result->user->status }}</td>
-			  					<td></td>
-			  				</tr>
+			  				@livewire('employee.user', ['user' => $result], key($result->id))
 			  			@endforeach
 
 			  			@if( count($results->toArray()) == 0 )

@@ -24,7 +24,7 @@ Route::middleware('auth')->group(function() {
 	});
 
 	Route::prefix('employees')->group( function() {
-		Route::get('view', [EmployeeController::class, 'get_all'])->name('employee-view');
+		Route::get('view', [EmployeeController::class, 'get_all'])->name('employees-view');
 	});
 
 	Route::prefix('accounting')->group( function() {
