@@ -7,6 +7,11 @@ use App\Http\Livewire\CustomComponent;
 class User extends CustomComponent
 {
 	public $user;
+
+	public function delete()
+	{
+		$this->emit('deleteEmployee', ['employee' => $this->user]);
+	}
 	
     public function render()
     {

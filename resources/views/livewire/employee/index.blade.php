@@ -91,4 +91,4 @@
 
 @livewire('role.create', ['company_id' => $company_id])
 @livewire('role.edit', ['company_id' => $company_id])
-@livewire('role.delete', ['company_id' => $company_id])
+@livewire('employee.delete', ['company_id' => $company_id])
