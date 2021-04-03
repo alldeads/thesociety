@@ -2,17 +2,14 @@
 
 namespace App\Http\Livewire\Company;
 
-use Livewire\Component;
+use App\Http\Livewire\CustomComponent;
 
 use Illuminate\Support\Facades\Validator;
 
 use App\Models\Company;
-use App\Traits\ResponseTrait;
 
-class Edit extends Component
+class Edit extends CustomComponent
 {
-	use ResponseTrait;
-
 	public $company;
 	public $inputs;
 

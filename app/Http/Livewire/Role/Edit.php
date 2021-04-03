@@ -2,17 +2,15 @@
 
 namespace App\Http\Livewire\Role;
 
-use Livewire\Component;
-use App\Traits\ResponseTrait;
+use App\Http\Livewire\CustomComponent;
+
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
 
 use App\Models\CompanyRole;
 
-class Edit extends Component
+class Edit extends CustomComponent
 {
-	use ResponseTrait;
-
 	public $listeners = [
         'updateRoleItem' => 'edit'
     ];

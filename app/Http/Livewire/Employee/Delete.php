@@ -4,12 +4,10 @@ namespace App\Http\Livewire\Employee;
 
 use App\Http\Livewire\CustomComponent;
 
-class User extends CustomComponent
+class Delete extends CustomComponent
 {
-	public $user;
-	
     public function render()
     {
-        return view('livewire.employee.user');
+        return view('livewire.employee.delete');
     }
 }

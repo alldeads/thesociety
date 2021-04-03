@@ -2,14 +2,12 @@
 
 namespace App\Http\Livewire\Role;
 
-use Livewire\Component;
+use App\Http\Livewire\CustomComponent;
+
 use App\Models\CompanyRole;
-use App\Traits\ResponseTrait;
 
-class Delete extends Component
+class Delete extends CustomComponent
 {
-	use ResponseTrait;
-
 	public $listeners = [
         'deleteRoleItem' => 'delete'
     ];

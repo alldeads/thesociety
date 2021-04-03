@@ -2,17 +2,14 @@
 
 namespace App\Http\Livewire\Role;
 
-use Livewire\Component;
+use App\Http\Livewire\CustomComponent;
 
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
 use App\Models\CompanyRole;
-use App\Traits\ResponseTrait;
 
-class Create extends Component
+class Create extends CustomComponent
 {
-	use ResponseTrait;
-
 	public $inputs = [
 		'name'
 	];

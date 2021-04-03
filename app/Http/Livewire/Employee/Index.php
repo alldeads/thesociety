@@ -2,12 +2,12 @@
 
 namespace App\Http\Livewire\Employee;
 
-use Livewire\Component;
+use App\Http\Livewire\CustomComponent;
 use Livewire\WithPagination;
 
 use App\Models\Employee;
 
-class Index extends Component
+class Index extends CustomComponent
 {
     use WithPagination;
 
