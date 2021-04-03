@@ -28,7 +28,9 @@ class Delete extends CustomComponent
     	if ( !$cr ) {
     		$this->message('Oops! Something went wrong upon deletion, please try again!', 'error');
     	}
-    	
+
+        $cr->updated_by = auth()->id();
+        $cr->save();
     	$cr->delete();
 
     	$this->emit('dissmissModal', ['el' => $this->el]);

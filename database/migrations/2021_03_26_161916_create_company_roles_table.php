@@ -19,6 +19,7 @@ class CreateCompanyRolesTable extends Migration
             $table->string('role_name');
             $table->bigInteger('created_by')->unsigned();
             $table->bigInteger('updated_by')->nullable()->unsigned();
+            $table->softDeletes();
             $table->timestamps();
         });
     }
