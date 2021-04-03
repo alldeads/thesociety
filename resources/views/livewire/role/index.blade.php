@@ -11,24 +11,27 @@
 				              		<span>Create</span>
 				            	</button>
 			            	@endcan
-		              		<button type="button" class="btn btn-outline-primary ml-2 dropdown-toggle rounded" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-		              			<i data-feather="share" class="mr-25"></i>
-		              			<span>Export</span>
-		              		</button>
-				             <div class="dropdown-menu">
-			                	<a class="dropdown-item" href="javascript:void(0);">
-			                		<i data-feather="printer" class="mr-25"></i>
-		              				<span>Print</span>
-			                	</a>
-				                <a class="dropdown-item" href="javascript:void(0);">
-			                		<i data-feather="file-text" class="mr-25"></i>
-		              				<span>Csv</span>
-			                	</a>
-			                	<a class="dropdown-item" href="javascript:void(0);">
-			                		<i data-feather="file" class="mr-25"></i>
-		              				<span>Excel</span>
-			                	</a>
-				            </div>
+
+			            	@can('role.export')
+			              		<button type="button" class="btn btn-outline-primary ml-2 dropdown-toggle rounded" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+			              			<i data-feather="share" class="mr-25"></i>
+			              			<span>Export</span>
+			              		</button>
+					             <div class="dropdown-menu">
+				                	<a class="dropdown-item" href="javascript:void(0);">
+				                		<i data-feather="printer" class="mr-25"></i>
+			              				<span>Print</span>
+				                	</a>
+					                <a class="dropdown-item" href="javascript:void(0);">
+				                		<i data-feather="file-text" class="mr-25"></i>
+			              				<span>Csv</span>
+				                	</a>
+				                	<a class="dropdown-item" href="javascript:void(0);">
+				                		<i data-feather="file" class="mr-25"></i>
+			              				<span>Excel</span>
+				                	</a>
+					            </div>
+					        @endcan
 		            	</div>
 	  				</div>
 	  			</div>
