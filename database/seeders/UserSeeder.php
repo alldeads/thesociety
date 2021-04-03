@@ -54,6 +54,9 @@ class UserSeeder extends Seeder
                     'company_id' => 1
                 ]);
 
+                $user->givePermissionTo('employee.view');
+                $user->givePermissionTo('employee.export');
+                $user->givePermissionTo('employee.update');
                 $user->givePermissionTo('role.view');
                 $user->givePermissionTo('role.update');
                 $user->givePermissionTo('company.view');
