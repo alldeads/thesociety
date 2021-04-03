@@ -3,13 +3,19 @@
 namespace App\Http\Livewire\Employee;
 
 use Livewire\Component;
+use Livewire\WithPagination;
 
 use App\Models\Employee;
 
 class Index extends Component
 {
+    use WithPagination;
+
+    protected $paginationTheme = 'bootstrap';
+
 	public $company_id;
 	public $search = '';
+    public $limit;
 
     public $listeners = [
         'refreshEmployeeParent' => '$refresh'
@@ -19,6 +25,11 @@ class Index extends Component
 	{
 		$this->company_id = auth()->user()->empCard->company_id;
 	}
+
+    public function updatingSearch()
+    {
+        $this->resetPage();
+    }
 
 	public function render()
     {
@@ -30,7 +41,7 @@ class Index extends Component
     			->orWhere('email', 'like', "%" . $search ."%");
     	})->orWhereHas('role', function($query) use ($search) {
     		return $query->where('role_name', 'like', "%" . $search ."%");
-    	})->orderBy('created_at', 'desc')->get();
+    	})->orderBy('created_at', 'desc')->paginate($this->limit);
     	
         return view('livewire.employee.index', [
         	'results' => $results

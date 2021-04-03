@@ -3,25 +3,15 @@
 		<div class="card">
 	  		<div class="card-body">
 	  			<div class="row">
-	  			
-	  				<div class="col-md-6 col-lg-8 col-xl-8 col-sm-12 mt-1">
-	  					<div class="form-group">
-		                  	<input type="text" class="form-control" placeholder="Search employee name, email, role, and status" wire:model="search"/>
-                		</div>
-	  				</div>
-
-	  				@can('role.create')
-		  				<div class="col-md-3 col-lg-2 col-xl-2 col-sm-3 mt-1">
-		  					<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-employee-create" wire:ignore>
-			          			<i data-feather="plus" class="mr-25"></i>
-			              		<span>Create</span>
-			            	</button>
-		  				</div>
-	  				@endcan
-
-	  				<div class="col-md-3 col-lg-2 col-xl-2 col-sm-3 mt-1">
+	  				<div class="col-12 mt-1 text-right">
 	  					<div class="btn-group" wire:ignore>
-		              		<button type="button" class="btn btn-outline-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+	  						@can('role.create')
+		  						<button type="button" class="btn btn-primary rounded" data-toggle="modal" data-target="#modal-employee-create" wire:ignore>
+				          			<i data-feather="plus" class="mr-25"></i>
+				              		<span>Create</span>
+				            	</button>
+			            	@endcan
+		              		<button type="button" class="btn btn-outline-primary ml-2 dropdown-toggle rounded" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 		              			<i data-feather="share" class="mr-25"></i>
 		              			<span>Export</span>
 		              		</button>
@@ -40,6 +30,24 @@
 			                	</a>
 				            </div>
 		            	</div>
+	  				</div>
+	  			</div>
+	  			<hr>
+	  			<div class="row">
+	  				<div class="col-md-10 col-lg-10 col-xl-10 col-sm-12 mt-1">
+	  					<div class="form-group">
+		                  	<input type="text" class="form-control" placeholder="Search employee name, email, role, and status" wire:model="search"/>
+                		</div>
+	  				</div>
+	  				<div class="col-md-2 col-lg-2 col-xl-2 col-sm-12 mt-1">
+	  					<div class="form-group">
+		                  	<select class="form-control" wire:model="limit">
+		                  		<option value="10">10 entries</option>
+		                  		<option value="25">25 entries</option>
+		                  		<option value="50">50 entries</option>
+		                  		<option value="100">100 entries</option>
+		                  	</select>
+                		</div>
 	  				</div>
 	  			</div>
 	 		</div>
@@ -70,6 +78,9 @@
 			  			@endif
 		  			</tbody>
 				</table>
+	  		</div>
+	  		<div class="m-auto">
+	  			{{ $results->links() }}
 	  		</div>
 		</div>
   	</div>
