@@ -21,6 +21,10 @@ class PermissionSeeder extends Seeder
         ]);
 
         Permission::create([
+            'name' => 'company.read'
+        ]);
+
+        Permission::create([
         	'name' => 'company.update'
         ]);
 
@@ -53,6 +57,10 @@ class PermissionSeeder extends Seeder
         	'name' => 'employee.delete'
         ]);
 
+        Permission::create([
+            'name' => 'employee.export'
+        ]);
+
         // Roles
         Permission::create([
         	'name' => 'role.view'
@@ -60,6 +68,10 @@ class PermissionSeeder extends Seeder
 
         Permission::create([
         	'name' => 'role.update'
+        ]);
+
+        Permission::create([
+            'name' => 'role.read'
         ]);
 
         Permission::create([
@@ -71,7 +83,7 @@ class PermissionSeeder extends Seeder
         ]);
 
         Permission::create([
-        	'name' => 'role.assign'
+            'name' => 'role.export'
         ]);
     }
 }
