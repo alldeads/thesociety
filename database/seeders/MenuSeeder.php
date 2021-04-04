@@ -29,18 +29,18 @@ class MenuSeeder extends Seeder
             'permission' => 'dashboard'
         ]);
 
-        // $header = Header::create([
-        // 	'name'  => 'Accounting',
-        // 	'order' => 2
-        // ]);
+        $header = Header::create([
+        	'name'  => 'Accounting',
+        	'order' => 2
+        ]);
 
-        // $header->menus()->create([
-        // 	'name'       => 'Chart Of Accounts',
-        // 	'slug'       => 'chart-of-accounts',
-        // 	'url'        => 'accounting/chart-of-accounts',
-        // 	'icon'       => 'book',
-        //     'permission' => 'dashboard'
-        // ]);
+        $header->menus()->create([
+        	'name'       => 'Chart of Accounts',
+        	'slug'       => 'chart-of-accounts',
+        	'url'        => 'accounting/chart-of-accounts',
+        	'icon'       => 'columns',
+            'permission' => 'chart.view'
+        ]);
 
         // $header->menus()->create([
         // 	'name'  => 'Cash Flow',
