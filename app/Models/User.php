@@ -18,8 +18,6 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'first_name',
-        'last_name',
         'email',
         'password',
         'status'
@@ -44,14 +42,14 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function getNameAttribute()
-    {
-        return $this->first_name . ' ' . $this->last_name;
-    }
-
     public function empCard()
     {
         return $this->belongsTo(Employee::class, 'id', 'user_id');
+    }
+
+    public function profile()
+    {
+        return $this->hasOne(Profile::class);
     }
 
     public function role()

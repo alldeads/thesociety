@@ -32,7 +32,8 @@ class Create extends CustomComponent
 	        CompanyRole::create([
 	        	'company_id' => $this->company_id,
 	        	'role_name'  => strtolower($this->inputs['name']),
-	        	'created_by' => auth()->id()
+	        	'created_by' => auth()->id(),
+	        	'updated_by' => auth()->id(),
 	        ]);
 
 	        DB::commit();

@@ -31,6 +31,11 @@ class Index extends CustomComponent
         $this->resetPage();
     }
 
+    public function create()
+    {
+        return redirect()->route('employees-create');
+    }
+
 	public function render()
     {
     	$search = $this->search;

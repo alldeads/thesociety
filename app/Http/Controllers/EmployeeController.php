@@ -22,4 +22,21 @@ class EmployeeController extends Controller
 		    return view('misc.not-authorized');
 		}
     }
+
+    public function create()
+    {
+    	$response = Gate::inspect('employee.create');
+
+    	$breadcrumbs = [
+	        ['link'=> route('home'), 'name'=>"Dashboard"], 
+	        ['link'=> route('employees-view'), 'name'=> "Employees"],
+	        ['name'=> "Create Employee"],
+	    ];
+
+		if ( $response->allowed() ) {
+		    return view('employee.create', ['breadcrumbs' => $breadcrumbs]);
+		} else {
+		    return view('misc.not-authorized');
+		}
+    }
 }
