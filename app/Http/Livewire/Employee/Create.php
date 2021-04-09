@@ -26,6 +26,10 @@ class Create extends CustomComponent
 	];
 	public $roles;
 
+	public $listeners = [
+        'refreshSelf' => '$refresh'
+    ];
+
 	public function mount($company_id)
 	{
 		$this->company_id = $company_id;
@@ -67,10 +71,11 @@ class Create extends CustomComponent
 				'created_by' => auth()->id(),
 				'updated_by' => auth()->id(),
 			]);
+			DB::commit();
+
+			$this->inputs = [];
 
 			$this->message('Employee has been created', 'success');
-
-			DB::commit();
 		} catch (\Exception $e) {
 			DB::rollback();
 			$this->message($e->getMessage(), 'error');
