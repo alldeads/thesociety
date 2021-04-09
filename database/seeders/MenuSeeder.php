@@ -34,13 +34,13 @@ class MenuSeeder extends Seeder
         	'order' => 2
         ]);
 
-        $header->menus()->create([
-        	'name'       => 'Chart of Accounts',
-        	'slug'       => 'chart-of-accounts',
-        	'url'        => 'accounting/chart-of-accounts',
-        	'icon'       => 'columns',
-            'permission' => 'chart.view'
-        ]);
+        // $header->menus()->create([
+        // 	'name'       => 'Chart of Accounts',
+        // 	'slug'       => 'chart-of-accounts',
+        // 	'url'        => 'accounting/chart-of-accounts',
+        // 	'icon'       => 'columns',
+        //     'permission' => 'chart.view'
+        // ]);
 
         // $header->menus()->create([
         // 	'name'  => 'Cash Flow',

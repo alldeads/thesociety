@@ -8,6 +8,8 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Spatie\Permission\Traits\HasRoles;
 
+use App\Models\Header;
+
 class User extends Authenticatable
 {
     use HasFactory, Notifiable, HasRoles;
@@ -55,5 +57,23 @@ class User extends Authenticatable
     public function role()
     {
         return $this->belongsTo(CompanyRole::class, 'id', 'user_id');
+    }
+
+    public static function getMenu()
+    {
+        $permissions = auth()->user()->permissions;
+
+        $headers = Header::all();
+        $menus   = [];
+
+        foreach ($headers as $header) {
+            foreach ($header->menus as $menu) {
+                if ( auth()->user()->hasPermissionTo($menu->permission) ) {
+                    $menus[$header->name][] = $menu;
+                }
+            }
+        }
+
+        return $menus;
     }
 }

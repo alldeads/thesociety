@@ -42,6 +42,15 @@ class UserSeeder extends Seeder
                     'role_id'    => $role->id,
                     'company_id' => 1
                 ]);
+
+                $user->givePermissionTo('dashboard');
+                $user->givePermissionTo('employee.view');
+                $user->givePermissionTo('employee.export');
+                $user->givePermissionTo('employee.update');
+                $user->givePermissionTo('role.view');
+                $user->givePermissionTo('role.update');
+                $user->givePermissionTo('company.view');
+                $user->givePermissionTo('company.update');
             }
 
             if ( $role->role_name == "accountant" ) {
@@ -63,6 +72,7 @@ class UserSeeder extends Seeder
                     'company_id' => 1
                 ]);
 
+                $user->givePermissionTo('dashboard');
                 $user->givePermissionTo('employee.view');
                 $user->givePermissionTo('employee.export');
                 $user->givePermissionTo('employee.update');
@@ -71,17 +81,30 @@ class UserSeeder extends Seeder
                 $user->givePermissionTo('company.view');
                 $user->givePermissionTo('company.update');
             }
+
+            if ( $role->role_name == "owner" ) {
+                $user = User::create([
+                    'email'      => 'wong@test.com',
+                    'password'   => bcrypt('password')
+                ]);
+
+                $profile = Profile::factory(1)->create([
+                    'user_id'    => $user->id,
+                    'first_name' => 'Dave Scott',
+                    'last_name'  => 'Wong',
+                ]);
+
+                Employee::create([
+                    'user_id'    => $user->id,
+                    'role_id'    => $role->id,
+                    'company_id' => 1
+                ]);
+
+                $user->givePermissionTo('dashboard');
+                $user->givePermissionTo('employee.view');
+                $user->givePermissionTo('role.view');
+                $user->givePermissionTo('company.view');
+            }
         }
-
-        User::create([
-        	'email'      => 'dave@test.com',
-        	'password'   => bcrypt('password')
-        ]);
-
-        $profile = Profile::factory(1)->create([
-            'user_id'    => $user->id,
-            'first_name' => 'Dave Scott',
-            'last_name'  => 'Wong',
-        ]);
     }
 }

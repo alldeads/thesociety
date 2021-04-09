@@ -15,6 +15,11 @@ class PermissionSeeder extends Seeder
      */
     public function run()
     {
+        // Dashboard
+        Permission::create([
+            'name' => 'dashboard'
+        ]);
+
     	// Company
         Permission::create([
         	'name' => 'company.view'

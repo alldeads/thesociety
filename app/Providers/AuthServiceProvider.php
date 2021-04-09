@@ -24,14 +24,5 @@ class AuthServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->registerPolicies();
-
-        Gate::before(function ($user, $ability) {
-
-            if ( !$user->empCard ) {
-                return null;
-            }
-
-            return $user->empCard->role->role_name == "owner" ? true : null;
-        });
     }
 }

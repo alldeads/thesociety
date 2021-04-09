@@ -3,7 +3,11 @@
 	<td>{{ ucwords($user->user->profile->name_with_mi) }}</td>
 	<td>{{ ucwords($user->role->role_name) }}</td>
 	<td>{{ $user->created_at->format('F j, Y') }}</td>
-	<td>{{ ucwords($user->user->status) }}</td>
+	<td>
+		<span class="badge badge-pill  badge-light-{{ $user->user->status == "active" ? "success" : "danger" }}">
+			{{ ucwords($user->user->status) }}
+		</span>
+	</td>
 
 	@if( auth()->user()->can('employee.update') || auth()->user()->can('employee.delete') )
 		<td>
