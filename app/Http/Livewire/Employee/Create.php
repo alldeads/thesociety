@@ -8,6 +8,7 @@ use App\Models\User;
 use App\Models\Employee;
 use App\Models\Profile;
 use App\Models\CompanyRole;
+use App\Models\CompanyMenu;
 
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
@@ -15,6 +16,7 @@ use Illuminate\Support\Facades\Validator;
 class Create extends CustomComponent
 {
 	public $company_id;
+
 	public $inputs = [
 		'first_name',
 		'middle_name',
@@ -22,18 +24,18 @@ class Create extends CustomComponent
 		'username',
 		'email',
 		'password',
-		'role'
+		'role',
+		'permissions'
 	];
-	public $roles;
 
-	public $listeners = [
-        'refreshSelf' => '$refresh'
-    ];
+	public $roles;
+	public $menus;
 
 	public function mount($company_id)
 	{
 		$this->company_id = $company_id;
 		$this->roles = CompanyRole::getCompanyRoles($this->company_id);
+		$this->menus = CompanyMenu::getCompanyMenus($this->company_id);
 	}
 
 	public function submit()
@@ -71,6 +73,15 @@ class Create extends CustomComponent
 				'created_by' => auth()->id(),
 				'updated_by' => auth()->id(),
 			]);
+
+			foreach ($this->inputs['permissions'] as $key => $permission) {
+				foreach ($this->menus as $menu) {
+					if ( strrpos($key, $menu->menu->base) !== false ) {
+						$user->givePermissionTo(str_replace('-', '.', $key));
+					}
+				}
+			}
+
 			DB::commit();
 
 			$this->inputs = [];

@@ -105,41 +105,53 @@
 											<thead class="thead-light">
 												<tr>
 													<th>Module</th>
-													<th>Read</th>
-													<th>Write</th>
+													<th>View</th>
+													<th>Edit</th>
 													<th>Create</th>
 													<th>Delete</th>
+													<th>Export</th>
 												</tr>
 											</thead>
 
 											<tbody>
-												<tr>
-													<td>Admin</td>
-													<td>
-														<div class="custom-control custom-checkbox">
-															<input type="checkbox" class="custom-control-input" id="admin-read" checked />
-															<label class="custom-control-label" for="admin-read"></label>
-														</div>
-													</td>
-													<td>
-														<div class="custom-control custom-checkbox">
-															<input type="checkbox" class="custom-control-input" id="admin-write" />
-															<label class="custom-control-label" for="admin-write"></label>
-														</div>
-													</td>
-													<td>
-														<div class="custom-control custom-checkbox">
-															<input type="checkbox" class="custom-control-input" id="admin-create" />
-															<label class="custom-control-label" for="admin-create"></label>
-														</div>
-													</td>
-													<td>
-														<div class="custom-control custom-checkbox">
-															<input type="checkbox" class="custom-control-input" id="admin-delete" />
-															<label class="custom-control-label" for="admin-delete"></label>
-														</div>
-													</td>
-												</tr>
+												@foreach( $menus as $menu )
+													<tr>
+														<td>{{ ucwords($menu->menu->name) }}</td>
+														<td>
+															<div class="custom-control custom-checkbox">
+																<input type="checkbox" class="custom-control-input" id="{{$menu->menu->base}}-view" wire:model="inputs.permissions.{{$menu->menu->base}}-view"/>
+																<label class="custom-control-label" for="{{$menu->menu->base}}-view"></label>
+															</div>
+														</td>
+														<td>
+															<div class="custom-control custom-checkbox">
+																<input type="checkbox" class="custom-control-input" id="{{$menu->menu->base}}-write" wire:model="inputs.permissions.{{$menu->menu->base}}-write"/>
+																<label class="custom-control-label" for="{{$menu->menu->base}}-write"></label>
+															</div>
+														</td>
+														<td>
+															<div class="custom-control custom-checkbox">
+																<input type="checkbox" class="custom-control-input" id="{{$menu->menu->base}}-create" wire:model="inputs.permissions.{{$menu->menu->base}}-create"/>
+																<label class="custom-control-label" for="{{$menu->menu->base}}-create"></label>
+															</div>
+														</td>
+														<td>
+															<div class="custom-control custom-checkbox">
+																<input type="checkbox" class="custom-control-input" id="{{$menu->menu->base}}-delete" wire:model="inputs.permissions.{{$menu->menu->base}}-delete"/>
+																<label class="custom-control-label" for="{{$menu->menu->base}}-delete"></label>
+															</div>
+														</td>
+
+														<td>
+															<div class="custom-control custom-checkbox">
+																@if ($menu->menu->is_export)
+																	<input type="checkbox" class="custom-control-input" id="{{$menu->menu->base}}-export" wire:model="inputs.permissions.{{$menu->menu->base}}-export"/>
+																	<label class="custom-control-label" for="{{$menu->menu->base}}-export"></label>
+																@endif
+															</div>
+														</td>
+													</tr>
+												@endforeach
 											</tbody>
 										</table>
 									</div>

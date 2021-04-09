@@ -17,7 +17,19 @@ class PermissionSeeder extends Seeder
     {
         // Dashboard
         Permission::create([
-            'name' => 'dashboard'
+            'name' => 'dashboard.view'
+        ]);
+
+        Permission::create([
+            'name' => 'dashboard.read'
+        ]);
+
+        Permission::create([
+            'name' => 'dashboard.create'
+        ]);
+
+        Permission::create([
+            'name' => 'dashboard.update'
         ]);
 
     	// Company

@@ -26,7 +26,9 @@ class MenuSeeder extends Seeder
         	'slug'       => 'home',
         	'url'        => 'home',
         	'icon'       => 'home',
-            'permission' => 'dashboard'
+            'base'       => 'dashboard',
+            'is_export'  => false,
+            'permission' => 'dashboard.view'
         ]);
 
         $header = Header::create([
@@ -92,6 +94,8 @@ class MenuSeeder extends Seeder
             'slug'       => 'employees',
             'url'        => 'employees/view',
             'icon'       => 'users',
+            'base'       => 'employee',
+            'is_export'  => true,
             'permission' => 'employee.view'
         ]);
 
@@ -100,6 +104,8 @@ class MenuSeeder extends Seeder
             'slug'       => 'roles',
             'url'        => 'roles/view',
             'icon'       => 'key',
+            'base'       => 'role',
+            'is_export'  => true,
             'permission' => 'role.view'
         ]);
 
@@ -113,6 +119,8 @@ class MenuSeeder extends Seeder
             'slug'       => 'company',
             'url'        => 'company/details',
             'icon'       => 'info',
+            'base'       => 'company',
+            'is_export'  => false,
             'permission' => 'company.view'
         ]);
     }

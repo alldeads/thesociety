@@ -21,6 +21,8 @@ class CreateMenusTable extends Migration
             $table->string('url')->nullable();
             $table->string('icon')->nullable();
             $table->string('badge')->nullable();
+            $table->string('base')->nullable();
+            $table->boolean('is_export')->default(true);
             $table->string('badgeClass')->nullable();
             $table->boolean('newTab')->default(false);
             $table->string('classList')->nullable();

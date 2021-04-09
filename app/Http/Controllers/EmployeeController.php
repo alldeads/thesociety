@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 
 use App\Models\Employee;
+use App\Models\User;
 
 class EmployeeController extends Controller
 {

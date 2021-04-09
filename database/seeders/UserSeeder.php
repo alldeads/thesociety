@@ -43,8 +43,9 @@ class UserSeeder extends Seeder
                     'company_id' => 1
                 ]);
 
-                $user->givePermissionTo('dashboard');
+                $user->givePermissionTo('dashboard.view');
                 $user->givePermissionTo('employee.view');
+                $user->givePermissionTo('employee.create');
                 $user->givePermissionTo('employee.export');
                 $user->givePermissionTo('employee.update');
                 $user->givePermissionTo('role.view');
@@ -72,7 +73,7 @@ class UserSeeder extends Seeder
                     'company_id' => 1
                 ]);
 
-                $user->givePermissionTo('dashboard');
+                $user->givePermissionTo('dashboard.view');
                 $user->givePermissionTo('employee.view');
                 $user->givePermissionTo('employee.export');
                 $user->givePermissionTo('employee.update');
@@ -100,7 +101,7 @@ class UserSeeder extends Seeder
                     'company_id' => 1
                 ]);
 
-                $user->givePermissionTo('dashboard');
+                $user->givePermissionTo('dashboard.view');
                 $user->givePermissionTo('employee.view');
                 $user->givePermissionTo('role.view');
                 $user->givePermissionTo('company.view');
