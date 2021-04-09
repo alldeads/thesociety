@@ -15,14 +15,27 @@ class Profile extends Model
      * @var array
      */
     protected $fillable = [
+        'user_id',
         'first_name',
         'last_name',
         'middle_name',
+        'username',
         'birth_date'
     ];
 
     public function getNameAttribute()
     {
     	return $this->first_name . ' ' . $this->last_name;
+    }
+
+    public function getNameWithMiAttribute()
+    {
+        $str = "";
+
+        if ( !empty($this->middle_name) ) {
+            $str = ' ' . substr($this->middle_name, 0, 1) . '.';
+        }
+
+        return $this->last_name . ', ' . $this->first_name . $str;
     }
 }

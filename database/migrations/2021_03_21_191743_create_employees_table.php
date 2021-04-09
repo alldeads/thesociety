@@ -17,8 +17,9 @@ class CreateEmployeesTable extends Migration
             $table->id();
             $table->bigInteger('company_id')->unsigned();
             $table->bigInteger('user_id')->unsigned();
-            $table->bigInteger('role_id')->nullable();
+            $table->bigInteger('role_id');
             $table->bigInteger('updated_by')->nullable()->unsigned();
+            $table->bigInteger('created_by')->nullable()->unsigned();
             $table->softDeletes();
             $table->timestamps();
         });

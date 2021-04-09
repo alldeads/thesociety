@@ -19,7 +19,8 @@ class CreateProfilesTable extends Migration
             $table->string('first_name');
             $table->string('middle_name')->nullable();
             $table->string('last_name');
-            $table->date('birth_date');
+            $table->string('username')->nullable();
+            $table->date('birth_date')->nullable();
             $table->enum('gender', ['male', 'female', 'others']);
             $table->timestamps();
         });

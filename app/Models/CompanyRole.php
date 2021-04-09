@@ -23,6 +23,13 @@ class CompanyRole extends Model
         'updated_by'
     ];
 
+    public static function getCompanyRoles($company_id)
+    {
+        return CompanyRole::where('company_id', $company_id)
+                ->where('role_name', '!=', 'owner')
+                ->get();
+    }
+
     public function user_updated()
     {
         return $this->belongsTo(User::class, 'updated_by', 'id');

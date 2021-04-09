@@ -2,8 +2,20 @@
 	<section class="app-user-edit">
 		<div class="card">
 			<div class="card-body">
+
+				<div class="alert alert-danger" style="display: {{ count($errors) > 0 ? 'block' : 'none' }}" role="alert">
+					<div class="alert-body">
+						<i data-feather="info"></i>
+						<ul style="list-style: none;">
+					        @foreach($errors->all() as $error)
+					        	<li>{{$error}}</li>
+					        @endforeach
+			    		</ul>
+					</div>
+				</div>
+
 				<ul class="nav nav-pills" role="tablist">
-					<li class="nav-item">
+					<li class="nav-item" wire:ignore>
 						<a class="nav-link d-flex align-items-center active"
 							id="account-tab"
 							data-toggle="tab"
@@ -15,13 +27,13 @@
 						</a>
 					</li>
 
-					<li class="nav-item">
+					<li class="nav-item" wire:ignore>
 						<a class="nav-link d-flex align-items-center" id="information-tab" data-toggle="tab" href="#information" aria-controls="information" role="tab" aria-selected="false">
 							<i data-feather="info"></i><span class="d-none d-sm-block">Information</span>
 						</a>
 					</li>
 
-					<li class="nav-item">
+					<li class="nav-item" wire:ignore>
 						<a class="nav-link d-flex align-items-center" id="social-tab" data-toggle="tab" href="#social" aria-controls="social" role="tab" aria-selected="false">
 							<i data-feather="share-2"></i><span class="d-none d-sm-block">Social</span>
 						</a>
@@ -35,49 +47,56 @@
 							<div class="row">
 								<div class="col-md-4">
 									<div class="form-group">
-										<label for="username">Username</label>
-										<input type="text" class="form-control" placeholder="Username" value="eleanor.aguilar" name="username" id="username"/>
+										<label for="first_name">First Name <span style="color:red;">*</span></label>
+										<input type="text" class="form-control" placeholder="First Name" wire:model="inputs.first_name" id="first_name"/>
 									</div>
 								</div>
 
 								<div class="col-md-4">
 									<div class="form-group">
-										<label for="name">Name</label>
-										<input type="text" class="form-control" placeholder="Name" value="Eleanor Aguilar" name="name"id="name"/>
+										<label for="middle_name">Middle Name </label>
+										<input type="text" class="form-control" placeholder="Middle Name" wire:model="inputs.middle_name" id="middle_name"/>
 									</div>
 								</div>
 
 								<div class="col-md-4">
 									<div class="form-group">
-										<label for="email">E-mail</label>
-										<input type="email" class="form-control" placeholder="Email" value="eleanor.aguilar@gmail.com" name="email" id="email"/>
+										<label for="last_name">Last Name <span style="color:red;">*</span></label>
+										<input type="text" class="form-control" placeholder="Last Name" wire:model="inputs.last_name" id="last_name"/>
 									</div>
 								</div>
 
 								<div class="col-md-4">
 									<div class="form-group">
-										<label for="username">Username</label>
-										<input type="text" class="form-control" placeholder="Username" value="eleanor.aguilar" name="username" id="username"/>
+										<label for="roles">Role</label>
+										<select class="form-control" wire:model="inputs.role">
+											<option> Select Role</option>
+											@foreach($roles as $role)
+												<option value="{{ $role->id }}">
+													{{ ucwords($role->role_name) }}
+												</option>
+											@endforeach
+										</select>
 									</div>
 								</div>
 
 								<div class="col-md-4">
 									<div class="form-group">
-										<label for="name">Name</label>
-										<input type="text" class="form-control" placeholder="Name" value="Eleanor Aguilar" name="name"id="name"/>
+										<label for="email">Email <span style="color:red;">*</span></label>
+										<input type="text" class="form-control" placeholder="Email" wire:model="inputs.email" id="email"/>
 									</div>
 								</div>
 
 								<div class="col-md-4">
 									<div class="form-group">
-										<label for="email">E-mail</label>
-										<input type="email" class="form-control" placeholder="Email" value="eleanor.aguilar@gmail.com" name="email" id="email"/>
+										<label for="password">Password <span style="color:red;">*</span></label>
+										<input type="password" class="form-control" placeholder="Password" wire:model="inputs.password" id="password"/>
 									</div>
 								</div>
 
 								<div class="col-12">
 									<div class="table-responsive border rounded mt-1">
-										<h6 class="py-1 mx-1 mb-0 font-medium-2">
+										<h6 class="py-1 mx-1 mb-0 font-medium-2" wire:ignore>
 											<i data-feather="lock" class="font-medium-3 mr-25"></i>
 											<span class="align-middle">Permission</span>
 										</h6>
@@ -126,7 +145,7 @@
 									</div>
 								</div>
 								<div class="col-12 d-flex flex-sm-row flex-column mt-2">
-									<button type="submit" class="btn btn-primary mb-1 mb-sm-0 mr-0 mr-sm-1">Save Changes</button>
+									<button wire:click="submit" class="btn btn-primary mb-1 mb-sm-0 mr-0 mr-sm-1">Save Changes</button>
 									<button type="reset" class="btn btn-outline-secondary">Reset</button>
 								</div>
 							</div>

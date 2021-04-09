@@ -10,6 +10,19 @@ class Employee extends Model
 {
     use HasFactory, SoftDeletes;
 
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'user_id',
+        'company_id',
+        'role_id',
+        'created_by',
+        'updated_by'
+    ];
+
     public function company()
     {
     	return $this->belongsTo(Company::class);

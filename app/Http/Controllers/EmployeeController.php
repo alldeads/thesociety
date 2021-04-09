@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 
+use App\Models\Employee;
+
 class EmployeeController extends Controller
 {
     public function get_all()
@@ -33,8 +35,15 @@ class EmployeeController extends Controller
 	        ['name'=> "Create Employee"],
 	    ];
 
+	    $company_id = auth()->user()->empCard->company_id ?? 0;
+
+	    $employee = Employee::find($company_id);
+
 		if ( $response->allowed() ) {
-		    return view('employee.create', ['breadcrumbs' => $breadcrumbs]);
+		    return view('employee.create', [
+		    	'breadcrumbs' => $breadcrumbs,
+		    	'company'     => $employee->company
+		    ]);
 		} else {
 		    return view('misc.not-authorized');
 		}

@@ -33,7 +33,9 @@ class EmployeeSeeder extends Seeder
         		Employee::create([
         			'company_id' => $company->id,
         			'user_id' => $user[0]->id,
-        			'role_id' => $role->id
+        			'role_id' => $role->id,
+                    'updated_by' => 1,
+                    'created_by' => 1
         		]);
         	}
         }
