@@ -3,9 +3,11 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
+
 use App\Models\Company;
 use App\Models\CompanyRole;
 use App\Models\User;
+use App\Models\Profile;
 use App\Models\Employee;
 
 class EmployeeSeeder extends Seeder
@@ -23,6 +25,10 @@ class EmployeeSeeder extends Seeder
         foreach ($companies as $company) {
         	foreach ($roles as $role) {
         		$user = User::factory(1)->create();
+
+                $profile = Profile::factory(1)->create([
+                    'user_id' => $user[0]->id
+                ]);
 
         		Employee::create([
         			'company_id' => $company->id,

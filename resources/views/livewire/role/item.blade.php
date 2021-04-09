@@ -2,7 +2,7 @@
 	<td>{{ $item->id }}</td>
 	<td>{{ ucwords($item->role_name) }}</td>
 	<td>{{ $item->created_at->format('F j, Y') }}</td>
-	<td>{{ $item->user_updated->name ?? '' }}</td>
+	<td>{{ $item->user_created->profile->name ?? '' }}</td>
 
 	@if( auth()->user()->can('role.update') || auth()->user()->can('role.delete') )
 		<td>

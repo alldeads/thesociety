@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 
 use App\Models\User;
+use App\Models\Profile;
 use App\Models\Employee;
 use App\Models\CompanyRole;
 
@@ -25,11 +26,15 @@ class UserSeeder extends Seeder
             
             if ( $role->role_name == "owner" ) {
                 $user = User::create([
-                    'first_name' => 'John Rexter',
-                    'last_name'  => 'Flores',
                     'email'      => 'john@test.com',
                     'password'   => bcrypt('password'),
                     'status'     => 'active'
+                ]);
+
+                $profile = Profile::factory(1)->create([
+                    'user_id'    => $user->id,
+                    'first_name' => 'John Rexter',
+                    'last_name'  => 'Flores',
                 ]);
 
                 Employee::create([
@@ -41,11 +46,15 @@ class UserSeeder extends Seeder
 
             if ( $role->role_name == "accountant" ) {
                 $user = User::create([
-                    'first_name' => 'Rojennette Ann',
-                    'last_name'  => 'Alivio',
                     'email'      => 'roj@test.com',
                     'password'   => bcrypt('password'),
                     'status'     => 'active'
+                ]);
+
+                $profile = Profile::factory(1)->create([
+                    'user_id'    => $user->id,
+                    'first_name' => 'Rojennette Ann',
+                    'last_name'  => 'Alivio',
                 ]);
 
                 Employee::create([
@@ -65,10 +74,14 @@ class UserSeeder extends Seeder
         }
 
         User::create([
-        	'first_name' => 'Dave Scott',
-            'last_name'  => 'Wong',
         	'email'      => 'dave@test.com',
         	'password'   => bcrypt('password')
+        ]);
+
+        $profile = Profile::factory(1)->create([
+            'user_id'    => $user->id,
+            'first_name' => 'Dave Scott',
+            'last_name'  => 'Wong',
         ]);
     }
 }
