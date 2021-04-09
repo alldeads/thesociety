@@ -1,6 +1,6 @@
 <tr>
 	<td>{{ $user->id }}</td>
-	<td>{{ ucwords($user->user->name) }}</td>
+	<td>{{ ucwords($user->user->profile->name) }}</td>
 	<td>{{ ucwords($user->role->role_name) }}</td>
 	<td>{{ $user->created_at->format('F j, Y') }}</td>
 	<td>{{ ucwords($user->user->status) }}</td>
