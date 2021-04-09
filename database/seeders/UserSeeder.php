@@ -46,10 +46,12 @@ class UserSeeder extends Seeder
                 $user->givePermissionTo('dashboard.view');
                 $user->givePermissionTo('employee.view');
                 $user->givePermissionTo('employee.create');
+                $user->givePermissionTo('employee.delete');
                 $user->givePermissionTo('employee.export');
                 $user->givePermissionTo('employee.update');
                 $user->givePermissionTo('role.view');
                 $user->givePermissionTo('role.update');
+                $user->givePermissionTo('role.delete');
                 $user->givePermissionTo('company.view');
                 $user->givePermissionTo('company.update');
             }

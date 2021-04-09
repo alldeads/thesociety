@@ -24,6 +24,7 @@
 		{{-- Include core + vendor Styles --}}
 		@include('panels/styles')
 		@livewireStyles
+		<script defer src="{{ asset(mix('js/scripts/all.min.js')) }}"></script>
 </head>
 
 @isset($configData["mainLayoutType"])

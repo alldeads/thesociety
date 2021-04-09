@@ -7,15 +7,15 @@
 	@if( auth()->user()->can('role.update') || auth()->user()->can('role.delete') )
 		<td>
 			@can('role.update')
-				<button wire:click="edit" type="button" class="btn btn-sm btn-primary" wire:ignore>
-		      		<span>Edit</span>
-		    	</button>
+				<span type="button" wire:click="edit">
+					<i class="fas fa-pen ml-1"></i>
+				</span>
 		    @endcan
 
 	    	@can('role.delete')
-		    	<button wire:click="delete" type="button" class="btn btn-sm btn-danger" wire:ignore>
-		      		<span>Delete</span>
-		    	</button>
+	    		<span type="button" wire:click="delete">
+					<i class="fas fa-trash ml-1"></i>
+				</span>
 		    @endcan
 		</td>
 	@endif
