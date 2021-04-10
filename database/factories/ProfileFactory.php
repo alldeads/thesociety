@@ -22,10 +22,22 @@ class ProfileFactory extends Factory
     public function definition()
     {
         return [
-            'first_name'  => $this->faker->firstName,
-            'last_name'   => $this->faker->lastName,
-            'middle_name' => $this->faker->lastName,
-            'birth_date'  => $this->faker->date
+            'first_name'     => $this->faker->firstName,
+            'last_name'      => $this->faker->lastName,
+            'middle_name'    => $this->faker->lastName,
+            'birth_date'     => $this->faker->date,
+            'phone_number'   => $this->faker->e164PhoneNumber,
+            'marital_status' => $this->faker->randomElement($array = array ('single','widowed','married')),
+            'address_line_1' => $this->faker->address,
+            'address_line_2' => $this->faker->secondaryAddress,
+            'city'           => $this->faker->city,
+            'state'          => $this->faker->state,
+            'postal'         => $this->faker->postcode,
+            'country'        => $this->faker->country,
+            'sss'            => $this->faker->ean13,
+            'pagibig'        => $this->faker->ean13,
+            'philhealth'     => $this->faker->ean13,
+            'tin'            => $this->faker->ean13,
         ];
     }
 }

@@ -103,8 +103,6 @@ class Create extends CustomComponent
 				'first_name'     => $this->inputs['first_name'],
 	            'middle_name'    => $this->inputs['middle_name'] ?? null,
 	            'last_name'      => $this->inputs['last_name'],
-	            'username'       => $this->inputs['username'] ?? null,
-	            'username'       => $this->inputs['username'] ?? null,
 	            'birth_date'     => $this->inputs['birth_date'],
 	            'phone_number'   => $this->inputs['phone_number'],
 	            'gender'         => $this->inputs['gender'],
