@@ -177,21 +177,21 @@
 								
 			  					<div class="col-lg-4 col-md-6">
 									<div class="form-group">
-				  						<label for="birth">Birth date</label>
+				  						<label for="birth">Birth date <span style="color:red;">*</span></label>
 		  								<input id="birth" type="text" class="form-control birthdate-picker" wire:model="inputs.birth_date" placeholder="YYYY-MM-DD"/>
 									</div>
 			  					</div>
 
 			  					<div class="col-lg-4 col-md-6">
 									<div class="form-group">
-				  						<label for="phone">Phone No.</label>
+				  						<label for="phone">Phone No. <span style="color:red;">*</span></label>
 			  							<input id="phone" type="text" class="form-control" wire:model="inputs.phone_number" placeholder="Enter Phone Number"/>
 									</div>
 			  					</div>
 
 			  					<div class="col-lg-4 col-md-6">
 									<div class="form-group">
-				  						<label for="marital">Marital Status</label>
+				  						<label for="marital">Marital Status <span style="color:red;">*</span></label>
 				  						<select id="marital" class="form-control" wire:model="inputs.marital_status">
 				  							<option>Select Marital Status</option>
 											<option value="single">Single</option>
@@ -206,7 +206,7 @@
 
 		  						<div class="col-lg-4 col-md-6">
 									<div class="form-group">
-				  						<label for="gender">Gender</label>
+				  						<label for="gender">Gender <span style="color:red;">*</span></label>
 				  						<select id="gender" class="form-control" wire:model="inputs.gender">
 				  							<option>Select Gender</option>
 											<option value="male">Male</option>
@@ -225,7 +225,7 @@
 
 			  					<div class="col-lg-4 col-md-6">
 									<div class="form-group">
-				  						<label for="nationality">Nationality</label>
+				  						<label for="nationality">Nationality <span style="color:red;">*</span></label>
 		  								<input id="nationality" type="text" class="form-control" wire:model="inputs.nationality" placeholder="Enter Nationality"/>
 									</div>
 			  					</div>
@@ -239,43 +239,43 @@
 
 			  					<div class="col-lg-4 col-md-6">
 									<div class="form-group">
-				  						<label for="address-1">Address Line 1</label>
-				  						<input id="address-1" type="text" class="form-control" value="A-65, Belvedere Streets" name="address"/>
+				  						<label for="address-1">Address Line 1 <span style="color:red;">*</span></label>
+				  						<input id="address-1" type="text" class="form-control" placeholder="Enter Address Line 1" wire:model="inputs.address_line_1"/>
 									</div>
 			  					</div>
 
 			  					<div class="col-lg-4 col-md-6">
 									<div class="form-group">
-				  						<label for="address-1">Address Line 2</label>
-				  						<input id="address-1" type="text" class="form-control" value="A-65, Belvedere Streets" name="address"/>
+				  						<label for="address-2">Address Line 2</label>
+				  						<input id="address-2" type="text" class="form-control" placeholder="Enter Address Line 2" wire:model="inputs.address_line_2"/>
 									</div>
 			  					</div>
 
 			  					<div class="col-lg-4 col-md-6">
 									<div class="form-group">
-				  						<label for="address-1">Municipality/City</label>
-				  						<input id="address-1" type="text" class="form-control" value="A-65, Belvedere Streets" name="address"/>
+				  						<label for="city">Municipality/City <span style="color:red;">*</span></label>
+				  						<input id="city" type="text" class="form-control" placeholder="Enter City or Municipality" wire:model="inputs.city"/>
 									</div>
 			  					</div>
 
 			  					<div class="col-lg-4 col-md-6">
 									<div class="form-group">
-				  						<label for="address-1">Province/State</label>
-				  						<input id="address-1" type="text" class="form-control" value="A-65, Belvedere Streets" name="address"/>
+				  						<label for="state">Province/State <span style="color:red;">*</span></label>
+				  						<input id="state" type="text" class="form-control" placeholder="Enter Province or State" wire:model="inputs.state"/>
 									</div>
 			  					</div>
 
 			  					<div class="col-lg-4 col-md-6">
 									<div class="form-group">
-				  						<label for="address-1">Postal Code</label>
-				  						<input id="address-1" type="text" class="form-control" value="A-65, Belvedere Streets" name="address"/>
+				  						<label for="postal">Postal Code <span style="color:red;">*</span></label>
+				  						<input id="postal" type="text" class="form-control" placeholder="Enter Postal or Zip Code" wire:model="inputs.postal"/>
 									</div>
 			  					</div>
 
 			  					<div class="col-lg-4 col-md-6">
 									<div class="form-group">
-				  						<label for="address-1">Country</label>
-				  						<input id="address-1" type="text" class="form-control" value="A-65, Belvedere Streets" name="address"/>
+				  						<label for="country">Country <span style="color:red;">*</span></label>
+				  						<input id="country" type="text" class="form-control" placeholder="Enter Country" wire:model="inputs.country"/>
 									</div>
 			  					</div>
 			  
@@ -289,7 +289,7 @@
 					<!-- Social Tab starts -->
 					<div class="tab-pane" id="social" aria-labelledby="social-tab" role="tabpanel">
 		  				<!-- users edit social form start -->
-		  				<form class="form-validate">
+		  				<form>
 							<div class="row mt-1">
 								<div class="col-12">
 									<h4 class="mb-1">
@@ -300,29 +300,29 @@
 
 			  					<div class="col-lg-3 col-md-6">
 									<div class="form-group">
-				  						<label for="address-1">SSS <span style="color:red;">*</span></label>
-				  						<input id="address-1" type="text" class="form-control" value="A-65, Belvedere Streets" name="address"/>
+				  						<label for="sss">SSS <span style="color:red;">*</span></label>
+				  						<input id="sss" type="text" class="form-control" placeholder="Enter SSS No." wire:model="inputs.sss"/>
 									</div>
 			  					</div>
 
 			  					<div class="col-lg-3 col-md-6">
 									<div class="form-group">
-				  						<label for="address-1">Pagibig <span style="color:red;">*</span></label>
-				  						<input id="address-1" type="text" class="form-control" value="A-65, Belvedere Streets" name="address"/>
+				  						<label for="pagibig">Pagibig <span style="color:red;">*</span></label>
+				  						<input id="pagibig" type="text" class="form-control" placeholder="Enter Pagibig No." wire:model="inputs.pagibig"/>
 									</div>
 			  					</div>
 
 			  					<div class="col-lg-3 col-md-6">
 									<div class="form-group">
-				  						<label for="address-1">Philhealth <span style="color:red;">*</span></label>
-				  						<input id="address-1" type="text" class="form-control" value="A-65, Belvedere Streets" name="address"/>
+				  						<label for="philhealth">Philhealth <span style="color:red;">*</span></label>
+				  						<input id="philhealth" type="text" class="form-control" placeholder="Enter Philhealth No." wire:model="inputs.philhealth"/>
 									</div>
 			  					</div>
 
 			  					<div class="col-lg-3 col-md-6">
 									<div class="form-group">
-				  						<label for="address-1">Tin <span style="color:red;">*</span></label>
-				  						<input id="address-1" type="text" class="form-control" value="A-65, Belvedere Streets" name="address"/>
+				  						<label for="tin">Tin <span style="color:red;">*</span></label>
+				  						<input id="tin" type="text" class="form-control" placeholder="Enter Tin No." wire:model="inputs.tin"/>
 									</div>
 			  					</div>
 
@@ -335,27 +335,27 @@
 
 			  					<div class="col-lg-4 col-md-6">
 									<div class="form-group">
-				  						<label for="address-1">Name <span style="color:red;">*</span></label>
-				  						<input id="address-1" type="text" class="form-control" value="A-65, Belvedere Streets" name="address"/>
+				  						<label for="contact-name">Name <span style="color:red;">*</span></label>
+				  						<input id="contact-name" type="text" class="form-control" placeholder="Enter Contact Name" wire:model="inputs.contact_name"/>
 									</div>
 			  					</div>
 
 			  					<div class="col-lg-4 col-md-6">
 									<div class="form-group">
-				  						<label for="address-1">Contact No. <span style="color:red;">*</span></label>
-				  						<input id="address-1" type="text" class="form-control" value="A-65, Belvedere Streets" name="address"/>
+				  						<label for="contact_phone">Contact No. <span style="color:red;">*</span></label>
+				  						<input id="contact_phone" type="text" class="form-control" placeholder="Enter Contact Phone" wire:model="inputs.contact_phone"/>
 									</div>
 			  					</div>
 
 			  					<div class="col-lg-4 col-md-6">
 									<div class="form-group">
-				  						<label for="address-1">Relationship <span style="color:red;">*</span></label>
-				  						<input id="address-1" type="text" class="form-control" value="A-65, Belvedere Streets" name="address"/>
+				  						<label for="relationship">Relationship <span style="color:red;">*</span></label>
+				  						<input id="relationship" type="text" class="form-control" placeholder="Enter Contact Relationship" wire:model="inputs.contact_relationship"/>
 									</div>
 			  					</div>
 
 				  				<div class="col-12 d-flex flex-sm-row flex-column mt-2">
-									<button class="btn btn-primary mb-1 mb-sm-0 mr-0 mr-sm-1">Save Changes</button>
+									<button wire:click="submit" class="btn btn-primary mb-1 mb-sm-0 mr-0 mr-sm-1">Save Changes</button>
 				  				</div>
 							</div>
 		  				</form>

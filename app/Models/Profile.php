@@ -29,7 +29,13 @@ class Profile extends Model
         'sss',
         'pagibig',
         'philhealth',
-        'tin'
+        'tin',
+        'address_line_1',
+        'address_line_2',
+        'city',
+        'state',
+        'postal',
+        'country'
     ];
 
     public function getNameAttribute()

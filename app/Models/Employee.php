@@ -20,7 +20,8 @@ class Employee extends Model
         'company_id',
         'role_id',
         'created_by',
-        'updated_by'
+        'updated_by',
+        'date_hired'
     ];
 
     public function company()

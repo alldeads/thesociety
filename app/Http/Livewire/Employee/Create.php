@@ -7,6 +7,7 @@ use App\Http\Livewire\CustomComponent;
 use App\Models\User;
 use App\Models\Employee;
 use App\Models\Profile;
+use App\Models\Contact;
 use App\Models\CompanyRole;
 use App\Models\CompanyMenu;
 
@@ -32,7 +33,20 @@ class Create extends CustomComponent
 		'gender',
 		'marital_status',
 		'date_hired',
-		'nationality'
+		'nationality',
+		'address_line_1',
+		'address_line_2',
+		'city',
+		'state',
+		'postal',
+		'country',
+		'sss',
+        'pagibig',
+        'philhealth',
+        'tin',
+        'contact_name',
+        'contact_phone',
+        'contact_relationship',
 	];
 
 	public $roles;
@@ -54,6 +68,7 @@ class Create extends CustomComponent
             'username'       => ['nullable', 'string', 'max:255'],
             'email'          => ['required', 'email', 'unique:users,email'],
             'password'       => ['required', 'min:6'],
+            'permissions'    => ['required'],
             'role'           => ['required', 'numeric'],
             'birth_date'     => ['required', 'date'],
             'phone_number'   => ['required'],
@@ -61,6 +76,19 @@ class Create extends CustomComponent
             'marital_status' => ['required', 'string'],
             'date_hired'     => ['nullable', 'date'],
             'nationality'    => ['required', 'string'],
+            'address_line_1' => ['required', 'string'],
+			'address_line_2' => ['nullable', 'string'],
+			'city'           => ['required', 'string'],
+			'state'          => ['required', 'string'],
+			'postal'         => ['required', 'string'],
+			'country'        => ['required', 'string'],
+			'sss'            => ['required', 'string'],
+	        'pagibig'        => ['required', 'string'],
+	        'philhealth'     => ['required', 'string'],
+	        'tin'            => ['required', 'string'],
+	        'contact_name'   => ['required', 'string'],
+			'contact_phone'   => ['required', 'string'],
+			'contact_relationship'  => ['required', 'string'],
         ])->validate();
 
 		try {
@@ -72,19 +100,43 @@ class Create extends CustomComponent
 			]);
 
 			$profile = Profile::create([
-				'user_id'      => $user->id,
-				'first_name'   => $this->inputs['first_name'],
-	            'middle_name'  => $this->inputs['middle_name'] ?? null,
-	            'last_name'    => $this->inputs['last_name'],
-	            'username'     => $this->inputs['username'] ?? null,
+				'user_id'        => $user->id,
+				'first_name'     => $this->inputs['first_name'],
+	            'middle_name'    => $this->inputs['middle_name'] ?? null,
+	            'last_name'      => $this->inputs['last_name'],
+	            'username'       => $this->inputs['username'] ?? null,
+	            'username'       => $this->inputs['username'] ?? null,
+	            'birth_date'     => $this->inputs['birth_date'],
+	            'phone_number'   => $this->inputs['phone_number'],
+	            'gender'         => $this->inputs['gender'],
+	            'marital_status' => $this->inputs['marital_status'],
+	            'nationality'    => $this->inputs['nationality'],
+	            'address_line_1' => $this->inputs['address_line_1'],
+				'address_line_2' => $this->inputs['address_line_2'] ?? null,
+				'city'           => $this->inputs['city'],
+				'state'          => $this->inputs['state'],
+				'postal'         => $this->inputs['postal'],
+				'country'        => $this->inputs['country'],
+				'sss'            => $this->inputs['sss'],
+		        'pagibig'        => $this->inputs['pagibig'],
+		        'philhealth'     => $this->inputs['philhealth'],
+		        'tin'            => $this->inputs['tin'],
 			]);
 
 			Employee::create([
 				'user_id'    => $user->id,
 				'company_id' => $this->company_id,
 				'role_id'    => $this->inputs['role'],
+				'date_hired' => $this->inputs['date_hired'] ?? null,
 				'created_by' => auth()->id(),
 				'updated_by' => auth()->id(),
+			]);
+
+			Contact::create([
+				'user_id'      => $user->id,
+				'name'         => $this->inputs['contact_name'],
+				'phone'        => $this->inputs['contact_phone'],
+				'relationship' => $this->inputs['contact_relationship'],
 			]);
 
 			foreach ($this->inputs['permissions'] as $key => $permission) {
