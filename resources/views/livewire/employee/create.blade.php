@@ -125,8 +125,8 @@
 														</td>
 														<td>
 															<div class="custom-control custom-checkbox">
-																<input type="checkbox" class="custom-control-input" id="{{$menu->menu->base}}-write" wire:model="inputs.permissions.{{$menu->menu->base}}-write"/>
-																<label class="custom-control-label" for="{{$menu->menu->base}}-write"></label>
+																<input type="checkbox" class="custom-control-input" id="{{$menu->menu->base}}-update" wire:model="inputs.permissions.{{$menu->menu->base}}-update"/>
+																<label class="custom-control-label" for="{{$menu->menu->base}}-update"></label>
 															</div>
 														</td>
 														<td>
