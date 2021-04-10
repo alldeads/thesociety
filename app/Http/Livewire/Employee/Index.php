@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\Employee;
 
 use App\Http\Livewire\CustomComponent;
+use Illuminate\Database\Eloquent\Builder;
 use Livewire\WithPagination;
 
 use App\Models\Employee;
@@ -40,16 +41,20 @@ class Index extends CustomComponent
     {
         $search = $this->search;
 
-        $results = Employee::whereHas('user', function($query) use ($search) {
-            return $query->where('email', 'like', "%" . $search ."%")
-                ->orWhereHas('profile', function($query) use ($search) {
-                    return $query->where('first_name', 'like', "%" . $search ."%")
-                    ->orWhere('middle_name', 'like', "%" . $search ."%")
-                    ->orWhere('last_name', 'like', "%" . $search ."%");
+        $results = Employee::where('company_id', $this->company_id)
+            ->where( function (Builder $query) use ($search) {
+                $query->whereHas('user', function($query) use ($search) {
+                    return $query->where('email', 'like', "%" . $search ."%")
+                        ->orWhereHas('profile', function($query) use ($search) {
+                            return $query->where('first_name', 'like', "%" . $search ."%")
+                            ->orWhere('middle_name', 'like', "%" . $search ."%")
+                            ->orWhere('last_name', 'like', "%" . $search ."%");
+                        });
+                })->orWhereHas('role', function($query) use ($search) {
+                    return $query->where('role_name', 'like', "%" . $search ."%");
                 });
-        })->orWhereHas('role', function($query) use ($search) {
-            return $query->where('role_name', 'like', "%" . $search ."%");
-        })->orderBy('created_at', 'desc')->paginate($this->limit);
+            })
+            ->orderBy('created_at', 'desc')->paginate($this->limit);
         
         return view('livewire.employee.index', [
             'results' => $results

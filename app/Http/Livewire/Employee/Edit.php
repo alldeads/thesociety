@@ -14,48 +14,59 @@ use App\Models\CompanyMenu;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 
-class Create extends CustomComponent
+class Edit extends CustomComponent
 {
 	public $company_id;
 
 	public $inputs = [
-		'first_name',
-		'middle_name',
-		'last_name',
-		'username',
-		'email',
-		'password',
-		'role',
 		'permissions',
-		'birth_date',
-		'phone_number',
-		'gender',
-		'marital_status',
-		'date_hired',
-		'nationality',
-		'address_line_1',
-		'address_line_2',
-		'city',
-		'state',
-		'postal',
-		'country',
-		'sss',
-        'pagibig',
-        'philhealth',
-        'tin',
-        'contact_name',
-        'contact_phone',
-        'contact_relationship',
+		'password'
 	];
 
 	public $roles;
 	public $menus;
+	public $employee;
 
-	public function mount($company_id)
+	public function mount($company_id, $employee)
 	{
 		$this->company_id = $company_id;
+		$this->employee   = $employee;
 		$this->roles = CompanyRole::getCompanyRoles($this->company_id);
 		$this->menus = CompanyMenu::getCompanyMenus($this->company_id);
+
+		$this->inputs = [
+			'first_name'        => $employee->user->profile->first_name ?? '',
+			'permissions'       => [],
+			'middle_name'       => $employee->user->profile->middle_name ?? '',
+			'last_name'         => $employee->user->profile->last_name ?? '',
+			'email'             => $employee->user->email ?? '',
+			'role'              => $employee->role_id ?? '',
+			'birth_date'        => $employee->user->profile->birth_date ?? '',
+			'phone_number'      => $employee->user->profile->phone_number ?? '',
+			'gender'            => $employee->user->profile->gender ?? '',
+			'marital_status'    => $employee->user->profile->marital_status ?? '',
+			'date_hired'        => $employee->date_hired ?? '',
+			'nationality'       => $employee->user->profile->nationality ?? '',
+			'address_line_1'    => $employee->user->profile->address_line_1 ?? '',
+			'address_line_2'    => $employee->user->profile->address_line_2 ?? '',
+			'city'              => $employee->user->profile->city ?? '',
+			'state'             => $employee->user->profile->state ?? '',
+			'postal'            => $employee->user->profile->postal ?? '',
+			'country'           => $employee->user->profile->country ?? '',
+			'sss'               => $employee->user->profile->sss ?? '',
+	        'pagibig'           => $employee->user->profile->pagibig ?? '',
+	        'philhealth'        => $employee->user->profile->philhealth ?? '',
+	        'tin'               => $employee->user->profile->tin ?? '',
+	        'contact_name'      => $employee->user->contact->name ?? '',
+	        'contact_phone'     => $employee->user->contact->phone ?? '',
+	        'contact_relationship' => $employee->user->contact->relationship ?? '',
+		];
+
+		foreach ($employee->user->permissions()->pluck('name') as $pem) {
+			$plain = str_replace('.', '-', $pem);
+
+			$this->inputs['permissions'][$plain] = true;
+		}
 	}
 
 	public function submit()
@@ -64,9 +75,8 @@ class Create extends CustomComponent
             'first_name'     => ['required', 'string', 'max:255'],
             'middle_name'    => ['nullable', 'string', 'max:255'],
             'last_name'      => ['required', 'string', 'max:255'],
-            'username'       => ['nullable', 'string', 'max:255'],
-            'email'          => ['required', 'email', 'unique:users,email'],
-            'password'       => ['required', 'min:6'],
+            'email'          => ['required', 'email'],
+            'password'       => ['nullable', 'min:6'],
             'permissions'    => ['required'],
             'role'           => ['required', 'numeric'],
             'birth_date'     => ['required', 'date'],
@@ -93,13 +103,19 @@ class Create extends CustomComponent
 		try {
 			DB::beginTransaction();
 
-			$user = User::create([
-				'email'     => $this->inputs['email'],
-            	'password'  => bcrypt($this->inputs['password'])
-			]);
+			$user = User::find($this->employee->user->id);
 
-			$profile = Profile::create([
-				'user_id'        => $user->id,
+			$user->email = $this->inputs['email'];
+
+			if ( isset($this->inputs['password']) ) {
+				$user->password = bcrypt($this->inputs['password']);
+			}
+			
+			$user->save();
+
+			$profile = Profile::find($this->employee->user->profile->id);
+
+			$profile->fill([
 				'first_name'     => $this->inputs['first_name'],
 	            'middle_name'    => $this->inputs['middle_name'] ?? null,
 	            'last_name'      => $this->inputs['last_name'],
@@ -122,35 +138,43 @@ class Create extends CustomComponent
 		        'tin'            => $this->inputs['tin'],
 			]);
 
-			Employee::create([
-				'user_id'    => $user->id,
-				'company_id' => $this->company_id,
+			$profile->save();
+
+			$employee = Employee::find($this->employee->id);
+
+			$employee->fill([
 				'role_id'    => $this->inputs['role'],
 				'date_hired' => $this->inputs['date_hired'] ?? null,
-				'created_by' => auth()->id(),
 				'updated_by' => auth()->id(),
 			]);
 
-			Contact::create([
-				'user_id'      => $user->id,
+			$employee->save();
+
+			$contact = Contact::find($this->employee->user->contact->id);
+
+			$contact->fill([
 				'name'         => $this->inputs['contact_name'],
 				'phone'        => $this->inputs['contact_phone'],
 				'relationship' => $this->inputs['contact_relationship'],
 			]);
 
+			$contact->save();
+
 			foreach ($this->inputs['permissions'] as $key => $permission) {
 				foreach ($this->menus as $menu) {
 					if ( strrpos($key, $menu->menu->base) !== false ) {
-						$user->givePermissionTo(str_replace('-', '.', $key));
+						$plain = str_replace('-', '.', $key);
+
+						if ( !$user->hasPermissionTo($plain) ) {
+							$user->givePermissionTo($plain);
+						}
 					}
 				}
 			}
 
 			DB::commit();
 
-			$this->inputs = [];
-
-			$this->message('Employee has been created', 'success');
+			$this->message('Employee has been updated', 'success');
 		} catch (\Exception $e) {
 			DB::rollback();
 			$this->message($e->getMessage(), 'error');
@@ -159,6 +183,6 @@ class Create extends CustomComponent
 
     public function render()
     {
-        return view('livewire.employee.create');
+        return view('livewire.employee.edit');
     }
 }

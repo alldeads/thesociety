@@ -38,12 +38,43 @@ class EmployeeController extends Controller
 
 	    $company_id = auth()->user()->empCard->company_id ?? 0;
 
-	    $employee = Employee::find($company_id);
+	    $employee = Employee::findOrFail($company_id);
 
 		if ( $response->allowed() ) {
 		    return view('employee.create', [
 		    	'breadcrumbs' => $breadcrumbs,
 		    	'company'     => $employee->company
+		    ]);
+		} else {
+		    return view('misc.not-authorized');
+		}
+    }
+
+    public function edit(Employee $emp)
+    {
+    	$response = Gate::inspect('employee.update');
+
+    	$breadcrumbs = [
+	        ['link'=> route('home'), 'name'=>"Dashboard"], 
+	        ['link'=> route('employees-view'), 'name'=> "Employees"],
+	        ['name'=> "Edit Employee"],
+	    ];
+
+	    $company_id = auth()->user()->empCard->company_id ?? 0;
+
+	    $employee = Employee::findOrFail($company_id);
+
+	    $success = true;
+
+	    if ( $emp->company_id != $company_id ) {
+	    	$success = false;
+	    }
+
+		if ( $response->allowed() && $success ) {
+		    return view('employee.edit', [
+		    	'breadcrumbs' => $breadcrumbs,
+		    	'company'     => $employee->company,
+		    	'emp'         => $emp
 		    ]);
 		} else {
 		    return view('misc.not-authorized');

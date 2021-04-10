@@ -54,6 +54,11 @@ class User extends Authenticatable
         return $this->hasOne(Profile::class);
     }
 
+    public function contact()
+    {
+        return $this->hasOne(Contact::class);
+    }
+
     public function role()
     {
         return $this->belongsTo(CompanyRole::class, 'id', 'user_id');

@@ -12,6 +12,11 @@ class User extends CustomComponent
 	{
 		$this->emit('deleteEmployee', ['employee' => $this->user]);
 	}
+
+	public function edit()
+	{
+		return redirect()->route('employees-edit', ['emp' => $this->user->id]);
+	}
 	
     public function render()
     {

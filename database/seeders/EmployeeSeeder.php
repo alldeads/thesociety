@@ -20,9 +20,13 @@ class EmployeeSeeder extends Seeder
     public function run()
     {
         $companies = Company::all();
-        $roles = CompanyRole::where('role_name', 'not like', 'owner')->get();
 
         foreach ($companies as $company) {
+
+            $roles = CompanyRole::where('role_name', 'not like', 'owner')
+                            ->where('company_id', $company->id)
+                            ->get();
+
         	foreach ($roles as $role) {
         		$user = User::factory(1)->create();
 
