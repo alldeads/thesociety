@@ -45,7 +45,7 @@ class Edit extends CustomComponent
 			'phone_number'      => $employee->user->profile->phone_number ?? '',
 			'gender'            => $employee->user->profile->gender ?? '',
 			'marital_status'    => $employee->user->profile->marital_status ?? '',
-			'date_hired'        => $employee->date_hired ?? '',
+			'date_hired'        => $employee->date_hired ?? null,
 			'nationality'       => $employee->user->profile->nationality ?? '',
 			'address_line_1'    => $employee->user->profile->address_line_1 ?? '',
 			'address_line_2'    => $employee->user->profile->address_line_2 ?? '',
@@ -160,15 +160,24 @@ class Edit extends CustomComponent
 
 			$contact->save();
 
+			$p = [];
+
 			foreach ($this->inputs['permissions'] as $key => $permission) {
 				foreach ($this->menus as $menu) {
 					if ( strrpos($key, $menu->menu->base) !== false ) {
 						$plain = str_replace('-', '.', $key);
 
-						if ( !$user->hasPermissionTo($plain) ) {
+						if ( $permission ) {
+							$p[$plain] = $plain;
 							$user->givePermissionTo($plain);
 						}
 					}
+				}
+			}
+
+			foreach ($user->permissions as $u) {
+				if ( !isset($p[$u->name]) ) {
+					$user->revokePermissionTo($u->name);
 				}
 			}
 

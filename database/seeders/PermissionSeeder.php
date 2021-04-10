@@ -32,6 +32,10 @@ class PermissionSeeder extends Seeder
             'name' => 'dashboard.update'
         ]);
 
+        Permission::create([
+            'name' => 'dashboard.delete'
+        ]);
+
     	// Company
         Permission::create([
         	'name' => 'company.view'

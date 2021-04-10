@@ -8,6 +8,7 @@ use App\Models\Company;
 use App\Models\CompanyRole;
 use App\Models\User;
 use App\Models\Profile;
+use App\Models\Contact;
 use App\Models\Employee;
 
 class EmployeeSeeder extends Seeder
@@ -31,6 +32,10 @@ class EmployeeSeeder extends Seeder
         		$user = User::factory(1)->create();
 
                 $profile = Profile::factory(1)->create([
+                    'user_id' => $user[0]->id
+                ]);
+
+                Contact::factory(1)->create([
                     'user_id' => $user[0]->id
                 ]);
 
