@@ -22,6 +22,20 @@ class CreateProfilesTable extends Migration
             $table->string('username')->nullable();
             $table->date('birth_date')->nullable();
             $table->enum('gender', ['male', 'female', 'others']);
+            $table->string('citizenship')->nullable();
+            $table->string('marital_status')->nullable();
+            $table->string('nationality')->nullable();
+            $table->string('phone_number')->nullable();
+            $table->string('sss')->nullable();
+            $table->string('pagibig')->nullable();
+            $table->string('philhealth')->nullable();
+            $table->string('tin')->nullable();
+            $table->string('address_line_1')->nullable();
+            $table->string('address_line_2')->nullable();
+            $table->string('city')->nullable();
+            $table->string('state')->nullable();
+            $table->string('postal')->nullable();
+            $table->string('country')->nullable();
             $table->timestamps();
         });
     }

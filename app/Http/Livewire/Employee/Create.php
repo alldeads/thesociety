@@ -25,7 +25,14 @@ class Create extends CustomComponent
 		'email',
 		'password',
 		'role',
-		'permissions'
+		'permissions',
+		'birth_date',
+		'birth_date',
+		'phone_number',
+		'gender',
+		'marital_status',
+		'date_hired',
+		'nationality'
 	];
 
 	public $roles;
@@ -41,13 +48,19 @@ class Create extends CustomComponent
 	public function submit()
 	{
 		Validator::make($this->inputs, [
-            'first_name'   => ['required', 'string', 'max:255'],
-            'middle_name'  => ['nullable', 'string', 'max:255'],
-            'last_name'    => ['required', 'string', 'max:255'],
-            'username'     => ['nullable', 'string', 'max:255'],
-            'email'        => ['required', 'email', 'unique:users,email'],
-            'password'     => ['required', 'min:6'],
-            'role'         => ['required']
+            'first_name'     => ['required', 'string', 'max:255'],
+            'middle_name'    => ['nullable', 'string', 'max:255'],
+            'last_name'      => ['required', 'string', 'max:255'],
+            'username'       => ['nullable', 'string', 'max:255'],
+            'email'          => ['required', 'email', 'unique:users,email'],
+            'password'       => ['required', 'min:6'],
+            'role'           => ['required', 'numeric'],
+            'birth_date'     => ['required', 'date'],
+            'phone_number'   => ['required'],
+            'gender'         => ['required', 'string'],
+            'marital_status' => ['required', 'string'],
+            'date_hired'     => ['nullable', 'date'],
+            'nationality'    => ['required', 'string'],
         ])->validate();
 
 		try {

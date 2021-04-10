@@ -20,7 +20,16 @@ class Profile extends Model
         'last_name',
         'middle_name',
         'username',
-        'birth_date'
+        'birth_date',
+        'gender',
+        'citizenship',
+        'marital_status',
+        'nationality',
+        'phone_number',
+        'sss',
+        'pagibig',
+        'philhealth',
+        'tin'
     ];
 
     public function getNameAttribute()
