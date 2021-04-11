@@ -54,6 +54,7 @@ class UserSeeder extends Seeder
                 $user->givePermissionTo('employee.delete');
                 $user->givePermissionTo('employee.export');
                 $user->givePermissionTo('employee.update');
+                $user->givePermissionTo('role.create');
                 $user->givePermissionTo('role.view');
                 $user->givePermissionTo('role.update');
                 $user->givePermissionTo('role.delete');
