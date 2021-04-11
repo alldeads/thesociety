@@ -89,4 +89,4 @@
 	</div>
 </div>
 
-{{-- @livewire('employee.delete', ['company_id' => $company_id]) --}}
+@livewire('chart-of-account.delete', ['company_id' => $company_id])

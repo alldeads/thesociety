@@ -7,15 +7,15 @@
 		</span>
 	</td>
 
-	@if( auth()->user()->can('employee.update') || auth()->user()->can('employee.delete') )
+	@if( auth()->user()->can('chart.update') || auth()->user()->can('chart.delete') )
 		<td>
-		    @can('employee.update')
+		    @can('chart.update')
 				<span type="button" wire:click="edit">
 					<i class="fas fa-pen ml-1"></i>
 				</span>
 		    @endcan
 
-	    	@can('employee.delete')
+	    	@can('chart.delete')
 	    		<span type="button" wire:click="delete">
 					<i class="fas fa-trash ml-1"></i>
 				</span>
