@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\WebController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\AccountingController;
+use App\Http\Controllers\ChartOfAccountController;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\EmployeeController;
@@ -30,7 +31,7 @@ Route::middleware('auth')->group(function() {
 	});
 
 	Route::prefix('accounting')->group( function() {
-		Route::get('chart-of-accounts', [AccountingController::class, 'chart_accounts'])->name('chart-of-accounts');
+		Route::get('chart-of-accounts', [ChartOfAccountController::class, 'index'])->name('chart-of-accounts');
 	});
 
 	Route::prefix('roles')->group( function() {
