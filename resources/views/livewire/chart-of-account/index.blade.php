@@ -40,7 +40,7 @@
 		  			<div class="row">
 		  				<div class="col-md-10 col-lg-10 col-xl-10 col-sm-12 mt-1">
 		  					<div class="form-group">
-			                  	<input type="text" class="form-control" placeholder="Search employee name, email, role, and status" wire:model="search"/>
+			                  	<input type="text" class="form-control" placeholder="Search account name, account type, and code" wire:model="search"/>
 	                		</div>
 		  				</div>
 		  				<div class="col-md-2 col-lg-2 col-xl-2 col-sm-12 mt-1">
@@ -56,23 +56,21 @@
 		  			</div>
 		 		</div>
 
-		  		{{-- <div class="table-responsive">
+		  		<div class="table-responsive">
 					<table class="table table-hover-animation">
 			  			<thead>
 							<tr>
-								<th>ID</th>
+								<th>Code</th>
 								<th>Name</th>
-								<th>Role</th>
-								<th>Date Hired</th>
-								<th>Status</th>
-								@if( auth()->user()->can('employee.update') || auth()->user()->can('employee.delete') )
+								<th>Type</th>
+								@if( auth()->user()->can('chart.update') || auth()->user()->can('chart.delete') )
 									<th>Actions</th>
 								@endif
 							</tr>
 			  			</thead>
 			  			<tbody>
 				  			@foreach($results as $result)
-				  				@livewire('employee.user', ['user' => $result], key($result->id))
+				  				@livewire('chart-of-account.item', ['account' => $result], key($result->id))
 				  			@endforeach
 
 				  			@if( count($results->toArray()) == 0 )
@@ -82,7 +80,7 @@
 				  			@endif
 			  			</tbody>
 					</table>
-		  		</div> --}}
+		  		</div>
 		  		<div class="m-auto">
 		  			{{ $results->links() }}
 		  		</div>

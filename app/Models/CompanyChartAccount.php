@@ -35,6 +35,11 @@ class CompanyChartAccount extends Model
         return $this->belongsTo(Company::class);
     }
 
+    public function type()
+    {
+        return $this->belongsTo(ChartType::class, 'chart_type_id');
+    }
+
     public function user_updated()
     {
         return $this->belongsTo(User::class, 'updated_by', 'id');
