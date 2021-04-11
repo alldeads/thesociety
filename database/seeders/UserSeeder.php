@@ -44,6 +44,10 @@ class UserSeeder extends Seeder
                 ]);
 
                 $user->givePermissionTo('dashboard.view');
+                $user->givePermissionTo('chart.create');
+                $user->givePermissionTo('chart.view');
+                $user->givePermissionTo('chart.update');
+                $user->givePermissionTo('chart.export');
                 $user->givePermissionTo('employee.view');
                 $user->givePermissionTo('employee.create');
                 $user->givePermissionTo('employee.delete');

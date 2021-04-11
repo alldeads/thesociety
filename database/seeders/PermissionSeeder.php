@@ -106,5 +106,30 @@ class PermissionSeeder extends Seeder
         Permission::create([
             'name' => 'role.export'
         ]);
+
+        // Chart of Accounts
+        Permission::create([
+            'name' => 'chart.view'
+        ]);
+
+        Permission::create([
+            'name' => 'chart.update'
+        ]);
+
+        Permission::create([
+            'name' => 'chart.read'
+        ]);
+
+        Permission::create([
+            'name' => 'chart.create'
+        ]);
+
+        Permission::create([
+            'name' => 'chart.delete'
+        ]);
+
+        Permission::create([
+            'name' => 'chart.export'
+        ]);
     }
 }
