@@ -6,7 +6,7 @@ use App\Http\Livewire\CustomComponent;
 use Illuminate\Database\Eloquent\Builder;
 use Livewire\WithPagination;
 
-// use App\Models\Chart;
+use App\Models\CompanyChartAccount;
 
 class Index extends CustomComponent
 {

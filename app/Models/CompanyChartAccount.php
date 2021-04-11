@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class CompanyChartAccount extends Model
 {
@@ -17,6 +18,7 @@ class CompanyChartAccount extends Model
     protected $fillable = [
         'chart_name',
         'code',
+        'chart_type_id',
         'company_id',
         'created_by',
         'updated_by'

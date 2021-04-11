@@ -19,6 +19,7 @@ class CreateCompanyChartAccountsTable extends Migration
             $table->string('chart_name');
             $table->string('code')->nullable();
             $table->bigInteger('created_by')->unsigned();
+            $table->bigInteger('chart_type_id')->unsigned();
             $table->bigInteger('updated_by')->nullable()->unsigned();
             $table->softDeletes();
             $table->timestamps();
