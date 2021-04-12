@@ -32,11 +32,14 @@ class Index extends CustomComponent
     	$search = $this->search;
 
     	$results = CompanyChartAccount::where('company_id', $this->company_id)
-    					->where(function (Builder $query) use ($search) {
-    						return $query->where('chart_name', 'like', "%" . $search ."%")
-    									->orWhere('code', $search);
-    					})->orderBy('code', 'asc')->paginate($this->limit);
-
+					->where(function (Builder $query) use ($search) {
+                        return $query->where('chart_name', 'like', "%" . $search ."%")
+								->orWhere('code', $search)
+                                ->orWhereHas('type', function($query) use ($search) {
+                                    return $query->where('name', 'like', "%" . $search ."%");
+                                });
+					})->orderBy('code', 'asc')->paginate($this->limit);
+                        
         return view('livewire.chart-of-account.index', [
             'results' => $results
         ]);
