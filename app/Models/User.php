@@ -71,7 +71,7 @@ class User extends Authenticatable
 
     public static function getSetting()
     {
-        return auth()->user()->setting;
+        return auth()->user()->setting ?? null;
     }
 
     public static function getMenu()

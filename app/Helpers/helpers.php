@@ -84,8 +84,10 @@ class Helper
 
         $settings = User::getSetting();
 
-        $data['theme'] = $settings->is_dark ? 'dark' : 'light';
-
+        if ( $settings ) {
+            $data['theme'] = $settings->is_dark ? 'dark' : 'light';
+        }
+        
         //layout classes
         $layoutClasses = [
             'theme' => $data['theme'],
