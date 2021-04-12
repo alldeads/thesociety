@@ -42,6 +42,7 @@ class Index extends CustomComponent
         $search = $this->search;
 
         $results = Employee::where('company_id', $this->company_id)
+            ->where('is_owner', false)
             ->where( function (Builder $query) use ($search) {
                 $query->whereHas('user', function($query) use ($search) {
                     return $query->where('email', 'like', "%" . $search ."%")

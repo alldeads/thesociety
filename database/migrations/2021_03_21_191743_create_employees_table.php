@@ -19,6 +19,7 @@ class CreateEmployeesTable extends Migration
             $table->bigInteger('user_id')->unsigned();
             $table->bigInteger('role_id');
             $table->date('date_hired')->nullable();
+            $table->boolean('is_owner')->default(false);
             $table->bigInteger('updated_by')->nullable()->unsigned();
             $table->bigInteger('created_by')->nullable()->unsigned();
             $table->softDeletes();

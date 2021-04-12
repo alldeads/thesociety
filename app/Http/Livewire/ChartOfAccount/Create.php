@@ -36,7 +36,7 @@ class Create extends CustomComponent
         	$error = $validator->errors();
             foreach ($error->all() as $message) {
 			    $this->message($message, 'error');
-			    break;
+			    return;
 			}
         }
 

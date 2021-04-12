@@ -40,6 +40,7 @@ class UserSeeder extends Seeder
                 Employee::create([
                     'user_id'    => $user->id,
                     'role_id'    => $role->id,
+                    'is_owner'   => true,
                     'company_id' => 1
                 ]);
 
@@ -78,6 +79,7 @@ class UserSeeder extends Seeder
                 Employee::create([
                     'user_id'    => $user->id,
                     'role_id'    => $role->id,
+                    'is_owner'   => true,
                     'company_id' => 1
                 ]);
 
@@ -106,6 +108,7 @@ class UserSeeder extends Seeder
                 Employee::create([
                     'user_id'    => $user->id,
                     'role_id'    => $role->id,
+                    'is_owner'   => true,
                     'company_id' => 1
                 ]);
 
