@@ -8,9 +8,18 @@ class Item extends CustomComponent
 {
 	public $account;
 
+	public $listeners = [
+        'refreshChartItem' => '$refresh'
+    ];
+
 	public function delete()
 	{
 		$this->emit('deleteChartAccount', ['account' => $this->account]);
+	}
+
+	public function edit()
+	{
+		$this->emit('editChartAccount', ['account' => $this->account]);
 	}
 
     public function render()
