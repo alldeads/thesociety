@@ -16,11 +16,21 @@ class CashFlow extends Model
      * @var array
      */
     protected $fillable = [
-        'chart_name',
-        'code',
+        'account_type_id',
+        'payor',
         'chart_type_id',
         'company_id',
         'created_by',
         'updated_by'
     ];
+
+    public function chart_account()
+    {
+        return $this->belongsTo(CompanyChartAccount::class, 'account_type_id', 'id');
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'payor', 'id');
+    }
 }
