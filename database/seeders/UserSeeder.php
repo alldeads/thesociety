@@ -31,6 +31,11 @@ class UserSeeder extends Seeder
                     'status'     => 'active'
                 ]);
 
+                $user->setting()->create([
+                    'user_id' => $user->id,
+                    'is_dark' => true
+                ]);
+
                 $profile = Profile::factory(1)->create([
                     'user_id'    => $user->id,
                     'first_name' => 'John Rexter',
@@ -85,6 +90,11 @@ class UserSeeder extends Seeder
                     'company_id' => 1
                 ]);
 
+                $user->setting()->create([
+                    'user_id' => $user->id,
+                    'is_dark' => true
+                ]);
+
                 $user->givePermissionTo('dashboard.view');
                 $user->givePermissionTo('employee.view');
                 $user->givePermissionTo('employee.export');
@@ -115,6 +125,11 @@ class UserSeeder extends Seeder
                     'role_id'    => $role->id,
                     'is_owner'   => true,
                     'company_id' => 1
+                ]);
+
+                $user->setting()->create([
+                    'user_id' => $user->id,
+                    'is_dark' => false
                 ]);
 
                 $user->givePermissionTo('dashboard.view');

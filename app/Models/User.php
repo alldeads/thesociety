@@ -64,6 +64,16 @@ class User extends Authenticatable
         return $this->belongsTo(CompanyRole::class, 'id', 'user_id');
     }
 
+    public function setting()
+    {
+        return $this->hasOne(UserSetting::class);
+    }
+
+    public static function getSetting()
+    {
+        return auth()->user()->setting;
+    }
+
     public static function getMenu()
     {
         $permissions = auth()->user()->permissions;

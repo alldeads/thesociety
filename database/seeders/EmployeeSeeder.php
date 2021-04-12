@@ -31,6 +31,11 @@ class EmployeeSeeder extends Seeder
         	foreach ($roles as $role) {
         		$user = User::factory(1)->create();
 
+                $user[0]->setting()->create([
+                    'user_id' => $user[0]->id,
+                    'is_dark' => false
+                ]);
+
                 $profile = Profile::factory(1)->create([
                     'user_id' => $user[0]->id
                 ]);

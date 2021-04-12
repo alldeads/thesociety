@@ -3,6 +3,7 @@
 namespace App\Helpers;
 
 use Config;
+use App\Models\User;
 
 class Helper
 {
@@ -11,7 +12,7 @@ class Helper
         // default data array
         $DefaultData = [
           'mainLayoutType' => 'vertical',
-          'theme' => 'light',
+          'theme' => 'dark', 
           'sidebarCollapsed' => false,
           'navbarColor' => '',
           'horizontalMenuType' => 'floating',
@@ -80,6 +81,10 @@ class Helper
                 }
             }
         }
+
+        $settings = User::getSetting();
+
+        $data['theme'] = $settings->is_dark ? 'dark' : 'light';
 
         //layout classes
         $layoutClasses = [
