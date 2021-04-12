@@ -17,12 +17,14 @@ class CreateCashFlowsTable extends Migration
             $table->id();
             $table->bigInteger('company_id')->unsigned();
             $table->bigInteger('created_by')->unsigned();
-            $table->bigInteger('account_type')->unsigned();
-            $table->bigInteger('requestee')->unsigned();
-            $table->double('cash_in')->default(0);
-            $table->double('cash_out')->default(0);
-            $table->bigInteger('source')->unsigned();
+            $table->bigInteger('updated_by')->unsigned();
+            $table->bigInteger('account_type_id')->unsigned();
+            $table->bigInteger('payor')->unsigned();
+            $table->double('credit')->default(0);
+            $table->double('debit')->default(0);
             $table->double('balance')->default(0);
+            $table->text('notes')->nullable();
+            $table->text('attachment')->nullable();
             $table->timestamps();
         });
     }
