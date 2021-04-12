@@ -19,13 +19,13 @@
             <div class="bookmark-wrapper d-flex align-items-center">
                 <ul class="nav navbar-nav d-xl-none">
                     <li class="nav-item">
-                        <a class="nav-link menu-toggle" href="javascript:void(0);">
+                        <a class="nav-link menu-toggle" href="javascript:void(0);" wire:ignore>
                             <i class="ficon" data-feather="menu"></i>
                         </a>
                     </li>
                 </ul>
                 <ul class="nav navbar-nav">
-                    <li class="nav-item d-none d-lg-block">
+                    <li class="nav-item">
                         <a class="nav-link nav-link-style" wire:click.prevent="switch" wire:ignore>
                             <i class="ficon" data-feather="{{($configData['theme'] === 'dark') ? 'sun' : 'moon' }}"></i>
                         </a>
@@ -46,10 +46,10 @@
                         </span>
                     </a>
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdown-user">
-                        <a class="dropdown-item" href="javascript:void(0)">
+                        <a class="dropdown-item" wire:ignore href="javascript:void(0)">
                             <i class="mr-50" data-feather="user"></i> Profile
                         </a>
-                        <a class="dropdown-item" href="{{ route('logout') }}"
+                        <a class="dropdown-item" wire:ignore href="{{ route('logout') }}"
                                            onclick="event.preventDefault();
                                                          document.getElementById('logout-form').submit();">
                             <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
