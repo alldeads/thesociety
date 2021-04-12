@@ -60,7 +60,9 @@ class UserSeeder extends Seeder
                 $user->givePermissionTo('role.update');
                 $user->givePermissionTo('role.delete');
                 $user->givePermissionTo('company.view');
-                $user->givePermissionTo('company.update');
+                $user->givePermissionTo('cashflow.view');
+                $user->givePermissionTo('cashflow.create');
+                $user->givePermissionTo('cashflow.export');
             }
 
             if ( $role->role_name == "accountant" ) {
@@ -91,6 +93,9 @@ class UserSeeder extends Seeder
                 $user->givePermissionTo('role.update');
                 $user->givePermissionTo('company.view');
                 $user->givePermissionTo('company.update');
+                $user->givePermissionTo('cashflow.view');
+                $user->givePermissionTo('cashflow.create');
+                $user->givePermissionTo('cashflow.export');
             }
 
             if ( $role->role_name == "owner" ) {

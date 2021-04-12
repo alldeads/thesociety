@@ -32,6 +32,7 @@ Route::middleware('auth')->group(function() {
 
 	Route::prefix('accounting')->group( function() {
 		Route::get('chart-of-accounts', [ChartOfAccountController::class, 'index'])->name('chart-of-accounts');
+		Route::get('cash-flow', [ChartOfAccountController::class, 'index'])->name('cash-flow');
 	});
 
 	Route::prefix('roles')->group( function() {

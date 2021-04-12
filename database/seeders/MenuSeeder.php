@@ -46,12 +46,15 @@ class MenuSeeder extends Seeder
             'permission' => 'chart.view'
         ]);
 
-        // $header->menus()->create([
-        // 	'name'  => 'Cash Flow',
-        // 	'slug'  => 'cash-flow',
-        // 	'url'   => 'accounting/cash-flow',
-        // 	'icon'  => 'edit-3'
-        // ]);
+        $header->menus()->create([
+        	'name'       => 'Cash Flow',
+        	'slug'       => 'cash-flow',
+        	'url'        => 'accounting/cash-flow',
+            'base'       => 'cashflow',
+            'is_export'  => true,
+        	'icon'       => 'activity',
+            'permission' => 'cashflow.view'
+        ]);
 
         // $header->menus()->create([
         // 	'name'  => 'Ledger',

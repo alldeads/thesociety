@@ -131,5 +131,30 @@ class PermissionSeeder extends Seeder
         Permission::create([
             'name' => 'chart.export'
         ]);
+
+        // Cash Flow
+        Permission::create([
+            'name' => 'cashflow.view'
+        ]);
+
+        Permission::create([
+            'name' => 'cashflow.update'
+        ]);
+
+        Permission::create([
+            'name' => 'cashflow.read'
+        ]);
+
+        Permission::create([
+            'name' => 'cashflow.create'
+        ]);
+
+        Permission::create([
+            'name' => 'cashflow.delete'
+        ]);
+
+        Permission::create([
+            'name' => 'cashflow.export'
+        ]);
     }
 }
