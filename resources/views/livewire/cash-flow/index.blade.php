@@ -7,7 +7,7 @@
 		  				<div class="col-12 mt-1 text-right">
 		  					<div class="btn-group" wire:ignore>
 		  						@can('employee.create')
-			  						<button type="button" class="btn btn-primary rounded" data-toggle="modal" data-target="#modal-chart-create" wire:ignore>
+			  						<button type="button" class="btn btn-primary rounded" data-toggle="modal" data-target="#modal-cash-flow-create" wire:ignore>
 					          			<i data-feather="plus" class="mr-25"></i>
 					              		<span>Create</span>
 					            	</button>
@@ -93,6 +93,6 @@
 	</div>
 </div>
 
-@livewire('chart-of-account.create', ['company_id' => $company_id])
-@livewire('chart-of-account.edit', ['company_id' => $company_id])
+@livewire('cash-flow.create', ['company_id' => $company_id])
+{{-- @livewire('chart-of-account.edit', ['company_id' => $company_id]) --}}
 @livewire('chart-of-account.delete', ['company_id' => $company_id])
