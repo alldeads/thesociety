@@ -45,4 +45,9 @@ class Company extends Model
     {
         return $this->hasMany(CompanyRole::class);
     }
+
+    public function chart_accounts()
+    {
+        return $this->hasMany(CompanyChartAccount::class);
+    }
 }

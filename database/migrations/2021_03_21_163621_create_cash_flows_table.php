@@ -17,7 +17,7 @@ class CreateCashFlowsTable extends Migration
             $table->id();
             $table->bigInteger('company_id')->unsigned();
             $table->bigInteger('created_by')->unsigned();
-            $table->bigInteger('updated_by')->unsigned();
+            $table->bigInteger('updated_by')->nullable()->unsigned();
             $table->bigInteger('account_type_id')->unsigned();
             $table->bigInteger('payor')->unsigned();
             $table->double('credit')->default(0);
@@ -25,6 +25,8 @@ class CreateCashFlowsTable extends Migration
             $table->double('balance')->default(0);
             $table->text('notes')->nullable();
             $table->text('attachment')->nullable();
+            $table->enum('status', ['confirmed', 'pending', 'hold', 'cancelled'])->default('confirmed');
+            $table->softDeletes();
             $table->timestamps();
         });
     }
