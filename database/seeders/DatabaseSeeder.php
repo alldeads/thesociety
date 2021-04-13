@@ -23,7 +23,8 @@ class DatabaseSeeder extends Seeder
             EmployeeSeeder::class,
             CompanyMenuSeeder::class,
             CompanyChartSeeder::class,
-            CashFlowSeeder::class
+            CashFlowSeeder::class,
+            CustomerSeeder::class
         ]);
     }
 }

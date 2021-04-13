@@ -8,4 +8,26 @@ use Illuminate\Database\Eloquent\Model;
 class Customer extends Model
 {
     use HasFactory;
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'user_id',
+        'company_id',
+        'created_by',
+        'updated_by'
+    ];
+
+    public function company()
+    {
+    	return $this->belongsTo(Company::class);
+    }
+
+    public function user()
+    {
+    	return $this->belongsTo(User::class);
+    }
 }

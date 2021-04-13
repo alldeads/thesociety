@@ -9,6 +9,7 @@ use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\CashFlowController;
+use App\Http\Controllers\CustomerController;
 
 
 Auth::routes(['register' => false]);
@@ -29,6 +30,12 @@ Route::middleware('auth')->group(function() {
 		Route::get('view', [EmployeeController::class, 'get_all'])->name('employees-view');
 		Route::get('create', [EmployeeController::class, 'create'])->name('employees-create');
 		Route::get('edit/{emp}', [EmployeeController::class, 'edit'])->name('employees-edit');
+	});
+
+	Route::prefix('customers')->group( function() {
+		Route::get('view', [CustomerController::class, 'index'])->name('customers-view');
+		// Route::get('create', [EmployeeController::class, 'create'])->name('employees-create');
+		// Route::get('edit/{emp}', [EmployeeController::class, 'edit'])->name('employees-edit');
 	});
 
 	Route::prefix('accounting')->group( function() {
