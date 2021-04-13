@@ -8,7 +8,7 @@
 
 	@if ( $item->debit != 0 )
 		<td style="color: blue;">
-			{{ number_format($item->debit) }}
+			{{ number_format($item->debit, 2,'.', ',') }}
 		</td>
 	@else
 		<td>
@@ -18,7 +18,7 @@
 
 	@if ( $item->credit != 0 )
 		<td style="color: red;">
-			({{ number_format($item->credit) }})
+			({{ number_format($item->credit, 2,'.', ',') }})
 		</td>
 	@else
 		<td>
@@ -26,7 +26,7 @@
 		</td>
 	@endif
 
-	<td>{{ number_format($item->balance) }}</td>
+	<td>{{ number_format($item->balance, 2,'.', ',') }}</td>
 
 	@if( auth()->user()->can('cash-flow.update') || auth()->user()->can('cash-flow.delete') )
 		<td>
