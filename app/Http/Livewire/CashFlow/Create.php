@@ -21,7 +21,7 @@ class Create extends CustomComponent
 	public function mount()
 	{
 		$this->accounts = CompanyChartAccount::getCompanyCharts($this->company_id);
-		$this->users    = User::all();
+		$this->users    = User::getCompanyUsers($this->company_id);
 	}
 
 	public function submit()

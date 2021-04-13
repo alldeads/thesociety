@@ -94,8 +94,9 @@ class Create extends CustomComponent
 			DB::beginTransaction();
 
 			$user = User::create([
-				'email'     => $this->inputs['email'],
-            	'password'  => bcrypt($this->inputs['password'])
+				'company_id' => $this->company_id,
+				'email'      => $this->inputs['email'],
+            	'password'   => bcrypt($this->inputs['password'])
 			]);
 
 			$profile = Profile::create([

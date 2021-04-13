@@ -20,6 +20,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
+        'company_id',
         'email',
         'password',
         'status'
@@ -72,6 +73,11 @@ class User extends Authenticatable
     public static function getSetting()
     {
         return auth()->user()->setting ?? null;
+    }
+
+    public static function getCompanyUsers($company_id)
+    {
+        return User::where('company_id', $company_id)->get();
     }
 
     public static function getMenu()

@@ -26,6 +26,7 @@ class UserSeeder extends Seeder
             
             if ( $role->role_name == "owner" ) {
                 $user = User::create([
+                    'company_id' => 1,
                     'email'      => 'john@test.com',
                     'password'   => bcrypt('password'),
                     'status'     => 'active'
@@ -79,6 +80,7 @@ class UserSeeder extends Seeder
 
             if ( $role->role_name == "accountant" ) {
                 $user = User::create([
+                    'company_id' => 1,
                     'email'      => 'roj@test.com',
                     'password'   => bcrypt('password'),
                     'status'     => 'active'
@@ -117,6 +119,7 @@ class UserSeeder extends Seeder
 
             if ( $role->role_name == "owner" ) {
                 $user = User::create([
+                    'company_id' => 1,
                     'email'      => 'wong@test.com',
                     'password'   => bcrypt('password')
                 ]);

@@ -29,7 +29,9 @@ class EmployeeSeeder extends Seeder
                             ->get();
 
         	foreach ($roles as $role) {
-        		$user = User::factory(1)->create();
+        		$user = User::factory(1)->create([
+                    'company_id' => $company->id,
+                ]);
 
                 $user[0]->setting()->create([
                     'user_id' => $user[0]->id,

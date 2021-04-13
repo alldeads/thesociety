@@ -23,7 +23,9 @@ class CustomerSeeder extends Seeder
 
         foreach ($companies as $company) {
         	for ( $i = 0; $i < rand(10,20); $i++) { 
-        		$user = User::factory(1)->create();
+        		$user = User::factory(1)->create([
+        			'company_id' => $company->id,
+        		]);
 
 	        	$user[0]->setting()->create([
 	                'user_id' => $user[0]->id,
