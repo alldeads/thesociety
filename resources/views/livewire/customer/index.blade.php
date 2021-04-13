@@ -88,3 +88,5 @@
 	  	</div>
 	</div>
 </div>
+
+@livewire('customer.delete', ['company_id' => $company_id])
