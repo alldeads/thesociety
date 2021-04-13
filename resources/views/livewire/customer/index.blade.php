@@ -7,7 +7,7 @@
 		  				<div class="col-12 mt-1 text-right">
 		  					<div class="btn-group" wire:ignore>
 		  						@can('employee.create')
-			  						<button type="button" class="btn btn-primary rounded" data-toggle="modal" data-target="#modal-cash-flow-create" wire:ignore>
+			  						<button type="button" class="btn btn-primary rounded" wire:click="create" wire:ignore>
 					          			<i data-feather="plus" class="mr-25"></i>
 					              		<span>Create</span>
 					            	</button>

@@ -29,4 +29,26 @@ class CustomerController extends Controller
 		    return view('misc.not-authorized');
 		}
     }
+
+    public function create()
+    {
+    	$response = Gate::inspect('customer.create');
+
+    	$breadcrumbs = [
+	        ['link'=> route('home'), 'name'=>"Dashboard"], 
+	        ['link'=> route('customers-view'), 'name'=>"Customers"], 
+	        ['name'=>"Create Customer"], 
+	    ];
+
+	    $company = Company::findOrFail(auth()->user()->empCard->company_id);
+
+		if ( $response->allowed() ) {
+		    return view('customer.create', [
+		    	'breadcrumbs' => $breadcrumbs,
+		    	'company'     => $company
+		    ]);
+		} else {
+		    return view('misc.not-authorized');
+		}
+    }
 }
