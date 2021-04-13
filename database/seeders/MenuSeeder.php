@@ -90,8 +90,23 @@ class MenuSeeder extends Seeder
         // ]);
 
         $header = Header::create([
-            'name'  => 'Employees Management',
+            'name'  => 'Customers Management',
             'order' => 3
+        ]);
+
+        $header->menus()->create([
+            'name'       => 'Customers',
+            'slug'       => 'customers',
+            'url'        => 'customers/view',
+            'icon'       => 'user-check',
+            'base'       => 'customer',
+            'is_export'  => true,
+            'permission' => 'customer.view'
+        ]);
+
+        $header = Header::create([
+            'name'  => 'Employees Management',
+            'order' => 4
         ]);
 
         $header->menus()->create([
@@ -116,7 +131,7 @@ class MenuSeeder extends Seeder
 
         $header = Header::create([
             'name'  => 'Settings',
-            'order' => 4
+            'order' => 5
         ]);
 
         $header->menus()->create([

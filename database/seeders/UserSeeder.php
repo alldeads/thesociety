@@ -68,6 +68,13 @@ class UserSeeder extends Seeder
                 $user->givePermissionTo('cashflow.view');
                 $user->givePermissionTo('cashflow.create');
                 $user->givePermissionTo('cashflow.export');
+                $user->givePermissionTo('cashflow.read');
+                $user->givePermissionTo('customer.view');
+                $user->givePermissionTo('customer.create');
+                $user->givePermissionTo('customer.delete');
+                $user->givePermissionTo('customer.update');
+                $user->givePermissionTo('customer.read');
+                $user->givePermissionTo('customer.export');
             }
 
             if ( $role->role_name == "accountant" ) {

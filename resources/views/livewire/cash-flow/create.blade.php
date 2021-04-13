@@ -44,12 +44,12 @@
 	          		</div>
 
 	          		<div class="form-group">	
-	            		<label class="form-label" for="notes">Notes</label>
+	            		<label class="form-label" for="notes">Notes (<em>optional</em>)</label>
 	            		<textarea rows="2" cols="5" class="form-control" id="notes" wire:model="inputs.notes"></textarea>
 	          		</div>
 
 	          		<div class="form-group">	
-	            		<label class="form-label" for="attachment">Attachment</label>
+	            		<label class="form-label" for="attachment">Attachment (<em>optional</em>)</label>
 	            		<input type="file" class="form-control" wire:model="inputs.attachment">
 	          		</div>
 
