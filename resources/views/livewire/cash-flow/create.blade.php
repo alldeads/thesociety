@@ -11,7 +11,7 @@
 	        	<div class="modal-body flex-grow-1">
 	          		<div class="form-group">	
 	            		<label class="form-label" for="basic-icon-cash-flow">Account Name</label>
-	            		<select class="select2 form-control form-control-lg" id="basic-icon-cash-flow" wire:model="inputs.account_type">
+	            		<select class="form-control form-control-lg" id="basic-icon-cash-flow" wire:model="inputs.account_type">
 	            			<option> Select account</option>
 	            			@foreach($accounts as $account)
 	            				<option value="{{ $account->id }}"> {{ ucwords($account->chart_name) }}</option>
@@ -21,7 +21,7 @@
 
 	          		<div class="form-group">	
 	            		<label class="form-label" for="basic-icon-cash-flow-type">Movement</label>
-	            		<select class="select2 form-control form-control-lg" id="basic-icon-cash-flow-type" wire:model="inputs.movement">
+	            		<select class="form-control form-control-lg" id="basic-icon-cash-flow-type" wire:model="inputs.movement">
 	            			<option> Select movement</option>
 	            			<option value="cr"> Credit</option>
 	            			<option value="dr"> Debit</option>
@@ -35,7 +35,7 @@
 
 	          		<div class="form-group">	
 	            		<label class="form-label" for="payee">Payee/Payor</label>
-	            		<select class="select2 form-control form-control-lg" id="payee" wire:model="inputs.payee">
+	            		<select class="form-control form-control-lg" id="payee" wire:model="inputs.payor">
 	            			<option> Select payee or payor</option>
 	            			@foreach($users as $user)
 	            				<option value="{{ $user->id }}"> {{ ucwords($user->profile->name) }}</option>

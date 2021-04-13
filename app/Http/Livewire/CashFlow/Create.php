@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Validator;
 use App\Models\ChartType;
 use App\Models\User;
 use App\Models\CompanyChartAccount;
+use App\Models\CashFlow;
 
 class Create extends CustomComponent
 {
@@ -15,7 +16,7 @@ class Create extends CustomComponent
 	public $accounts;
 	public $users;
 
-	public $inputs;
+	public $inputs = [];
 
 	public function mount()
 	{
@@ -29,7 +30,7 @@ class Create extends CustomComponent
             'account_type'  => ['required', 'numeric'],
             'movement'      => ['required'],
             'amount'        => ['required', 'numeric'],
-            'payee'         => ['required', 'numeric'],
+            'payor'         => ['required', 'numeric'],
             'notes'         => ['nullable', 'string'],
             'attachment'    => ['nullable', 'file'],
         ]);
@@ -41,6 +42,50 @@ class Create extends CustomComponent
 			    return;
 			}
         }
+
+        $attachment = "";
+
+        if ( isset($this->inputs['attachment']) ) {
+        	$attachment = $this->inputs['attachment']->store('attachments');
+        }
+
+        $cashflow = CashFlow::getCompanyLastEntry($this->company_id);
+        $balance  = 0;
+
+        if ( $cashflow ) {
+        	$balance = $cashflow->balance;
+        }
+
+        $data = [];
+
+        if ( $this->inputs['movement'] == "cr" ) {
+        	$data['credit']  = $this->inputs['amount'];
+        	$data['balance'] = $balance - $this->inputs['amount'];
+        } else {
+        	$data['debit']   = $this->inputs['amount'];
+        	$data['balance'] = $balance + $this->inputs['amount'];
+        }
+
+        CashFlow::create([
+        	'company_id'       => $this->company_id,
+        	'created_by'       => auth()->id(),
+        	'updated_by'       => auth()->id(),
+        	'account_type_id'  => $this->inputs['account_type'],
+        	'payor'            => $this->inputs['payor'],
+        	'notes'            => $this->inputs['notes'] ?? null,
+        	'attachment'       => $attachment ?? null,
+        	'credit'           => $data['credit'] ?? 0,
+        	'debit'            => $data['debit'] ?? 0,
+        	'balance'          => $data['balance']
+        ]);
+
+        $this->emit('refreshCashFlowParent');
+
+        $this->message('New Entry has been created', 'success');
+
+        $this->inputs = [];
+
+        $this->emit('dissmissModal', ['el' => 'modal-cash-flow-create']);
 	}
 
     public function render()

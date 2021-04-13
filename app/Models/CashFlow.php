@@ -18,11 +18,19 @@ class CashFlow extends Model
     protected $fillable = [
         'account_type_id',
         'payor',
-        'chart_type_id',
+        'amount',
+        'debit',
+        'credit',
+        'balance',
         'company_id',
         'created_by',
         'updated_by'
     ];
+
+    public static function getCompanyLastEntry($company_id)
+    {
+        return CashFlow::where('company_id', $company_id)->orderBy('id', 'desc')->first();
+    }
 
     public function chart_account()
     {
