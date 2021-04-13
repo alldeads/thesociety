@@ -108,6 +108,7 @@
 												<tr>
 													<th>Module</th>
 													<th>View</th>
+													<th>Read</th>
 													<th>Edit</th>
 													<th>Create</th>
 													<th>Delete</th>
@@ -123,6 +124,12 @@
 															<div class="custom-control custom-checkbox">
 																<input type="checkbox" class="custom-control-input" id="{{$menu->menu->base}}-view" wire:model="inputs.permissions.{{$menu->menu->base}}-view"/>
 																<label class="custom-control-label" for="{{$menu->menu->base}}-view"></label>
+															</div>
+														</td>
+														<td>
+															<div class="custom-control custom-checkbox">
+																<input type="checkbox" class="custom-control-input" id="{{$menu->menu->base}}-read" wire:model="inputs.permissions.{{$menu->menu->base}}-read"/>
+																<label class="custom-control-label" for="{{$menu->menu->base}}-read"></label>
 															</div>
 														</td>
 														<td>
