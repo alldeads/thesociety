@@ -117,7 +117,7 @@ class ChartAccountSeeder extends Seeder
 
         $type->accounts()->create([
         	'code' => '50001',
-        	'name' => 'Cost of Good Sold'
+        	'name' => 'Cost of Goods Sold'
         ]);
 
         $type->accounts()->create([

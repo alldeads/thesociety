@@ -32,7 +32,7 @@ class MenuSeeder extends Seeder
         ]);
 
         $header = Header::create([
-        	'name'  => 'Accounting',
+        	'name'  => 'Accounting & Finance',
         	'order' => 2
         ]);
 

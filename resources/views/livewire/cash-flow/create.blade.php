@@ -38,7 +38,9 @@
 	            		<select class="form-control form-control-lg" id="payee" wire:model="inputs.payor">
 	            			<option> Select payee or payor</option>
 	            			@foreach($users as $user)
-	            				<option value="{{ $user->id }}"> {{ ucwords($user->profile->name) }}</option>
+	            				@if ( isset($user->profile->name) )
+	            					<option value="{{ $user->id }}"> {{ ucwords($user->profile->name) }}</option>
+	            				@endif
 	            			@endforeach
               			</select>
 	          		</div>
