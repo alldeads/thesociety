@@ -30,6 +30,7 @@ class ProfileFactory extends Factory
             'marital_status' => $this->faker->randomElement($array = array ('single','widowed','married')),
             'address_line_1' => $this->faker->address,
             'address_line_2' => $this->faker->secondaryAddress,
+            'company'        => $this->faker->company,
             'city'           => $this->faker->city,
             'state'          => $this->faker->state,
             'postal'         => $this->faker->postcode,

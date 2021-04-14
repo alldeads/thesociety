@@ -37,6 +37,7 @@ class Index extends CustomComponent
 		                    return $query->where('email', 'like', "%" . $search ."%")
 		                        ->orWhereHas('profile', function($query) use ($search) {
 		                            return $query->where('first_name', 'like', "%" . $search ."%")
+                                    ->orWhere('company', 'like', "%" . $search ."%")
 		                            ->orWhere('middle_name', 'like', "%" . $search ."%")
 		                            ->orWhere('last_name', 'like', "%" . $search ."%")
                                     ->orWhere('phone_number', $search);

@@ -59,7 +59,7 @@
 			  			<thead>
 							<tr>
 								<th>ID</th>
-								<th>Name</th>
+								<th>Company</th>
 								<th>Phone</th>
 								<th>Status</th>
 								@if( auth()->user()->can('supplier.update') || auth()->user()->can('supplier.delete') )
@@ -68,9 +68,9 @@
 							</tr>
 			  			</thead>
 			  			<tbody>
-				  			{{-- @foreach($results as $result)
-				  				@livewire('customer.item', ['item' => $result], key($result->id))
-				  			@endforeach --}}
+				  			@foreach($results as $result)
+				  				@livewire('supplier.item', ['item' => $result], key($result->id))
+				  			@endforeach
 
 				  			@if( count($results->items()) == 0 )
 				  				<tr class="text-center">
