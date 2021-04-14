@@ -3,38 +3,36 @@
 	  	<div class="col-12">
 			<div class="card">
 		  		<div class="card-body">
-		  			<div class="row">
-		  				<div class="col-12 mt-1 text-right">
-		  					<div class="btn-group" wire:ignore>
-		  						@can('role.create')
-			  						<button type="button" class="btn btn-primary rounded" data-toggle="modal" data-target="#modal-role-create" wire:ignore>
-					          			<i data-feather="plus" class="mr-25"></i>
-					              		<span>Create</span>
-					            	</button>
-				            	@endcan
+		  			<div class="d-flex justify-content-between">
+		  				@can('role.create')
+	  						<button type="button" class="btn btn-primary rounded" data-toggle="modal" data-target="#modal-role-create" wire:ignore>
+			          			<i data-feather="plus" class="mr-25"></i>
+			              		<span>Create</span>
+			            	</button>
+		            	@endcan
 
-				            	@can('role.export')
-				              		<button type="button" class="btn btn-outline-primary ml-2 dropdown-toggle rounded" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-				              			<i data-feather="share" class="mr-25"></i>
-				              			<span>Export</span>
-				              		</button>
-						             <div class="dropdown-menu">
-					                	<a class="dropdown-item" href="javascript:void(0);">
-					                		<i data-feather="printer" class="mr-25"></i>
-				              				<span>Print</span>
-					                	</a>
-						                <a class="dropdown-item" href="javascript:void(0);">
-					                		<i data-feather="file-text" class="mr-25"></i>
-				              				<span>Csv</span>
-					                	</a>
-					                	<a class="dropdown-item" href="javascript:void(0);">
-					                		<i data-feather="file" class="mr-25"></i>
-				              				<span>Excel</span>
-					                	</a>
-						            </div>
-						        @endcan
-			            	</div>
-		  				</div>
+		            	<div class="btn-group" wire:ignore>
+		            		@can('role.export')
+			              		<button type="button" class="btn btn-outline-primary ml-2 dropdown-toggle rounded" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+			              			<i data-feather="share" class="mr-25"></i>
+			              			<span>Export</span>
+			              		</button>
+					             <div class="dropdown-menu">
+				                	<a class="dropdown-item" href="javascript:void(0);">
+				                		<i data-feather="printer" class="mr-25"></i>
+			              				<span>Print</span>
+				                	</a>
+					                <a class="dropdown-item" href="javascript:void(0);">
+				                		<i data-feather="file-text" class="mr-25"></i>
+			              				<span>Csv</span>
+				                	</a>
+				                	<a class="dropdown-item" href="javascript:void(0);">
+				                		<i data-feather="file" class="mr-25"></i>
+			              				<span>Excel</span>
+				                	</a>
+					            </div>
+					        @endcan
+		            	</div>
 		  			</div>
 		  			<hr>
 		  			<div class="row">

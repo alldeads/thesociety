@@ -232,7 +232,7 @@
 						<i data-feather="arrow-left" class="align-middle mr-sm-25 mr-0"></i>
 						<span class="align-middle d-sm-inline-block d-none">Previous</span>
 		  			</button>
-	  				<button class="btn btn-success" wire:click="save">Submit</button>
+	  				<button class="btn btn-success" wire:click="submit">Submit</button>
 				</div>
 	  		</div>
 		</div>
