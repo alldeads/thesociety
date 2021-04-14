@@ -9,6 +9,8 @@
 		</span>
 	</td>
 
+	<td>{{ $item->created_at->format('F j, Y') }}</td>
+
 	@if( auth()->user()->can('customer.update') || auth()->user()->can('customer.delete') )
 		<td>
 		    @can('customer.update')

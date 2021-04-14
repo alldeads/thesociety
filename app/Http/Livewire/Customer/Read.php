@@ -34,6 +34,10 @@ class Read extends Component
 			'linkedin'         => $this->customer->user->profile->linkedin ?? '',
 			'pinterest'        => $this->customer->user->profile->pinterest ?? '',
 			'youtube'          => $this->customer->user->profile->youtube ?? '',
+			'created_at'       => $this->customer->created_at->format('F, j Y h:i:s a') ?? '',
+			'updated_at'       => $this->customer->updated_at->format('F, j Y h:i:s a') ?? '',
+			'created_by'       => ucwords($this->customer->user_created->profile->name) ?? '',
+			'updated_by'       => ucwords($this->customer->user_updated->profile->name) ?? '',
 		];
 	}
 

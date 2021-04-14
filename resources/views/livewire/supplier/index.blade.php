@@ -62,6 +62,7 @@
 								<th>Company</th>
 								<th>Phone</th>
 								<th>Status</th>
+								<th>Created At</th>
 								@if( auth()->user()->can('supplier.update') || auth()->user()->can('supplier.delete') )
 									<th>Actions</th>
 								@endif

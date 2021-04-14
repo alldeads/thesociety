@@ -62,6 +62,7 @@
 								<th>Name</th>
 								<th>Phone</th>
 								<th>Status</th>
+								<th>Created At</th>
 								@if( auth()->user()->can('customer.update') || auth()->user()->can('customer.delete') )
 									<th>Actions</th>
 								@endif
@@ -72,9 +73,9 @@
 				  				@livewire('customer.item', ['item' => $result], key($result->id))
 				  			@endforeach
 
-				  			@if( count($results->toArray()) == 0 )
+				  			@if( count($results->items()) == 0 )
 				  				<tr class="text-center">
-				  					<td colspan="4"> No items found.</td>
+				  					<td colspan="5"> No items found.</td>
 				  				</tr>
 				  			@endif
 			  			</tbody>

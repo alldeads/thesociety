@@ -41,6 +41,16 @@
 				</button>
 	  		</div>
 
+	  		<div class="step" data-target="#others" wire:ignore>
+				<button type="button" class="step-trigger">
+			  		<span class="bs-stepper-box">-</span>
+			  			<span class="bs-stepper-label">
+						<span class="bs-stepper-title">Others</span>
+						<span class="bs-stepper-subtitle">Other Information</span>
+			  		</span>
+				</button>
+	  		</div>
+
 	  		<div wire:ignore>
 				<button class="btn btn-success" wire:click="edit">Edit Customer</button>
 	  		</div>
@@ -237,6 +247,34 @@
 		  			</button>
 				</div>
 	  		</div>
+
+	  		<div id="others" class="content" wire:ignore>
+				<div class="content-header">
+					<h5 class="mb-0">Other Information</h5>
+				</div>
+
+				<div class="row">
+		  			<div class="form-group col-md-6">
+						<label class="form-label" for="vertical-twitter">Created By</label>
+						<input type="text" id="vertical-twitter" class="form-control" readonly wire:model="inputs.created_by"/>
+		  			</div>
+		  			<div class="form-group col-md-6">
+						<label class="form-label" for="vertical-facebook">Last Updated By</label>
+						<input type="text" id="vertical-facebook" class="form-control" readonly wire:model="inputs.updated_by"/>
+		  			</div>
+				</div>
+
+				<div class="row">
+		  			<div class="form-group col-md-6">
+						<label class="form-label" for="vertical-twitter">Created At</label>
+						<input type="text" id="vertical-twitter" class="form-control" readonly wire:model="inputs.created_at"/>
+		  			</div>
+		  			<div class="form-group col-md-6">
+						<label class="form-label" for="vertical-facebook">Last Updated At</label>
+						<input type="text" id="vertical-facebook" class="form-control" readonly wire:model="inputs.updated_at"/>
+		  			</div>
+				</div>
+			</div>
 		</div>
   	</div>
 </section>
