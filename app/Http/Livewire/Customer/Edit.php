@@ -22,8 +22,6 @@ class Edit extends CustomComponent
 
 	public $statuses = [];
 
-	public $listeners = ['refreshSelf' => '$refresh'];
-
 	public function mount()
 	{
 		$this->statuses = Status::all();
@@ -64,7 +62,7 @@ class Edit extends CustomComponent
             'first_name'     => ['required', 'string', 'max:255'],
             'last_name'      => ['required', 'string', 'max:255'],
             'phone'          => ['required'],
-            'email'          => ['required', Rule::unique('users')->ignore($this->customer->user->id)],
+            'email'          => ['required', 'email', Rule::unique('users')->ignore($this->customer->user->id)],
             'company'        => ['nullable', 'string'],
             'position'       => ['nullable', 'string'],
             'telephone'      => ['nullable', 'string'],
@@ -85,6 +83,9 @@ class Edit extends CustomComponent
         ])->validate();
 
         try {
+
+        	DB::beginTransaction();
+
 			$user = User::find($this->customer->user->id);
 
 			$user->fill([
@@ -99,22 +100,22 @@ class Edit extends CustomComponent
 				'first_name'     => ucwords($this->inputs['first_name']),
 				'last_name'      => ucwords($this->inputs['last_name']),
 				'phone_number'   => $this->inputs['phone'],
-				'company'        => ucwords($this->inputs['company']) ?? null,
-				'position'       => ucwords($this->inputs['position']) ?? null,
-				'telephone'      => $this->inputs['telephone'] ?? null,
-				'fax'            => $this->inputs['fax'] ?? null,
+				'company'        => ucwords($this->inputs['company']),
+				'position'       => ucwords($this->inputs['position']),
+				'telephone'      => $this->inputs['telephone'],
+				'fax'            => $this->inputs['fax'],
 				'address_line_1' => ucwords($this->inputs['address_line_1']),
-				'address_line_2' => ucwords($this->inputs['address_line_2']) ?? null,
+				'address_line_2' => ucwords($this->inputs['address_line_2']),
 				'city'           => ucwords($this->inputs['city']),
 				'state'          => ucwords($this->inputs['state']),
 				'postal'         => $this->inputs['postal'],
-				'country'        => ucwords($this->inputs['country']) ?? null,
-				'facebook'       => $this->inputs['facebook'] ?? null,
-		        'instagram'      => $this->inputs['instagram'] ?? null,
-		        'linkedin'       => $this->inputs['linkedin'] ?? null,
-		        'youtube'        => $this->inputs['youtube'] ?? null,
-		        'twitter'        => $this->inputs['twitter'] ?? null,
-		        'pinterest'      => $this->inputs['pinterest'] ?? null,
+				'country'        => ucwords($this->inputs['country']),
+				'facebook'       => $this->inputs['facebook'],
+		        'instagram'      => $this->inputs['instagram'],
+		        'linkedin'       => $this->inputs['linkedin'],
+		        'youtube'        => $this->inputs['youtube'],
+		        'twitter'        => $this->inputs['twitter'],
+		        'pinterest'      => $this->inputs['pinterest'],
 			]);
 
 			$profile->save();
@@ -127,6 +128,8 @@ class Edit extends CustomComponent
 			]);
 
 			$customer->save();
+
+			DB::commit();
 
 			$this->init($customer);
 
