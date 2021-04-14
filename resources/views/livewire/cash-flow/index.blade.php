@@ -36,11 +36,24 @@
 					</div>
 		  			<hr>
 		  			<div class="row">
-		  				<div class="col-md-10 col-lg-10 col-xl-10 col-sm-12 mt-1">
+		  				<div class="col-md-6 col-lg-6 col-xl-6 col-sm-12 mt-1">
 		  					<div class="form-group">
-			                  	<input type="text" class="form-control" placeholder="Search account name, account type, and code" wire:model="search"/>
+			                  	<input type="text" class="form-control" placeholder="Search account title, payee, or payor" wire:model="search"/>
 	                		</div>
 		  				</div>
+
+		  				<div class="col-md-2 col-lg-2 col-xl-2 col-sm-12 mt-1">
+		  					<div class="form-group">
+			                  	<input type="text" class="form-control basicpkr" placeholder="Date From" wire:model="date_from" />
+	                		</div>
+		  				</div>
+
+		  				<div class="col-md-2 col-lg-2 col-xl-2 col-sm-12 mt-1">
+		  					<div class="form-group">
+			                  	<input type="text" class="form-control basicpkr" placeholder="Date To" wire:model="date_to" />
+	                		</div>
+		  				</div>
+
 		  				<div class="col-md-2 col-lg-2 col-xl-2 col-sm-12 mt-1">
 		  					<div class="form-group">
 			                  	<select class="form-control" wire:model="limit">
@@ -60,7 +73,7 @@
 							<tr>
 								<th>Date</th>
 								<th>Payee/Payor</th>
-								<th>Name</th>
+								<th>Title</th>
 								<th>Type</th>
 								<th>Debit</th>
 								<th>Credit</th>
@@ -75,9 +88,9 @@
 				  				@livewire('cash-flow.item', ['item' => $result], key($result->id))
 				  			@endforeach
 
-				  			@if( count($results->toArray()) == 0 )
+				  			@if( count($results->items()) == 0 )
 				  				<tr class="text-center">
-				  					<td colspan="4"> No items found.</td>
+				  					<td colspan="8"> No items found.</td>
 				  				</tr>
 				  			@endif
 			  			</tbody>
@@ -92,4 +105,3 @@
 </div>
 
 @livewire('cash-flow.create', ['company_id' => $company_id])
-@livewire('chart-of-account.delete', ['company_id' => $company_id])

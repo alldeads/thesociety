@@ -91,6 +91,8 @@
 				buttonsStyling: !1
 			});
 		});
+
+		$('.basicpkr').flatpickr();
   	</script>
 </body>
 

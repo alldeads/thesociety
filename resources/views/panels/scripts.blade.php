@@ -4,6 +4,8 @@
 <script src="{{ asset(mix('vendors/js/ui/prism.min.js')) }}"></script>
 @yield('vendor-script')
 
+<script src="{{ asset(mix('vendors/js/pickers/flatpickr/flatpickr.min.js')) }}"></script>
+
 {{-- Toastr --}}
 <script src="{{ asset(mix('vendors/js/extensions/toastr.min.js')) }}"></script>
 <script src="{{ asset(mix('js/scripts/extensions/ext-component-toastr.js')) }}"></script>

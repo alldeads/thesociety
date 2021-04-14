@@ -17,6 +17,8 @@ class Index extends CustomComponent
     public $company_id;
     public $search = '';
     public $limit;
+    public $date_from;
+    public $date_to;
 
     public $listeners = [
         'refreshCashFlowParent' => '$refresh'
@@ -30,9 +32,31 @@ class Index extends CustomComponent
     public function render()
     {
     	$search = $this->search;
+        $from = $this->date_from;
+        $to = $this->date_to;
 
     	$results = CashFlow::where('company_id', $this->company_id)
-					->orderBy('id', 'desc')->paginate($this->limit);
+                    ->where( function (Builder $query) use ($search) {
+                        $query->whereHas('user', function($query) use ($search) {
+                            return $query->whereHas('profile', function($query) use ($search) {
+                                return $query->where('first_name', 'like', "%" . $search ."%")
+                                ->orWhere('middle_name', 'like', "%" . $search ."%")
+                                ->orWhere('last_name', 'like', "%" . $search ."%");
+                            });
+                        })->orWhereHas('chart_account', function($query) use ($search) {
+                            return $query->where('chart_name', 'like', "%" . $search ."%");
+                        });
+                    });
+
+        if ( !empty($from) ) {
+            $results = $results->whereDate('created_at', '>=', $from );
+        }
+
+        if ( !empty($to) ) {
+            $results = $results->whereDate('created_at', '<=', $to );
+        }
+
+        $results = $results->orderBy('id', 'desc')->paginate($this->limit);
                         
         return view('livewire.cash-flow.index', [
             'results' => $results
