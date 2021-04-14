@@ -1,11 +1,11 @@
 <tr>
-	<td>{{ ucwords($item->id) }}</td>
-	<td>{{ ucwords($item->user->profile->name) }}</td>
-	<td>{{ ucwords($item->user->profile->phone_number) }}</td>
+	<td>{{ $item->id }}</td>
+	<td>{{ $item->user->profile->name }}</td>
+	<td>{{ $item->user->profile->phone_number }}</td>
 
 	<td>
 		<span class="badge badge-pill  badge-light-{{ $item->status->color }}">
-			{{ ucwords($item->status->name) }}
+			{{ $item->status->name }}
 		</span>
 	</td>
 

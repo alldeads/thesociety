@@ -4,6 +4,7 @@ namespace App\Http\Livewire\Customer;
 
 use App\Http\Livewire\CustomComponent;
 
+use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 
@@ -12,17 +13,49 @@ use App\Models\Profile;
 use App\Models\Customer;
 use App\Models\Status;
 
-class Create extends CustomComponent
+class Edit extends CustomComponent
 {
 	public $company_id;
+	public $customer;
 
 	public $inputs = [];
 
 	public $statuses = [];
 
+	public $listeners = ['refreshSelf' => '$refresh'];
+
 	public function mount()
 	{
 		$this->statuses = Status::all();
+
+		$this->init($this->customer);
+	}
+
+	public function init($customer)
+	{
+		$this->inputs = [
+			'first_name'       => $customer->user->profile->first_name ?? null,
+			'last_name'        => $customer->user->profile->last_name ?? null,
+			'phone'            => $customer->user->profile->phone_number ?? null,
+			'email'            => $customer->user->email ?? null,
+			'status'           => $customer->status_id,
+			'company'          => $customer->user->profile->company ?? null,
+			'position'         => $customer->user->profile->position ?? null,
+			'telephone'        => $customer->user->profile->telephone ?? null,
+			'fax'              => $customer->user->profile->fax ?? null,
+			'country'          => $customer->user->profile->country ?? null,
+			'state'            => $customer->user->profile->state ?? null,
+			'city'             => $customer->user->profile->city ?? null,
+			'address_line_2'   => $customer->user->profile->address_line_2 ?? null,
+			'address_line_1'   => $customer->user->profile->address_line_1 ?? null,
+			'postal'           => $customer->user->profile->postal ?? null,
+			'twitter'          => $customer->user->profile->twitter ?? null,
+			'facebook'         => $customer->user->profile->facebook ?? null,
+			'instagram'        => $customer->user->profile->instagram ?? null,
+			'linkedin'         => $customer->user->profile->linkedin ?? null,
+			'pinterest'        => $customer->user->profile->pinterest ?? null,
+			'youtube'          => $customer->user->profile->youtube ?? null,
+		];
 	}
 
 	public function submit()
@@ -31,7 +64,7 @@ class Create extends CustomComponent
             'first_name'     => ['required', 'string', 'max:255'],
             'last_name'      => ['required', 'string', 'max:255'],
             'phone'          => ['required'],
-            'email'          => ['required', 'unique:users'],
+            'email'          => ['required', Rule::unique('users')->ignore($this->customer->user->id)],
             'company'        => ['nullable', 'string'],
             'position'       => ['nullable', 'string'],
             'telephone'      => ['nullable', 'string'],
@@ -51,15 +84,18 @@ class Create extends CustomComponent
 	        'status'         => ['required', 'numeric'],
         ])->validate();
 
-		try {
-			$user = User::create([
-				'email'      => $this->inputs['email'],
-				'company_id' => $this->company_id,
-				'password'   => bcrypt(time())
+        try {
+			$user = User::find($this->customer->user->id);
+
+			$user->fill([
+				'email'      => $this->inputs['email']
 			]);
 
-			$profile = Profile::create([
-				'user_id'        => $user->id,
+			$user->save();
+
+			$profile = Profile::find($this->customer->user->profile->id);
+
+			$profile->fill([
 				'first_name'     => ucwords($this->inputs['first_name']),
 				'last_name'      => ucwords($this->inputs['last_name']),
 				'phone_number'   => $this->inputs['phone'],
@@ -81,17 +117,20 @@ class Create extends CustomComponent
 		        'pinterest'      => $this->inputs['pinterest'] ?? null,
 			]);
 
-			$customer = Customer::create([
-				'user_id'    => $user->id,
-				'company_id' => $this->company_id,
-				'created_by' => auth()->id(),
+			$profile->save();
+
+			$customer = Customer::find($this->customer->id);
+
+			$customer->fill([
 				'updated_by' => auth()->id(),
 				'status_id'  => $this->inputs['status'],
 			]);
 
-			$this->inputs = [];
+			$customer->save();
 
-			$this->message('Customer has been created', 'success');
+			$this->init($customer);
+
+			$this->message('Customer has been updated.', 'success');
 		} catch(\Exception $e) {
 			DB::rollback();
 			$this->message($e->getMessage(), 'error');
@@ -100,6 +139,6 @@ class Create extends CustomComponent
 
     public function render()
     {
-        return view('livewire.customer.create');
+        return view('livewire.customer.edit');
     }
 }

@@ -79,4 +79,31 @@ class CustomerController extends Controller
 		    return view('misc.not-authorized');
 		}
     }
+
+    public function edit(Customer $customer)
+    {
+    	$response = Gate::inspect('customer.update');
+
+    	$company = Company::findOrFail(auth()->user()->empCard->company_id);
+
+    	if ( $customer->company_id != $company->id ) {
+    		return view('misc.not-authorized');
+    	}
+
+    	$breadcrumbs = [
+	        ['link'=> route('home'), 'name'=>"Dashboard"], 
+	        ['link'=> route('customers-view'), 'name'=>"Customers"],
+	        ['name'=> ucwords($customer->user->profile->name)], 
+	    ];
+
+		if ( $response->allowed() ) {
+		    return view('customer.edit', [
+		    	'breadcrumbs' => $breadcrumbs,
+		    	'company'     => $company,
+		    	'customer'    => $customer
+		    ]);
+		} else {
+		    return view('misc.not-authorized');
+		}
+    }
 }
