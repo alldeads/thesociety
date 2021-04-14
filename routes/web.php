@@ -10,6 +10,7 @@ use App\Http\Controllers\RoleController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\CashFlowController;
 use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\SupplierController;
 
 
 Auth::routes(['register' => false]);
@@ -37,6 +38,13 @@ Route::middleware('auth')->group(function() {
 		Route::get('create', [CustomerController::class, 'create'])->name('customers-create');
 		Route::get('view/{customer}', [CustomerController::class, 'view'])->name('customers-read');
 		Route::get('edit/{customer}', [CustomerController::class, 'edit'])->name('customers-edit');
+	});
+
+	Route::prefix('inventory')->group( function() {
+		Route::get('suppliers', [SupplierController::class, 'index'])->name('suppliers-view');
+		// Route::get('create', [CustomerController::class, 'create'])->name('customers-create');
+		// Route::get('view/{customer}', [CustomerController::class, 'view'])->name('customers-read');
+		// Route::get('edit/{customer}', [CustomerController::class, 'edit'])->name('customers-edit');
 	});
 
 	Route::prefix('accounting')->group( function() {
