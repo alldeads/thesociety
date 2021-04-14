@@ -10,12 +10,20 @@ use Illuminate\Support\Facades\Validator;
 use App\Models\User;
 use App\Models\Profile;
 use App\Models\Customer;
+use App\Models\Status;
 
 class Create extends CustomComponent
 {
 	public $company_id;
 
 	public $inputs = [];
+
+	public $statuses = [];
+
+	public function mount()
+	{
+		$this->statuses = Status::all();
+	}
 
 	public function submit()
 	{
@@ -40,7 +48,7 @@ class Create extends CustomComponent
 	        'youtube'        => ['nullable', 'url'],
 	        'twitter'        => ['nullable', 'url'],
 	        'pinterest'      => ['nullable', 'url'],
-	        'status'         => ['required', 'string'],
+	        'status'         => ['required', 'numeric'],
         ])->validate();
 
 		try {
@@ -71,7 +79,6 @@ class Create extends CustomComponent
 		        'youtube'        => $this->inputs['youtube'] ?? null,
 		        'twitter'        => $this->inputs['twitter'] ?? null,
 		        'pinterest'      => $this->inputs['pinterest'] ?? null,
-		        'status'         => $this->inputs['status'],
 			]);
 
 			$customer = Customer::create([
@@ -79,6 +86,7 @@ class Create extends CustomComponent
 				'company_id' => $this->company_id,
 				'created_by' => auth()->id(),
 				'updated_by' => auth()->id(),
+				'status_id'  => $this->inputs['status'],
 			]);
 
 			$this->inputs = [];

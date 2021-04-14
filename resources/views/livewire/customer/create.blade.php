@@ -87,14 +87,11 @@
 				<div class="row">
 		  			<div class="form-group col-md-6">
 						<label class="form-label" for="status">Status</label>
-						<select class="form-control" id="status">
+						<select class="form-control" id="status" wire:model="inputs.status">
 							<option>Select status</option>
-							<option value="new"> New</option>
-							<option value="prospect"> Prospect</option>
-							<option value="expired"> Expired</option>
-							<option value="suspended"> Suspended</option>
-							<option value="active"> Active</option>
-							<option value="inactive"> Inactive</option>
+							@foreach($statuses as $status)
+								<option value="{{ $status->id }}"> {{ ucwords($status->name) }}</option>
+							@endforeach
 						</select>
 		  			</div>
 				</div>
