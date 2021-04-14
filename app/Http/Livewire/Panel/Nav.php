@@ -15,12 +15,13 @@ class Nav extends Component
 	{
 		$user = User::find($this->user->id);
 
-		$user->setting()->update([
+		$user->setting()->updateOrCreate([
 			'user_id' => $user->id,
+		],[
 			'is_dark' => $this->configData['theme'] === 'dark' ? 0 : 1
 		]);
 
-		$this->render();
+		$this->emit('$refresh');
 	}
 
     public function render()
