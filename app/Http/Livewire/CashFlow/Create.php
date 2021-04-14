@@ -27,7 +27,7 @@ class Create extends CustomComponent
 	public function submit()
 	{
 		$validator = Validator::make($this->inputs, [
-            'account_type'  => ['required', 'numeric'],
+            'account_title' => ['required', 'numeric'],
             'movement'      => ['required'],
             'amount'        => ['required', 'numeric'],
             'payor'         => ['required', 'numeric'],
@@ -70,7 +70,7 @@ class Create extends CustomComponent
         	'company_id'       => $this->company_id,
         	'created_by'       => auth()->id(),
         	'updated_by'       => auth()->id(),
-        	'account_type_id'  => $this->inputs['account_type'],
+        	'account_type_id'  => $this->inputs['account_title'],
         	'payor'            => $this->inputs['payor'],
         	'notes'            => $this->inputs['notes'] ?? null,
         	'attachment'       => $attachment ?? null,

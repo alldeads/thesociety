@@ -10,8 +10,8 @@
 
 	        	<div class="modal-body flex-grow-1">
 	          		<div class="form-group">	
-	            		<label class="form-label" for="basic-icon-cash-flow">Account Name</label>
-	            		<select class="form-control form-control-lg" id="basic-icon-cash-flow" wire:model="inputs.account_type">
+	            		<label class="form-label" for="basic-icon-cash-flow">Account Title</label>
+	            		<select class="form-control form-control-lg" id="basic-icon-cash-flow" wire:model="inputs.account_title">
 	            			<option> Select account</option>
 	            			@foreach($accounts as $account)
 	            				<option value="{{ $account->id }}"> {{ ucwords($account->chart_name) }}</option>
