@@ -4,14 +4,13 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 
-use App\Models\Company;
-use App\Models\Customer;
 use App\Models\User;
+use App\Models\Supplier;
 use App\Models\Profile;
-use App\Models\Contact;
+use App\Models\Company;
 use App\Models\Status;
 
-class CustomerSeeder extends Seeder
+class SupplierSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -33,7 +32,7 @@ class CustomerSeeder extends Seeder
 	                'user_id' => $user[0]->id
 	            ]);
 
-	            Customer::create([
+	            Supplier::create([
 	    			'company_id' => $company->id,
 	    			'user_id'    => $user[0]->id,
 	                'updated_by' => 1,

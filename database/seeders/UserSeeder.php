@@ -35,7 +35,7 @@ class UserSeeder extends Seeder
 
                 $user->setting()->create([
                     'user_id' => $user->id,
-                    'is_dark' => true
+                    'is_dark' => false
                 ]);
 
                 $profile = Profile::factory(1)->create([
