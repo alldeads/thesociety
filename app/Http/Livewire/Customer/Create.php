@@ -31,7 +31,7 @@ class Create extends CustomComponent
             'first_name'     => ['required', 'string', 'max:255'],
             'last_name'      => ['required', 'string', 'max:255'],
             'phone'          => ['required'],
-            'email'          => ['required', 'unique:users'],
+            'email'          => ['required', 'email', 'unique:users'],
             'company'        => ['nullable', 'string'],
             'position'       => ['nullable', 'string'],
             'telephone'      => ['nullable', 'string'],
@@ -52,6 +52,9 @@ class Create extends CustomComponent
         ])->validate();
 
 		try {
+
+			DB::beginTransaction();
+
 			$user = User::create([
 				'email'      => $this->inputs['email'],
 				'company_id' => $this->company_id,
@@ -63,16 +66,16 @@ class Create extends CustomComponent
 				'first_name'     => ucwords($this->inputs['first_name']),
 				'last_name'      => ucwords($this->inputs['last_name']),
 				'phone_number'   => $this->inputs['phone'],
-				'company'        => ucwords($this->inputs['company']) ?? null,
-				'position'       => ucwords($this->inputs['position']) ?? null,
+				'company'        => ucwords($this->inputs['company'] ?? null),
+				'position'       => ucwords($this->inputs['position'] ?? null),
 				'telephone'      => $this->inputs['telephone'] ?? null,
 				'fax'            => $this->inputs['fax'] ?? null,
 				'address_line_1' => ucwords($this->inputs['address_line_1']),
-				'address_line_2' => ucwords($this->inputs['address_line_2']) ?? null,
+				'address_line_2' => ucwords($this->inputs['address_line_2'] ?? null),
 				'city'           => ucwords($this->inputs['city']),
 				'state'          => ucwords($this->inputs['state']),
 				'postal'         => $this->inputs['postal'],
-				'country'        => ucwords($this->inputs['country']) ?? null,
+				'country'        => ucwords($this->inputs['country'] ?? null),
 				'facebook'       => $this->inputs['facebook'] ?? null,
 		        'instagram'      => $this->inputs['instagram'] ?? null,
 		        'linkedin'       => $this->inputs['linkedin'] ?? null,
@@ -88,6 +91,8 @@ class Create extends CustomComponent
 				'updated_by' => auth()->id(),
 				'status_id'  => $this->inputs['status'],
 			]);
+
+			DB::commit();
 
 			$this->inputs = [];
 
