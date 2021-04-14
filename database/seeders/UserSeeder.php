@@ -8,6 +8,7 @@ use App\Models\User;
 use App\Models\Profile;
 use App\Models\Employee;
 use App\Models\CompanyRole;
+use Spatie\Permission\Models\Permission;
 
 use Spatie\Permission\Models\Role;
 
@@ -50,33 +51,11 @@ class UserSeeder extends Seeder
                     'company_id' => 1
                 ]);
 
-                $user->givePermissionTo('dashboard.view');
-                $user->givePermissionTo('chart.create');
-                $user->givePermissionTo('chart.view');
-                $user->givePermissionTo('chart.update');
-                $user->givePermissionTo('chart.delete');
-                $user->givePermissionTo('chart.export');
-                $user->givePermissionTo('employee.view');
-                $user->givePermissionTo('employee.create');
-                $user->givePermissionTo('employee.delete');
-                $user->givePermissionTo('employee.export');
-                $user->givePermissionTo('employee.update');
-                $user->givePermissionTo('role.create');
-                $user->givePermissionTo('role.view');
-                $user->givePermissionTo('role.update');
-                $user->givePermissionTo('role.delete');
-                $user->givePermissionTo('company.view');
-                $user->givePermissionTo('company.update');
-                $user->givePermissionTo('cashflow.view');
-                $user->givePermissionTo('cashflow.create');
-                $user->givePermissionTo('cashflow.export');
-                $user->givePermissionTo('cashflow.read');
-                $user->givePermissionTo('customer.view');
-                $user->givePermissionTo('customer.create');
-                $user->givePermissionTo('customer.delete');
-                $user->givePermissionTo('customer.update');
-                $user->givePermissionTo('customer.read');
-                $user->givePermissionTo('customer.export');
+                $permissions = Permission::all();
+
+                foreach ($permissions as $permission) {
+                    $user->givePermissionTo($permission);
+                }
             }
 
             if ( $role->role_name == "accountant" ) {

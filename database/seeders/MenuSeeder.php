@@ -63,10 +63,20 @@ class MenuSeeder extends Seeder
         // 	'icon'  => 'book-open'
         // ]);
 
-        // $header = Header::create([
-        // 	'name'  => 'Inventory',
-        // 	'order' => 3
-        // ]);
+        $header = Header::create([
+        	'name'  => 'Products & Inventory',
+        	'order' => 3
+        ]);
+
+        $header->menus()->create([
+            'name'       => 'Suppliers',
+            'slug'       => 'suppliers',
+            'url'        => 'inventory/suppliers',
+            'base'       => 'supplier',
+            'is_export'  => true,
+            'icon'       => 'truck',
+            'permission' => 'supplier.view'
+        ]);
 
         // $header->menus()->create([
         // 	'name'  => 'Purchase Orders',
@@ -81,13 +91,7 @@ class MenuSeeder extends Seeder
         // 	'url'   => 'inventory/supplies',
         // 	'icon'  => 'package'
         // ]);
-
-        // $header->menus()->create([
-        // 	'name'  => 'Suppliers',
-        // 	'slug'  => 'suppliers',
-        // 	'url'   => 'inventory/suppliers',
-        // 	'icon'  => 'user-check'
-        // ]);
+        
 
         $header = Header::create([
             'name'  => 'Customers Management',
