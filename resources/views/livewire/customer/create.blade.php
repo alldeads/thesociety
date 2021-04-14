@@ -51,6 +51,10 @@
 	  				</span>
 				</button>
 	  		</div>
+
+	  		<div wire:ignore>
+				<button class="btn btn-success" wire:click="submit">Submit</button>
+	  		</div>
 		</div>
 
 		<div class="bs-stepper-content" wire:ignore>

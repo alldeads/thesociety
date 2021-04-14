@@ -40,6 +40,10 @@
 	  				</span>
 				</button>
 	  		</div>
+
+	  		<div wire:ignore>
+				<button class="btn btn-success" wire:click="edit">Edit Customer</button>
+	  		</div>
 		</div>
 
 		<div class="bs-stepper-content" wire:ignore>

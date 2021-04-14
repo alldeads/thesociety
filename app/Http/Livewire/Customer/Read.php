@@ -37,6 +37,11 @@ class Read extends Component
 		];
 	}
 
+	public function edit()
+	{
+		return redirect()->route('customers-edit', ['customer' => $this->customer->id]);
+	}
+
     public function render()
     {
         return view('livewire.customer.read');
