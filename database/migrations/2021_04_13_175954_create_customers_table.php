@@ -19,6 +19,7 @@ class CreateCustomersTable extends Migration
             $table->bigInteger('user_id')->unsigned();
             $table->bigInteger('updated_by')->nullable()->unsigned();
             $table->bigInteger('created_by')->nullable()->unsigned();
+            $table->bigInteger('status_id')->nullable()->unsigned();
             $table->softDeletes();
             $table->timestamps();
         });

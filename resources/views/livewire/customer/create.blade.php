@@ -76,13 +76,26 @@
 		  			<div class="form-group col-md-6">
 						<label class="form-label" for="vertical-username">Phone No.</label>
 						<input type="text" id="vertical-username" class="form-control" placeholder="Enter Phone No." wire:model="inputs.phone"/>
-						@error('phone') <span class="error">{{ $message }}</span> @enderror
 		  			</div>
 
 		  			<div class="form-group col-md-6">
 						<label class="form-label" for="vertical-email">Email</label>
 						<input type="email" id="vertical-email" class="form-control" placeholder="Enter Email Address" wire:model="inputs.email"/>
-						@error('email') <span class="error">{{ $message }}</span> @enderror
+		  			</div>
+				</div>
+
+				<div class="row">
+		  			<div class="form-group col-md-6">
+						<label class="form-label" for="status">Status</label>
+						<select class="form-control" id="status">
+							<option>Select status</option>
+							<option value="new"> New</option>
+							<option value="prospect"> Prospect</option>
+							<option value="expired"> Expired</option>
+							<option value="suspended"> Suspended</option>
+							<option value="active"> Active</option>
+							<option value="inactive"> Inactive</option>
+						</select>
 		  			</div>
 				</div>
 
@@ -107,7 +120,7 @@
 				<div class="row">
 		  			<div class="form-group col-md-6">
 						<label class="form-label" for="company-name">Company Name</label>
-						<input type="text" id="company-name" class="form-control" placeholder="Enter Company Name" wire:model="inputs.company_name" />
+						<input type="text" id="company-name" class="form-control" placeholder="Enter Company Name" wire:model="inputs.company" />
 		  			</div>
 
 		  			<div class="form-group col-md-6">
@@ -148,8 +161,8 @@
 
 				<div class="row">
 		  			<div class="form-group col-md-6">
-						<label class="form-label" for="street">Street Address</label>
-						<input type="text" id="street" class="form-control" placeholder="Enter Street Address" wire:model="inputs.street" />
+						<label class="form-label" for="address_line_1">Address Line 1</label>
+						<input type="text" id="address_line_1" class="form-control" placeholder="Enter Address Line 1" wire:model="inputs.address_line_1" />
 		  			</div>
 
 		  			<div class="form-group col-md-6">
@@ -174,6 +187,11 @@
 		  			<div class="form-group col-md-6">
 						<label class="form-label" for="postal">Zip / Postal Code</label>
 						<input type="text" id="postal" class="form-control" placeholder="Enter Zip Code" wire:model="inputs.postal"/>
+		  			</div>
+
+		  			<div class="form-group col-md-6">
+						<label class="form-label" for="country">Country</label>
+						<input type="text" id="country" class="form-control" placeholder="Enter Country" wire:model="inputs.country"/>
 		  			</div>
 				</div>
 

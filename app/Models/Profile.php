@@ -35,7 +35,17 @@ class Profile extends Model
         'city',
         'state',
         'postal',
-        'country'
+        'country',
+        'company',
+        'position',
+        'telephone',
+        'fax',
+        'facebook',
+        'instagram',
+        'linkedin',
+        'youtube',
+        'twitter',
+        'pinterest'
     ];
 
     public function getNameAttribute()

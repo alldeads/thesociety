@@ -46,7 +46,9 @@ class Index extends CustomComponent
 		                            ->orWhere('last_name', 'like', "%" . $search ."%")
                                     ->orWhere('phone_number', $search);
 		                        });
-		                });
+		                })->orWherehas('status',function($query) use ($search) {
+                            return $query->where('name', 'like', "%" . $search ."%");
+                        });
 		            })->orderBy('id', 'desc')->paginate($this->limit);
                         
         return view('livewire.customer.index', [

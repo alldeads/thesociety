@@ -15,7 +15,7 @@
 @endsection
 
 @section('content')
-	@livewire('customer.create')
+	@livewire('customer.create', ['company_id' => $company->id])
 @endsection
 
 @section('vendor-script')

@@ -18,7 +18,8 @@ class Customer extends Model
         'user_id',
         'company_id',
         'created_by',
-        'updated_by'
+        'updated_by',
+        'status_id'
     ];
 
     public function company()
@@ -29,5 +30,10 @@ class Customer extends Model
     public function user()
     {
     	return $this->belongsTo(User::class);
+    }
+
+    public function status()
+    {
+        return $this->belongsTo(Status::class);
     }
 }

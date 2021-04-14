@@ -9,6 +9,7 @@ use App\Models\Customer;
 use App\Models\User;
 use App\Models\Profile;
 use App\Models\Contact;
+use App\Models\Status;
 
 class CustomerSeeder extends Seeder
 {
@@ -20,6 +21,7 @@ class CustomerSeeder extends Seeder
     public function run()
     {
         $companies = Company::all();
+        $statuses  = Status::all();
 
         foreach ($companies as $company) {
         	for ( $i = 0; $i < rand(10,20); $i++) { 
@@ -44,7 +46,8 @@ class CustomerSeeder extends Seeder
 	    			'company_id' => $company->id,
 	    			'user_id'    => $user[0]->id,
 	                'updated_by' => 1,
-	                'created_by' => 1
+	                'created_by' => 1,
+	                'status_id'  => $statuses->random(1)->first()->id
 	    		]);
         	}
         }

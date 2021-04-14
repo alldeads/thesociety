@@ -36,6 +36,16 @@ class CreateProfilesTable extends Migration
             $table->string('state')->nullable();
             $table->string('postal')->nullable();
             $table->string('country')->nullable();
+            $table->string('company')->nullable();
+            $table->string('position')->nullable();
+            $table->string('telephone')->nullable();
+            $table->string('fax')->nullable();
+            $table->string('facebook')->nullable();
+            $table->string('twitter')->nullable();
+            $table->string('instagram')->nullable();
+            $table->string('linkedin')->nullable();
+            $table->string('youtube')->nullable();
+            $table->string('pinterest')->nullable();
             $table->timestamps();
         });
     }
