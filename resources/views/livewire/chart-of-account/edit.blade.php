@@ -10,9 +10,8 @@
 
 	        	<div class="modal-body flex-grow-1">
 	          		<div class="form-group">	
-	            		<label class="form-label" for="basic-icon-account-name">Account Name</label>
-	            		<input type="text" class="form-control" id="basic-icon-account-name" required placeholder="Enter Account Name" wire:model="inputs.account_name"/>
-	            		@error('account_name') <span class="error">{{ $message }}</span> @enderror
+	            		<label class="form-label" for="basic-icon-account-name">Account Title</label>
+	            		<input type="text" class="form-control" id="basic-icon-account-name" required placeholder="Enter Account Title" wire:model="inputs.account_title"/>
 	          		</div>
 
 	          		<div class="form-group">	

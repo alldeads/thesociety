@@ -38,7 +38,7 @@
 		  			<div class="row">
 		  				<div class="col-md-10 col-lg-10 col-xl-10 col-sm-12 mt-1">
 		  					<div class="form-group">
-			                  	<input type="text" class="form-control" placeholder="Search account name, account type, and code" wire:model="search"/>
+			                  	<input type="text" class="form-control" placeholder="Search account title, account type, and code" wire:model="search"/>
 	                		</div>
 		  				</div>
 		  				<div class="col-md-2 col-lg-2 col-xl-2 col-sm-12 mt-1">
@@ -59,7 +59,7 @@
 			  			<thead>
 							<tr>
 								<th>Code</th>
-								<th>Name</th>
+								<th>Title</th>
 								<th>Type</th>
 								@if( auth()->user()->can('chart.update') || auth()->user()->can('chart.delete') )
 									<th>Actions</th>

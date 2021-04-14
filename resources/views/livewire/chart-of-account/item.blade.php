@@ -1,9 +1,9 @@
 <tr>
 	<td>{{ $account->code }}</td>
-	<td>{{ ucwords($account->chart_name) }}</td>
+	<td>{{ $account->chart_name }}</td>
 	<td>
 		<span class="badge badge-pill  badge-light-{{ $account->type->color }}">
-			{{ ucwords($account->type->name) }}
+			{{ $account->type->name }}
 		</span>
 	</td>
 

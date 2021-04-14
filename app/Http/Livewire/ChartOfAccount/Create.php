@@ -11,7 +11,7 @@ use App\Models\CompanyChartAccount;
 class Create extends CustomComponent
 {
 	public $inputs = [
-		'account_name',
+		'account_title',
 		'account_code',
 		'account_type'
 	];
@@ -27,7 +27,7 @@ class Create extends CustomComponent
 	public function submit()
 	{
 		$validator = Validator::make($this->inputs, [
-            'account_name'  => ['required', 'string', 'max:255'],
+            'account_title' => ['required', 'string', 'max:255'],
             'account_code'  => ['required', 'string', 'max:255'],
             'account_type'  => ['required', 'numeric', 'exists:chart_types,id'],
         ]);
@@ -41,7 +41,7 @@ class Create extends CustomComponent
         }
 
         CompanyChartAccount::create([
-			'chart_name'    => $this->inputs['account_name'],
+			'chart_name'    => ucwords($this->inputs['account_title']),
 			'code'          => $this->inputs['account_code'],
 			'chart_type_id' => $this->inputs['account_type'],
 			'created_by'    => auth()->id(),
