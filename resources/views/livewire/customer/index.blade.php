@@ -40,7 +40,7 @@
 		  			<div class="row">
 		  				<div class="col-md-10 col-lg-10 col-xl-10 col-sm-12 mt-1">
 		  					<div class="form-group">
-			                  	<input type="text" class="form-control" placeholder="Search customer name" wire:model="search"/>
+			                  	<input type="text" class="form-control" placeholder="Search customer name, email and phone number" wire:model="search"/>
 	                		</div>
 		  				</div>
 		  				<div class="col-md-2 col-lg-2 col-xl-2 col-sm-12 mt-1">
