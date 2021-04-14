@@ -17,6 +17,12 @@
 				</span>
 		    @endcan
 
+		    @can('customer.read')
+				<span type="button" wire:click="read">
+					<i class="fas fa-eye ml-1"></i>
+				</span>
+		    @endcan
+
 	    	@can('customer.delete')
 	    		<span type="button" wire:click="delete">
 					<i class="fas fa-trash ml-1"></i>
