@@ -16,6 +16,8 @@ class Supplier extends Model
      */
     protected $fillable = [
         'user_id',
+        'email',
+        'phone',
         'company_id',
         'created_by',
         'updated_by',
@@ -30,6 +32,16 @@ class Supplier extends Model
     public function user()
     {
     	return $this->belongsTo(User::class);
+    }
+
+    public function user_created()
+    {
+        return $this->belongsTo(User::class, 'created_by', 'id');
+    }
+
+    public function user_updated()
+    {
+        return $this->belongsTo(User::class, 'updated_by', 'id');
     }
 
     public function status()

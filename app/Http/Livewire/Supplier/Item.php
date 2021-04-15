@@ -12,6 +12,11 @@ class Item extends Component
 	{
 		$this->emit('deleteSupplier', ['item' => $this->item]);
 	}
+
+	public function read()
+	{
+		return redirect()->route('suppliers-read', ['supplier' => $this->item->id]);
+	}
 	
     public function render()
     {
