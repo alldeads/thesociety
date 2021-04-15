@@ -31,6 +31,16 @@ class MenuSeeder extends Seeder
             'permission' => 'dashboard.view'
         ]);
 
+        // $header->menus()->create([
+        //     'name'       => 'Invoices',
+        //     'slug'       => 'invoices',
+        //     'url'        => 'home',
+        //     'icon'       => 'file-text',
+        //     'base'       => 'dashboard',
+        //     'is_export'  => false,
+        //     'permission' => 'dashboard.view'
+        // ]);
+
         $header = Header::create([
         	'name'  => 'Accounting & Finance',
         	'order' => 2
@@ -57,6 +67,16 @@ class MenuSeeder extends Seeder
         ]);
 
         // $header->menus()->create([
+        //     'name'       => 'Tax',
+        //     'slug'       => 'accounting/tax',
+        //     'url'        => 'home',
+        //     'icon'       => 'percent',
+        //     'base'       => 'dashboard',
+        //     'is_export'  => false,
+        //     'permission' => 'dashboard.view'
+        // ]);
+
+        // $header->menus()->create([
         // 	'name'  => 'Ledger',
         // 	'slug'  => 'ledger',
         // 	'url'   => 'accounting/ledger',
@@ -64,7 +84,7 @@ class MenuSeeder extends Seeder
         // ]);
 
         $header = Header::create([
-        	'name'  => 'Products & Inventory',
+        	'name'  => 'Stocks & Inventory',
         	'order' => 3
         ]);
 
@@ -79,19 +99,69 @@ class MenuSeeder extends Seeder
         ]);
 
         // $header->menus()->create([
-        // 	'name'  => 'Purchase Orders',
-        // 	'slug'  => 'purchase-orders',
-        // 	'url'   => 'inventory/purchase-orders',
-        // 	'icon'  => 'clipboard'
+        //     'name'       => 'Purchase Orders',
+        //     'slug'       => 'purchase-orders',
+        //     'url'        => 'inventory/suppliers',
+        //     'base'       => 'supplier',
+        //     'is_export'  => true,
+        //     'icon'       => 'clipboard',
+        //     'permission' => 'supplier.view'
         // ]);
 
         // $header->menus()->create([
-        // 	'name'  => 'Supplies',
-        // 	'slug'  => 'supplies',
-        // 	'url'   => 'inventory/supplies',
-        // 	'icon'  => 'package'
+        //     'name'       => 'Stock Cards',
+        //     'slug'       => 'suppliers',
+        //     'url'        => 'inventory/suppliers',
+        //     'base'       => 'supplier',
+        //     'is_export'  => true,
+        //     'icon'       => 'layers',
+        //     'permission' => 'supplier.view'
         // ]);
-        
+
+        // $header->menus()->create([
+        //     'name'       => 'Inventory',
+        //     'slug'       => 'suppliers',
+        //     'url'        => 'inventory/suppliers',
+        //     'base'       => 'supplier',
+        //     'is_export'  => true,
+        //     'icon'       => 'archive',
+        //     'permission' => 'supplier.view'
+        // ]);
+
+        // $header = Header::create([
+        //     'name'  => 'Product Management',
+        //     'order' => 3
+        // ]);
+
+        // $header->menus()->create([
+        //     'name'       => 'Products',
+        //     'slug'       => 'products',
+        //     'url'        => 'inventory/suppliers',
+        //     'base'       => 'supplier',
+        //     'is_export'  => true,
+        //     'icon'       => 'shopping-bag',
+        //     'permission' => 'supplier.view'
+        // ]);
+
+        // $header->menus()->create([
+        //     'name'       => 'Supplies',
+        //     'slug'       => 'supplies',
+        //     'url'        => 'inventory/suppliers',
+        //     'base'       => 'supplier',
+        //     'is_export'  => true,
+        //     'icon'       => 'package',
+        //     'permission' => 'supplier.view'
+        // ]);
+
+        // $header->menus()->create([
+        //     'name'       => 'Services',
+        //     'slug'       => 'services',
+        //     'url'        => 'inventory/suppliers',
+        //     'base'       => 'supplier',
+        //     'is_export'  => true,
+        //     'icon'       => 'list',
+        //     'permission' => 'supplier.view'
+        // ]);
 
         $header = Header::create([
             'name'  => 'Customers Management',
