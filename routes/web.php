@@ -11,6 +11,7 @@ use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\CashFlowController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\SupplierController;
+use App\Http\Controllers\ProductController;
 
 
 Auth::routes(['register' => false]);
@@ -38,6 +39,13 @@ Route::middleware('auth')->group(function() {
 		Route::get('create', [CustomerController::class, 'create'])->name('customers-create');
 		Route::get('view/{customer}', [CustomerController::class, 'view'])->name('customers-read');
 		Route::get('edit/{customer}', [CustomerController::class, 'edit'])->name('customers-edit');
+	});
+
+	Route::prefix('products')->group( function() {
+		Route::get('view', [ProductController::class, 'index'])->name('products-view');
+		// Route::get('create', [CustomerController::class, 'create'])->name('customers-create');
+		// Route::get('view/{customer}', [CustomerController::class, 'view'])->name('customers-read');
+		// Route::get('edit/{customer}', [CustomerController::class, 'edit'])->name('customers-edit');
 	});
 
 	Route::prefix('inventory')->group( function() {

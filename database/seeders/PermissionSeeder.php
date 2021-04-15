@@ -206,5 +206,30 @@ class PermissionSeeder extends Seeder
         Permission::create([
             'name' => 'supplier.export'
         ]);
+
+        // Products
+        Permission::create([
+            'name' => 'product.view'
+        ]);
+
+        Permission::create([
+            'name' => 'product.update'
+        ]);
+
+        Permission::create([
+            'name' => 'product.read'
+        ]);
+
+        Permission::create([
+            'name' => 'product.create'
+        ]);
+
+        Permission::create([
+            'name' => 'product.delete'
+        ]);
+
+        Permission::create([
+            'name' => 'product.export'
+        ]);
     }
 }

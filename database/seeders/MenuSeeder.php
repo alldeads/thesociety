@@ -128,20 +128,20 @@ class MenuSeeder extends Seeder
         //     'permission' => 'supplier.view'
         // ]);
 
-        // $header = Header::create([
-        //     'name'  => 'Product Management',
-        //     'order' => 3
-        // ]);
+        $header = Header::create([
+            'name'  => 'Product Management',
+            'order' => 3
+        ]);
 
-        // $header->menus()->create([
-        //     'name'       => 'Products',
-        //     'slug'       => 'products',
-        //     'url'        => 'inventory/suppliers',
-        //     'base'       => 'supplier',
-        //     'is_export'  => true,
-        //     'icon'       => 'shopping-bag',
-        //     'permission' => 'supplier.view'
-        // ]);
+        $header->menus()->create([
+            'name'       => 'Products',
+            'slug'       => 'products',
+            'url'        => 'products/view',
+            'base'       => 'product',
+            'is_export'  => true,
+            'icon'       => 'shopping-bag',
+            'permission' => 'product.view'
+        ]);
 
         // $header->menus()->create([
         //     'name'       => 'Supplies',
