@@ -17,6 +17,11 @@ class Item extends Component
 	{
 		return redirect()->route('suppliers-read', ['supplier' => $this->item->id]);
 	}
+
+	public function edit()
+	{
+		return redirect()->route('suppliers-edit', ['supplier' => $this->item->id]);
+	}
 	
     public function render()
     {

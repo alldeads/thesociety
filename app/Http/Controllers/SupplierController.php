@@ -79,4 +79,31 @@ class SupplierController extends Controller
 		    return view('misc.not-authorized');
 		}
     }
+
+    public function edit(Supplier $supplier)
+    {
+    	$response = Gate::inspect('supplier.update');
+
+    	$company = Company::findOrFail(auth()->user()->empCard->company_id);
+
+    	if ( $supplier->company_id != $company->id ) {
+    		return view('misc.not-authorized');
+    	}
+
+    	$breadcrumbs = [
+	        ['link'=> route('home'), 'name'=>"Dashboard"], 
+	        ['link'=> route('suppliers-view'), 'name'=> "Suppliers"],
+	        ['name'=> $supplier->user->profile->company], 
+	    ];
+
+		if ( $response->allowed() ) {
+		    return view('supplier.edit', [
+		    	'breadcrumbs' => $breadcrumbs,
+		    	'company'     => $company,
+		    	'supplier'    => $supplier
+		    ]);
+		} else {
+		    return view('misc.not-authorized');
+		}
+    }
 }

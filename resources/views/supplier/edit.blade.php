@@ -1,6 +1,6 @@
 @extends('layouts/contentLayoutMaster')
 
-@section('title', 'Edit Customer')
+@section('title', 'New Supplier')
 
 @section('vendor-style')
 	<!-- vendor css files -->
@@ -15,9 +15,9 @@
 @endsection
 
 @section('content')
-	@livewire('customer.edit', [
+	@livewire('supplier.edit', [
 		'company_id' => $company->id,
-		'customer'   => $customer
+		'supplier'   => $supplier
 	])
 @endsection
 

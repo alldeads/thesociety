@@ -45,8 +45,8 @@ Route::middleware('auth')->group(function() {
 			Route::get('view', [SupplierController::class, 'index'])->name('suppliers-view');
 			Route::get('create', [SupplierController::class, 'create'])->name('suppliers-create');
 			Route::get('view/{supplier}', [SupplierController::class, 'view'])->name('suppliers-read');
+			Route::get('edit/{supplier}', [SupplierController::class, 'edit'])->name('suppliers-edit');
 		});
-		// Route::get('edit/{customer}', [CustomerController::class, 'edit'])->name('customers-edit');
 	});
 
 	Route::prefix('accounting')->group( function() {
