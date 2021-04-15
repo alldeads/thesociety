@@ -11,6 +11,7 @@ use App\Models\Contact;
 use App\Models\CompanyRole;
 use App\Models\CompanyMenu;
 
+use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 
@@ -75,7 +76,7 @@ class Edit extends CustomComponent
             'first_name'     => ['required', 'string', 'max:255'],
             'middle_name'    => ['nullable', 'string', 'max:255'],
             'last_name'      => ['required', 'string', 'max:255'],
-            'email'          => ['required', 'email'],
+            'email'          => ['required', 'email', Rule::unique('users')->ignore($this->employee->user->id)],
             'password'       => ['nullable', 'min:6'],
             'permissions'    => ['required'],
             'role'           => ['required', 'numeric'],
