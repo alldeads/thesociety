@@ -21,8 +21,8 @@ class ProductFactory extends Factory
      */
     public function definition()
     {
-        $cost = $this->faker->randomFloat(100, 200);
-        $srp  = $this->faker->randomFloat(600, 999);
+        $cost = rand(50, 200);
+        $srp  = rand(500, 2000);
 
         $markup = ($srp / $cost) * 100;
 
