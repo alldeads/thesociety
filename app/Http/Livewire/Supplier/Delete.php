@@ -1,19 +1,19 @@
 <?php
 
-namespace App\Http\Livewire\Customer;
+namespace App\Http\Livewire\Supplier;
 
 use App\Http\Livewire\CustomComponent;
 
-use App\Models\Customer;
+use App\Models\Supplier;
 
 class Delete extends CustomComponent
 {
 	public $listeners = [
-        'deleteCustomer' => 'delete'
+        'deleteSupplier' => 'delete'
     ];
 
     public $item;
-    public $el = "delete-customer-item";
+    public $el = "delete-supplier-item";
 
     public function delete($item)
     {
@@ -23,23 +23,23 @@ class Delete extends CustomComponent
 
     public function confirm()
     {
-    	$cus = Customer::find($this->item['item']['id']);
+    	$supp = Supplier::find($this->item['item']['id']);
 
-    	if ( !$cus ) {
+    	if ( !$supp ) {
     		$this->message('Oops! Something went wrong upon deletion, please try again!', 'error');
     	}
 
-        $cus->updated_by = auth()->id();
-        $cus->save();
-    	$cus->delete();
+        $supp->updated_by = auth()->id();
+        $supp->save();
+    	$supp->delete();
 
     	$this->emit('dissmissModal', ['el' => $this->el]);
-    	$this->message('Success! Customer has been deleted.', 'success');
-    	$this->emit('refreshCustomerParent');
+    	$this->message('Success! Supplier has been deleted.', 'success');
+    	$this->emit('refreshSupplierParent');
     }
 
     public function render()
     {
-        return view('livewire.customer.delete');
+        return view('livewire.supplier.delete');
     }
 }
