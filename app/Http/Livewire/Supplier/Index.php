@@ -27,6 +27,11 @@ class Index extends CustomComponent
         $this->resetPage();
     }
 
+    public function create()
+    {
+        return redirect()->route('suppliers-create');
+    }
+
     public function render()
     {
     	$search = $this->search;

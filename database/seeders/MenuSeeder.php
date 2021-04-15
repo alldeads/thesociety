@@ -91,7 +91,7 @@ class MenuSeeder extends Seeder
         $header->menus()->create([
             'name'       => 'Suppliers',
             'slug'       => 'suppliers',
-            'url'        => 'inventory/suppliers',
+            'url'        => 'inventory/suppliers/view',
             'base'       => 'supplier',
             'is_export'  => true,
             'icon'       => 'truck',

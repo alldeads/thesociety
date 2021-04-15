@@ -30,4 +30,26 @@ class SupplierController extends Controller
 		    return view('misc.not-authorized');
 		}
     }
+
+    public function create()
+    {
+    	$response = Gate::inspect('supplier.create');
+
+    	$breadcrumbs = [
+	        ['link'=> route('home'), 'name'=>"Dashboard"], 
+	        ['link'=> route('suppliers-view'), 'name'=> "Suppliers"],
+	        ['name'=> "Create Supplier"],
+	    ];
+
+	    $company = Company::findOrFail(auth()->user()->empCard->company_id);
+
+		if ( $response->allowed() ) {
+		    return view('supplier.create', [
+		    	'breadcrumbs' => $breadcrumbs,
+		    	'company'     => $company
+		    ]);
+		} else {
+		    return view('misc.not-authorized');
+		}
+    }
 }
