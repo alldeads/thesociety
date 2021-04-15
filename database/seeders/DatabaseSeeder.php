@@ -26,7 +26,8 @@ class DatabaseSeeder extends Seeder
             CompanyChartSeeder::class,
             CashFlowSeeder::class,
             CustomerSeeder::class,
-            SupplierSeeder::class
+            SupplierSeeder::class,
+            ProductSeeder::class
         ]);
     }
 }
