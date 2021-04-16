@@ -51,7 +51,7 @@ Route::middleware('auth')->group(function() {
 
 	Route::prefix('supplies')->group( function() {
 		Route::get('view', [SupplyController::class, 'index'])->name('supplies-view');
-		// Route::get('create', [ProductController::class, 'create'])->name('products-create');
+		Route::get('create', [SupplyController::class, 'create'])->name('supplies-create');
 		// Route::get('view/{product}', [ProductController::class, 'view'])->name('products-read');
 		// Route::get('edit/{product}', [ProductController::class, 'edit'])->name('products-edit');
 	});
