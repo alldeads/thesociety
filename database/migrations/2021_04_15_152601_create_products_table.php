@@ -29,7 +29,7 @@ class CreateProductsTable extends Migration
             $table->double('srp_price');
             $table->double('discounted_price')->nullable();
             $table->double('cost');
-            $table->double('markup')->nullable();
+            $table->decimal('markup', 12, 2)->nullable();
             $table->bigInteger('updated_by')->nullable()->unsigned();
             $table->bigInteger('created_by')->nullable()->unsigned();
             $table->enum('type', ['product', 'supply'])->default('product');

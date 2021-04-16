@@ -66,11 +66,38 @@ class ProductController extends Controller
     	$breadcrumbs = [
 	        ['link'=> route('home'), 'name'=>"Dashboard"], 
 	        ['link'=> route('products-view'), 'name'=>"Products"],
-	        ['name'=> "Create Product"],
+	        ['name'=> $product->name],
 	    ];
 
 		if ( $response->allowed() ) {
 		    return view('product.read', [
+		    	'breadcrumbs' => $breadcrumbs,
+		    	'company'     => $company,
+		    	'product'     => $product
+		    ]);
+		} else {
+		    return view('misc.not-authorized');
+		}
+    }
+
+    public function edit(Product $product)
+    {
+    	$response = Gate::inspect('product.update');
+
+    	$company = Company::findOrFail(auth()->user()->empCard->company_id);
+
+    	if ( $product->company_id !== $company->id ) {
+    		return view('misc.not-authorized');
+    	}
+
+    	$breadcrumbs = [
+	        ['link'=> route('home'), 'name'=>"Dashboard"], 
+	        ['link'=> route('products-view'), 'name'=>"Products"],
+	        ['name'=> "Edit Product"],
+	    ];
+
+		if ( $response->allowed() ) {
+		    return view('product.edit', [
 		    	'breadcrumbs' => $breadcrumbs,
 		    	'company'     => $company,
 		    	'product'     => $product

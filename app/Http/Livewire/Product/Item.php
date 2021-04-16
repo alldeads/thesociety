@@ -18,6 +18,11 @@ class Item extends Component
 		return redirect()->route('products-read', ['product' => $this->item->id]);
 	}
 
+	public function edit()
+	{
+		return redirect()->route('products-edit', ['product' => $this->item->id]);
+	}
+
     public function render()
     {
         return view('livewire.product.item');

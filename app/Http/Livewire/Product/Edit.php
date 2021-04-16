@@ -11,36 +11,29 @@ use Livewire\WithFileUploads;
 
 use App\Models\Product;
 
-class Create extends CustomComponent
+class Edit extends CustomComponent
 {
-	use WithFileUploads;
-
 	public $company_id;
-
+	public $product;
+	public $inputs;
 	public $mark_up;
-
-	public $inputs = [
-		'cost',
-		'avatar'
-	];
 
 	public function mount()
 	{
-		$this->inputs['cost']  = 0;
-		$this->inputs['price'] = 0;
-		$this->inputs['sku'] = Product::generate_sku($this->company_id);
+		$this->inputs = [
+			'name'              => $this->product->name ?? '',
+			'sku'               => $this->product->sku ?? '',
+			'description'       => $this->product->long_description ?? '',
+			'brief_description' => $this->product->short_description ?? '',
+			'cost'              => $this->product->cost ?? 0,
+			'price'             => $this->product->srp_price ?? 0,
+			'discounted'        => $this->product->discounted_price ?? 0,
+			'quantity'          => $this->product->quantity ?? 0,
+			'threshold'         => $this->product->threshold ?? 0,
+			'status'            => $this->product->status ?? ''
+		];
 
-		$this->mark_up = 0;
-	}
-
-	public function calculate()
-	{
-		$srp  = (int) ($this->inputs['price'] ?? 0);
-		$cost = (int) ($this->inputs['cost'] ?? 0);
-
-		if ( $srp > 0 && $cost > 0 ) {
-			$this->mark_up = number_format((($srp - $cost) / $cost) * 100, 2, '.', ',');
-		}
+		$this->mark_up = $this->product->markup ?? 0;
 	}
 
 	public function submit()
@@ -66,7 +59,7 @@ class Create extends CustomComponent
         $results = Product::where([
         	'company_id' => $this->company_id,
         	'sku'        => $this->inputs['sku']
-        ])->first();
+        ])->where('id', '!=', $this->product->id)->first();
 
         if ( $results ) {
         	return $this->message('Product sku has been used.', 'error');
@@ -75,8 +68,9 @@ class Create extends CustomComponent
         try {
 			DB::beginTransaction();
 
-	        Product::create([
-	        	'company_id' => $this->company_id,
+			$product = Product::find($this->product->id);
+
+	        $product->fill([
 	        	'avatar'     => $path ?? null,
 	        	'sku'        => $this->inputs['sku'] ?? null,
 	        	'name'       => ucwords($this->inputs['name']),
@@ -89,26 +83,34 @@ class Create extends CustomComponent
 	        	'cost'      => $this->inputs['cost'],
 	        	'markup'    => str_replace(',', '', $this->mark_up),
 	        	'updated_by' => auth()->id(),
-	        	'created_by' => auth()->id(),
 	        	'type'       => 'product',
 	        	'status'     => $this->inputs['status'],
 	        ]);
 
+	        $product->save();
+
 	        DB::commit();
 
-	        $this->inputs = [];
-
-	        $this->message('Product has been created', 'success');
+	        $this->message('Product has been updated.', 'success');
         } catch(\Exception $e) {
 			DB::rollback();
 			$this->message($e->getMessage(), 'error');
 		}
 	}
 
+	public function calculate()
+	{
+		$srp  = (int) ($this->inputs['price'] ?? 0);
+		$cost = (int) ($this->inputs['cost'] ?? 0);
+
+		if ( $srp > 0 && $cost > 0 ) {
+			$this->mark_up = number_format((($srp - $cost) / $cost) * 100, 2, '.', ',');
+		}
+	}
+
     public function render()
     {
     	$this->calculate();
-
-        return view('livewire.product.create');
+        return view('livewire.product.edit');
     }
 }

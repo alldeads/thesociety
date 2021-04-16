@@ -35,7 +35,7 @@ class Delete extends CustomComponent
 
     	$this->emit('dissmissModal', ['el' => $this->el]);
     	$this->message('Success! Product has been deleted.', 'success');
-    	$this->emit('refreshCustomerParent');
+    	$this->emit('refreshProductParent');
     }
 
     public function render()
