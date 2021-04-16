@@ -12,6 +12,7 @@ use App\Http\Controllers\CashFlowController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\SupplyController;
 
 
 Auth::routes(['register' => false]);
@@ -46,6 +47,13 @@ Route::middleware('auth')->group(function() {
 		Route::get('create', [ProductController::class, 'create'])->name('products-create');
 		Route::get('view/{product}', [ProductController::class, 'view'])->name('products-read');
 		Route::get('edit/{product}', [ProductController::class, 'edit'])->name('products-edit');
+	});
+
+	Route::prefix('supplies')->group( function() {
+		Route::get('view', [SupplyController::class, 'index'])->name('supplies-view');
+		// Route::get('create', [ProductController::class, 'create'])->name('products-create');
+		// Route::get('view/{product}', [ProductController::class, 'view'])->name('products-read');
+		// Route::get('edit/{product}', [ProductController::class, 'edit'])->name('products-edit');
 	});
 
 	Route::prefix('inventory')->group( function() {
