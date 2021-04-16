@@ -143,15 +143,15 @@ class MenuSeeder extends Seeder
             'permission' => 'product.view'
         ]);
 
-        // $header->menus()->create([
-        //     'name'       => 'Supplies',
-        //     'slug'       => 'supplies',
-        //     'url'        => 'inventory/suppliers',
-        //     'base'       => 'supplier',
-        //     'is_export'  => true,
-        //     'icon'       => 'package',
-        //     'permission' => 'supplier.view'
-        // ]);
+        $header->menus()->create([
+            'name'       => 'Supplies',
+            'slug'       => 'supplies',
+            'url'        => 'supplies/view',
+            'base'       => 'supplies',
+            'is_export'  => true,
+            'icon'       => 'package',
+            'permission' => 'supplies.view'
+        ]);
 
         // $header->menus()->create([
         //     'name'       => 'Services',
