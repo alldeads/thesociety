@@ -15,7 +15,7 @@ class PermissionSeeder extends Seeder
      */
     public function run()
     {
-        $permissions = ['view', 'read', 'export', 'create', 'update'];
+        $permissions = ['view', 'read', 'export', 'create', 'update', 'delete'];
         $menus = [
             'dashboard', 'company', 'employee', 'role',
             'chart', 'cashflow', 'customer', 'supplier',
