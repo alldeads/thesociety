@@ -91,4 +91,4 @@
 	</div>
 </div>
 
-@livewire('customer.delete', ['company_id' => $company_id])
+@livewire('product.delete', ['company_id' => $company_id])

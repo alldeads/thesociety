@@ -34,6 +34,7 @@ class CreateProductsTable extends Migration
             $table->bigInteger('created_by')->nullable()->unsigned();
             $table->enum('type', ['product', 'supply'])->default('product');
             $table->enum('status', ['published', 'unpublished', 'draft', 'new', 'in stock', 'out of stock'])->default('published');
+            $table->softDeletes();
             $table->timestamps();
         });
     }
