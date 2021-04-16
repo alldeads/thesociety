@@ -52,4 +52,31 @@ class SupplyController extends Controller
 		    return view('misc.not-authorized');
 		}
     }
+
+    public function view(Product $product)
+    {
+    	$response = Gate::inspect('supply.read');
+
+    	$company = Company::findOrFail(auth()->user()->empCard->company_id);
+
+    	if ( $product->company_id !== $company->id ) {
+    		return view('misc.not-authorized');
+    	}
+
+    	$breadcrumbs = [
+	        ['link'=> route('home'), 'name'=>"Dashboard"], 
+	        ['link'=> route('products-view'), 'name'=>"Supplies"],
+	        ['name'=> $product->name],
+	    ];
+
+		if ( $response->allowed() ) {
+		    return view('supply.read', [
+		    	'breadcrumbs' => $breadcrumbs,
+		    	'company'     => $company,
+		    	'supply'      => $product
+		    ]);
+		} else {
+		    return view('misc.not-authorized');
+		}
+    }
 }

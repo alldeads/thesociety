@@ -36,7 +36,9 @@ class ProductFactory extends Factory
             'threshold'         => rand(10, 20),
             'srp_price'         => $srp,
             'cost'              => $cost,
-            'markup'            => $markup
+            'markup'            => $markup,
+            'updated_by'        => 1,
+            'created_by'        => 1
         ];
     }
 }
