@@ -147,10 +147,10 @@ class MenuSeeder extends Seeder
             'name'       => 'Supplies',
             'slug'       => 'supplies',
             'url'        => 'supplies/view',
-            'base'       => 'supplies',
+            'base'       => 'supply',
             'is_export'  => true,
             'icon'       => 'package',
-            'permission' => 'supplies.view'
+            'permission' => 'supply.view'
         ]);
 
         // $header->menus()->create([

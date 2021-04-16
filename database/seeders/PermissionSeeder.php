@@ -19,7 +19,7 @@ class PermissionSeeder extends Seeder
         $menus = [
             'dashboard', 'company', 'employee', 'role',
             'chart', 'cashflow', 'customer', 'supplier',
-            'products', 'supplies'
+            'product', 'supply'
         ];
 
         foreach ($menus as $menu) {
