@@ -11,17 +11,23 @@ use Livewire\WithFileUploads;
 
 use App\Models\Product;
 
-class Create extends CustomComponent
+class Edit extends CustomComponent
 {
-	use WithFileUploads;
-
 	public $company_id;
-
-	public $inputs = [];
+	public $supply;
+	public $inputs;
 
 	public function mount()
 	{
-		$this->inputs['sku'] = Product::generate_sku($this->company_id);
+		$this->inputs = [
+			'name'              => $this->supply->name ?? '',
+			'sku'               => $this->supply->sku ?? '',
+			'description'       => $this->supply->long_description ?? '',
+			'cost'              => $this->supply->cost ?? '',
+			'quantity'          => $this->supply->quantity ?? '',
+			'threshold'         => $this->supply->threshold ?? '',
+			'status'            => $this->supply->status ?? '',
+		];
 	}
 
 	public function submit()
@@ -42,40 +48,38 @@ class Create extends CustomComponent
         }
 
         if ( !empty($this->inputs['sku']) ) {
-	        $results = Product::where([
+        	$results = Product::where([
 	        	'company_id' => $this->company_id,
 	        	'sku'        => $this->inputs['sku']
-	        ])->first();
+	        ])->where('id', '!=', $this->supply->id)->first();
 
 	        if ( $results ) {
-	        	return $this->message('Supply sku has been used.', 'error');
+	        	return $this->message('Sku has been used.', 'error');
 	        }
-	    }
+        }
 
         try {
 			DB::beginTransaction();
 
-	        Product::create([
-	        	'company_id' => $this->company_id,
+			$supply = Product::find($this->supply->id);
+
+	        $supply->fill([
 	        	'avatar'     => $path ?? null,
 	        	'sku'        => $this->inputs['sku'] ?? null,
-	        	'srp_price'  => 0,
 	        	'name'       => ucwords($this->inputs['name']),
-	        	'long_description' => ucwords($this->inputs['description'] ?? null),
+	        	'long_description' => ucwords($this->inputs['description']),
 	        	'quantity'  => $this->inputs['quantity'],
 	        	'threshold' => $this->inputs['threshold'] ?? 0,
 	        	'cost'      => $this->inputs['cost'],
 	        	'updated_by' => auth()->id(),
-	        	'created_by' => auth()->id(),
-	        	'type'       => 'supply',
 	        	'status'     => $this->inputs['status'],
 	        ]);
 
+	        $supply->save();
+
 	        DB::commit();
 
-	        $this->inputs = [];
-
-	        $this->message('Supply has been created', 'success');
+	        $this->message('Supply has been updated.', 'success');
         } catch(\Exception $e) {
 			DB::rollback();
 			$this->message($e->getMessage(), 'error');
@@ -84,6 +88,6 @@ class Create extends CustomComponent
 
     public function render()
     {
-        return view('livewire.supply.create');
+        return view('livewire.supply.edit');
     }
 }

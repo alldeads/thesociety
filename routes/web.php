@@ -53,7 +53,7 @@ Route::middleware('auth')->group(function() {
 		Route::get('view', [SupplyController::class, 'index'])->name('supplies-view');
 		Route::get('create', [SupplyController::class, 'create'])->name('supplies-create');
 		Route::get('view/{product}', [SupplyController::class, 'view'])->name('supplies-read');
-		// Route::get('edit/{product}', [ProductController::class, 'edit'])->name('products-edit');
+		Route::get('edit/{product}', [SupplyController::class, 'edit'])->name('supplies-edit');
 	});
 
 	Route::prefix('inventory')->group( function() {
