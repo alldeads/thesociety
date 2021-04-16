@@ -13,6 +13,11 @@ class Item extends Component
 		$this->emit('deleteProduct', ['item' => $this->item]);
 	}
 
+	public function read()
+	{
+		return redirect()->route('products-read', ['product' => $this->item->id]);
+	}
+
     public function render()
     {
         return view('livewire.product.item');

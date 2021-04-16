@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 
 use App\Models\Company;
+use App\Models\Product;
 
 class ProductController extends Controller
 {
@@ -46,6 +47,33 @@ class ProductController extends Controller
 		    return view('product.create', [
 		    	'breadcrumbs' => $breadcrumbs,
 		    	'company'     => $company
+		    ]);
+		} else {
+		    return view('misc.not-authorized');
+		}
+    }
+
+    public function view(Product $product)
+    {
+    	$response = Gate::inspect('product.read');
+
+    	$company = Company::findOrFail(auth()->user()->empCard->company_id);
+
+    	if ( $product->company_id !== $company->id ) {
+    		return view('misc.not-authorized');
+    	}
+
+    	$breadcrumbs = [
+	        ['link'=> route('home'), 'name'=>"Dashboard"], 
+	        ['link'=> route('products-view'), 'name'=>"Products"],
+	        ['name'=> "Create Product"],
+	    ];
+
+		if ( $response->allowed() ) {
+		    return view('product.read', [
+		    	'breadcrumbs' => $breadcrumbs,
+		    	'company'     => $company,
+		    	'product'     => $product
 		    ]);
 		} else {
 		    return view('misc.not-authorized');
