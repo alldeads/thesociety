@@ -98,15 +98,15 @@ class MenuSeeder extends Seeder
             'permission' => 'supplier.view'
         ]);
 
-        // $header->menus()->create([
-        //     'name'       => 'Purchase Orders',
-        //     'slug'       => 'purchase-orders',
-        //     'url'        => 'inventory/suppliers',
-        //     'base'       => 'supplier',
-        //     'is_export'  => true,
-        //     'icon'       => 'clipboard',
-        //     'permission' => 'supplier.view'
-        // ]);
+        $header->menus()->create([
+            'name'       => 'Purchase Orders',
+            'slug'       => 'purchase-orders',
+            'url'        => 'inventory/purchase-orders',
+            'base'       => 'purchase_order',
+            'is_export'  => true,
+            'icon'       => 'clipboard',
+            'permission' => 'purchase_order.view'
+        ]);
 
         // $header->menus()->create([
         //     'name'       => 'Stock Cards',
