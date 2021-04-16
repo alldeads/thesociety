@@ -43,7 +43,7 @@ Route::middleware('auth')->group(function() {
 
 	Route::prefix('products')->group( function() {
 		Route::get('view', [ProductController::class, 'index'])->name('products-view');
-		// Route::get('create', [CustomerController::class, 'create'])->name('customers-create');
+		Route::get('create', [ProductController::class, 'create'])->name('products-create');
 		// Route::get('view/{customer}', [CustomerController::class, 'view'])->name('customers-read');
 		// Route::get('edit/{customer}', [CustomerController::class, 'edit'])->name('customers-edit');
 	});

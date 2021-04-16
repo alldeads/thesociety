@@ -29,4 +29,26 @@ class ProductController extends Controller
 		    return view('misc.not-authorized');
 		}
     }
+
+    public function create()
+    {
+    	$response = Gate::inspect('product.create');
+
+    	$breadcrumbs = [
+	        ['link'=> route('home'), 'name'=>"Dashboard"], 
+	        ['link'=> route('products-view'), 'name'=>"Products"],
+	        ['name'=> "Create Product"],
+	    ];
+
+	    $company = Company::findOrFail(auth()->user()->empCard->company_id);
+
+		if ( $response->allowed() ) {
+		    return view('product.create', [
+		    	'breadcrumbs' => $breadcrumbs,
+		    	'company'     => $company
+		    ]);
+		} else {
+		    return view('misc.not-authorized');
+		}
+    }
 }

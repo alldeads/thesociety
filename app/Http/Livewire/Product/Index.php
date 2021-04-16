@@ -29,7 +29,7 @@ class Index extends CustomComponent
 
     public function create()
     {
-        return redirect()->route('suppliers-create');
+        return redirect()->route('products-create');
     }
 
     public function render()

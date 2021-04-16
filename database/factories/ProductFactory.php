@@ -24,7 +24,7 @@ class ProductFactory extends Factory
         $cost = rand(50, 200);
         $srp  = rand(500, 2000);
 
-        $markup = ($srp / $cost) * 100;
+        $markup = (($srp - $cost) / $cost) * 100;
 
         return [     
             'avatar'            => $this->faker->imageUrl(600,480),
