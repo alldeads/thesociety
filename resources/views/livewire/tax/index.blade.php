@@ -88,6 +88,6 @@
 	</div>
 </div>
 
-@livewire('chart-of-account.create', ['company_id' => $company_id])
+@livewire('tax.create', ['company_id' => $company_id])
 @livewire('chart-of-account.edit', ['company_id' => $company_id])
 @livewire('tax.delete', ['company_id' => $company_id])
