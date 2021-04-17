@@ -12,7 +12,7 @@
 		            	@endcan
 
 		            	<div class="btn-group" wire:ignore>
-		            		@can('employee.export')
+		            		@can('chart.export')
 			              		<button type="button" class="btn btn-outline-primary ml-2 dropdown-toggle rounded" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 			              			<i data-feather="share" class="mr-25"></i>
 			              			<span>Export</span>

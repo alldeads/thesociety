@@ -19,6 +19,7 @@ class CreateTaxesTable extends Migration
             $table->string('name');
             $table->decimal('fixed_rate', 12, 2)->nullable();
             $table->decimal('percentage', 12, 2)->nullable();
+            $table->softDeletes();
             $table->timestamps();
         });
     }
