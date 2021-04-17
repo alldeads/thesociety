@@ -19,6 +19,8 @@ class Tax extends Model
         'company_id',
         'name',
         'fixed_rate',
-        'percentage'
+        'percentage',
+        'created_by',
+        'updated_by',
     ];
 }

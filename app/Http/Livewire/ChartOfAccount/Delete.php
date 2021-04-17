@@ -2,7 +2,6 @@
 
 namespace App\Http\Livewire\ChartOfAccount;
 
-use Livewire\Component;
 use App\Http\Livewire\CustomComponent;
 
 use App\Models\CompanyChartAccount;
