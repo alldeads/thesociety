@@ -66,15 +66,15 @@ class MenuSeeder extends Seeder
             'permission' => 'cashflow.view'
         ]);
 
-        // $header->menus()->create([
-        //     'name'       => 'Tax',
-        //     'slug'       => 'accounting/tax',
-        //     'url'        => 'home',
-        //     'icon'       => 'percent',
-        //     'base'       => 'dashboard',
-        //     'is_export'  => false,
-        //     'permission' => 'dashboard.view'
-        // ]);
+        $header->menus()->create([
+            'name'       => 'Tax',
+            'slug'       => 'tax',
+            'url'        => 'accounting/tax',
+            'icon'       => 'percent',
+            'base'       => 'tax',
+            'is_export'  => false,
+            'permission' => 'tax.view'
+        ]);
 
         // $header->menus()->create([
         // 	'name'  => 'Ledger',

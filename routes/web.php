@@ -13,6 +13,7 @@ use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\SupplyController;
+use App\Http\Controllers\TaxController;
 
 
 Auth::routes(['register' => false]);
@@ -68,6 +69,7 @@ Route::middleware('auth')->group(function() {
 	Route::prefix('accounting')->group( function() {
 		Route::get('chart-of-accounts', [ChartOfAccountController::class, 'index'])->name('chart-of-accounts');
 		Route::get('cash-flow', [CashFlowController::class, 'index'])->name('cash-flow');
+		Route::get('tax', [TaxController::class, 'index'])->name('tax');
 	});
 
 	Route::prefix('roles')->group( function() {
