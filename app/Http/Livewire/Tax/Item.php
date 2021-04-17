@@ -8,9 +8,18 @@ class Item extends Component
 {
 	public $item;
 
+	public $listeners = [
+        'refreshTax' => '$refresh'
+    ];
+
 	public function delete()
 	{
 		$this->emit('deleteTaxItem', ['item' => $this->item]);
+	}
+
+	public function edit()
+	{
+		$this->emit('editTaxItem', ['item' => $this->item]);
 	}
 
     public function render()
