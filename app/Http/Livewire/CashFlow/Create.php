@@ -4,6 +4,7 @@ namespace App\Http\Livewire\CashFlow;
 
 use App\Http\Livewire\CustomComponent;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Storage;
 
 use App\Models\ChartType;
 use App\Models\User;
@@ -46,7 +47,7 @@ class Create extends CustomComponent
         $attachment = "";
 
         if ( isset($this->inputs['attachment']) ) {
-        	$attachment = $this->inputs['attachment']->store('attachments');
+            $attachment = Storage::url($this->inputs['attachment']->store('attachments'));
         }
 
         $cashflow = CashFlow::getCompanyLastEntry($this->company_id);

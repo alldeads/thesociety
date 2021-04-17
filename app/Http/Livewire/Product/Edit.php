@@ -13,6 +13,8 @@ use App\Models\Product;
 
 class Edit extends CustomComponent
 {
+	use WithFileUploads;
+	
 	public $company_id;
 	public $product;
 	public $inputs;

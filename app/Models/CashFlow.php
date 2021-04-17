@@ -17,6 +17,8 @@ class CashFlow extends Model
      */
     protected $fillable = [
         'account_type_id',
+        'attachment',
+        'notes',
         'payor',
         'amount',
         'debit',

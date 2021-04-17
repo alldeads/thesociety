@@ -13,8 +13,6 @@ use App\Models\Product;
 
 class Create extends CustomComponent
 {
-	use WithFileUploads;
-
 	public $company_id;
 
 	public $mark_up;
