@@ -13,7 +13,7 @@
 
 	<td>{{ $item->created_at->format('F j, Y') }}</td>
 
-	@if( auth()->user()->can('purchase_order.update') || auth()->user()->can('purchase_order.delete') )
+	{{-- @if( auth()->user()->can('purchase_order.update') || auth()->user()->can('purchase_order.delete') )
 		<td>
 		    @if ($item->status->name != "approved")
 		    	@can('purchase_order.update')
@@ -41,5 +41,5 @@
 				</span>
 		    @endcan
 		</td>
-	@endif
+	@endif --}}
 </tr>
