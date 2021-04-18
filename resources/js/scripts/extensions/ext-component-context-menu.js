@@ -1,12 +1,3 @@
-/*=========================================================================================
-    File Name: ext-component-context-menu.js
-    Description: Context Menu
-    --------------------------------------------------------------------------------------
-    Item Name: Vuexy  - Vuejs, HTML & Laravel Admin Dashboard Template
-    Author: PIXINVENT
-    Author URL: http://www.themeforest.net/user/pixinvent
-==========================================================================================*/
-
 'use strict';
 
 var isRtl = $('html').attr('data-textdirection') === 'rtl';

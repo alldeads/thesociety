@@ -94,6 +94,7 @@ class CompanyController extends AdminController
         $form = new Form(new Company());
 
         $form->text('name', __('Name'));
+        $form->text('first_name', __('First Name'));
         $form->email('email', __('Email'));
         $form->mobile('phone', __('Phone'));
         $form->text('fax', __('Fax'));
@@ -125,7 +126,7 @@ class CompanyController extends AdminController
                 ]);
 
                 Profile::create([
-                    'user_id' => $user->id
+                    'user_id'    => $user->id
                 ]);
 
                 $role = CompanyRole::create([
