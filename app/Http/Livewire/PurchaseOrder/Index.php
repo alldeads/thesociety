@@ -38,7 +38,10 @@ class Index extends CustomComponent
 
     	$results = PurchaseOrder::where('company_id', $this->company_id)
     				->where( function (Builder $query) use ($search) {
-		                return $query->where('reference', 'like', "%". $search . "%");
+		                return $query->where('reference', 'like', "%". $search . "%")
+		                	->orWhereHas('status', function($query) use ($search) {
+                                return $query->where('name', 'like', "%" . $search ."%");
+                            });
 		            })->orderBy('id', 'desc')->paginate($this->limit);
                         
         return view('livewire.purchase-order.index', [

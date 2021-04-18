@@ -59,6 +59,7 @@
 			  			<thead>
 							<tr>
 								<th>P.O #</th>
+								<th>Quantity</th>
 								<th>Total</th>
 								<th>Status</th>
 								<th>Created At</th>
@@ -69,7 +70,7 @@
 			  			</thead>
 			  			<tbody>
 				  			@foreach($results as $result)
-				  				{{-- @livewire('purchase_order.item', ['item' => $result], key($result->id)) --}}
+				  				@livewire('purchase-order.item', ['item' => $result], key($result->id))
 				  			@endforeach
 			  			</tbody>
 					</table>

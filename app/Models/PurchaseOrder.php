@@ -24,14 +24,47 @@ class PurchaseOrder extends Model
         'fob',
         'notes',
         'sub_total',
+        'quantity',
         'discount',
         'shipping',
+        'status_id',
         'tax',
         'delivery_date',
         'updated_by',
         'created_by',
+        'approved_by',
         'total'
     ];
+
+    public function company()
+    {
+        return $this->belongsTo(Company::class);
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function user_created()
+    {
+        return $this->belongsTo(User::class, 'created_by', 'id');
+    }
+
+    public function user_updated()
+    {
+        return $this->belongsTo(User::class, 'updated_by', 'id');
+    }
+
+    public function user_approved()
+    {
+        return $this->belongsTo(User::class, 'approved_by', 'id');
+    }
+
+    public function status()
+    {
+        return $this->belongsTo(Status::class);
+    }
 
     public function items()
     {
