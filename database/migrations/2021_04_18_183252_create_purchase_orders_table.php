@@ -28,6 +28,8 @@ class CreatePurchaseOrdersTable extends Migration
             $table->decimal('shipping', 12, 2);
             $table->decimal('tax', 12, 2)->default(0);
             $table->date('delivery_date')->nullable();
+            $table->bigInteger('status_id')->nullable();
+            $table->bigInteger('approved_by')->nullable()->unsigned();
             $table->bigInteger('updated_by')->nullable()->unsigned();
             $table->bigInteger('created_by')->nullable()->unsigned();
             $table->softDeletes();

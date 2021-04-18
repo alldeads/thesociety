@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 
 use App\Models\Company;
+use App\Models\Status;
 use App\Models\PurchaseOrder;
 use App\Models\PurchaseOrderItem;
 
@@ -18,6 +19,7 @@ class PurchaseOrderSeeder extends Seeder
     public function run()
     {
         $companies = Company::all();
+        $status    = Status::where('is_purchase_order', true)->get();
 
         $ship_via = ['ups', 'lbc', 'ap', 'fedex'];
         $method   = ['truck', 'air freight', 'rail freight'];
@@ -49,7 +51,8 @@ class PurchaseOrderSeeder extends Seeder
         		'total'      => $total,
         		'tax'        => $tax,
         		'discount'   => $disc,
-        		'shipping'   => $handling
+        		'shipping'   => $handling,
+        		'status_id'  => $status->random(1)->first()->id
         	]);
         }
     }

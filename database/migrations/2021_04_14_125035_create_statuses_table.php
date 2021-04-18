@@ -17,7 +17,11 @@ class CreateStatusesTable extends Migration
             $table->id();
             $table->string('name');
             $table->string('color');
+            $table->boolean('is_purchase_order')->default(false);
             $table->boolean('is_custom')->default(false);
+            $table->boolean('is_product')->default(true);
+            $table->boolean('is_supplier')->default(true);
+            $table->boolean('is_customer')->default(true);
             $table->timestamps();
         });
     }

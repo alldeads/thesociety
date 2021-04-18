@@ -14,7 +14,7 @@ use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\SupplyController;
 use App\Http\Controllers\TaxController;
-
+use App\Http\Controllers\PurchaseOrderController;
 
 Auth::routes(['register' => false]);
 
@@ -63,6 +63,13 @@ Route::middleware('auth')->group(function() {
 			Route::get('create', [SupplierController::class, 'create'])->name('suppliers-create');
 			Route::get('view/{supplier}', [SupplierController::class, 'view'])->name('suppliers-read');
 			Route::get('edit/{supplier}', [SupplierController::class, 'edit'])->name('suppliers-edit');
+		});
+
+		Route::prefix('purchase-orders')->group( function() {
+			Route::get('view', [PurchaseOrderController::class, 'index'])->name('purchase-orders-view');
+			// Route::get('create', [SupplierController::class, 'create'])->name('suppliers-create');
+			// Route::get('view/{supplier}', [SupplierController::class, 'view'])->name('suppliers-read');
+			// Route::get('edit/{supplier}', [SupplierController::class, 'edit'])->name('suppliers-edit');
 		});
 	});
 

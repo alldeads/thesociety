@@ -101,7 +101,7 @@ class MenuSeeder extends Seeder
         $header->menus()->create([
             'name'       => 'Purchase Orders',
             'slug'       => 'purchase-orders',
-            'url'        => 'inventory/purchase-orders',
+            'url'        => 'inventory/purchase-orders/view',
             'base'       => 'purchase_order',
             'is_export'  => true,
             'icon'       => 'clipboard',

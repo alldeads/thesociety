@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 
 use App\Models\Status;
+use App\Models\PurchaseOrderStatus;
 
 class StatusSeeder extends Seeder
 {
@@ -18,6 +19,54 @@ class StatusSeeder extends Seeder
         Status::create([
         	'name'  => 'new',
         	'color' => 'success'
+        ]);
+
+        Status::create([
+            'name'  => 'approved',
+            'color' => 'success',
+            'is_purchase_order' => true
+        ]);
+
+        Status::create([
+            'name'  => 'closed',
+            'color' => 'danger',
+            'is_purchase_order' => true
+        ]);
+
+        Status::create([
+            'name'  => 'cancelled',
+            'color' => 'warning',
+            'is_purchase_order' => true
+        ]);
+
+        Status::create([
+            'name'  => 'hold',
+            'color' => 'info',
+            'is_purchase_order' => true
+        ]);
+
+        Status::create([
+            'name'  => 'in progress',
+            'color' => 'primary',
+            'is_purchase_order' => true
+        ]);
+
+        Status::create([
+            'name'  => 'pending',
+            'color' => 'secondary',
+            'is_purchase_order' => true
+        ]);
+
+        Status::create([
+            'name'  => 'revised',
+            'color' => 'info',
+            'is_purchase_order' => true
+        ]);
+
+        Status::create([
+            'name'  => 'waiting for approval',
+            'color' => 'primary',
+            'is_purchase_order' => true
         ]);
 
         Status::create([
