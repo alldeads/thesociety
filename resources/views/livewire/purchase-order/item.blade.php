@@ -9,6 +9,8 @@
 		</span>
 	</td>
 
+	<td>{{ $item->user_approved->profile->name }}</td>
+
 	<td>{{ $item->created_at->format('F j, Y') }}</td>
 
 	@if( auth()->user()->can('purchase_order.update') || auth()->user()->can('purchase_order.delete') )

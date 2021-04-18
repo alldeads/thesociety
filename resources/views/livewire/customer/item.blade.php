@@ -5,7 +5,7 @@
 
 	<td>
 		<span class="badge badge-pill  badge-light-{{ $item->status->color }}">
-			{{ $item->status->name }}
+			{{ ucwords($item->status->name) }}
 		</span>
 	</td>
 

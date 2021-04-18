@@ -53,7 +53,8 @@ class PurchaseOrderSeeder extends Seeder
                     'tax'        => $tax,
                     'discount'   => $disc,
                     'shipping'   => $handling,
-                    'status_id'  => $status->random(1)->first()->id
+                    'status_id'  => $status->random(1)->first()->id,
+                    'approved_by'=> 1
                 ]);
             }
         }

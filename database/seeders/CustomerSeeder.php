@@ -21,7 +21,7 @@ class CustomerSeeder extends Seeder
     public function run()
     {
         $companies = Company::all();
-        $statuses  = Status::all();
+        $statuses  = Status::where('is_customer', true)->get();
 
         foreach ($companies as $company) {
         	for ( $i = 0; $i < rand(10,20); $i++) { 
