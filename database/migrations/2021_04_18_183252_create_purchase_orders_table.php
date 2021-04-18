@@ -23,9 +23,10 @@ class CreatePurchaseOrdersTable extends Migration
             $table->string('fob')->nullable();
             $table->text('notes')->nullable();
             $table->decimal('sub_total', 12, 2);
-            $table->decimal('discount', 12, 2);
+            $table->decimal('total', 12, 2);
+            $table->decimal('discount', 12, 2)->default(0);
             $table->decimal('shipping', 12, 2);
-            $table->decimal('tax', 12, 2);
+            $table->decimal('tax', 12, 2)->default(0);
             $table->date('delivery_date')->nullable();
             $table->bigInteger('updated_by')->nullable()->unsigned();
             $table->bigInteger('created_by')->nullable()->unsigned();

@@ -1,0 +1,56 @@
+<?php
+
+namespace Database\Seeders;
+
+use Illuminate\Database\Seeder;
+
+use App\Models\Company;
+use App\Models\PurchaseOrder;
+use App\Models\PurchaseOrderItem;
+
+class PurchaseOrderSeeder extends Seeder
+{
+    /**
+     * Run the database seeds.
+     *
+     * @return void
+     */
+    public function run()
+    {
+        $companies = Company::all();
+
+        $ship_via = ['ups', 'lbc', 'ap', 'fedex'];
+        $method   = ['truck', 'air freight', 'rail freight'];
+
+        foreach ($companies as $company) {
+
+        	$tax   = rand(1, 20) / 100;
+        	$total = rand(5000, 9999);
+        	$sub   = $total;
+        	$disc  = rand(10, 30) / 100;
+
+        	$x = ($total * $disc);
+        	$total -= $x;
+
+        	$y =  ($total * $tax);
+        	$total += $y;
+
+        	$handling = rand(50, 200);
+
+        	$total += $handling;
+
+        	PurchaseOrder::create([
+        		'reference'  => mt_rand( 1000000000, 9999999999 ),
+        		'company_id' => $company->id,
+        		'ship_via'   => $ship_via[rand(0,3)],
+        		'shipping_method' => $ship_via[rand(0,3)],
+        		'notes'      => 'Payment first',
+        		'sub_total'  => $sub,
+        		'total'      => $total,
+        		'tax'        => $tax,
+        		'discount'   => $disc,
+        		'shipping'   => $handling
+        	]);
+        }
+    }
+}
