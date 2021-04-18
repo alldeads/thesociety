@@ -9,12 +9,11 @@
 
 @section('page-style')
 	<link rel="stylesheet" href="{{ asset(mix('css/base/plugins/charts/chart-apex.css')) }}">
-	<link rel="stylesheet" href="{{ asset(mix('css/base/pages/app-invoice-list.css')) }}">
 	<link rel="stylesheet" href="{{ asset(mix('css/base/pages/app-user.css')) }}">
 @endsection
 
 @section('content')
-	@livewire('company.details')
+	@livewire('company.details', ['company' => $company])
 @endsection
 
 @section('vendor-script')

@@ -49,6 +49,16 @@ class Product extends Model
     	return Product::generate_sku();
     }
 
+    public function scopeProduct($query)
+    {
+        $query->where('type', 'product');
+    }
+
+    public function scopeSupply($query)
+    {
+        $query->where('type', 'supply');
+    }
+
     public function user_created()
     {
         return $this->belongsTo(User::class, 'created_by', 'id');

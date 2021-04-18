@@ -15,7 +15,7 @@
 @endsection
 
 @section('content')
-	@livewire('company.edit')
+	@livewire('company.edit', ['company' => $company])
 @endsection
 
 @section('vendor-script')

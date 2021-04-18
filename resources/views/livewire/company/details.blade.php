@@ -151,7 +151,7 @@
                             <i data-feather="map-pin" class="font-medium-5"></i>
                         </div>
                     </div>
-                    <h2 class="font-weight-bolder mt-1">38</h2>
+                    <h2 class="font-weight-bolder mt-1">{{ $branches }}</h2>
                     <p class="card-text">Branches</p>
                 </div>
                 <div id="branch-chart"></div>
@@ -164,10 +164,10 @@
                 <div class="card-header flex-column align-items-start pb-0">
                     <div class="avatar bg-light-warning p-50 m-0">
                         <div class="avatar-content">
-                            <i data-feather="package" class="font-medium-5"></i>
+                            <i data-feather="shopping-bag" class="font-medium-5"></i>
                         </div>
                     </div>
-                    <h2 class="font-weight-bolder mt-1">68</h2>
+                    <h2 class="font-weight-bolder mt-1">{{ $products }}</h2>
                     <p class="card-text">Products</p>
                 </div>
                 <div id="product-chart"></div>
@@ -180,10 +180,10 @@
                 <div class="card-header flex-column align-items-start pb-0">
                     <div class="avatar bg-light-warning p-50 m-0">
                         <div class="avatar-content">
-                            <i data-feather="layers" class="font-medium-5"></i>
+                            <i data-feather="package" class="font-medium-5"></i>
                         </div>
                     </div>
-                    <h2 class="font-weight-bolder mt-1">150</h2>
+                    <h2 class="font-weight-bolder mt-1">{{ $supplies }}</h2>
                     <p class="card-text">Supplies</p>
                 </div>
                 <div id="supply-chart"></div>

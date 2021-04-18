@@ -15,31 +15,27 @@ class Edit extends CustomComponent
 
 	public function mount()
 	{
-		if ( auth()->user()->empCard ) {
-			$this->company = auth()->user()->empCard->company;
-
-			$this->inputs = [
-				'name'            => $this->company->name,
-				'email'           => $this->company->email,
-				'phone'           => $this->company->phone,
-				'fax'             => $this->company->fax,
-				'bir'             => $this->company->bir,
-				'dti'             => $this->company->dti,
-				'sss'             => $this->company->sss,
-				'business_permit' => $this->company->business_permit,
-				'state'           => $this->company->state,
-				'street'          => $this->company->street,
-				'address_line_2'  => $this->company->address_line_2,
-				'city'            => $this->company->city,
-				'postal'          => $this->company->postal,
-				'facebook'        => $this->company->facebook,
-				'twitter'         => $this->company->twitter,
-				'instagram'       => $this->company->instagram,
-				'linkedin'        => $this->company->linkedin,
-				'pinterest'       => $this->company->pinterest,
-				'youtube'         => $this->company->youtube,
-			];
-		}
+		$this->inputs = [
+			'name'            => $this->company->name,
+			'email'           => $this->company->email,
+			'phone'           => $this->company->phone,
+			'fax'             => $this->company->fax,
+			'bir'             => $this->company->bir,
+			'dti'             => $this->company->dti,
+			'sss'             => $this->company->sss,
+			'business_permit' => $this->company->business_permit,
+			'state'           => $this->company->state,
+			'street'          => $this->company->street,
+			'address_line_2'  => $this->company->address_line_2,
+			'city'            => $this->company->city,
+			'postal'          => $this->company->postal,
+			'facebook'        => $this->company->facebook,
+			'twitter'         => $this->company->twitter,
+			'instagram'       => $this->company->instagram,
+			'linkedin'        => $this->company->linkedin,
+			'pinterest'       => $this->company->pinterest,
+			'youtube'         => $this->company->youtube,
+		];
 	}
 
 	public function save()

@@ -18,8 +18,13 @@ class CompanyController extends Controller
 	        ['name'=>"Company Details"],
 	    ];
 
+	    $company = Company::findOrFail(auth()->user()->empCard->company_id);
+
 		if ( $response->allowed() ) {
-		    return view('company.details', ['breadcrumbs' => $breadcrumbs]);
+		    return view('company.details', [
+		    	'breadcrumbs' => $breadcrumbs,
+		    	'company'     => $company
+		    ]);
 		} else {
 		    return view('misc.not-authorized');
 		}
@@ -35,8 +40,13 @@ class CompanyController extends Controller
 	        ['name'=>"Edit"], 
 	    ];
 
+	    $company = Company::findOrFail(auth()->user()->empCard->company_id);
+
 		if ( $response->allowed() ) {
-		    return view('company.edit', ['breadcrumbs' => $breadcrumbs]);
+		    return view('company.edit', [
+		    	'breadcrumbs' => $breadcrumbs,
+		    	'company'     => $company
+		    ]);
 		} else {
 		    return view('misc.not-authorized');
 		}

@@ -50,4 +50,9 @@ class Company extends Model
     {
         return $this->hasMany(CompanyChartAccount::class);
     }
+
+    public function products()
+    {
+        return $this->hasMany(Product::class);
+    }
 }
