@@ -102,20 +102,23 @@
 	  		<div class="card plan-card border-primary">
 				<div class="card-header d-flex justify-content-between align-items-center pt-75 pb-1">
 		  			<h5 class="mb-0">Current Plan</h5>
-	  				<span class="badge badge-light-secondary" data-toggle="tooltip" data-placement="top" title="Expiry Date">July 22, <span class="nextYear"></span>
+	  				<span class="badge badge-light-secondary" data-toggle="tooltip" data-placement="top" title="Expiry Date">May 20, <span class="nextYear"></span>
 	  				</span>
 				</div>
 				<div class="card-body">
-		  			<div class="badge badge-light-primary">Basic</div>
+		  			<div class="badge badge-light-primary">Platinum</div>
 	  				<ul class="list-unstyled my-1">
 						<li>
-		  					<span class="align-middle">5 Users</span>
+		  					<span class="align-middle">25 User(s)</span>
 						</li>
 						<li class="my-25">
-		  					<span class="align-middle">10 GB storage</span>
+		  					<span class="align-middle">Unlimited storage</span>
+						</li>
+						<li class="my-25">
+		  					<span class="align-middle">15 features</span>
 						</li>
 						<li>
-		  					<span class="align-middle">Basic Support</span>
+		  					<span class="align-middle">Premium Support</span>
 						</li>
 	  				</ul>
 	  				<button class="btn btn-primary text-center btn-block">Upgrade Plan</button>
