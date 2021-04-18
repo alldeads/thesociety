@@ -94,7 +94,6 @@ class CompanyController extends AdminController
         $form = new Form(new Company());
 
         $form->text('name', __('Name'));
-        $form->text('first_name', __('First Name'));
         $form->email('email', __('Email'));
         $form->mobile('phone', __('Phone'));
         $form->text('fax', __('Fax'));
