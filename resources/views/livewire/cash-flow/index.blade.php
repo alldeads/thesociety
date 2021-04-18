@@ -87,15 +87,16 @@
 				  			@foreach($results as $result)
 				  				@livewire('cash-flow.item', ['item' => $result], key($result->id))
 				  			@endforeach
-
-				  			@if( count($results->items()) == 0 )
-				  				<tr class="text-center">
-				  					<td colspan="8"> No items found.</td>
-				  				</tr>
-				  			@endif
 			  			</tbody>
 					</table>
 		  		</div>
+
+		  		@if( count($results->items()) == 0 )
+			  		<div class="m-auto p-2">
+					  	<p>No Items Found.</p>
+			  		</div>
+		  		@endif
+		  		
 		  		<div class="m-auto">
 		  			{{ $results->links() }}
 		  		</div>
