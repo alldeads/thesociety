@@ -397,6 +397,19 @@ return [
     'extensions' => [
         'material-ui' => [
             'enable' => true
+        ],
+        'data-table' => [
+            // If the value is set to false, this extension will be disabled
+            'enable' => true,
+            // global options
+            'options' => [
+                 'paging' => true,
+                 'lengthChange' => false,
+                 'searching' => true,
+                 'ordering' => false,
+                 'info' => false,
+                 'language' => 'English', // or Chinese
+            ]
         ]
     ],
 ];
