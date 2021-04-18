@@ -22,7 +22,7 @@ class Create extends CustomComponent
 
 	public function mount()
 	{
-		$this->statuses = Status::all();
+		$this->statuses = Status::where('is_supplier', true)->get();
 	}
 
 	public function submit()

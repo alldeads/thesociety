@@ -20,7 +20,7 @@ class SupplierSeeder extends Seeder
     public function run()
     {
         $companies = Company::all();
-        $statuses  = Status::all();
+        $statuses  = Status::where('is_supplier', true)->get();
 
         foreach ($companies as $company) {
         	for ( $i = 0; $i < rand(10,20); $i++) { 

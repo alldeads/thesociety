@@ -26,12 +26,14 @@ class StatusSeeder extends Seeder
             'color' => 'success',
             'is_purchase_order' => true,
             'is_customer' => false,
+            'is_supplier' => false,
         ]);
 
         Status::create([
             'name'  => 'closed',
             'color' => 'danger',
             'is_customer' => false,
+            'is_supplier' => false,
             'is_purchase_order' => true
         ]);
 
@@ -39,6 +41,7 @@ class StatusSeeder extends Seeder
             'name'  => 'cancelled',
             'color' => 'warning',
             'is_customer' => false,
+            'is_supplier' => false,
             'is_purchase_order' => true
         ]);
 
@@ -46,6 +49,7 @@ class StatusSeeder extends Seeder
             'name'  => 'hold',
             'color' => 'info',
             'is_customer' => false,
+            'is_supplier' => false,
             'is_purchase_order' => true
         ]);
 
@@ -53,6 +57,7 @@ class StatusSeeder extends Seeder
             'name'  => 'in progress',
             'color' => 'primary',
             'is_customer' => false,
+            'is_supplier' => false,
             'is_purchase_order' => true
         ]);
 
@@ -60,6 +65,7 @@ class StatusSeeder extends Seeder
             'name'  => 'pending',
             'color' => 'secondary',
             'is_customer' => false,
+            'is_supplier' => false,
             'is_purchase_order' => true
         ]);
 
@@ -67,6 +73,7 @@ class StatusSeeder extends Seeder
             'name'  => 'revised',
             'color' => 'info',
             'is_customer' => false,
+            'is_supplier' => false,
             'is_purchase_order' => true
         ]);
 
@@ -74,6 +81,7 @@ class StatusSeeder extends Seeder
             'name'  => 'waiting for approval',
             'color' => 'primary',
             'is_customer' => false,
+            'is_supplier' => false,
             'is_purchase_order' => true
         ]);
 
