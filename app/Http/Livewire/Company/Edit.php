@@ -5,6 +5,7 @@ namespace App\Http\Livewire\Company;
 use App\Http\Livewire\CustomComponent;
 
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Storage;
 
 use App\Models\Company;
 
@@ -42,6 +43,7 @@ class Edit extends CustomComponent
 	{
 		Validator::make($this->inputs, [
             'name'            => ['required', 'string', 'max:255'],
+            'avatar'          => ['nullable', 'image'],
             'email'           => ['required', 'email'],
             'phone'           => ['required'],
             'fax'             => ['nullable'],
@@ -65,6 +67,11 @@ class Edit extends CustomComponent
         try {
 
         	$company = Company::find($this->company->id);
+
+        	if ( isset($this->inputs['avatar']) ) {
+	        	$path = Storage::url($this->inputs['avatar']->store('logos'));
+	        	$this->inputs['avatar'] = $path;
+	        }
 
 			$company->fill($this->inputs);
 			$company->save();

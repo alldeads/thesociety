@@ -85,6 +85,16 @@
 						<label class="form-label" for="vertical-email">Fax No.</label>
 						<input type="text" id="vertical-email" class="form-control" placeholder="Enter Company Fax" wire:model="inputs.fax"/>
 		  			</div>
+
+		  			<div class="form-group col-md-6">
+						<label class="form-label" for="avatar">
+							<img class="img-fluid rounded"
+								src="{{ $company->avatar ?? '' }}"
+								width="150"
+								alt="Company logo"/>
+						</label>
+						<input type="file" id="avatar" class="form-control" wire:model="inputs.avatar"/>
+		  			</div>
 				</div>
 
 				<div class="d-flex justify-content-between">

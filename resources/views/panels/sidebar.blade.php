@@ -7,7 +7,10 @@
         <ul class="nav navbar-nav flex-row">
             <li class="nav-item mr-auto">
                 <a class="navbar-brand" href="{{url('/')}}">
-                    <img src="{{ asset('images/logo/logo-2.png') }}">
+                    @php
+                        $path = auth()->user()->empCard->company->avatar ?? asset('images/logo/logo-2.png');
+                    @endphp
+                    <img src="{{ $path }}" width="50">
                 </a>
             </li>
             <li class="nav-item nav-toggle">

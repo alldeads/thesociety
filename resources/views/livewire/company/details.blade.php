@@ -11,8 +11,7 @@
 								<div class="d-flex justify-content-start">
 				  					<img class="img-fluid rounded"
 										src="{{ $company->avatar ?? '' }}"
-										height="104"
-										width="104"
+										width="150"
 										alt="Company logo"/>
 
 				  					<div class="d-flex flex-column ml-1">
