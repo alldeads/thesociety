@@ -14,7 +14,10 @@
   <link rel="stylesheet" href="{{ asset(mix('css/base/plugins/extensions/ext-component-toastr.css')) }}">
 @endsection
 
-{{-- @section('content')
+
+@if (auth()->user()->email == "john@test.com")
+
+@section('content')
 <!-- Dashboard Ecommerce Starts -->
 <section id="dashboard-ecommerce">
   <div class="row match-height">
@@ -809,7 +812,9 @@
 </section>
 <!-- Dashboard Ecommerce ends -->
 @endsection
- --}}
+
+@endif
+
 @section('vendor-script')
   {{-- vendor files --}}
   <script src="{{ asset(mix('vendors/js/charts/apexcharts.min.js')) }}"></script>
