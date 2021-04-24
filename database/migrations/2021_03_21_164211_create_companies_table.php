@@ -24,11 +24,12 @@ class CreateCompaniesTable extends Migration
             $table->string('dti')->nullable();
             $table->string('sss')->nullable();
             $table->string('business_permit')->nullable();
-            $table->string('street')->nullable();
+            $table->string('address_line_1')->nullable();
             $table->string('address_line_2')->nullable();
             $table->string('city')->nullable();
             $table->string('state')->nullable();
             $table->string('postal')->nullable();
+            $table->string('country')->nullable();
             $table->string('facebook')->nullable();
             $table->string('twitter')->nullable();
             $table->string('instagram')->nullable();

@@ -90,5 +90,3 @@
 	  	</div>
 	</div>
 </div>
-
-@livewire('product.delete', ['company_id' => $company_id])

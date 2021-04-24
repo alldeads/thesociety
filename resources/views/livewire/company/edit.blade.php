@@ -159,8 +159,8 @@
 
 				<div class="row">
 		  			<div class="form-group col-md-6">
-						<label class="form-label" for="street">Street Address</label>
-						<input type="text" id="street" class="form-control" placeholder="Enter Street Address" wire:model="inputs.street" />
+						<label class="form-label" for="street">Address Line 1</label>
+						<input type="text" id="street" class="form-control" placeholder="Enter Address Line 1" wire:model="inputs.address_line_1" />
 		  			</div>
 
 		  			<div class="form-group col-md-6">
@@ -185,6 +185,11 @@
 		  			<div class="form-group col-md-6">
 						<label class="form-label" for="postal">Zip / Postal Code</label>
 						<input type="text" id="postal" class="form-control" placeholder="Enter Zip Code" wire:model="inputs.postal"/>
+		  			</div>
+
+		  			<div class="form-group col-md-6">
+						<label class="form-label" for="country">Country</label>
+						<input type="text" id="country" class="form-control" placeholder="Enter Country" wire:model="inputs.country"/>
 		  			</div>
 				</div>
 

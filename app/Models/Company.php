@@ -28,7 +28,8 @@ class Company extends Model
         'city',
         'address_line_2',
         'postal',
-        'street',
+        'country',
+        'address_line_1',
         'facebook',
         'instagram',
         'linkedin',
@@ -36,6 +37,22 @@ class Company extends Model
         'twitter',
         'pinterest',
     ];
+
+    public function getAddressAttribute()
+    {
+        $str = "";
+        $address = [];
+
+        if ( $this->address_line_2 ) {
+            $str .= $this->address_line_2 . ', ';
+        }
+
+        $address[0] = ucwords($str . $this->address_line_1);
+        $address[1] = ucwords($this->city . ', ' . $this->state);
+        $address[2] = ucwords($this->postal . ', ' . $this->country);
+
+        return $address;
+    }
 
     public function employees()
     {
