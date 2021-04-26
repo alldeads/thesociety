@@ -46,7 +46,7 @@ class Product extends Model
     		return $sku;
     	}
 
-    	return Product::generate_sku();
+    	return Product::generate_sku($company_id);
     }
 
     public function scopeProduct($query)

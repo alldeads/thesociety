@@ -21,21 +21,14 @@
 						</div>
 
 						<div class="invoice-number-date mt-md-0 mt-2" wire:ignore>
-			  				<div class="d-flex align-items-center justify-content-md-end mb-1">
-								<h4 class="invoice-title">P.O.</h4>
-								<div class="input-group input-group-merge invoice-edit-input-group">
-				  					<div class="input-group-prepend">
-										<div class="input-group-text">
-					  						<i data-feather="hash"></i>
-										</div>
-				  					</div>
-				  					<input type="text" class="form-control invoice-edit-input" placeholder="53634" />
-								</div>
-			  				</div>
+			  				<div class="d-flex align-items-center mb-1">
+				                <span class="title" style="font-weight: bold;">P.O:</span>
+				                <input type="text" class="form-control" wire:model="inputs.reference"/>
+				            </div>
 
 			  				<div class="d-flex align-items-center mb-1">
 								<span class="title">Date:</span>
-								<input type="text" class="form-control date-picker" />
+								<input type="date" class="form-control" wire:model="inputs.date" />
 			  				</div>
 						</div>
 		  			</div>
@@ -95,7 +88,7 @@
 
 					  						<div class="col-lg-3 col-12 my-lg-0 my-2">
 												<p class="card-text col-title mb-md-2 mb-0">Cost</p>
-												<input type="number" class="form-control" wire:model="inputs.items.{{ $key }}.cost"/>
+												<input type="number" class="form-control" wire:model="inputs.items.{{ $key }}.cost" readonly />
 					  						</div>
 
 					  						<div class="col-lg-2 col-12 my-lg-0 my-2">
@@ -105,7 +98,7 @@
 
 					  						<div class="col-lg-2 col-12 mt-lg-0 mt-2">
 												<p class="card-text col-title mb-md-50 mb-0">Price</p>
-												<input type="number" class="form-control" wire:model="inputs.items.{{ $key }}.price"/>
+												<input type="text" class="form-control" wire:model="inputs.items.{{ $key }}.price" readonly />
 					  						</div>
 										</div>
 
@@ -142,25 +135,39 @@
 						</div>
 
 						<div class="col-md-6 d-flex justify-content-end order-md-2 order-1">
-			  				<div class="invoice-total-wrapper">
-								<div class="invoice-total-item">
-									<p class="invoice-total-title">Subtotal:</p>
-									<p class="invoice-total-amount">{{ $inputs['subtotal'] }}</p>
-								</div>
-								<div class="invoice-total-item">
-									<p class="invoice-total-title">Discount:</p>
-									<p class="invoice-total-amount">{{ $inputs['subtotal'] }}</p>
-								</div>
-								<div class="invoice-total-item">
-									<p class="invoice-total-title">Tax:</p>
-									<p class="invoice-total-amount">21%</p>
-								</div>
-								<hr class="my-50" />
-								<div class="invoice-total-item">
-									<p class="invoice-total-title">Total:</p>
-									<p class="invoice-total-amount">$1690</p>
-								</div>
-			  				</div>
+
+							<table class="table">
+								<tr>
+									<td>Subtotal:</td>
+									<td>{{ $inputs['subtotal'] }}</td>
+								</tr>
+								<tr>
+									<td>Discount(%):</td>
+									<td><input type="number" class="form-control" wire:model="inputs.discount"/></td>
+								</tr>
+								<tr>
+									<td>Discount(Fixed):</td>
+									<td><input type="number" class="form-control" wire:model="inputs.fixed"/></td>
+								</tr>
+								<tr>
+									<td>Tax(%):</td>
+									<td>
+										<select class="form-control" wire:model="inputs.tax">
+											<option>Select tax</option>
+											
+											@foreach($taxes as $tax)
+												<option value="{{ $tax->percentage }}">
+													{{ $tax->name }}({{ $tax->percentage }}%)
+												</option>
+											@endforeach
+										</select>
+									</td>
+								</tr>
+								<tr>
+									<td>Total:</td>
+									<td>{{ $inputs['total'] }}</td>
+								</tr>
+							</table>
 						</div>
 		  			</div>
 				</div>
@@ -178,7 +185,7 @@
 		  			<button class="btn btn-primary btn-block mb-75" data-toggle="modal" data-target="#send-invoice-sidebar">
 						Send Purchase Order
 		  			</button>
-					<button type="button" class="btn btn-outline-primary btn-block mb-75">Save</button>
+					<button type="button" class="btn btn-outline-primary btn-block mb-75" wire:click="save">Save</button>
 					<button class="btn btn-success btn-block mb-75" data-toggle="modal" data-target="#add-payment-sidebar">
 						Add Payment
 		  			</button>

@@ -36,6 +36,21 @@ class PurchaseOrder extends Model
         'total'
     ];
 
+    public static function generate_reference($company_id)
+    {
+        $reference = mt_rand( 1000000000, 9999999999 );
+
+        $results = PurchaseOrder::where('reference', $reference)
+                        ->where('company_id', $company_id)
+                        ->first();
+
+        if ( !$results ) {
+            return $reference;
+        }
+
+        return PurchaseOrder::generate_reference($company_id);
+    }
+
     public function company()
     {
         return $this->belongsTo(Company::class);
