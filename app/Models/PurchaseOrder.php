@@ -17,8 +17,10 @@ class PurchaseOrder extends Model
      */
     protected $fillable = [
         'company_id',
+        'supplier_id',
         'reference',
         'ship_via',
+        'ship_to',
         'shipping_method',
         'shipping_terms',
         'fob',
@@ -26,10 +28,11 @@ class PurchaseOrder extends Model
         'sub_total',
         'quantity',
         'discount',
+        'fixed',
         'shipping',
         'status_id',
         'tax',
-        'delivery_date',
+        'purchase_date',
         'updated_by',
         'created_by',
         'approved_by',
@@ -54,6 +57,11 @@ class PurchaseOrder extends Model
     public function company()
     {
         return $this->belongsTo(Company::class);
+    }
+
+    public function supplier()
+    {
+        return $this->belongsTo(Supplier::class);
     }
 
     public function user()

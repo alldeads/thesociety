@@ -28,7 +28,7 @@
 
 			  				<div class="d-flex align-items-center mb-1">
 								<span class="title">Date:</span>
-								<input type="date" class="form-control" wire:model="inputs.date" />
+								<input type="date" class="form-control" wire:model="inputs.purchase_date" />
 			  				</div>
 						</div>
 		  			</div>
@@ -54,7 +54,7 @@
 
 						<div>
 			  				<h6 class="mb-2">Ship To:</h6>
-			  				<select class="form-control" wire:model="inputs.employee">
+			  				<select class="form-control" wire:model="inputs.ship_to">
 			  					<option>Select an employee</option>
 
 			  					@foreach($employees as $employee)
@@ -62,6 +62,28 @@
 			  					@endforeach
 			  				</select>
 						</div>
+		  			</div>
+
+		  			<hr>
+
+		  			<div class="row mt-3">
+		  				<div class="col-md-4 col-lg-4 col-xl-4 col-sm-12">
+		  					<h6 class="mb-2">Ship Via: </h6>
+
+			  				<input type="text" class="form-control" wire:model="inputs.ship_via"/>
+		  				</div>
+
+		  				<div class="col-md-4 col-lg-4 col-xl-4 col-sm-12">
+		  					<h6 class="mb-2">Shipping Method: </h6>
+
+			  				<input type="text" class="form-control" wire:model="inputs.shipping_method"/>
+		  				</div>
+
+		  				<div class="col-md-4 col-lg-4 col-xl-4 col-sm-12">
+		  					<h6 class="mb-2">Shipping Terms: </h6>
+
+			  				<input type="text" class="form-control" wire:model="inputs.shipping_terms"/>
+		  				</div>
 		  			</div>
 				</div>
 				<!-- Address and Contact ends -->
@@ -129,7 +151,7 @@
 		  			<div class="row invoice-sales-total-wrapper">
 						<div class="col-md-6 order-md-1 order-2 mt-md-0 mt-3">
 			  				<div class="d-flex align-items-center mb-1">
-								<label for="note" class="form-label font-weight-bold">Note:</label>
+								<label for="note" class="form-label font-weight-bold mr-2">Notes:</label>
 								<textarea class="form-control" rows="4" id="note" wire:model="inputs.notes"></textarea>
 			  				</div>
 						</div>
@@ -153,8 +175,7 @@
 									<td>Tax(%):</td>
 									<td>
 										<select class="form-control" wire:model="inputs.tax">
-											<option>Select tax</option>
-											
+											<option value="0">No tax</option>
 											@foreach($taxes as $tax)
 												<option value="{{ $tax->percentage }}">
 													{{ $tax->name }}({{ $tax->percentage }}%)
@@ -162,6 +183,14 @@
 											@endforeach
 										</select>
 									</td>
+								</tr>
+								<tr>
+									<td>Shipping(Fee):</td>
+									<td><input type="number" class="form-control" wire:model="inputs.fee"/></td>
+								</tr>
+								<tr>
+									<td>Total Discount:</td>
+									<td>{{ $inputs['discount_total'] }}</td>
 								</tr>
 								<tr>
 									<td>Total:</td>
@@ -195,7 +224,7 @@
 	  		<div class="mt-2">
 				<div class="invoice-terms mt-1">
 		  			<div class="d-flex justify-content-between">
-						<label class="invoice-terms-title mb-0" for="paymentTerms">Publish</label>
+						<label class="invoice-terms-title mb-0" for="paymentTerms">Pending</label>
 						<div class="custom-control custom-switch">
 							<input type="checkbox" class="custom-control-input" checked id="paymentTerms" />
 							<label class="custom-control-label" for="paymentTerms"></label>

@@ -1,5 +1,6 @@
 <tr>
 	<td>{{ $item->reference }}</td>
+	<td>{{ $item->supplier->user->profile->company }}</td>
 	<td>{{ number_format($item->quantity, 2, '.', ',') }}</td>
 	<td>{{ number_format($item->total, 2, '.', ',') }}</td>
 

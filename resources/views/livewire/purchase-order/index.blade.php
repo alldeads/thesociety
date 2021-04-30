@@ -59,6 +59,7 @@
 			  			<thead>
 							<tr>
 								<th>P.O #</th>
+								<th>Supplier</th>
 								<th>Quantity</th>
 								<th>Total</th>
 								<th>Status</th>

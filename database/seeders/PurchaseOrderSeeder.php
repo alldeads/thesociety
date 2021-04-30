@@ -6,6 +6,7 @@ use Illuminate\Database\Seeder;
 
 use App\Models\Company;
 use App\Models\Status;
+use App\Models\Supplier;
 use App\Models\PurchaseOrder;
 use App\Models\PurchaseOrderItem;
 
@@ -41,8 +42,11 @@ class PurchaseOrderSeeder extends Seeder
 
                 $total += $handling;
 
+                $suppliers = Supplier::where('company_id', $company->id)->get();
+
                 PurchaseOrder::create([
                     'reference'  => mt_rand( 1000000000, 9999999999 ),
+                    'supplier_id' => $suppliers->random()->id,
                     'company_id' => $company->id,
                     'ship_via'   => $ship_via[rand(0,3)],
                     'shipping_method' => $ship_via[rand(0,3)],
@@ -54,7 +58,8 @@ class PurchaseOrderSeeder extends Seeder
                     'discount'   => $disc,
                     'shipping'   => $handling,
                     'status_id'  => $status->random(1)->first()->id,
-                    'approved_by'=> 1
+                    'approved_by'=> 1,
+                    'created_by' => 1
                 ]);
             }
         }
