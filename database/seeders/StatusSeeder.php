@@ -22,6 +22,14 @@ class StatusSeeder extends Seeder
         ]);
 
         Status::create([
+            'name'  => 'draft',
+            'color' => 'secondary',
+            'is_purchase_order' => true,
+            'is_customer' => false,
+            'is_supplier' => false,
+        ]);
+
+        Status::create([
             'name'  => 'approved',
             'color' => 'success',
             'is_purchase_order' => true,

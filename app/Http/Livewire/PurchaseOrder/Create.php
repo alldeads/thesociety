@@ -13,6 +13,7 @@ use App\Models\Employee;
 use App\Models\Tax;
 use App\Models\Product;
 use App\Models\PurchaseOrder;
+use App\Models\PurchaseOrderItem;
 
 class Create extends CustomComponent
 {
@@ -79,6 +80,8 @@ class Create extends CustomComponent
 		unset($this->inputs['items'][$key]);
 
 		$this->inputs['items'] = array_values($this->inputs['items']);
+
+		$this->calculate();
 	}
 
 	public function updated($name, $value)
@@ -118,6 +121,11 @@ class Create extends CustomComponent
 			}
 		}
 
+		$this->calculate();
+	}
+
+	public function calculate()
+	{
 		$total = 0;
 		$sub_total = 0;
 
@@ -233,7 +241,7 @@ class Create extends CustomComponent
 				$total += $x;
 			}
 
-			PurchaseOrder::create([
+			$purchase = PurchaseOrder::create([
 				'company_id'    => $this->company->id,
 				'supplier_id'   => $this->inputs['supplier'],
 				'reference'     => $this->inputs['reference'],
@@ -255,6 +263,23 @@ class Create extends CustomComponent
 				'shipping_terms'  => $this->inputs['shipping_terms'] ?? null,
 				'notes'           => $this->inputs['notes'] ?? null,
 			]);
+
+			foreach ($this->inputs['items'] as $item) {
+
+				$product = Product::find($item['product']);
+
+				if ( !$product ) {
+					return $this->message('Item not found.', 'error');
+				}
+
+				PurchaseOrderItem::create([
+					'purchase_order_id' => $purchase->id,
+					'cost'       => $item['cost'],
+					'quantity'   => $item['qty'],
+					'product_id' => $product->id,
+					'name'       => $product->name,
+				]);
+			}
 
         	DB::commit();
 

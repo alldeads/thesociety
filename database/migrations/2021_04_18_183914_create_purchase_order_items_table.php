@@ -16,10 +16,10 @@ class CreatePurchaseOrderItemsTable extends Migration
         Schema::create('purchase_order_items', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('purchase_order_id')->unsigned();
-            $table->bigInteger('product_id')->unsigned();
+            $table->bigInteger('product_id')->nullable()->unsigned();
             $table->string('name');
-            $table->decimal('quantity', 12, 2);
-            $table->decimal('cost', 12, 2);
+            $table->decimal('quantity', 12, 2)->default(0);
+            $table->decimal('cost', 12, 2)->default(0);
             $table->timestamps();
         });
     }
