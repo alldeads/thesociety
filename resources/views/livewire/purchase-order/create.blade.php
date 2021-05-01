@@ -13,11 +13,11 @@
 									alt="Company logo"/>
 			  				</div>
 
-			  				<p class="card-text mb-25">{{ $company->address[0] }}</p>
-			  				<p class="card-text mb-25">{{ $company->address[1] }}</p>
-			  				<p class="card-text mb-25">{{ $company->address[2] }}</p>
-			  				<p class="card-text mb-0">{{ $company->phone }}</p>
-			  				<p class="card-text mb-0">{{ $company->email }}</p>
+			  				<p class="card-text mb-25">{{ $company->address[0] ?? "N/A" }}</p>
+			  				<p class="card-text mb-25">{{ $company->address[1] ?? "N/A" }}</p>
+			  				<p class="card-text mb-25">{{ $company->address[2] ?? "N/A" }}</p>
+			  				<p class="card-text mb-0">{{ $company->phone ?? "N/A" }}</p>
+			  				<p class="card-text mb-0">{{ $company->email ?? "N/A" }}</p>
 						</div>
 
 						<div class="invoice-number-date mt-md-0 mt-2" wire:ignore>

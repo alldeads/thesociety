@@ -65,9 +65,9 @@
 								<th>Status</th>
 								<th>Approved By</th>
 								<th>Created At</th>
-								{{-- @if( auth()->user()->can('purchase_order.update') || auth()->user()->can('purchase_order.delete') )
+								@if( auth()->user()->can('purchase_order.update') || auth()->user()->can('purchase_order.delete') )
 									<th>Actions</th>
-								@endif --}}
+								@endif
 							</tr>
 			  			</thead>
 			  			<tbody>

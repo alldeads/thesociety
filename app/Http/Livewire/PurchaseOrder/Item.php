@@ -26,6 +26,11 @@ class Item extends CustomComponent
 
 		$this->message('Success! Purchase Order has been approved.', 'success');
 	}
+
+	public function read()
+	{
+		return redirect()->route('purchase-orders-read', ['purchase' => $this->item->id]);
+	}
 	
     public function render()
     {

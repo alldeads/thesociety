@@ -74,6 +74,11 @@ class PurchaseOrder extends Model
         return $this->belongsTo(User::class, 'created_by', 'id');
     }
 
+    public function user_shipped()
+    {
+        return $this->belongsTo(User::class, 'ship_to', 'id');
+    }
+
     public function user_updated()
     {
         return $this->belongsTo(User::class, 'updated_by', 'id');
@@ -91,6 +96,6 @@ class PurchaseOrder extends Model
 
     public function items()
     {
-    	return $this->hasMany(PurchaseOrderItem::class, 'id', 'purchase_order_id');
+    	return $this->hasMany(PurchaseOrderItem::class, 'purchase_order_id');
     }
 }

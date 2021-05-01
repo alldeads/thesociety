@@ -25,6 +25,22 @@ class Supplier extends Model
         'status_id'
     ];
 
+    public function getAddressAttribute()
+    {
+        $str = "";
+        $address = [];
+
+        if ( $this->user->profile->address_line_2 ) {
+            $str .= $this->user->profile->address_line_2 . ', ';
+        }
+
+        $address[0] = ucwords($str . $this->user->profile->address_line_1);
+        $address[1] = ucwords($this->user->profile->city . ', ' . $this->user->profile->state);
+        $address[2] = ucwords($this->user->profile->postal . ', ' . $this->user->profile->country);
+
+        return $address;
+    }
+
     public function company()
     {
     	return $this->belongsTo(Company::class);
