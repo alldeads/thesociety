@@ -69,7 +69,7 @@ Route::middleware('auth')->group(function() {
 			Route::get('view', [PurchaseOrderController::class, 'index'])->name('purchase-orders-view');
 			Route::get('create', [PurchaseOrderController::class, 'create'])->name('purchase-orders-create');
 			Route::get('view/{purchase}', [PurchaseOrderController::class, 'view'])->name('purchase-orders-read');
-			// Route::get('edit/{supplier}', [SupplierController::class, 'edit'])->name('suppliers-edit');
+			Route::get('edit/{purchase}', [PurchaseOrderController::class, 'edit'])->name('purchase-orders-edit');
 		});
 	});
 

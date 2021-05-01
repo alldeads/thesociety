@@ -199,7 +199,9 @@
       				<a class="btn btn-outline-secondary btn-block mb-75" href="{{url('app/invoice/print')}}" target="_blank">
         				Print
       				</a>
-      				<a class="btn btn-outline-secondary btn-block mb-75" href="{{url('app/invoice/edit')}}"> Edit </a>
+      				<a class="btn btn-outline-secondary btn-block mb-75" href="{{ route('purchase-orders-edit', [
+      					'purchase' => $purchase
+      				]) }}"> Edit </a>
           			<button class="btn btn-success btn-block" data-toggle="modal" data-target="#add-payment-sidebar">
             			Add Payment
           			</button>

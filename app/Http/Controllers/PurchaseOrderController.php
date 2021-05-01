@@ -79,4 +79,31 @@ class PurchaseOrderController extends Controller
 		    return view('misc.not-authorized');
 		}
     }
+
+    public function edit(PurchaseOrder $purchase)
+    {
+    	$response = Gate::inspect('purchase_order.update');
+
+    	$company = Company::findOrFail(auth()->user()->empCard->company_id);
+
+    	if ( $purchase->company_id !== $company->id ) {
+    		return view('misc.not-authorized');
+    	}
+
+    	$breadcrumbs = [
+	        ['link'=> route('home'), 'name'=>"Dashboard"], 
+	        ['link'=> route('purchase-orders-view'), 'name'=>"Purchase Orders"],
+	        ['name'=> $purchase->reference],
+	    ];
+
+		if ( $response->allowed() ) {
+		    return view('purchase-order.edit', [
+		    	'breadcrumbs' => $breadcrumbs,
+		    	'company'     => $company,
+		    	'purchase'    => $purchase
+		    ]);
+		} else {
+		    return view('misc.not-authorized');
+		}
+    }
 }
