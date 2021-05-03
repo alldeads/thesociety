@@ -11,7 +11,7 @@
 	        	<div class="modal-body flex-grow-1">
 	          		<div class="form-group">	
 	            		<label class="form-label" for="basic-icon-cash-flow">Account Title</label>
-	            		<select class="form-control form-control-lg" id="basic-icon-cash-flow" wire:model="inputs.account_title">
+	            		<select class="form-control" id="basic-icon-cash-flow" wire:model="inputs.account_title">
 	            			<option> Select account</option>
 	            			@foreach($accounts as $account)
 	            				<option value="{{ $account->id }}"> {{ ucwords($account->chart_name) }}</option>
@@ -20,8 +20,23 @@
 	          		</div>
 
 	          		<div class="form-group">	
+	            		<label class="form-label" for="posting-date">Posting Date</label>
+	            		<input type="date" class="form-control" wire:model="inputs.posting">
+	          		</div>
+
+	          		<div class="form-group">	
+	            		<label class="form-label" for="account_number">Account Number (<em>optional</em>)</label>
+	            		<input type="number" wire:model="inputs.account_number" id="account_number" class="form-control">
+	          		</div>
+
+	          		<div class="form-group">	
+	            		<label class="form-label" for="check_no">Check No. (<em>optional</em>)</label>
+	            		<input type="number" wire:model="inputs.check_no" id="check_no" class="form-control">
+	          		</div>
+
+	          		<div class="form-group">	
 	            		<label class="form-label" for="basic-icon-cash-flow-type">Movement</label>
-	            		<select class="form-control form-control-lg" id="basic-icon-cash-flow-type" wire:model="inputs.movement">
+	            		<select class="form-control" id="basic-icon-cash-flow-type" wire:model="inputs.movement">
 	            			<option> Select movement</option>
 	            			<option value="cr"> Credit</option>
 	            			<option value="dr"> Debit</option>
@@ -43,6 +58,11 @@
 	            				@endif
 	            			@endforeach
               			</select>
+	          		</div>
+
+	          		<div class="form-group">	
+	            		<label class="form-label" for="description">Description </label>
+	            		<textarea rows="2" cols="5" class="form-control" id="description" wire:model="inputs.description"></textarea>
 	          		</div>
 
 	          		<div class="form-group">	

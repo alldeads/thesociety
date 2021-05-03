@@ -20,9 +20,13 @@ class CreateCashFlowsTable extends Migration
             $table->bigInteger('updated_by')->nullable()->unsigned();
             $table->bigInteger('account_type_id')->unsigned();
             $table->bigInteger('payor')->unsigned();
+            $table->text('account_no')->nullable();
+            $table->text('check_no')->nullable();
+            $table->date('posting_date');
             $table->double('credit')->default(0);
             $table->double('debit')->default(0);
             $table->double('balance')->default(0);
+            $table->text('description')->nullable();
             $table->text('notes')->nullable();
             $table->text('attachment')->nullable();
             $table->enum('status', ['confirmed', 'pending', 'hold', 'cancelled'])->default('confirmed');

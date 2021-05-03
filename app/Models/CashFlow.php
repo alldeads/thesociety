@@ -26,7 +26,11 @@ class CashFlow extends Model
         'balance',
         'company_id',
         'created_by',
-        'updated_by'
+        'updated_by',
+        'account_no',
+        'check_no',
+        'posting_date',
+        'description'
     ];
 
     public static function getCompanyLastEntry($company_id)

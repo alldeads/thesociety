@@ -6,6 +6,8 @@ use App\Http\Livewire\CustomComponent;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Storage;
 
+use Carbon\Carbon;
+
 use App\Models\ChartType;
 use App\Models\User;
 use App\Models\CompanyChartAccount;
@@ -23,17 +25,23 @@ class Create extends CustomComponent
 	{
 		$this->accounts = CompanyChartAccount::getCompanyCharts($this->company_id);
 		$this->users    = User::getCompanyUsers($this->company_id);
+
+        $this->inputs['posting'] = Carbon::now()->format('Y-m-d');
 	}
 
 	public function submit()
 	{
 		$validator = Validator::make($this->inputs, [
-            'account_title' => ['required', 'numeric'],
-            'movement'      => ['required'],
-            'amount'        => ['required', 'numeric'],
-            'payor'         => ['required', 'numeric'],
-            'notes'         => ['nullable', 'string'],
-            'attachment'    => ['nullable', 'file'],
+            'account_title'  => ['required', 'numeric'],
+            'account_number' => ['nullable'],
+            'check_no'       => ['nullable'],
+            'posting'        => ['required', 'date'],
+            'movement'       => ['required'],
+            'amount'         => ['required', 'numeric'],
+            'payor'          => ['required', 'numeric'],
+            'description'    => ['required'],
+            'notes'          => ['nullable'],
+            'attachment'     => ['nullable', 'file'],
         ]);
 
         if ($validator->fails()) {
@@ -72,6 +80,10 @@ class Create extends CustomComponent
         	'created_by'       => auth()->id(),
         	'updated_by'       => auth()->id(),
         	'account_type_id'  => $this->inputs['account_title'],
+            'account_no'       => $this->inputs['account_number'] ?? null,
+            'check_no'         => $this->inputs['check_no'] ?? null,
+            'posting_date'     => $this->inputs['posting'],
+            'description'      => $this->inputs['description'] ?? null,
         	'payor'            => $this->inputs['payor'],
         	'notes'            => $this->inputs['notes'] ?? null,
         	'attachment'       => $attachment ?? null,

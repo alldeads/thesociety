@@ -78,7 +78,7 @@
 								<th>Debit</th>
 								<th>Credit</th>
 								<th>Balance</th>
-								@if( auth()->user()->can('cash-flow.update') || auth()->user()->can('cash-flow.delete') )
+								@if( auth()->user()->can('cashflow.update') || auth()->user()->can('cashflow.delete') )
 									<th>Actions</th>
 								@endif
 							</tr>

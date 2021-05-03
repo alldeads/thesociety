@@ -1,5 +1,5 @@
 <tr>
-	<td>{{ $item->created_at->format('F, j Y h:i:s a') }}</td>
+	<td>{{ $item->posting_date }}</td>
 	<td>{{ $item->user->profile->name }}</td>
 	<td>{{ ucwords($item->chart_account->chart_name) }}</td>
 	<td>
@@ -28,19 +28,21 @@
 
 	<td>{{ number_format($item->balance, 2,'.', ',') }}</td>
 
-	@if( auth()->user()->can('cash-flow.update') || auth()->user()->can('cash-flow.delete') )
+	@if( auth()->user()->can('cashflow.update') || auth()->user()->can('cashflow.delete') )
 		<td>
-		    @can('cash-flow.update')
+		    @can('cashflow.update')
 				<span type="button" wire:click="edit">
 					<i class="fas fa-pen ml-1"></i>
 				</span>
 		    @endcan
 
-	    	@can('cash-flow.delete')
-	    		<span type="button" wire:click="delete">
-					<i class="fas fa-trash ml-1"></i>
-				</span>
-		    @endcan
+		    @if ($last->id == $item->id)
+		    	@can('cashflow.delete')
+		    		<span type="button" wire:click="delete">
+						<i class="fas fa-trash ml-1"></i>
+					</span>
+			    @endcan
+			@endif
 		</td>
 	@endif
 </tr>

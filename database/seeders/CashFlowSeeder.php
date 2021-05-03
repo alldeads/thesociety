@@ -31,6 +31,7 @@ class CashFlowSeeder extends Seeder
         		'account_type_id' => $coa,
         		'payor'           => $employees,
         		'credit'          => 0,
+                'posting_date'    => now()->format('Y-m-d'),
         		'debit'           => $debit,
         		'balance'         => $debit,
         	]);
@@ -61,6 +62,7 @@ class CashFlowSeeder extends Seeder
 	        		'payor'           => $employees,
 	        		'credit'          => $rand == 0 ? $credit : 0,
 	        		'debit'           => $rand != 0 ? $debit : 0,
+                    'posting_date'    => now()->format('Y-m-d'),
 	        		'balance'         => $balance,
 	        	]);
         	}
