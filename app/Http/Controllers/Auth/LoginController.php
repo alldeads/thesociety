@@ -68,7 +68,11 @@ class LoginController extends Controller
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
 
-            auth()->user()->notify( new LoginEmail($request->header('user-agent'), $request->ip()) );
+            $env = env('APP_ENV', 'local');
+
+            if ( $env != 'local' ) {
+                auth()->user()->notify( new LoginEmail($request->header('user-agent'), $request->ip()) );
+            }
 
             return redirect()->intended('home');
         }
