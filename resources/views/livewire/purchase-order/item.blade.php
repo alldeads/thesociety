@@ -16,14 +16,6 @@
 
 	@if( auth()->user()->can('purchase_order.update') || auth()->user()->can('purchase_order.delete') )
 		<td>
-		    @if ($item->status->name != "approved")
-		    	@can('purchase_order.update')
-					<span type="button" wire:click="approve">
-						<i class="fas fa-check ml-1"></i>
-					</span>
-			    @endcan
-		    @endif
-
 		    @can('purchase_order.update')
 				<span type="button" wire:click="edit">
 					<i class="fas fa-pen ml-1"></i>

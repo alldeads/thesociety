@@ -214,7 +214,10 @@
 		  			<button class="btn btn-primary btn-block mb-75" data-toggle="modal" data-target="#send-invoice-sidebar">
 						Send Purchase Order
 		  			</button>
-		  			<button type="button" class="btn btn-outline-primary btn-block mb-75" wire:click="save">Preview</button>
+		  			<button type="button" class="btn btn-outline-primary btn-block mb-75" wire:click="preview">Preview</button>
+		  			<a class="btn btn-outline-secondary btn-block mb-75" href="{{url('app/invoice/print')}}" target="_blank">
+						Print
+					</a>
 					<button type="button" class="btn btn-outline-primary btn-block mb-75" wire:click="save">Save</button>
 					<button class="btn btn-success btn-block mb-75" data-toggle="modal" data-target="#add-payment-sidebar">
 						Add Payment
@@ -224,18 +227,63 @@
 
 	  		<div class="mt-2">
 				<div class="invoice-terms mt-1">
-		  			<div class="d-flex justify-content-between">
-						<label class="invoice-terms-title mb-0" for="paymentTerms">Pending</label>
-						<div class="custom-control custom-switch">
-							<input type="checkbox" class="custom-control-input" checked id="paymentTerms" />
-							<label class="custom-control-label" for="paymentTerms"></label>
+					<div class="d-flex justify-content-between">
+						<label class="invoice-terms-title mb-0" for="status">Status</label>
+						<div class="custom-control custom-switch mb-2">
+							<select class="form-control" wire:model="inputs.status">
+			  					<option>Select status</option>
+
+			  					@foreach($statuses as $status)
+			  						<option value="{{ $status->id }}"> {{ ucwords($status->name) }}</option>
+			  					@endforeach
+			  				</select>
 						</div>
 		  			</div>
-		  			<div class="d-flex justify-content-between py-1">
-						<label class="invoice-terms-title mb-0" for="clientNotes">Draft</label>
-						<div class="custom-control custom-switch">
-			  				<input type="checkbox" class="custom-control-input" checked id="clientNotes" />
-			  				<label class="custom-control-label" for="clientNotes"></label>
+
+		  			<div class="d-flex justify-content-between">
+						<label class="invoice-terms-title mb-0" for="approved">Approved By</label>
+						<div class="custom-control custom-switch mb-2">
+							<select class="form-control" wire:model="inputs.approved_by">
+			  					<option>Select approver</option>
+
+			  					@foreach($employees as $employee)
+			  						<option value="{{ $employee->id }}"> {{ $employee->user->profile->name }}</option>
+			  					@endforeach
+			  				</select>
+						</div>
+		  			</div>
+
+		  			<div class="d-flex justify-content-between">
+						<label class="invoice-terms-title mb-0" for="requested">Requested By</label>
+						<div class="custom-control custom-switch mb-2">
+							<select class="form-control" wire:model="inputs.requested_by">
+			  					<option>Select requestee</option>
+
+			  					@foreach($employees as $employee)
+			  						<option value="{{ $employee->id }}"> {{ $employee->user->profile->name }}</option>
+			  					@endforeach
+			  				</select>
+						</div>
+		  			</div>
+
+		  			<div class="d-flex justify-content-between">
+						<label class="invoice-terms-title mb-0" for="created">Created By</label>
+						<div class="custom-control custom-switch mb-2">
+							{{ $inputs['created_by'] }}
+						</div>
+		  			</div>
+
+		  			<div class="d-flex justify-content-between">
+						<label class="invoice-terms-title mb-0" for="created">Created At</label>
+						<div class="custom-control custom-switch mb-2">
+							{{ $inputs['created_at'] }}
+						</div>
+		  			</div>
+
+		  			<div class="d-flex justify-content-between">
+						<label class="invoice-terms-title mb-0" for="created">Last Updated At</label>
+						<div class="custom-control custom-switch mb-2">
+							{{ $inputs['updated_at'] }}
 						</div>
 		  			</div>
 				</div>

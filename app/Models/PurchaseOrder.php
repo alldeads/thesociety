@@ -36,6 +36,7 @@ class PurchaseOrder extends Model
         'updated_by',
         'created_by',
         'approved_by',
+        'requested_by',
         'total'
     ];
 

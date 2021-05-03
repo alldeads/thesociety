@@ -36,11 +36,12 @@ return [
     'mailers' => [
         'smtp' => [
             'transport' => 'smtp',
-            'host' => env('MAIL_HOST', 'smtp.mailgun.org'),
-            'port' => env('MAIL_PORT', 587),
-            'encryption' => env('MAIL_ENCRYPTION', 'tls'),
-            'username' => env('MAIL_USERNAME'),
-            'password' => env('MAIL_PASSWORD'),
+            'from' => array('address' => 'support@thesociety32.com', 'name' => 'The Society 32'),
+            'host' => "smtp.sendgrid.net",
+            'port' => 465,
+            'encryption' => "ssl",
+            'username' => "apikey",
+            'password' => "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",
             'timeout' => null,
             'auth_mode' => null,
         ],

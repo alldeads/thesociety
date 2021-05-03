@@ -292,12 +292,6 @@ class Create extends CustomComponent
 
     public function render()
     {
-    	// if ( isset($this->inputs['employee']) && !empty($this->inputs['employee']) ) {
-    	// 	$results = Employee::find($this->inputs['employee']);
-
-    	// 	$this->emp = $results->user->profile->name;
-    	// }
-
         return view('livewire.purchase-order.create');
     }
 }

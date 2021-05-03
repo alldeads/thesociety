@@ -31,6 +31,11 @@ class Item extends CustomComponent
 	{
 		return redirect()->route('purchase-orders-read', ['purchase' => $this->item->id]);
 	}
+
+	public function edit()
+	{
+		return redirect()->route('purchase-orders-edit', ['purchase' => $this->item->id]);
+	}
 	
     public function render()
     {

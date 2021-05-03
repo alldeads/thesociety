@@ -34,6 +34,7 @@ class CreatePurchaseOrdersTable extends Migration
             $table->bigInteger('status_id')->nullable();
             $table->bigInteger('ship_to')->nullable()->unsigned();
             $table->bigInteger('approved_by')->nullable()->unsigned();
+            $table->bigInteger('requested_by')->nullable()->unsigned();
             $table->bigInteger('updated_by')->nullable()->unsigned();
             $table->bigInteger('created_by')->nullable()->unsigned();
             $table->softDeletes();
