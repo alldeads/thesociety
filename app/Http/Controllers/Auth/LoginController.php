@@ -4,7 +4,11 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Http\Request;
+
+use App\Notifications\LoginEmail;
 
 class LoginController extends Controller
 {
@@ -48,6 +52,29 @@ class LoginController extends Controller
 
         return view('/auth/login', [
             'pageConfigs' => $pageConfigs
+        ]);
+    }
+
+    /**
+     * Handle an authentication attempt.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function login(Request $request)
+    {
+        $credentials = $request->only('email', 'password');
+
+        if (Auth::attempt($credentials)) {
+            $request->session()->regenerate();
+
+            auth()->user()->notify( new LoginEmail($request->header('user-agent'), $request->ip()) );
+
+            return redirect()->intended('home');
+        }
+
+        return back()->withErrors([
+            'email' => 'The provided credentials do not match our records.',
         ]);
     }
 }
