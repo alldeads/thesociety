@@ -28,10 +28,12 @@ class Delete extends CustomComponent
     	$acc = CashFlow::find($this->cashflow['cashflow']['id']);
 
     	if ( !$acc ) {
+    		$this->emit('dissmissModal', ['el' => $this->el]);
     		return $this->message('Oops! Something went wrong upon deletion, please try again!', 'error');
     	}
 
     	if ( $this->last->id != $acc->id ) {
+    		$this->emit('dissmissModal', ['el' => $this->el]);
     		return $this->message('Oops! Something went wrong upon deletion, please try again!', 'error');
     	}
 

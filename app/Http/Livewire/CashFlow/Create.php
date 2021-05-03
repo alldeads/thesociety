@@ -99,6 +99,8 @@ class Create extends CustomComponent
         $this->inputs = [];
 
         $this->emit('dissmissModal', ['el' => 'modal-cash-flow-create']);
+
+        $this->emit('refreshCashFlowItem');
 	}
 
     public function render()
