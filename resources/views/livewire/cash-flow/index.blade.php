@@ -106,3 +106,4 @@
 </div>
 
 @livewire('cash-flow.create', ['company_id' => $company_id])
+@livewire('cash-flow.delete', ['company_id' => $company_id])

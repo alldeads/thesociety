@@ -11,13 +11,19 @@ class Item extends Component
 	public $item;
 	public $last;
 
-	public function mount()
+	public $listeners = [
+        'refreshCashFlowItem' => '$refresh'
+    ];
+
+	public function delete()
 	{
-		$this->last = CashFlow::where('company_id', $this->item->company_id)->orderBy('id', 'desc')->first();
+		$this->emit('deleteCashFlowItem', ['cashflow' => $this->item]);
 	}
 
     public function render()
     {
+    	$this->last = CashFlow::where('company_id', $this->item->company_id)->orderBy('id', 'desc')->first();
+
         return view('livewire.cash-flow.item');
     }
 }
