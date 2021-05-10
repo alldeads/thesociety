@@ -102,7 +102,7 @@ class CompanyController extends AdminController
         $form->text('dti', __('Dti'));
         $form->text('sss', __('Sss'));
         $form->text('business_permit', __('Business permit'));
-        $form->text('street', __('Street'));
+        $form->text('address_line_1', __('Street'));
         $form->text('address_line_2', __('Address line 2'));
         $form->text('city', __('City'));
         $form->text('state', __('State'));

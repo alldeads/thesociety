@@ -195,7 +195,7 @@
 					<button class="btn btn-primary btn-block mb-75" data-toggle="modal" data-target="#send-invoice-sidebar">
 						Send Invoice
 					</button>
-					<button class="btn btn-outline-secondary btn-block btn-download-invoice mb-75">Download</button>
+					<button class="btn btn-outline-secondary btn-block btn-download-invoice mb-75" wire:click="download">Download</button>
 					<a class="btn btn-outline-secondary btn-block mb-75" href="{{url('app/invoice/print')}}" target="_blank">
 						Print
 					</a>

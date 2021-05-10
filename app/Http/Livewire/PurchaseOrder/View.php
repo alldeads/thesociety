@@ -37,6 +37,13 @@ class View extends Component
 		$this->inputs['tax'] = $this->purchase->tax;
 	}
 
+	public function download()
+	{
+		$pdf = \PDF::loadView('purchase-order.download');
+
+		return $pdf->stream();
+	}
+
     public function render()
     {
         return view('livewire.purchase-order.view');

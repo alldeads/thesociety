@@ -8,6 +8,9 @@ use Illuminate\Support\Facades\Gate;
 use App\Models\Company;
 use App\Models\PurchaseOrder;
 
+use Dompdf\Dompdf;
+use Illuminate\Support\Facades\View; 
+
 class PurchaseOrderController extends Controller
 {
     public function index()
@@ -105,5 +108,32 @@ class PurchaseOrderController extends Controller
 		} else {
 		    return view('misc.not-authorized');
 		}
+    }
+
+    public function download(PurchaseOrder $purchase)
+    {
+    	set_time_limit(60);
+
+    	$company = Company::findOrFail(auth()->user()->empCard->company_id);
+
+    	// $dompdf = new Dompdf();
+
+    	// $dompdf->loadHtml(
+     //        View::make('purchase-order.download', compact('company'))->render()
+     //    );
+
+     //    $dompdf->render();
+
+        $str = View::make('purchase-order.download', compact('company'))->render();
+
+        $pdf = \PDF::loadHTML($str);
+
+        // dd($str);
+
+    	// $pdf = \PDF::loadView('purchase-order.download', compact('company', 'purchase'));
+
+		return $pdf->stream();
+
+    	return view('purchase-order.download', compact('company'));
     }
 }
