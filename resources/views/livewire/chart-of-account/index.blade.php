@@ -55,7 +55,7 @@
 		 		</div>
 
 		  		<div class="table-responsive">
-					<table class="table table-hover-animation">
+					<table class="table">
 			  			<thead>
 							<tr>
 								<th>Code</th>

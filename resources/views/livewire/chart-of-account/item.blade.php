@@ -8,7 +8,26 @@
 	</td>
 
 	@if( auth()->user()->can('chart.update') || auth()->user()->can('chart.delete') )
+
 		<td>
+			<div class="dropdown">
+                <button type="button" class="btn btn-sm dropdown-toggle hide-arrow" data-toggle="dropdown">
+                   	<i class="fas fa-ellipsis-v ml-1" wire.click.prevent></i>
+                </button>
+
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" wire:click="edit" href="javascript:void(0);">
+                      	<i class="fas fa-pen ml-1"></i>
+                      	<span>Edit</span>
+                    </a>
+                    <a class="dropdown-item" href="javascript:void(0);">
+                      	<i class="fas fa-trash ml-1"></i>
+                      	<span>Delete</span>
+                    </a>
+                </div>
+            </div>
+		</td>
+		{{-- <td>
 		    @can('chart.update')
 				<span type="button" wire:click="edit">
 					<i class="fas fa-pen ml-1"></i>
@@ -20,6 +39,6 @@
 					<i class="fas fa-trash ml-1"></i>
 				</span>
 		    @endcan
-		</td>
+		</td> --}}
 	@endif
 </tr>
