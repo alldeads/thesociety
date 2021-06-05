@@ -18,11 +18,10 @@
 			              			<span>Export</span>
 			              		</button>
 					             <div class="dropdown-menu">
-				                	<a class="dropdown-item" href="javascript:void(0);">
-				                		<i data-feather="printer" class="mr-25"></i>
-			              				<span>Print</span>
-				                	</a>
-					                <a class="dropdown-item" href="javascript:void(0);">
+					                <a class="dropdown-item" href="{{ route('chart-of-accounts-export', [
+					                	'type' => 'csv',
+					                	'q'    => $search
+					                ]) }}" target="_blank">
 				                		<i data-feather="file-text" class="mr-25"></i>
 			              				<span>Csv</span>
 				                	</a>

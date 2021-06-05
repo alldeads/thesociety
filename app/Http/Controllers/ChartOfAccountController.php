@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\Gate;
 
 use App\Models\Company;
 
+use App\Exports\ChartAccountExport;
+
 class ChartOfAccountController extends Controller
 {
     public function index()
@@ -25,6 +27,31 @@ class ChartOfAccountController extends Controller
 		    	'breadcrumbs' => $breadcrumbs,
 		    	'company'     => $company
 		    ]);
+		} else {
+		    return view('misc.not-authorized');
+		}
+    }
+
+    public function export(Request $request)
+    {
+    	$types = ['csv', 'pdf', 'xlsx', 'xls'];
+
+    	$requested_type = isset($request['type']) ? strtolower($request['type']) : 'csv';
+    	$q = $request['q'];
+
+    	$response = Gate::inspect('chart.export');
+
+    	$company = Company::findOrFail(auth()->user()->empCard->company_id);
+
+    	if ( $response->allowed() ) {
+		    
+		    // Set default type, if specified type is invalid
+	    	if ( !in_array($requested_type, $types) ) {
+	    		$requested_type = 'csv';
+	    	}
+
+	    	return (new ChartAccountExport($q, $company->id))
+	    			->download('chart-of-accounts' . now()->format('Y-m-d') . '.' . $requested_type);
 		} else {
 		    return view('misc.not-authorized');
 		}
