@@ -22,6 +22,11 @@ class Item extends CustomComponent
 		$this->emit('editChartAccount', ['account' => $this->account]);
 	}
 
+	public function read()
+	{
+		$this->emit('readChartAccount', ['account' => $this->account]);
+	}
+
     public function render()
     {
         return view('livewire.chart-of-account.item');

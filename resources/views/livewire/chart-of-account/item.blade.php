@@ -8,37 +8,35 @@
 	</td>
 
 	@if( auth()->user()->can('chart.update') || auth()->user()->can('chart.delete') )
-
 		<td>
 			<div class="dropdown">
                 <button type="button" class="btn btn-sm dropdown-toggle hide-arrow" data-toggle="dropdown">
-                   	<i class="fas fa-ellipsis-v ml-1" wire.click.prevent></i>
+                   	<i class="fas fa-ellipsis-v ml-1"></i>
                 </button>
 
                 <div class="dropdown-menu">
-                    <a class="dropdown-item" wire:click="edit" href="javascript:void(0);">
-                      	<i class="fas fa-pen ml-1"></i>
-                      	<span>Edit</span>
-                    </a>
-                    <a class="dropdown-item" href="javascript:void(0);">
-                      	<i class="fas fa-trash ml-1"></i>
-                      	<span>Delete</span>
-                    </a>
+                	@can('chart.update')
+	                    <a class="dropdown-item" wire:click="edit" href="javascript:void(0);">
+	                      	<i class="fas fa-pen mr-1"></i>
+	                      	<span>Edit</span>
+	                    </a>
+	                @endcan
+
+	                @can('chart.read')
+	                    <a class="dropdown-item" wire:click="read" href="javascript:void(0);">
+	                      	<i class="fas fa-eye mr-1"></i>
+	                      	<span>View</span>
+	                    </a>
+	                @endcan
+
+	                @can('chart.delete')
+	                    <a class="dropdown-item" wire:click="delete" href="javascript:void(0);">
+	                      	<i class="fas fa-trash mr-1"></i>
+	                      	<span>Delete</span>
+	                    </a>
+	                @endcan
                 </div>
             </div>
 		</td>
-		{{-- <td>
-		    @can('chart.update')
-				<span type="button" wire:click="edit">
-					<i class="fas fa-pen ml-1"></i>
-				</span>
-		    @endcan
-
-	    	@can('chart.delete')
-	    		<span type="button" wire:click="delete">
-					<i class="fas fa-trash ml-1"></i>
-				</span>
-		    @endcan
-		</td> --}}
 	@endif
 </tr>
