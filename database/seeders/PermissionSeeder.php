@@ -16,10 +16,12 @@ class PermissionSeeder extends Seeder
     public function run()
     {
         $permissions = ['view', 'read', 'export', 'create', 'update', 'delete'];
+
         $menus = [
             'dashboard', 'company', 'employee', 'role',
             'chart', 'cashflow', 'customer', 'supplier',
-            'product', 'supply', 'purchase_order', 'tax'
+            'product', 'supply', 'purchase_order', 'tax',
+            'journal_entry'
         ];
 
         foreach ($menus as $menu) {

@@ -67,6 +67,16 @@ class MenuSeeder extends Seeder
         ]);
 
         $header->menus()->create([
+            'name'       => 'Journal Entries',
+            'slug'       => 'journal-entry',
+            'url'        => 'accounting/journal-entry',
+            'base'       => 'journal_entry',
+            'is_export'  => true,
+            'icon'       => 'book',
+            'permission' => 'journal_entry.view'
+        ]);
+
+        $header->menus()->create([
             'name'       => 'Tax',
             'slug'       => 'tax',
             'url'        => 'accounting/tax',
