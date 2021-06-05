@@ -116,21 +116,12 @@ class PurchaseOrderController extends Controller
 
     	$company = Company::findOrFail(auth()->user()->empCard->company_id);
 
-    	// $dompdf = new Dompdf();
+    	$address['supplier_name']    = $purchase->supplier->user->profile->company ?? 'N/A';
+		$address['supplier_address'] = $purchase->supplier->address ?? [];
+		$address['supplier_phone']   = $purchase->supplier->user->profile->phone_number ?? null;
+		$address['supplier_email']   = $purchase->supplier->user->email;
 
-    	// $dompdf->loadHtml(
-     //        View::make('purchase-order.download', compact('company'))->render()
-     //    );
-
-     //    $dompdf->render();
-
-        $str = View::make('purchase-order.download', compact('company'))->render();
-
-        $pdf = \PDF::loadHTML($str);
-
-        // dd($str);
-
-    	// $pdf = \PDF::loadView('purchase-order.download', compact('company', 'purchase'));
+    	$pdf = \PDF::loadView('purchase-order.download', compact('company', 'purchase', 'address'));
 
 		return $pdf->stream();
 

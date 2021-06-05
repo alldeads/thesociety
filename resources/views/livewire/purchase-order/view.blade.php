@@ -78,16 +78,16 @@
 							@foreach($inputs['items'] as $item)
 								<tr>
 									<td class="py-1">
-										<p class="card-text font-weight-bold mb-25">{{ $item->name }}</p>
+										<p class="card-text font-weight-bold mb-25">{{ $item->name ?? '' }}</p>
 									</td>
 									<td class="py-1">
 										<p class="card-text font-weight-bold mb-25">
-											{{ number_format($item->cost, 2, '.', ',') }} 
+											{{ number_format($item->cost ?? 0, 2, '.', ',') }} 
 										</p>
 									</td>
 									<td class="py-1">
 										<p class="card-text font-weight-bold mb-25">
-											{{ number_format($item->quantity, 2, '.', ',') }} 
+											{{ number_format($item->quantity ?? 0, 2, '.', ',') }} 
 										</p>
 									</td>
 									<td class="py-1">
@@ -195,9 +195,8 @@
 					<button class="btn btn-primary btn-block mb-75" data-toggle="modal" data-target="#send-invoice-sidebar">
 						Send Invoice
 					</button>
-					<button class="btn btn-outline-secondary btn-block btn-download-invoice mb-75" wire:click="download">Download</button>
-					<a class="btn btn-outline-secondary btn-block mb-75" href="{{url('app/invoice/print')}}" target="_blank">
-						Print
+					<a class="btn btn-outline-secondary btn-block btn-download-invoice mb-75" href="{{ route('purchase-orders-download', ['purchase' => $purchase->id]) }}" target="_blank">
+						Download
 					</a>
 					<a class="btn btn-outline-secondary btn-block mb-75" href="{{ route('purchase-orders-edit', [
 						'purchase' => $purchase

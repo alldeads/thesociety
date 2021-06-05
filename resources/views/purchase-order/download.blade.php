@@ -1,95 +1,92 @@
-@isset($pageConfigs)
-    {!! Helper::updatePageConfig($pageConfigs) !!}
-@endisset
+<html lang="en" data-textdirection="ltr" class="">
 
-<!DOCTYPE html>
-    @php
-        $configData = Helper::applClasses();
-    @endphp
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0">
+	<meta name="csrf-token" content="fiElBfDZkWAsqBgWFLyfPjaXf4Xj0koaKziIU64m">
 
-    <html lang="@if(session()->has('locale')){{session()->get('locale')}}@else{{$configData['defaultLanguage']}}@endif" data-textdirection="{{ env('MIX_CONTENT_DIRECTION') === 'rtl' ? 'rtl' : 'ltr' }}" class="{{ ($configData['theme'] === 'light') ? '' : $configData['layoutTheme'] }}">
+	<title>
+  		Download Purchase Order - The Society 32
+  	</title>
+  	
+	<link rel="shortcut icon" type="image/x-icon" href="{{ asset('images/logo/symbol.jpg') }}">
 
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width,initial-scale=1.0">
-        <meta name="csrf-token" content="{{ csrf_token() }}">
+	<link rel="stylesheet" href="{{ asset(mix('css/core.css')) }}" />
+</head>
 
-        <title>
-            Puchase Order - The Society 32
-        </title>
+<body style="background-color: white !important;">
+	<div class="container" >
+		<div class="row">
+			<div class="col-6" style="float: left;">
+				<div>
+					<div class="logo-wrapper">
+						<img class="img-fluid rounded"
+							src="{{ $company->avatar ?? '' }}"
+							width="150"
+							alt="Company logo"/>
+					</div>
 
-        <link rel="shortcut icon" type="image/x-icon" href="{{ asset('images/logo/symbol.jpg') }}">
-
-        {{-- <link rel="stylesheet" href="{{ asset(mix('vendors/css/vendors.min.css')) }}" />
-		<link rel="stylesheet" href="{{ asset(mix('vendors/css/ui/prism.min.css')) }}" /> --}}
-		<link rel="stylesheet" href="{{ asset(mix('css/core.css')) }}" />
-
-		{{-- {!! Helper::applClasses() !!} --}}
-		@php $configData = Helper::applClasses(); @endphp
-
-		{{-- <link rel="stylesheet" href="{{ asset(mix('css/base/core/menu/menu-types/vertical-menu.css')) }}" /> --}}
-		<link rel="stylesheet" href="{{asset(mix('css/base/pages/app-invoice-print.css'))}}">
-
-		{{-- Laravel Style --}}
-		<link rel="stylesheet" href="{{ asset(mix('css/overrides.css')) }}" />
-
-		{{-- user custom styles --}}
-		<link rel="stylesheet" href="{{ asset(mix('css/style.css')) }}" />
-		<link rel="stylesheet" href="{{ asset(mix('css/style-rtl.css')) }}" />
-    </head>
-
-    <body class="vertical-layout vertical-menu-modern blank-page {{ $configData['blankPageClass'] }} {{ $configData['bodyClass'] }} {{($configData['theme'] === 'dark') ? 'dark-layout' : 'light' }}
-    data-menu=" vertical-menu-modern" data-layout="{{ ($configData['theme'] === 'light') ? '' : $configData['layoutTheme'] }}" style="{{ $configData['bodyStyle'] }}" data-framework="laravel" data-asset-path="{{ asset('/')}}">
-
-        <!-- BEGIN: Content-->
-        <div class="app-content content {{ $configData['pageClass'] }}">
-            <div class="content-wrapper {{ $configData['layoutWidth'] === 'boxed' ? 'container p-0' : '' }}">
-                <div class="content-body">
-                	<section class="invoice-preview-wrapper">
-						<div class="row invoice-preview">
-							<div class="col-xl-9 col-md-8 col-12">
-								<div class="card invoice-preview-card">
-									<div class="card-body invoice-padding pb-0">
-										<div class="d-flex justify-content-between flex-md-row flex-column invoice-spacing mt-0">
-											<div>
-												<div class="logo-wrapper">
-													<img class="img-fluid rounded"
-														src="{{ $company->avatar ?? '' }}"
-														width="150"
-														alt="Company logo"/>
-												</div>
-
-												<p class="card-text mb-25">{{ $company->name }}</p>
-												<p class="card-text mb-25">{{ $company->address[0] ?? "N/A" }}</p>
-												<p class="card-text mb-25">{{ $company->address[1] ?? "N/A" }}</p>
-												<p class="card-text mb-25">{{ $company->address[2] ?? "N/A" }}</p>
-												<p class="card-text mb-0">{{ $company->phone ?? "N/A" }}</p>
-												<p class="card-text mb-0">{{ $company->email ?? "N/A" }}</p>
-											</div>
-
-											<div class="mt-md-0 mt-2">
-												<h4 class="invoice-title">
-													P.O
-													{{-- <span class="invoice-number">#{{ $inputs['reference'] }}</span> --}}
-												</h4>
-												<div class="invoice-date-wrapper">
-													<p class="invoice-date-title">Date Issued:</p>
-													{{-- <p class="invoice-date">{{ $inputs['purchase_date'] }}</p> --}}
-												</div>
-											</div>
-										</div>
-									</div>
-					            </div>
-					        </div>
-					    </div>
-					</section>
+					<p class="card-text mb-25">{{ $company->name }}</p>
+					<p class="card-text mb-25">{{ $company->address[0] ?? "N/A" }}</p>
+					<p class="card-text mb-25">{{ $company->address[1] ?? "N/A" }}</p>
+					<p class="card-text mb-25">{{ $company->address[2] ?? "N/A" }}</p>
+					<p class="card-text mb-0">{{ $company->phone ?? "N/A" }}</p>
 				</div>
-            </div>
-        </div>
+			</div>
+			<div class="col-6 text-right" style="float: right;">
+				<div>
+					<h4 class="invoice-title">
+						P.O:
+						<span class="invoice-number">#{{ $purchase['reference'] }}</span>
+					</h4>
 
-        {{-- include default scripts --}}
-        {{-- @include('panels/scripts') --}}
-    </body>
+					<h6 class="invoice-title">
+						Date:
+						<span class="invoice-number">{{ $purchase['purchase_date'] }}</span>
+					</h6>
+				</div>
+			</div>
+
+			<hr style="margin-top: 280px;">
+
+		</div>
+
+		<div class="row" style="margin-top: 580px;">
+			<div class="col-6" style="float: left;">
+				<div>
+					<h6>Supplier:</h6>
+					<h6 class="mb-25">{{ $address['supplier_name'] }}</h6>
+					<p class="card-text mb-25">{{ $address['supplier_address'][0] ?? "N/A" }}</p>
+					<p class="card-text mb-25">{{ $address['supplier_address'][1] ?? "N/A" }}</p>
+					<p class="card-text mb-25">{{ $address['supplier_address'][2] ?? "N/A" }}</p>
+
+					@if ($address['supplier_phone'] != null)
+						<p class="card-text mb-0">{{ $address['supplier_phone'] }}</p>
+					@endif
+
+					<p class="card-text mb-0">{{ $address['supplier_email'] }}</p>
+				</div>
+			</div>
+			<div class="col-6 text-right" style="float: right;">
+				<div>
+					<h4 class="invoice-title">
+						P.O:
+						<span class="invoice-number">#{{ $purchase['reference'] }}</span>
+					</h4>
+
+					<h6 class="invoice-title">
+						Date:
+						<span class="invoice-number">{{ $purchase['purchase_date'] }}</span>
+					</h6>
+				</div>
+			</div>
+
+			<hr style="margin-top: 280px;">
+
+		</div>
+	</div>
+</body>
+
 </html>
