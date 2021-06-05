@@ -16,7 +16,7 @@
 
 	          		<div class="form-group">	
 	            		<label class="form-label" for="read-code">Account Code</label>
-	            		<input type="text" class="form-control" id="account-code" readonly wire:model="inputs.account_code"/>
+	            		<input type="text" class="form-control" id="read-code" readonly wire:model="inputs.account_code"/>
 	          		</div>
 
 	          		<div class="form-group">	

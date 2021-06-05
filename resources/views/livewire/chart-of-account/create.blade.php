@@ -5,13 +5,13 @@
 	        	<button type="button" class="close" data-dismiss="modal" aria-label="Close">×</button>
 
 	        	<div class="modal-header mb-1">
-	          		<h5 class="modal-title" id="exampleModalLabel">New Account</h5>
+	          		<h5 class="modal-title">New Account</h5>
 	        	</div>
 
 	        	<div class="modal-body flex-grow-1">
 	          		<div class="form-group">	
-	            		<label class="form-label" for="basic-icon-account-name">Account Title</label>
-	            		<input type="text" class="form-control" id="basic-icon-account-name" required placeholder="Enter Account Title" wire:model="inputs.account_title"/>
+	            		<label class="form-label" for="create-account-title">Account Title</label>
+	            		<input type="text" class="form-control" id="create-account-title" required placeholder="Enter Account Title" wire:model="inputs.account_title"/>
 	          		</div>
 
 	          		<div class="form-group">	
