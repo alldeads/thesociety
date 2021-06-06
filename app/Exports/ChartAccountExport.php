@@ -31,15 +31,15 @@ class ChartAccountExport implements FromView
     {
         $search = $this->search;
 
-        return view('exports.invoices', [
-            'invoices' => CompanyChartAccount::where('company_id', $this->company_id)
+        return view('exports.chart-accounts', [
+            'accounts' => CompanyChartAccount::where('company_id', $this->company_id)
                             ->where(function (Builder $query) use ($search) {
                                 return $query->where('chart_name', 'like', "%" . $search ."%")
                                         ->orWhere('code', $search)
                                         ->orWhereHas('type', function($query) use ($search) {
                                             return $query->where('name', 'like', "%" . $search ."%");
                                         });
-                            })->orderBy('code', 'asc')
+                            })->orderBy('code', 'asc')->get()
         ]);
     }
 }

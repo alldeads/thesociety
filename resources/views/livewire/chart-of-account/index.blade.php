@@ -11,23 +11,31 @@
 			            	</button>
 		            	@endcan
 
-		            	<div class="btn-group" wire:ignore>
+		            	<div class="btn-group">
 		            		@can('chart.export')
 			              		<button type="button" class="btn btn-outline-primary ml-2 dropdown-toggle rounded" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-			              			<i data-feather="share" class="mr-25"></i>
+			              			<i class="fas fa-download mr-1"></i>
 			              			<span>Export</span>
 			              		</button>
 					             <div class="dropdown-menu">
 					                <a class="dropdown-item" href="{{ route('chart-of-accounts-export', [
 					                	'type' => 'csv',
-					                	'q'    => $search
+					                	'q'    => $this->search
 					                ]) }}" target="_blank">
-				                		<i data-feather="file-text" class="mr-25"></i>
 			              				<span>Csv</span>
 				                	</a>
-				                	<a class="dropdown-item" href="javascript:void(0);">
-				                		<i data-feather="file" class="mr-25"></i>
-			              				<span>Excel</span>
+				                	<a class="dropdown-item" href="{{ route('chart-of-accounts-export', [
+					                	'type' => 'xls',
+					                	'q'    => $this->search
+					                ]) }}" target="_blank">
+			              				<span>Excel (xls)</span>
+				                	</a>
+
+				                	<a class="dropdown-item" href="{{ route('chart-of-accounts-export', [
+					                	'type' => 'xlsx',
+					                	'q'    => $this->search
+					                ]) }}" target="_blank">
+			              				<span>Excel (xlsx)</span>
 				                	</a>
 					            </div>
 					        @endcan   
