@@ -37,6 +37,13 @@
 					                ]) }}" target="_blank">
 			              				<span>Excel (xlsx)</span>
 				                	</a>
+
+				                	<a class="dropdown-item" href="{{ route('chart-of-accounts-export', [
+					                	'type' => 'pdf',
+					                	'q'    => $this->search
+					                ]) }}" target="_blank">
+			              				<span>PDF</span>
+				                	</a>
 					            </div>
 					        @endcan   
 		            	</div>
