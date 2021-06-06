@@ -34,7 +34,7 @@ class ChartOfAccountController extends Controller
 
     public function export(Request $request)
     {
-    	$types = ['csv', 'pdf', 'xlsx', 'xls'];
+    	$types = ['csv', 'pdf', 'xlsx', 'xls', 'ods'];
 
     	$requested_type = isset($request['type']) ? strtolower($request['type']) : 'csv';
     	$q = $request['q'];

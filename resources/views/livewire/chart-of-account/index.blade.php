@@ -22,20 +22,27 @@
 					                	'type' => 'csv',
 					                	'q'    => $this->search
 					                ]) }}" target="_blank">
-			              				<span>Csv</span>
+			              				<span>CSV</span>
 				                	</a>
 				                	<a class="dropdown-item" href="{{ route('chart-of-accounts-export', [
 					                	'type' => 'xls',
 					                	'q'    => $this->search
 					                ]) }}" target="_blank">
-			              				<span>Excel (xls)</span>
+			              				<span>EXCEL (xls)</span>
 				                	</a>
 
 				                	<a class="dropdown-item" href="{{ route('chart-of-accounts-export', [
 					                	'type' => 'xlsx',
 					                	'q'    => $this->search
 					                ]) }}" target="_blank">
-			              				<span>Excel (xlsx)</span>
+			              				<span>EXCEL (xlsx)</span>
+				                	</a>
+
+				                	<a class="dropdown-item" href="{{ route('chart-of-accounts-export', [
+					                	'type' => 'ods',
+					                	'q'    => $this->search
+					                ]) }}" target="_blank">
+			              				<span>ODS</span>
 				                	</a>
 
 				                	<a class="dropdown-item" href="{{ route('chart-of-accounts-export', [
