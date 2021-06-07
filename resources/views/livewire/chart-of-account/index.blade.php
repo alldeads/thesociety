@@ -11,8 +11,8 @@
 			            	</button>
 		            	@endcan
 
-		            	<div class="btn-group">
-		            		@can('chart.export')
+		            	@can('chart.export')
+			            	<div class="btn-group">
 			              		<button type="button" class="btn btn-outline-primary ml-2 dropdown-toggle rounded" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 			              			<i class="fas fa-download mr-1"></i>
 			              			<span>Export</span>
@@ -52,8 +52,8 @@
 			              				<span>PDF</span>
 				                	</a>
 					            </div>
-					        @endcan   
-		            	</div>
+			            	</div>
+			            @endcan   
 		  			</div>
 		  			<hr>
 		  			<div class="row">

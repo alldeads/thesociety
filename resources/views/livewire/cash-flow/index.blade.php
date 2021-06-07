@@ -12,23 +12,54 @@
 		            	@endcan
 
 		            	@can('cashflow.export')
-				  			<div class="btn-group" wire:ignore>
+				  			<div class="btn-group">
 			              		<button type="button" class="btn btn-outline-primary ml-2 dropdown-toggle rounded" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-			              			<i data-feather="share" class="mr-25"></i>
+			              			<i class="fas fa-download mr-1"></i>
 			              			<span>Export</span>
 			              		</button>
 					             <div class="dropdown-menu">
-				                	<a class="dropdown-item" href="javascript:void(0);">
-				                		<i data-feather="printer" class="mr-25"></i>
-			              				<span>Print</span>
+					                <a class="dropdown-item" href="{{ route('cash-flow-export', [
+					                	'type' => 'csv',
+					                	'q'    => $this->search,
+					                	'from' => $this->date_from,
+					                	'to'   => $this->date_to
+					                ]) }}" target="_blank">
+			              				<span>CSV</span>
 				                	</a>
-					                <a class="dropdown-item" href="javascript:void(0);">
-				                		<i data-feather="file-text" class="mr-25"></i>
-			              				<span>Csv</span>
+				                	<a class="dropdown-item" href="{{ route('cash-flow-export', [
+					                	'type' => 'xls',
+					                	'q'    => $this->search,
+					                	'from' => $this->date_from,
+					                	'to'   => $this->date_to
+					                ]) }}" target="_blank">
+			              				<span>EXCEL (xls)</span>
 				                	</a>
-				                	<a class="dropdown-item" href="javascript:void(0);">
-				                		<i data-feather="file" class="mr-25"></i>
-			              				<span>Excel</span>
+
+				                	<a class="dropdown-item" href="{{ route('cash-flow-export', [
+					                	'type' => 'xlsx',
+					                	'q'    => $this->search,
+					                	'from' => $this->date_from,
+					                	'to'   => $this->date_to
+					                ]) }}" target="_blank">
+			              				<span>EXCEL (xlsx)</span>
+				                	</a>
+
+				                	<a class="dropdown-item" href="{{ route('cash-flow-export', [
+					                	'type' => 'ods',
+					                	'q'    => $this->search,
+					                	'from' => $this->date_from,
+					                	'to'   => $this->date_to
+					                ]) }}" target="_blank">
+			              				<span>ODS</span>
+				                	</a>
+
+				                	<a class="dropdown-item" href="{{ route('cash-flow-export', [
+					                	'type' => 'pdf',
+					                	'q'    => $this->search,
+					                	'from' => $this->date_from,
+					                	'to'   => $this->date_to
+					                ]) }}" target="_blank">
+			              				<span>PDF</span>
 				                	</a>
 					            </div>
 			            	</div>
