@@ -7,6 +7,8 @@ use Illuminate\Database\Seeder;
 use App\Models\Company;
 use App\Models\CashFlow;
 
+use Carbon\Carbon;
+
 class CashFlowSeeder extends Seeder
 {
     /**
@@ -31,12 +33,12 @@ class CashFlowSeeder extends Seeder
         		'account_type_id' => $coa,
         		'payor'           => $employees,
         		'credit'          => 0,
-                'posting_date'    => now()->format('Y-m-d'),
+                'posting_date'    => Carbon::now()->addDays(rand(0, 3))->format('Y-m-d'),
         		'debit'           => $debit,
         		'balance'         => $debit,
         	]);
 
-        	for ($i = 0; $i < rand(10, 20); $i++) { 
+        	for ($i = 0; $i < rand(15, 20); $i++) { 
 
         		$debit  = rand(10000, 50000);
         		$credit = rand(10000, 50000);
