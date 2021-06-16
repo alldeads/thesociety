@@ -41,7 +41,7 @@ class ChartOfAccountController extends Controller
 
     	$response = Gate::inspect('chart.export');
 
-    	$company = Company::findOrFail(auth()->user()->empCard->company_id);
+    	$company = Company::getCompanyDetails();
 
     	if ( $response->allowed() ) {
 		    

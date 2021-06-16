@@ -19,7 +19,7 @@ class CashFlowController extends Controller
 	        ['name'=>"Cash Flow"],
 	    ];
 
-	    $company = Company::findOrFail(auth()->user()->empCard->company_id);
+	    $company = Company::getCompanyDetails();
 
 		if ( $response->allowed() ) {
 		    return view('cash-flow.index', [
@@ -42,7 +42,7 @@ class CashFlowController extends Controller
 
     	$response = Gate::inspect('cashflow.export');
 
-    	$company = Company::findOrFail(auth()->user()->empCard->company_id);
+    	$company = Company::getCompanyDetails();
 
     	if ( $response->allowed() ) {
 		    

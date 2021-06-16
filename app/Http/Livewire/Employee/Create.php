@@ -147,6 +147,8 @@ class Create extends CustomComponent
 
 			DB::commit();
 
+			cache()->forget('app-company-users');
+
 			$this->inputs = [];
 
 			$this->message('Employee has been created', 'success');

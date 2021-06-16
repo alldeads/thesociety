@@ -7,7 +7,7 @@
 			  			@can('cashflow.create')
 	  						<button type="button" class="btn btn-primary rounded" data-toggle="modal" data-target="#modal-cash-flow-create" wire:ignore>
 			          			<i data-feather="plus" class="mr-25"></i>
-			              		<span>Create</span>
+			              		<span>{{ __('Create') }}</span>
 			            	</button>
 		            	@endcan
 
@@ -15,7 +15,7 @@
 				  			<div class="btn-group">
 			              		<button type="button" class="btn btn-outline-primary ml-2 dropdown-toggle rounded" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 			              			<i class="fas fa-download mr-1"></i>
-			              			<span>Export</span>
+			              			<span>{{ __('Export') }}</span>
 			              		</button>
 					             <div class="dropdown-menu">
 					                <a class="dropdown-item" href="{{ route('cash-flow-export', [
@@ -24,7 +24,7 @@
 					                	'from' => $this->date_from,
 					                	'to'   => $this->date_to
 					                ]) }}" target="_blank">
-			              				<span>CSV</span>
+			              				<span>{{ __('CSV') }}</span>
 				                	</a>
 				                	<a class="dropdown-item" href="{{ route('cash-flow-export', [
 					                	'type' => 'xls',
@@ -32,7 +32,7 @@
 					                	'from' => $this->date_from,
 					                	'to'   => $this->date_to
 					                ]) }}" target="_blank">
-			              				<span>EXCEL (xls)</span>
+			              				<span>{{ __('EXCEL (xls)') }}</span>
 				                	</a>
 
 				                	<a class="dropdown-item" href="{{ route('cash-flow-export', [
@@ -41,7 +41,7 @@
 					                	'from' => $this->date_from,
 					                	'to'   => $this->date_to
 					                ]) }}" target="_blank">
-			              				<span>EXCEL (xlsx)</span>
+			              				<span>{{ __('EXCEL (xlsx)') }}</span>
 				                	</a>
 
 				                	<a class="dropdown-item" href="{{ route('cash-flow-export', [
@@ -50,16 +50,7 @@
 					                	'from' => $this->date_from,
 					                	'to'   => $this->date_to
 					                ]) }}" target="_blank">
-			              				<span>ODS</span>
-				                	</a>
-
-				                	<a class="dropdown-item" href="{{ route('cash-flow-export', [
-					                	'type' => 'pdf',
-					                	'q'    => $this->search,
-					                	'from' => $this->date_from,
-					                	'to'   => $this->date_to
-					                ]) }}" target="_blank">
-			              				<span>PDF</span>
+			              				<span>{{ __('ODS') }}</span>
 				                	</a>
 					            </div>
 			            	</div>
@@ -115,7 +106,7 @@
 							</tr>
 			  			</thead>
 			  			<tbody>
-				  			@foreach($results as $result)
+				  			@foreach($results as $key => $result)
 				  				@livewire('cash-flow.item', ['item' => $result], key($result->id))
 				  			@endforeach
 			  			</tbody>

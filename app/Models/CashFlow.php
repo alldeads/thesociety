@@ -33,9 +33,11 @@ class CashFlow extends Model
         'description'
     ];
 
-    public static function getCompanyLastEntry($company_id)
+    public static function getCompanyLastEntry()
     {
-        return CashFlow::where('company_id', $company_id)->orderBy('id', 'desc')->first();
+        return cache()->remember('app-cash-flow-last', 60*60*24*360, function() {
+            return CashFlow::where('company_id', auth()->user()->empCard->company_id)->orderBy('id', 'desc')->first();
+        });
     }
 
     public function chart_account()

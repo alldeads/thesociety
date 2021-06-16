@@ -48,6 +48,8 @@ class Create extends CustomComponent
 			'company_id'    => $this->company_id
 		]);
 
+		cache()->forget('app-company-charts');
+
 		$this->emit('refreshChartParent');
 
         $this->message('New Account has been created', 'success');

@@ -22,8 +22,7 @@ class Item extends Component
 
     public function render()
     {
-    	$this->last = CashFlow::where('company_id', $this->item->company_id)->orderBy('id', 'desc')->first();
-
+    	$this->last = CashFlow::getCompanyLastEntry();
         return view('livewire.cash-flow.item');
     }
 }

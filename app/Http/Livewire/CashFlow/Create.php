@@ -23,8 +23,8 @@ class Create extends CustomComponent
 
 	public function mount()
 	{
-		$this->accounts = CompanyChartAccount::getCompanyCharts($this->company_id);
-		$this->users    = User::getCompanyUsers($this->company_id);
+		$this->accounts = CompanyChartAccount::getCompanyCharts();
+		$this->users    = User::getCompanyUsers();
 
         $this->inputs['posting'] = Carbon::now()->format('Y-m-d');
 	}
@@ -58,7 +58,7 @@ class Create extends CustomComponent
             $attachment = Storage::url($this->inputs['attachment']->store('attachments'));
         }
 
-        $cashflow = CashFlow::getCompanyLastEntry($this->company_id);
+        $cashflow = CashFlow::getCompanyLastEntry();
         $balance  = 0;
 
         if ( $cashflow ) {
@@ -91,6 +91,8 @@ class Create extends CustomComponent
         	'debit'            => $data['debit'] ?? 0,
         	'balance'          => $data['balance']
         ]);
+
+        cache()->forget('app-cash-flow-last');
 
         $this->emit('refreshCashFlowParent');
 

@@ -19,7 +19,7 @@ class Delete extends CustomComponent
     public function delete($cashflow)
     {
     	$this->cashflow = $cashflow;
-    	$this->last = CashFlow::where('company_id', $this->cashflow['cashflow']['company_id'])->orderBy('id', 'desc')->first();
+    	$this->last = CashFlow::getCompanyLastEntry();
     	$this->emit('showModal', ['el' => $this->el]);
     }
 
@@ -40,6 +40,8 @@ class Delete extends CustomComponent
         $acc->updated_by = auth()->id();
         $acc->save();
     	$acc->delete();
+
+        cache()->forget('app-cash-flow-last');
 
     	$this->emit('dissmissModal', ['el' => $this->el]);
     	$this->message('Success! Entry has been deleted.', 'success');

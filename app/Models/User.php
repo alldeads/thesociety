@@ -81,9 +81,11 @@ class User extends Authenticatable
         });
     }
 
-    public static function getCompanyUsers($company_id)
+    public static function getCompanyUsers()
     {
-        return User::where('company_id', $company_id)->get();
+        return cache()->remember('app-company-users', 60*60*24*360, function() {
+            return User::where('company_id', auth()->user()->empCard->company_id)->with(['profile'])->get();
+        });
     }
 
     public static function getMenu()

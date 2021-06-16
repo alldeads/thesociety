@@ -24,10 +24,11 @@ class CompanyChartAccount extends Model
         'updated_by'
     ];
 
-    public static function getCompanyCharts($company_id)
+    public static function getCompanyCharts()
     {
-        return CompanyChartAccount::where('company_id', $company_id)
-                ->get();
+        return cache()->remember('app-company-charts', 60*60*24*360, function() {
+            return CompanyChartAccount::where('company_id', auth()->user()->empCard->company_id)->get();
+        });
     }
 
     public function company()

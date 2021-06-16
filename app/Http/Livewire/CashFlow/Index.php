@@ -32,8 +32,8 @@ class Index extends CustomComponent
     public function render()
     {
     	$search = $this->search;
-        $from = $this->date_from;
-        $to = $this->date_to;
+        $from   = $this->date_from;
+        $to     = $this->date_to;
 
     	$results = CashFlow::where('company_id', $this->company_id)
                     ->where( function (Builder $query) use ($search) {
@@ -59,7 +59,9 @@ class Index extends CustomComponent
             $results = $results->whereDate('created_at', '<=', $to );
         }
 
-        $results = $results->orderBy('id', 'desc')->paginate($this->limit);
+        $results = $results->orderBy('id', 'desc')
+                    ->with(['user.profile', 'chart_account.type'])
+                    ->paginate($this->limit);
                         
         return view('livewire.cash-flow.index', [
             'results' => $results
