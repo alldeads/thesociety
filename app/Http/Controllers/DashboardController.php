@@ -12,6 +12,6 @@ class DashboardController extends Controller
 	        ['link'=>"home",'name'=>"Home"], ['name'=>"Index"]
 	    ];
 
-	    return view('/content/home', ['breadcrumbs' => $breadcrumbs]);
+	    return view('content.home', ['breadcrumbs' => $breadcrumbs]);
     }
 }

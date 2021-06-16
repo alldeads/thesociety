@@ -7,10 +7,7 @@
         <ul class="nav navbar-nav flex-row">
             <li class="nav-item mr-auto">
                 <a class="navbar-brand" href="{{url('/')}}">
-                    @php
-                        $path = auth()->user()->empCard->company->avatar ?? asset('images/logo/logo-2.png');
-                    @endphp
-                    <img src="{{ $path }}" width="50">
+                    <img src="{{ $__avatar }}" width="50">
                 </a>
             </li>
             <li class="nav-item nav-toggle">
@@ -26,7 +23,7 @@
     <div class="main-menu-content mt-2">
         <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation">
 
-            @foreach($headers as $key => $header)
+            @foreach($__headers as $key => $header)
                 <li class="navigation-header">
                     <span>{{ ucwords($key) }}</span>
                     <i data-feather="more-horizontal"></i>

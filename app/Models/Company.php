@@ -54,6 +54,13 @@ class Company extends Model
         return $address;
     }
 
+    public static function getCompanyAvatar()
+    {
+        return cache()->remember('company-avatar', 60*60*24, function () {
+            return auth()->user()->empCard->company->avatar ?? asset('images/logo/logo-2.png');
+        });
+    }
+
     public function employees()
     {
     	return $this->hasMany(Employee::class);

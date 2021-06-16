@@ -60,11 +60,6 @@ class User extends Authenticatable
         return $this->hasOne(Contact::class);
     }
 
-    public function role()
-    {
-        return $this->belongsTo(CompanyRole::class, 'id', 'user_id');
-    }
-
     public function setting()
     {
         return $this->hasOne(UserSetting::class);
@@ -72,7 +67,18 @@ class User extends Authenticatable
 
     public static function getSetting()
     {
-        return auth()->user()->setting ?? null;
+        return cache()->remember('user-setting', 60*60*24, function() {
+            return auth()->user()->setting ?? null;
+        });
+    }
+
+    public static function getUserDetails()
+    {
+        return cache()->remember('user-details', 60*60*24, function() {
+            return User::where('id', auth()->id())
+                        ->with(['profile', 'empCard.role'])
+                        ->first();
+        });
     }
 
     public static function getCompanyUsers($company_id)
@@ -82,19 +88,23 @@ class User extends Authenticatable
 
     public static function getMenu()
     {
-        $permissions = auth()->user()->permissions;
+        return cache()->remember('app-menus',60*60*24, function() {
 
-        $headers = Header::all();
-        $menus   = [];
+            $user = auth()->user();
 
-        foreach ($headers as $header) {
-            foreach ($header->menus as $menu) {
-                if ( auth()->user()->hasPermissionTo($menu->permission) ) {
-                    $menus[$header->name][] = $menu;
+            $headers = Header::with('menus')->get();
+
+            $menus   = [];
+
+            foreach ($headers as $header) {
+                foreach ($header->menus as $menu) {
+                    if ( $user->hasPermissionTo($menu->permission) ) {
+                        $menus[$header->name][] = $menu;
+                    }
                 }
             }
-        }
 
-        return $menus;
+            return $menus;
+        });
     }
 }

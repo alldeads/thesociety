@@ -15,7 +15,7 @@
 @endsection
 
 
-@if (auth()->user()->email == "john@test.com")
+@if ($__details->email == "john@test.com")
 
 @section('content')
 <!-- Dashboard Ecommerce Starts -->
@@ -25,7 +25,7 @@
     <div class="col-xl-4 col-md-6 col-12">
       <div class="card card-congratulation-medal">
         <div class="card-body">
-          <h5>Congratulations 🎉 {{ auth()->user()->profile->first_name }}!</h5>
+          <h5>Congratulations 🎉 {{ $__details->profile->first_name }}!</h5>
           <p class="card-text font-small-3">You have won gold medal</p>
           <h3 class="mb-75 mt-2 pt-50">
             <a href="javascript:void(0);">$48.9k</a>
