@@ -21,7 +21,7 @@ class Edit extends CustomComponent
 
     public function mount()
     {
-    	$this->types = ChartType::all();
+    	$this->types = ChartType::getChartTypes();
     }
 
     public function edit($account)

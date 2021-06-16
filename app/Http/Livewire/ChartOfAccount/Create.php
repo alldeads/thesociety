@@ -21,7 +21,7 @@ class Create extends CustomComponent
 
 	public function mount()
 	{
-		$this->types = ChartType::all();
+		$this->types = ChartType::getChartTypes();
 	}
 
 	public function submit()

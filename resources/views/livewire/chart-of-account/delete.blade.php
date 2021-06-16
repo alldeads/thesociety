@@ -3,17 +3,19 @@
 		<div class="modal-dialog modal-dialog-centered" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h5 class="modal-title" id="myModalLabel120">Delete Account</h5>
+					<h5 class="modal-title" id="myModalLabel120">{{ __('Delete Account') }}</h5>
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 						<span aria-hidden="true">&times;</span>
 					</button>
 				</div>
 				<div class="modal-body">
-					 <p> Are you sure you want to delete this account? Once the account is deleted, all of its data will be permanently deleted.</p>
+					<p> 
+						{{ __('Are you sure you want to delete this account? Once the account is deleted, all of its data will be permanently deleted.') }}
+					</p>
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
-					<button type="button" class="btn btn-danger" wire:click="confirm">Confirm</button>
+					<button type="button" class="btn btn-primary" data-dismiss="modal">{{ __('Cancel') }}</button>
+					<button type="button" class="btn btn-danger" wire:click="confirm">{{ __('Confirm') }}</button>
 				</div>
 			</div>
 		</div>

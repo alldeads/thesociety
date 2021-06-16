@@ -16,11 +16,11 @@ class ChartOfAccountController extends Controller
     	$response = Gate::inspect('chart.view');
 
     	$breadcrumbs = [
-	        ['link'=> route('home'), 'name'=>"Dashboard"], 
-	        ['name'=>"Chart of Accounts"],
+	        ['link' => route('home'), 'name'=>"Dashboard"], 
+	        ['name' =>"Chart of Accounts"],
 	    ];
 
-	    $company = Company::findOrFail(auth()->user()->empCard->company_id);
+	    $company = Company::getCompanyDetails();
 
 		if ( $response->allowed() ) {
 		    return view('chart-account.index', [

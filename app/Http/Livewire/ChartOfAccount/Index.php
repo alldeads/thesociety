@@ -38,7 +38,9 @@ class Index extends CustomComponent
                                 ->orWhereHas('type', function($query) use ($search) {
                                     return $query->where('name', 'like', "%" . $search ."%");
                                 });
-					})->orderBy('code', 'asc')->paginate($this->limit);
+					})->orderBy('code', 'asc')
+                    ->with(['type'])
+                    ->paginate($this->limit);
                         
         return view('livewire.chart-of-account.index', [
             'results' => $results

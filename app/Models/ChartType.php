@@ -13,4 +13,11 @@ class ChartType extends Model
     {
     	return $this->hasMany(ChartAccount::class, 'chart_type_id');
     }
+
+    public static function getChartTypes()
+    {
+    	return cache()->remember('app-chart-types', 60*60*24*360, function() {
+    		return ChartType::all();
+    	});
+    }
 }

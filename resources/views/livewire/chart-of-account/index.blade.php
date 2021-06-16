@@ -7,7 +7,7 @@
 		  				@can('chart.create')
 	  						<button type="button" class="btn btn-primary rounded" data-toggle="modal" data-target="#modal-chart-create" wire:ignore>
 			          			<i data-feather="plus" class="mr-25"></i>
-			              		<span>Create</span>
+			              		<span>{{ __('Create') }}</span>
 			            	</button>
 		            	@endcan
 
@@ -15,41 +15,41 @@
 			            	<div class="btn-group">
 			              		<button type="button" class="btn btn-outline-primary ml-2 dropdown-toggle rounded" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 			              			<i class="fas fa-download mr-1"></i>
-			              			<span>Export</span>
+			              			<span>{{ __('Export') }}</span>
 			              		</button>
 					             <div class="dropdown-menu">
 					                <a class="dropdown-item" href="{{ route('chart-of-accounts-export', [
 					                	'type' => 'csv',
 					                	'q'    => $this->search
 					                ]) }}" target="_blank">
-			              				<span>CSV</span>
+			              				<span>{{ __('CSV') }}</span>
 				                	</a>
 				                	<a class="dropdown-item" href="{{ route('chart-of-accounts-export', [
 					                	'type' => 'xls',
 					                	'q'    => $this->search
 					                ]) }}" target="_blank">
-			              				<span>EXCEL (xls)</span>
+			              				<span>{{ __('EXCEL (xls)') }}</span>
 				                	</a>
 
 				                	<a class="dropdown-item" href="{{ route('chart-of-accounts-export', [
 					                	'type' => 'xlsx',
 					                	'q'    => $this->search
 					                ]) }}" target="_blank">
-			              				<span>EXCEL (xlsx)</span>
+			              				<span>{{ __('EXCEL (xlsx)') }}</span>
 				                	</a>
 
 				                	<a class="dropdown-item" href="{{ route('chart-of-accounts-export', [
 					                	'type' => 'ods',
 					                	'q'    => $this->search
 					                ]) }}" target="_blank">
-			              				<span>ODS</span>
+			              				<span>{{ __('ODS') }}</span>
 				                	</a>
 
 				                	<a class="dropdown-item" href="{{ route('chart-of-accounts-export', [
 					                	'type' => 'pdf',
 					                	'q'    => $this->search
 					                ]) }}" target="_blank">
-			              				<span>PDF</span>
+			              				<span>{{ __('PDF') }}</span>
 				                	</a>
 					            </div>
 			            	</div>
@@ -65,10 +65,10 @@
 		  				<div class="col-md-2 col-lg-2 col-xl-2 col-sm-12 mt-1">
 		  					<div class="form-group">
 			                  	<select class="form-control" wire:model="limit">
-			                  		<option value="10">10 entries</option>
-			                  		<option value="25">25 entries</option>
-			                  		<option value="50">50 entries</option>
-			                  		<option value="100">100 entries</option>
+			                  		<option value="10">{{ __('10 entries') }}</option>
+			                  		<option value="25">{{ __('25 entries') }}</option>
+			                  		<option value="50">{{ __('50 entries') }}</option>
+			                  		<option value="100">{{ __('100 entries') }}</option>
 			                  	</select>
 	                		</div>
 		  				</div>
@@ -79,24 +79,22 @@
 					<table class="table table-hover">
 			  			<thead>
 							<tr>
-								<th>Code</th>
-								<th>Title</th>
-								<th>Type</th>
+								<th>{{ __('Code') }}</th>
+								<th>{{ __('Title') }}</th>
+								<th>{{ __('Type') }}</th>
 								@if( auth()->user()->can('chart.update') || auth()->user()->can('chart.delete') )
-									<th>Actions</th>
+									<th>{{ __('Actions') }}</th>
 								@endif
 							</tr>
 			  			</thead>
 			  			<tbody>
-				  			@foreach($results as $result)
+				  			@forelse($results as $result)
 				  				@livewire('chart-of-account.item', ['account' => $result], key($result->id))
-				  			@endforeach
-
-				  			@if( count($results->toArray()) == 0 )
+				  			@empty
 				  				<tr class="text-center">
-				  					<td colspan="4"> No items found.</td>
+				  					<td colspan="4"> {{ __('No items found.') }}</td>
 				  				</tr>
-				  			@endif
+				  			@endforelse
 			  			</tbody>
 					</table>
 		  		</div>

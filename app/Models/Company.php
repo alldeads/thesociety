@@ -61,6 +61,13 @@ class Company extends Model
         });
     }
 
+    public static function getCompanyDetails()
+    {
+        return cache()->remember('company-details', 60*60*24, function () {
+            return Company::findOrFail(auth()->user()->empCard->company_id);
+        });
+    }
+
     public function employees()
     {
     	return $this->hasMany(Employee::class);
