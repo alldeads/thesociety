@@ -29,6 +29,11 @@ class Index extends CustomComponent
         $this->resetPage();
     }
 
+    public function create()
+    {
+        return redirect()->route('cash-flow-create');
+    }
+
     public function render()
     {
     	$search = $this->search;

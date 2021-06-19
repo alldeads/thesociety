@@ -5,7 +5,7 @@
 		  		<div class="card-body">
 	  				<div class="d-flex justify-content-between">
 			  			@can('cashflow.create')
-	  						<button type="button" class="btn btn-primary rounded" data-toggle="modal" data-target="#modal-cash-flow-create" wire:ignore>
+			            	<button type="button" class="btn btn-primary rounded" wire:click="create" wire:ignore>
 			          			<i data-feather="plus" class="mr-25"></i>
 			              		<span>{{ __('Create') }}</span>
 			            	</button>
@@ -127,5 +127,4 @@
 	</div>
 </div>
 
-@livewire('cash-flow.create', ['company_id' => $company_id])
 @livewire('cash-flow.delete', ['company_id' => $company_id])

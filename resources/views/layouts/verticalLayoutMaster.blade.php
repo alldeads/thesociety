@@ -81,6 +81,10 @@
 			$("#" + param['el']).modal('hide');
 		});
 
+		window.livewire.on('resetFile', param => {
+			$("#" + param).val('');
+		});
+
 		window.livewire.on('sweet', param => {
 			Swal.fire({
 		  		title: param['title'],

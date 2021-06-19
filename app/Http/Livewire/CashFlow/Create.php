@@ -26,31 +26,32 @@ class Create extends CustomComponent
 		$this->accounts = CompanyChartAccount::getCompanyCharts();
 		$this->users    = User::getCompanyUsers();
 
-        $this->inputs['posting'] = Carbon::now()->format('Y-m-d');
+        $this->inputs['posting_date'] = Carbon::now()->format('Y-m-d');
 	}
+
+    public function resetBtn()
+    {
+        $this->inputs = [];
+        $this->inputs['posting_date'] = Carbon::now()->format('Y-m-d');
+        $this->emit('resetFile', 'attachment');
+    }
 
 	public function submit()
 	{
-		$validator = Validator::make($this->inputs, [
+		Validator::make($this->inputs, [
             'account_title'  => ['required', 'numeric'],
             'account_number' => ['nullable'],
             'check_no'       => ['nullable'],
-            'posting'        => ['required', 'date'],
+            'posting_date'   => ['required', 'date'],
             'movement'       => ['required'],
             'amount'         => ['required', 'numeric'],
             'payor'          => ['required', 'numeric'],
             'description'    => ['required'],
             'notes'          => ['nullable'],
             'attachment'     => ['nullable', 'file'],
-        ]);
-
-        if ($validator->fails()) {
-        	$error = $validator->errors();
-            foreach ($error->all() as $message) {
-			    $this->message($message, 'error');
-			    return;
-			}
-        }
+        ], [
+            'payor.required'   => 'Payee or Payor is required.',
+        ])->validate();
 
         $attachment = "";
 
@@ -82,7 +83,7 @@ class Create extends CustomComponent
         	'account_type_id'  => $this->inputs['account_title'],
             'account_no'       => $this->inputs['account_number'] ?? null,
             'check_no'         => $this->inputs['check_no'] ?? null,
-            'posting_date'     => $this->inputs['posting'],
+            'posting_date'     => $this->inputs['posting_date'],
             'description'      => $this->inputs['description'] ?? null,
         	'payor'            => $this->inputs['payor'],
         	'notes'            => $this->inputs['notes'] ?? null,
@@ -96,11 +97,11 @@ class Create extends CustomComponent
 
         $this->emit('refreshCashFlowParent');
 
+        $this->emit('resetFile', 'attachment');
+
         $this->message('New Entry has been created', 'success');
 
         $this->inputs = [];
-
-        $this->emit('dissmissModal', ['el' => 'modal-cash-flow-create']);
 
         $this->emit('refreshCashFlowItem');
 	}

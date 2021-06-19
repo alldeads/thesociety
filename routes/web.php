@@ -60,8 +60,14 @@ Route::middleware('auth')->group(function() {
 	Route::prefix('accounting')->group( function() {
 		Route::get('chart-of-accounts', 'ChartOfAccountController@index')->name('chart-of-accounts');
 		Route::get('chart-of-accounts/export', 'ChartOfAccountController@export')->name('chart-of-accounts-export');
-		Route::get('cash-flow', 'CashFlowController@index')->name('cash-flow');
-		Route::get('cash-flow/export', 'CashFlowController@export')->name('cash-flow-export');
+
+		Route::prefix('cash-flow')->group(function () {
+			Route::get('/', 'CashFlowController@index')->name('cash-flow');
+			Route::get('create', 'CashFlowController@create')->name('cash-flow-create');
+			Route::get('export', 'CashFlowController@export')->name('cash-flow-export');
+		});
+
+		
 		Route::get('tax', 'TaxController@index')->name('tax');
 	});
 

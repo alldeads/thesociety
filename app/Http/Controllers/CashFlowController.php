@@ -12,7 +12,7 @@ class CashFlowController extends Controller
 {
     public function index()
     {
-    	$response = Gate::inspect('chart.view');
+    	$response = Gate::inspect('cashflow.view');
 
     	$breadcrumbs = [
 	        ['link'=> route('home'), 'name'=>"Dashboard"], 
@@ -23,6 +23,28 @@ class CashFlowController extends Controller
 
 		if ( $response->allowed() ) {
 		    return view('cash-flow.index', [
+		    	'breadcrumbs' => $breadcrumbs,
+		    	'company'     => $company
+		    ]);
+		} else {
+		    return view('misc.not-authorized');
+		}
+    }
+
+    public function create()
+    {
+    	$response = Gate::inspect('cashflow.create');
+
+    	$breadcrumbs = [
+	        ['link'=> route('home'), 'name'=>"Dashboard"], 
+	        ['link'=> route('cash-flow'), 'name'=>"Cash Flow"], 
+	        ['name'=>"New Entry"],
+	    ];
+
+	    $company = Company::getCompanyDetails();
+
+		if ( $response->allowed() ) {
+		    return view('cash-flow.create', [
 		    	'breadcrumbs' => $breadcrumbs,
 		    	'company'     => $company
 		    ]);
