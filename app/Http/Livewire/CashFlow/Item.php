@@ -20,6 +20,11 @@ class Item extends Component
 		$this->emit('deleteCashFlowItem', ['cashflow' => $this->item]);
 	}
 
+	public function read()
+	{
+		return redirect()->route('cash-flow-read', ['cashflow' => $this->item->id]);
+	}
+
     public function render()
     {
     	$this->last = CashFlow::getCompanyLastEntry();

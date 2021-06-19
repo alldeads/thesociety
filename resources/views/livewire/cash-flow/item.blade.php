@@ -44,12 +44,12 @@
 	                    </a>
 	                @endcan
 
-	                {{-- @can('chart.read')
+	                @can('cashflow.read')
 	                    <a class="dropdown-item" wire:click="read" href="javascript:void(0);">
 	                      	<i class="fas fa-eye mr-1"></i>
 	                      	<span>View</span>
 	                    </a>
-	                @endcan --}}
+	                @endcan
 
 	                @if ($last->id == $item->id)
 		                @can('cashflow.delete')

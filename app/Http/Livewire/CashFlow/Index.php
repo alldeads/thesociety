@@ -39,6 +39,7 @@ class Index extends CustomComponent
     	$search = $this->search;
         $from   = $this->date_from;
         $to     = $this->date_to;
+        $limit  = $this->limit ?? 10;
 
     	$results = CashFlow::where('company_id', $this->company_id)
                     ->where( function (Builder $query) use ($search) {
@@ -66,7 +67,7 @@ class Index extends CustomComponent
 
         $results = $results->orderBy('id', 'desc')
                     ->with(['user.profile', 'chart_account.type'])
-                    ->paginate($this->limit);
+                    ->paginate($limit);
                         
         return view('livewire.cash-flow.index', [
             'results' => $results

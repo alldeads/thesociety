@@ -53,7 +53,7 @@ class Create extends CustomComponent
             'payor.required'   => 'Payee or Payor is required.',
         ])->validate();
 
-        $attachment = "";
+        $attachment = null;
 
         if ( isset($this->inputs['attachment']) ) {
             $attachment = Storage::url($this->inputs['attachment']->store('attachments'));

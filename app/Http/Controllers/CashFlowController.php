@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 
 use App\Models\Company;
+use App\Models\CashFlow;
 use App\Exports\CashFlowExport;
 
 class CashFlowController extends Controller
@@ -47,6 +48,28 @@ class CashFlowController extends Controller
 		    return view('cash-flow.create', [
 		    	'breadcrumbs' => $breadcrumbs,
 		    	'company'     => $company
+		    ]);
+		} else {
+		    return view('misc.not-authorized');
+		}
+    }
+
+    public function view(CashFlow $cashflow)
+    {
+    	$response = Gate::inspect('cashflow.read');
+
+    	$breadcrumbs = [
+	        ['link'=> route('home'), 'name'=>"Dashboard"], 
+	        ['link'=> route('cash-flow'), 'name'=>"Cash Flow"], 
+	        ['name'=>"View Entry"],
+	    ];
+
+	    $company = Company::getCompanyDetails();
+
+		if ( $response->allowed() && ($company->id == $cashflow->company_id) ) {
+		    return view('cash-flow.read', [
+		    	'breadcrumbs' => $breadcrumbs,
+		    	'cashflow'    => $cashflow
 		    ]);
 		} else {
 		    return view('misc.not-authorized');

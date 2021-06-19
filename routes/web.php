@@ -64,6 +64,7 @@ Route::middleware('auth')->group(function() {
 		Route::prefix('cash-flow')->group(function () {
 			Route::get('/', 'CashFlowController@index')->name('cash-flow');
 			Route::get('create', 'CashFlowController@create')->name('cash-flow-create');
+			Route::get('view/{cashflow}', 'CashFlowController@view')->name('cash-flow-read');
 			Route::get('export', 'CashFlowController@export')->name('cash-flow-export');
 		});
 
