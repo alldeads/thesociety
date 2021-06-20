@@ -39,6 +39,11 @@ class Read extends Component
 		return redirect()->route('cash-flow-create');
 	}
 
+	public function edit()
+	{
+		return redirect()->route('cash-flow-edit', ['cashflow' => $this->cashflow->id]);
+	}
+
     public function render()
     {
         return view('livewire.cash-flow.read');
