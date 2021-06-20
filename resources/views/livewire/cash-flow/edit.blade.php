@@ -3,7 +3,7 @@
 		<div class="col-12">
 			<div class="card">
 				<div class="card-header">
-					<h4 class="card-title">{{ __('Cash Flow Entry') }}</h4>
+					<h4 class="card-title">{{ __('Edit Cash Flow Entry') }}</h4>
 				</div>
 
 				<div class="card-body">
@@ -21,6 +21,17 @@
 
 					<form class="form">
 						<div class="row">
+
+							<div class="col-12">
+                				<div class="form-group">
+                  					<label class="form-label" for="balance">
+                  						{{ __('Running Balance') }}
+                  					</label>
+
+	            					<input type="text" id="balance" class="form-control" wire:model="inputs.balance" readonly>
+                				</div>
+              				</div>
+
 							<div class="col-md-6 col-12">
 								<div class="form-group">
 									<label class="form-label" for="posting-date">
@@ -78,7 +89,7 @@
 									<label class="form-label" for="movement">
 										{{ __('Movement') }} <span class="asterisk">*</span>
 									</label>
-									<select class="form-control @error('movement') is-invalid @enderror" id="movement" wire:model="inputs.movement">
+									<select class="form-control @error('movement') is-invalid @enderror" id="movement" wire:model="inputs.movement" {{ $last->id != $cashflow->id ? "disabled" : "" }}>
 										<option> {{ __('Select Movement') }}</option>
 										<option value="cr"> {{ __('Credit') }}</option>
 										<option value="dr"> {{ __('Debit') }}</option>
@@ -97,7 +108,7 @@
 									<label class="form-label" for="amount">
 										{{ __('Amount') }} <span class="asterisk">*</span>
 									</label>
-									<input type="number" wire:model="inputs.amount" id="amount" class="form-control @error('amount') is-invalid @enderror">
+									<input type="number" wire:model="inputs.amount" id="amount" class="form-control @error('amount') is-invalid @enderror" {{ $last->id != $cashflow->id ? "readonly" : "" }}>
 
 									@error('amount')
 										<span class="invalid-feedback" role="alert">
@@ -133,6 +144,10 @@
 								<div class="form-group">
 									<label class="form-label" for="attachment">{{ __('Attachment') }} (<em>{{ __('optional') }}</em>)</label>
 									<input type="file" id="attachment" class="form-control" wire:model="inputs.attachment">
+
+									@if ($inputs['old_attachment'])
+										<span> <a href="{{ $inputs['old_attachment'] }}" target="_blank"> View Attachment</a></span>
+									@endif
 								</div>
 							</div>
 
@@ -159,7 +174,7 @@
 							</div>
 			  
 							<div class="col-12">
-								<button wire:click.prevent="submit" class="btn btn-primary mr-1">{{ __('Create') }}</button>
+								<button wire:click.prevent="save" class="btn btn-primary mr-1">{{ __('Save Changes') }}</button>
 								<button wire:click.prevent="resetBtn" class="btn btn-outline-secondary">{{ __('Reset') }}</button>
 							</div>
 						</div>

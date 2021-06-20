@@ -76,6 +76,28 @@ class CashFlowController extends Controller
 		}
     }
 
+    public function edit(CashFlow $cashflow)
+    {
+    	$response = Gate::inspect('cashflow.update');
+
+    	$breadcrumbs = [
+	        ['link'=> route('home'), 'name'=>"Dashboard"], 
+	        ['link'=> route('cash-flow'), 'name'=>"Cash Flow"], 
+	        ['name'=>"Edit Entry"],
+	    ];
+
+	    $company = Company::getCompanyDetails();
+
+		if ( $response->allowed() && ($company->id == $cashflow->company_id) ) {
+		    return view('cash-flow.edit', [
+		    	'breadcrumbs' => $breadcrumbs,
+		    	'cashflow'    => $cashflow
+		    ]);
+		} else {
+		    return view('misc.not-authorized');
+		}
+    }
+
     public function export(Request $request)
     {
     	$types = ['csv', 'pdf', 'xlsx', 'xls', 'ods'];

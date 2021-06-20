@@ -25,6 +25,11 @@ class Item extends Component
 		return redirect()->route('cash-flow-read', ['cashflow' => $this->item->id]);
 	}
 
+	public function edit()
+	{
+		return redirect()->route('cash-flow-edit', ['cashflow' => $this->item->id]);
+	}
+
     public function render()
     {
     	$this->last = CashFlow::getCompanyLastEntry();
