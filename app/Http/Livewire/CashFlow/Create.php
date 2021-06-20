@@ -95,15 +95,11 @@ class Create extends CustomComponent
 
         cache()->forget('app-cash-flow-last');
 
-        $this->emit('refreshCashFlowParent');
-
         $this->emit('resetFile', 'attachment');
 
         $this->message('New Entry has been created', 'success');
 
         $this->inputs = [];
-
-        $this->emit('refreshCashFlowItem');
 	}
 
     public function render()

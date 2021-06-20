@@ -45,7 +45,7 @@ class Edit extends CustomComponent
 			'account_number' => $cashflow->account_no,
 			'balance'        => number_format($cashflow->balance, 2, '.', ','),
 			'check_no'       => $cashflow->check_no,
-			'movement'       => $cashflow->credit == 0 ? "cr" : "dr",
+			'movement'       => $cashflow->credit != 0 ? "cr" : "dr",
 			'amount'         => $amount,
 			'payor'          => $cashflow->payor,
 			'old_attachment' => $cashflow->attachment,
@@ -72,6 +72,60 @@ class Edit extends CustomComponent
         ], [
             'payor.required'   => 'Payee or Payor is required.',
         ])->validate();
+
+        $cf = CashFlow::find($this->cashflow->id);
+
+        $balance = $cf->balance; // current balance
+        $data    = [];
+        $updated = [];
+
+        if ( $cf->id == $this->last->id ) { // Last entry
+        	if ( $cf->credit == 0 ) {
+        		$balance -= $cf->debit;
+        	} else {
+        		$balance += $cf->credit;
+        	}
+
+        	if ( $this->inputs['movement'] == "cr" ) {
+	        	$data['credit']  = $this->inputs['amount'];
+	        	$data['balance'] = $balance - $this->inputs['amount'];
+	        } else {
+	        	$data['debit']   = $this->inputs['amount'];
+	        	$data['balance'] = $balance + $this->inputs['amount'];
+	        }
+
+	        $cf->fill([
+	        	'credit'   => $data['credit'] ?? 0,
+	        	'debit'    => $data['debit'] ?? 0,
+	        	'balance'  => $data['balance']
+	        ]);
+        }
+
+        $attachment = null;
+
+        if ( isset($this->inputs['attachment']) ) {
+            $attachment = Storage::url($this->inputs['attachment']->store('attachments'));
+            $cf->attachment = $attachment;
+        } 
+
+        $cf->fill([
+        	'updated_by'       => auth()->id(),
+        	'account_type_id'  => $this->inputs['account_title'],
+            'account_no'       => $this->inputs['account_number'] ?? null,
+            'check_no'         => $this->inputs['check_no'] ?? null,
+            'posting_date'     => $this->inputs['posting_date'],
+            'description'      => $this->inputs['description'] ?? null,
+        	'payor'            => $this->inputs['payor'],
+        	'notes'            => $this->inputs['notes'] ?? null
+        ]);
+
+        $cf->save();
+
+        $this->inputs['balance'] = number_format($data['balance'] ?? $balance, 2, '.', ',');
+
+        cache()->forget('app-cash-flow-last');
+
+        $this->message('Entry has been updated.', 'success');
 	}
 
     public function render()

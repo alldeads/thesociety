@@ -20,7 +20,7 @@ class Read extends Component
 			'account_title'  => $cashflow->chart_account->chart_name,
 			'account_number' => $cashflow->account_no ?? "N/A",
 			'check_no'       => $cashflow->check_no ?? "N/A",
-			'movement'       => $cashflow->credit == 0 ? "Credit" : "Debit",
+			'movement'       => $cashflow->credit != 0 ? "Credit" : "Debit",
 			'balance'        => number_format($cashflow->balance, 2, '.', ','),
 			'amount'         => number_format($amount, 2, '.', ','),
 			'payee'          => $cashflow->user->profile->name,
