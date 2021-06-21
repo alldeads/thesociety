@@ -30,7 +30,8 @@ class DatabaseSeeder extends Seeder
             ProductSeeder::class,
             SupplySeeder::class,
             TaxSeeder::class,
-            PurchaseOrderSeeder::class
+            PurchaseOrderSeeder::class,
+            JournalEntrySeeder::class
         ]);
     }
 }
