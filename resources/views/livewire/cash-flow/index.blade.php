@@ -106,18 +106,16 @@
 							</tr>
 			  			</thead>
 			  			<tbody>
-				  			@foreach($results as $key => $result)
+				  			@forelse($results as $key => $result)
 				  				@livewire('cash-flow.item', ['item' => $result], key($result->id))
-				  			@endforeach
+				  			@empty
+				  				<tr class="text-center">
+				  					<td colspan="7"> {{ __('No items found.') }}</td>
+				  				</tr>
+				  			@endforelse
 			  			</tbody>
 					</table>
 		  		</div>
-
-		  		@if( count($results->items()) == 0 )
-			  		<div class="m-auto p-2">
-					  	<p>No Items Found.</p>
-			  		</div>
-		  		@endif
 		  		
 		  		<div class="m-auto">
 		  			{{ $results->links() }}
@@ -125,6 +123,6 @@
 			</div>
 	  	</div>
 	</div>
-</div>
 
-@livewire('cash-flow.delete', ['company_id' => $company_id])
+	@livewire('cash-flow.delete', ['company_id' => $company_id])
+</div>

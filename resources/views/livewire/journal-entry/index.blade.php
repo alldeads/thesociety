@@ -124,6 +124,5 @@
 			</div>
 	  	</div>
 	</div>
+	@livewire('journal-entry.delete', ['company_id' => $company_id])
 </div>
-
-@livewire('cash-flow.delete', ['company_id' => $company_id])

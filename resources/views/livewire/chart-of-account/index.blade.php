@@ -104,9 +104,9 @@
 			</div>
 	  	</div>
 	</div>
-</div>
 
-@livewire('chart-of-account.create', ['company_id' => $company_id])
-@livewire('chart-of-account.edit', ['company_id' => $company_id])
-@livewire('chart-of-account.read')
-@livewire('chart-of-account.delete', ['company_id' => $company_id])
+	@livewire('chart-of-account.create', ['company_id' => $company_id])
+	@livewire('chart-of-account.edit', ['company_id' => $company_id])
+	@livewire('chart-of-account.read')
+	@livewire('chart-of-account.delete', ['company_id' => $company_id])
+</div>
