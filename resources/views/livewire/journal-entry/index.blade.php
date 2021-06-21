@@ -18,7 +18,7 @@
 			              			<span>{{ __('Export') }}</span>
 			              		</button>
 					             <div class="dropdown-menu">
-					                <a class="dropdown-item" href="{{ route('cash-flow-export', [
+					                <a class="dropdown-item" href="{{ route('journal-entry-export', [
 					                	'type' => 'csv',
 					                	'q'    => $this->search,
 					                	'from' => $this->date_from,
@@ -26,7 +26,7 @@
 					                ]) }}" target="_blank">
 			              				<span>{{ __('CSV') }}</span>
 				                	</a>
-				                	<a class="dropdown-item" href="{{ route('cash-flow-export', [
+				                	<a class="dropdown-item" href="{{ route('journal-entry-export', [
 					                	'type' => 'xls',
 					                	'q'    => $this->search,
 					                	'from' => $this->date_from,
@@ -35,7 +35,7 @@
 			              				<span>{{ __('EXCEL (xls)') }}</span>
 				                	</a>
 
-				                	<a class="dropdown-item" href="{{ route('cash-flow-export', [
+				                	<a class="dropdown-item" href="{{ route('journal-entry-export', [
 					                	'type' => 'xlsx',
 					                	'q'    => $this->search,
 					                	'from' => $this->date_from,
@@ -44,7 +44,7 @@
 			              				<span>{{ __('EXCEL (xlsx)') }}</span>
 				                	</a>
 
-				                	<a class="dropdown-item" href="{{ route('cash-flow-export', [
+				                	<a class="dropdown-item" href="{{ route('journal-entry-export', [
 					                	'type' => 'ods',
 					                	'q'    => $this->search,
 					                	'from' => $this->date_from,
@@ -105,18 +105,16 @@
 							</tr>
 			  			</thead>
 			  			<tbody>
-				  			@foreach($results as $key => $result)
+				  			@forelse($results as $key => $result)
 				  				@livewire('journal-entry.item', ['item' => $result], key($result->id))
-				  			@endforeach
+				  			@empty
+				  				<tr class="text-center">
+				  					<td colspan="6"> {{ __('No items found.') }}</td>
+				  				</tr>
+				  			@endforelse
 			  			</tbody>
 					</table>
 		  		</div>
-
-		  		@if( count($results->items()) == 0 )
-			  		<div class="m-auto p-2">
-					  	<p>No Items Found.</p>
-			  		</div>
-		  		@endif
 		  		
 		  		<div class="m-auto">
 		  			{{ $results->links() }}
@@ -124,5 +122,6 @@
 			</div>
 	  	</div>
 	</div>
+
 	@livewire('journal-entry.delete', ['company_id' => $company_id])
 </div>

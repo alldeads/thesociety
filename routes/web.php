@@ -74,7 +74,7 @@ Route::middleware('auth')->group(function() {
 			// Route::get('create', 'CashFlowController@create')->name('cash-flow-create');
 			// Route::get('edit/{cashflow}', 'CashFlowController@edit')->name('cash-flow-edit');
 			// Route::get('view/{cashflow}', 'CashFlowController@view')->name('cash-flow-read');
-			// Route::get('export', 'CashFlowController@export')->name('cash-flow-export');
+			Route::get('export', 'JournalEntryController@export')->name('journal-entry-export');
 		});
 		
 		Route::get('tax', 'TaxController@index')->name('tax');
