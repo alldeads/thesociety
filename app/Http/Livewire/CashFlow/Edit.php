@@ -101,11 +101,10 @@ class Edit extends CustomComponent
 	        ]);
         }
 
-        $attachment = null;
+        $attachment = $cf->attachment;
 
         if ( isset($this->inputs['attachment']) ) {
             $attachment = Storage::url($this->inputs['attachment']->store('attachments'));
-            $cf->attachment = $attachment;
         } 
 
         $cf->fill([
@@ -116,12 +115,14 @@ class Edit extends CustomComponent
             'posting_date'     => $this->inputs['posting_date'],
             'description'      => $this->inputs['description'] ?? null,
         	'payor'            => $this->inputs['payor'],
-        	'notes'            => $this->inputs['notes'] ?? null
+        	'notes'            => $this->inputs['notes'] ?? null,
+        	'attachment'       => $attachment
         ]);
 
         $cf->save();
 
         $this->inputs['balance'] = number_format($data['balance'] ?? $balance, 2, '.', ',');
+        $this->inputs['old_attachment'] = $attachment;
 
         cache()->forget('app-cash-flow-last');
 
