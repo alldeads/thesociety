@@ -23,54 +23,63 @@ class TaxSeeder extends Seeder
         		'company_id' => $company->id,
         		'name'       => 'Capital Gains Tax',
         		'percentage' => rand(1,20),
+                'created_by' => 1
         	]);
 
         	Tax::create([
         		'company_id' => $company->id,
         		'name'       => 'Documentary Stamp Tax',
         		'percentage' => rand(1,20),
+                'created_by' => 1
         	]);
 
         	Tax::create([
         		'company_id' => $company->id,
         		'name'       => 'Donor\'s Tax',
         		'percentage' => rand(1,20),
+                'created_by' => 1
         	]);
 
         	Tax::create([
         		'company_id' => $company->id,
         		'name'       => 'Estate Tax',
         		'percentage' => rand(1,20),
+                'created_by' => 1
         	]);
 
         	Tax::create([
         		'company_id' => $company->id,
         		'name'       => 'Income Tax',
         		'percentage' => rand(1,20),
+                'created_by' => 1
         	]);
 
         	Tax::create([
         		'company_id' => $company->id,
         		'name'       => 'Percentage Tax',
         		'percentage' => rand(1,20),
+                'created_by' => 1
         	]);
 
         	Tax::create([
         		'company_id' => $company->id,
         		'name'       => 'Value Added Tax',
         		'percentage' => rand(1,20),
+                'created_by' => 1
         	]);
 
         	Tax::create([
         		'company_id' => $company->id,
         		'name'       => 'Withholding Tax',
         		'percentage' => rand(1,20),
+                'created_by' => 1
         	]);
 
         	Tax::create([
         		'company_id' => $company->id,
         		'name'       => 'Excise Tax',
         		'percentage' => rand(1,20),
+                'created_by' => 1
         	]);
         }
     }

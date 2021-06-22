@@ -99,7 +99,7 @@
 								<th>Type</th>
 								<th>Debit</th>
 								<th>Credit</th>
-								@if( auth()->user()->can('journal_entry.update') || auth()->user()->can('journal_entry.delete') )
+								@if( auth()->user()->can('journal_entry.update') || auth()->user()->can('journal_entry.delete') || auth()->user()->can('journal_entry.read') )
 									<th>Actions</th>
 								@endif
 							</tr>

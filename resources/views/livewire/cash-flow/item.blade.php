@@ -28,7 +28,7 @@
 
 	<td>{{ number_format($item->balance, 2,'.', ',') }}</td>
 
-	@if( auth()->user()->can('cashflow.update') || auth()->user()->can('cashflow.delete') )
+	@if( auth()->user()->can('cashflow.update') || auth()->user()->can('cashflow.delete') || auth()->user()->can('cashflow.read') )
 
 		<td>
 			<div class="dropdown">

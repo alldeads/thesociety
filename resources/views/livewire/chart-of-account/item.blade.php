@@ -7,7 +7,7 @@
 		</span>
 	</td>
 
-	@if( auth()->user()->can('chart.update') || auth()->user()->can('chart.delete') )
+	@if( auth()->user()->can('chart.update') || auth()->user()->can('chart.delete') || auth()->user()->can('chart.read') )
 		<td>
 			<div class="dropdown">
                 <button type="button" class="btn btn-sm dropdown-toggle hide-arrow" data-toggle="dropdown">

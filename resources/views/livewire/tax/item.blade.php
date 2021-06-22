@@ -3,7 +3,7 @@
 	<td>{{ $item->name }}</td>
 	<td>{{ $item->percentage }}</td>
 
-	@if( auth()->user()->can('tax.update') || auth()->user()->can('tax.delete') )
+	@if( auth()->user()->can('tax.update') || auth()->user()->can('tax.delete')  || auth()->user()->can('tax.read'))
 		<td>
 			<div class="dropdown">
                 <button type="button" class="btn btn-sm dropdown-toggle hide-arrow" data-toggle="dropdown">

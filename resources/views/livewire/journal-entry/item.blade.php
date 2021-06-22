@@ -26,7 +26,7 @@
 		</td>
 	@endif
 
-	@if( auth()->user()->can('journal_entry.update') || auth()->user()->can('journal_entry.delete') )
+	@if( auth()->user()->can('journal_entry.update') || auth()->user()->can('journal_entry.delete') || auth()->user()->can('journal_entry.read') )
 
 		<td>
 			<div class="dropdown">

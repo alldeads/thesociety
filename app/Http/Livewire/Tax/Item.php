@@ -22,6 +22,11 @@ class Item extends Component
 		$this->emit('editTaxItem', ['item' => $this->item]);
 	}
 
+	public function read()
+	{
+		$this->emit('readTaxItem', ['item' => $this->item]);
+	}
+
     public function render()
     {
         return view('livewire.tax.item');

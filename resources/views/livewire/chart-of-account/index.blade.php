@@ -82,7 +82,7 @@
 								<th>{{ __('Code') }}</th>
 								<th>{{ __('Title') }}</th>
 								<th>{{ __('Type') }}</th>
-								@if( auth()->user()->can('chart.update') || auth()->user()->can('chart.delete') )
+								@if( auth()->user()->can('chart.update') || auth()->user()->can('chart.delete') || auth()->user()->can('chart.read') )
 									<th>{{ __('Actions') }}</th>
 								@endif
 							</tr>

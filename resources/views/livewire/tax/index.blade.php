@@ -82,7 +82,7 @@
 								<th>ID</th>
 								<th>Name</th>
 								<th>Percentage %</th>
-								@if( auth()->user()->can('tax.update') || auth()->user()->can('tax.delete') )
+								@if( auth()->user()->can('tax.update') || auth()->user()->can('tax.delete') || auth()->user()->can('tax.read') )
 									<th>Actions</th>
 								@endif
 							</tr>
@@ -108,5 +108,6 @@
 
 	@livewire('tax.create', ['company_id' => $company_id])
 	@livewire('tax.edit', ['company_id' => $company_id])
+	@livewire('tax.read')
 	@livewire('tax.delete', ['company_id' => $company_id])
 </div>
