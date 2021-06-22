@@ -71,9 +71,9 @@ Route::middleware('auth')->group(function() {
 
 		Route::prefix('journal-entry')->group(function () {
 			Route::get('/', 'JournalEntryController@index')->name('journal-entry');
-			// Route::get('create', 'CashFlowController@create')->name('cash-flow-create');
-			// Route::get('edit/{cashflow}', 'CashFlowController@edit')->name('cash-flow-edit');
-			// Route::get('view/{cashflow}', 'CashFlowController@view')->name('cash-flow-read');
+			Route::get('create', 'JournalEntryController@create')->name('journal-entry-create');
+			Route::get('edit/{journal}', 'JournalEntryController@edit')->name('journal-entry-edit');
+			Route::get('view/{journal}', 'JournalEntryController@view')->name('journal-entry-read');
 			Route::get('export', 'JournalEntryController@export')->name('journal-entry-export');
 		});
 		

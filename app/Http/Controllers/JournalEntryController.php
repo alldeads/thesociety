@@ -33,6 +33,72 @@ class JournalEntryController extends Controller
 		}
     }
 
+    public function create()
+    {
+    	$response = Gate::inspect('journal_entry.create');
+
+    	$breadcrumbs = [
+	        ['link'=> route('home'), 'name'=>"Dashboard"], 
+	        ['link'=> route('journal-entry'), 'name'=>"Journal Entries"], 
+	        ['name'=>"Create Entry"],
+	    ];
+
+	    $company = Company::getCompanyDetails();
+
+		if ( $response->allowed() ) {
+		    return view('journal-entry.create', [
+		    	'breadcrumbs' => $breadcrumbs,
+		    	'company'     => $company
+		    ]);
+		} else {
+		    return view('misc.not-authorized');
+		}
+    }
+
+    public function edit(JournalEntry $journal)
+    {
+    	$response = Gate::inspect('journal_entry.update');
+
+    	$breadcrumbs = [
+	        ['link'=> route('home'), 'name'=>"Dashboard"], 
+	        ['link'=> route('journal-entry'), 'name'=>"Journal Entries"], 
+	        ['name'=>"Update Entry"],
+	    ];
+
+	    $company = Company::getCompanyDetails();
+
+		if ( $response->allowed() && ($company->id == $journal->company_id) ) {
+		    return view('journal-entry.edit', [
+		    	'breadcrumbs' => $breadcrumbs,
+		    	'journal'     => $journal
+		    ]);
+		} else {
+		    return view('misc.not-authorized');
+		}
+    }
+
+    public function view(JournalEntry $journal)
+    {
+    	$response = Gate::inspect('journal_entry.read');
+
+    	$breadcrumbs = [
+	        ['link'=> route('home'), 'name'=>"Dashboard"], 
+	        ['link'=> route('journal-entry'), 'name'=>"Journal Entries"], 
+	        ['name'=>"View Journal Entry"],
+	    ];
+
+	    $company = Company::getCompanyDetails();
+
+		if ( $response->allowed() && ($company->id == $journal->company_id) ) {
+		    return view('journal-entry.read', [
+		    	'breadcrumbs' => $breadcrumbs,
+		    	'journal'     => $journal
+		    ]);
+		} else {
+		    return view('misc.not-authorized');
+		}
+    }
+
     public function export(Request $request)
     {
     	$types = ['csv', 'pdf', 'xlsx', 'xls', 'ods'];

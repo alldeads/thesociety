@@ -174,8 +174,9 @@
 							</div>
 			  
 							<div class="col-12">
-								<button wire:click.prevent="save" class="btn btn-primary mr-1">{{ __('Save Changes') }}</button>
-								<button wire:click.prevent="resetBtn" class="btn btn-outline-secondary">{{ __('Reset') }}</button>
+								<button wire:click.prevent="save" class="btn btn-primary mr-1 mt-1">{{ __('Save Changes') }}</button>
+								<button wire:click.prevent="read" class="btn btn-info mr-1 mt-1">{{ __('View') }}</button>
+								<button wire:click.prevent="resetBtn" class="btn btn-outline-secondary mt-1">{{ __('Reset') }}</button>
 							</div>
 						</div>
 					</form>

@@ -31,7 +31,7 @@ class Index extends CustomComponent
 
     public function create()
     {
-        return redirect()->route('cash-flow-create');
+        return redirect()->route('journal-entry-create');
     }
 
     public function render()

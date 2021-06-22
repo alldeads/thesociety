@@ -56,6 +56,11 @@ class Edit extends CustomComponent
 		$this->emit('resetFile', 'attachment');
 	}
 
+	public function read()
+	{
+		return redirect()->route('cash-flow-read', ['cashflow' => $this->cashflow->id]);
+	}
+
 	public function save()
 	{
 		Validator::make($this->inputs, [
