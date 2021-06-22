@@ -15,11 +15,6 @@
 	          		</div>
 
 	          		<div class="form-group">	
-	            		<label class="form-label" for="fixed-rate-edit">Fixed Rate <small>(Optional)</small></label>
-	            		<input type="number" class="form-control" id="fixed-rate-edit" required placeholder="Enter Fixed Rate" wire:model="inputs.fixed_rate"/>
-	          		</div>
-
-	          		<div class="form-group">	
 	            		<label class="form-label" for="percentage-edit">Percentage(%)</label>
 	            		<input type="number" class="form-control" id="percentage-edit" required placeholder="Enter Percentage" wire:model="inputs.percentage"/>
 	          		</div>

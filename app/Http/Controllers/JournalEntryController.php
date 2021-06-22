@@ -120,7 +120,7 @@ class JournalEntryController extends Controller
 	    	}
 
 	    	return (new JournalEntryExport($q, $company->id, $from, $to))
-	    			->download('journal-entries' . now()->format('Y-m-d') . '.' . $requested_type);
+	    			->download('journal-entries-' . now()->format('Y-m-d') . '.' . $requested_type);
 		} else {
 		    return view('misc.not-authorized');
 		}

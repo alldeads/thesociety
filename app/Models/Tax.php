@@ -18,9 +18,18 @@ class Tax extends Model
     protected $fillable = [
         'company_id',
         'name',
-        'fixed_rate',
         'percentage',
         'created_by',
         'updated_by',
     ];
+
+    public function user_updated()
+    {
+        return $this->belongsTo(User::class, 'updated_by', 'id');
+    }
+
+    public function user_created()
+    {
+        return $this->belongsTo(User::class, 'created_by', 'id');
+    }
 }

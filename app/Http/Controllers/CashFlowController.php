@@ -119,7 +119,7 @@ class CashFlowController extends Controller
 	    	}
 
 	    	return (new CashFlowExport($q, $company->id, $from, $to))
-	    			->download('cash-flow' . now()->format('Y-m-d') . '.' . $requested_type);
+	    			->download('cash-flow-' . now()->format('Y-m-d') . '.' . $requested_type);
 		} else {
 		    return view('misc.not-authorized');
 		}

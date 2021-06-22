@@ -51,7 +51,7 @@ class ChartOfAccountController extends Controller
 	    	}
 
 	    	return (new ChartAccountExport($q, $company->id))
-	    			->download('chart-of-accounts' . now()->format('Y-m-d') . '.' . $requested_type);
+	    			->download('chart-of-accounts-' . now()->format('Y-m-d') . '.' . $requested_type);
 		} else {
 		    return view('misc.not-authorized');
 		}

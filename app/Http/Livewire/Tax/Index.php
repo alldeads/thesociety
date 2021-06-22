@@ -34,7 +34,6 @@ class Index extends CustomComponent
     	$results = Tax::where('company_id', $this->company_id)
 					->where(function (Builder $query) use ($search) {
                         return $query->where('name', 'like', "%" . $search ."%")
-                        	->orWhere('fixed_rate', $search)
                         	->orWhere('percentage', $search);
 					})->orderBy('name', 'asc')->paginate($this->limit);
                         

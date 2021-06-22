@@ -23,7 +23,6 @@ class Edit extends CustomComponent
 
     	$this->inputs = [
     		'tax_name' => $this->item['item']['name'],
-    		'fixed_rate'  => $this->item['item']['fixed_rate'],
     		'percentage'  => $this->item['item']['percentage'],
     	];
 
@@ -34,7 +33,6 @@ class Edit extends CustomComponent
     {
     	$validator = Validator::make($this->inputs, [
             'tax_name'    => ['required', 'string', 'max:255'],
-            'fixed_rate'  => ['nullable', 'numeric'],
             'percentage'  => ['required', 'numeric'],
         ]);
 
@@ -50,7 +48,6 @@ class Edit extends CustomComponent
 
         $tax->fill([
 			'name'        => ucwords($this->inputs['tax_name']),
-			'fixed_rate'  => $this->inputs['fixed_rate'],
 			'percentage'  => $this->inputs['percentage'],
 			'updated_by'  => auth()->id()
 		]);

@@ -76,8 +76,11 @@ Route::middleware('auth')->group(function() {
 			Route::get('view/{journal}', 'JournalEntryController@view')->name('journal-entry-read');
 			Route::get('export', 'JournalEntryController@export')->name('journal-entry-export');
 		});
-		
-		Route::get('tax', 'TaxController@index')->name('tax');
+
+		Route::prefix('tax')->group(function () {
+			Route::get('/', 'TaxController@index')->name('tax');
+			Route::get('export', 'TaxController@export')->name('tax-export');
+		});
 	});
 
 	Route::prefix('roles')->group( function() {
