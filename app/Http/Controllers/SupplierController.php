@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Gate;
 use App\Models\Company;
 use App\Models\Supplier;
 
+use App\Exports\SupplierExport;
+
 class SupplierController extends Controller
 {
     public function index()
@@ -41,7 +43,7 @@ class SupplierController extends Controller
 	        ['name'=> "Create Supplier"],
 	    ];
 
-	    $company = Company::findOrFail(auth()->user()->empCard->company_id);
+	    $company = Company::getCompanyDetails();
 
 		if ( $response->allowed() ) {
 		    return view('supplier.create', [
@@ -57,11 +59,7 @@ class SupplierController extends Controller
     {
     	$response = Gate::inspect('supplier.read');
 
-    	$company = Company::findOrFail(auth()->user()->empCard->company_id);
-
-    	if ( $supplier->company_id != $company->id ) {
-    		return view('misc.not-authorized');
-    	}
+    	$company = Company::getCompanyDetails();
 
     	$breadcrumbs = [
 	        ['link'=> route('home'), 'name'=>"Dashboard"], 
@@ -69,7 +67,7 @@ class SupplierController extends Controller
 	        ['name'=> $supplier->user->profile->company], 
 	    ];
 
-		if ( $response->allowed() ) {
+		if ( $response->allowed() && ($supplier->company_id == $company->id) ) {
 		    return view('supplier.read', [
 		    	'breadcrumbs' => $breadcrumbs,
 		    	'company'     => $company,
@@ -84,11 +82,7 @@ class SupplierController extends Controller
     {
     	$response = Gate::inspect('supplier.update');
 
-    	$company = Company::findOrFail(auth()->user()->empCard->company_id);
-
-    	if ( $supplier->company_id != $company->id ) {
-    		return view('misc.not-authorized');
-    	}
+    	$company = Company::getCompanyDetails();
 
     	$breadcrumbs = [
 	        ['link'=> route('home'), 'name'=>"Dashboard"], 
@@ -96,12 +90,39 @@ class SupplierController extends Controller
 	        ['name'=> $supplier->user->profile->company], 
 	    ];
 
-		if ( $response->allowed() ) {
+		if ( $response->allowed() && ($supplier->company_id == $company->id) ) {
 		    return view('supplier.edit', [
 		    	'breadcrumbs' => $breadcrumbs,
 		    	'company'     => $company,
 		    	'supplier'    => $supplier
 		    ]);
+		} else {
+		    return view('misc.not-authorized');
+		}
+    }
+
+    public function export(Request $request)
+    {
+    	$types = ['csv', 'pdf', 'xlsx', 'xls', 'ods'];
+
+    	$requested_type = isset($request['type']) ? strtolower($request['type']) : 'csv';
+    	$q = $request['q'];
+    	$from = $request['from'];
+    	$to = $request['to'];
+
+    	$response = Gate::inspect('supplier.export');
+
+    	$company = Company::getCompanyDetails();
+
+    	if ( $response->allowed() ) {
+		    
+		    // Set default type, if specified type is invalid
+	    	if ( !in_array($requested_type, $types) ) {
+	    		$requested_type = 'csv';
+	    	}
+
+	    	return (new SupplierExport($q, $company->id, $from, $to))
+	    			->download('suppliers-' . now()->format('Y-m-d') . '.' . $requested_type);
 		} else {
 		    return view('misc.not-authorized');
 		}

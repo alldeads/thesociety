@@ -1,43 +1,32 @@
 <?php
 
-namespace App\Http\Livewire\Supplier;
-
-use App\Http\Livewire\CustomComponent;
-use Illuminate\Database\Eloquent\Builder;
-use Livewire\WithPagination;
+namespace App\Exports;
 
 use App\Models\Supplier;
+use Illuminate\Contracts\View\View;
+use Maatwebsite\Excel\Concerns\FromView;
+use Maatwebsite\Excel\Concerns\Exportable;
 
-class Index extends CustomComponent
+use Illuminate\Database\Eloquent\Builder;
+
+class SupplierExport implements FromView
 {
-	use WithPagination;
+	use Exportable;
 
-    protected $paginationTheme = 'bootstrap';
+	public $search;
+	public $company_id;
 
-    public $company_id;
-    public $search = '';
-    public $limit;
-
-    public $listeners = [
-        'refreshSupplierParent' => '$refresh'
-    ];
-
-    public function updatingSearch()
+    public function __construct($search, $company_id)
     {
-        $this->resetPage();
+        $this->search     = $search;
+        $this->company_id = $company_id;
     }
 
-    public function create()
+    public function view(): View
     {
-        return redirect()->route('suppliers-create');
-    }
+        $search = $this->search;
 
-    public function render()
-    {
-    	$search = $this->search;
-        $limit  = $this->limit ?? 10;
-
-    	$results = Supplier::where('company_id', $this->company_id)
+        $results = Supplier::where('company_id', $this->company_id)
     				->where( function (Builder $query) use ($search) {
 		                $query->whereHas('user', function($query) use ($search) {
 		                    return $query->where('email', 'like', "%" . $search ."%")
@@ -51,10 +40,10 @@ class Index extends CustomComponent
 		                })->orWherehas('status',function($query) use ($search) {
                             return $query->where('name', 'like', "%" . $search ."%");
                         });
-		            })->with(['user.profile', 'status'])->orderBy('id', 'desc')->paginate($limit);
-                        
-        return view('livewire.supplier.index', [
-            'results' => $results
+		            })->with(['user.profile', 'status'])->orderBy('id', 'desc')->get();
+
+        return view('exports.supplier', [
+            'suppliers' => $results
         ]);
     }
 }

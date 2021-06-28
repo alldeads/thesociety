@@ -46,6 +46,7 @@ Route::middleware('auth')->group(function() {
 			Route::get('create', 'SupplierController@create')->name('suppliers-create');
 			Route::get('view/{supplier}', 'SupplierController@view')->name('suppliers-read');
 			Route::get('edit/{supplier}', 'SupplierController@edit')->name('suppliers-edit');
+			Route::get('export', 'SupplierController@export')->name('suppliers-export');
 		});
 
 		Route::prefix('purchase-orders')->group( function() {
@@ -58,8 +59,11 @@ Route::middleware('auth')->group(function() {
 	});
 
 	Route::prefix('accounting')->group( function() {
-		Route::get('chart-of-accounts', 'ChartOfAccountController@index')->name('chart-of-accounts');
-		Route::get('chart-of-accounts/export', 'ChartOfAccountController@export')->name('chart-of-accounts-export');
+
+		Route::prefix('chart-of-accounts')->group(function () {
+			Route::get('/', 'ChartOfAccountController@index')->name('chart-of-accounts');
+			Route::get('export', 'ChartOfAccountController@export')->name('chart-of-accounts-export');
+		});
 
 		Route::prefix('cash-flow')->group(function () {
 			Route::get('/', 'CashFlowController@index')->name('cash-flow');

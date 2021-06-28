@@ -18,34 +18,34 @@
 			              			<span>{{ __('Export') }}</span>
 			              		</button>
 					             <div class="dropdown-menu">
-					                <a class="dropdown-item" href="{{ route('chart-of-accounts-export', [
+					                <a class="dropdown-item" href="{{ route('suppliers-export', [
 					                	'type' => 'csv',
 					                	'q'    => $this->search
 					                ]) }}" target="_blank">
 			              				<span>{{ __('CSV') }}</span>
 				                	</a>
-				                	<a class="dropdown-item" href="{{ route('chart-of-accounts-export', [
+				                	<a class="dropdown-item" href="{{ route('suppliers-export', [
 					                	'type' => 'xls',
 					                	'q'    => $this->search
 					                ]) }}" target="_blank">
 			              				<span>{{ __('EXCEL (xls)') }}</span>
 				                	</a>
 
-				                	<a class="dropdown-item" href="{{ route('chart-of-accounts-export', [
+				                	<a class="dropdown-item" href="{{ route('suppliers-export', [
 					                	'type' => 'xlsx',
 					                	'q'    => $this->search
 					                ]) }}" target="_blank">
 			              				<span>{{ __('EXCEL (xlsx)') }}</span>
 				                	</a>
 
-				                	<a class="dropdown-item" href="{{ route('chart-of-accounts-export', [
+				                	<a class="dropdown-item" href="{{ route('suppliers-export', [
 					                	'type' => 'ods',
 					                	'q'    => $this->search
 					                ]) }}" target="_blank">
 			              				<span>{{ __('ODS') }}</span>
 				                	</a>
 
-				                	<a class="dropdown-item" href="{{ route('chart-of-accounts-export', [
+				                	<a class="dropdown-item" href="{{ route('suppliers-export', [
 					                	'type' => 'pdf',
 					                	'q'    => $this->search
 					                ]) }}" target="_blank">
