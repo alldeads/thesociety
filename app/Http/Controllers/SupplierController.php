@@ -19,7 +19,7 @@ class SupplierController extends Controller
 	        ['name'=> "Suppliers"],
 	    ];
 
-	    $company = Company::findOrFail(auth()->user()->empCard->company_id);
+	    $company = Company::getCompanyDetails();
 
 		if ( $response->allowed() ) {
 		    return view('supplier.index', [

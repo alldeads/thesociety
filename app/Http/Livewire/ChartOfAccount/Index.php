@@ -30,6 +30,7 @@ class Index extends CustomComponent
     public function render()
     {
     	$search = $this->search;
+        $limit  = $this->limit ?? 10;
 
     	$results = CompanyChartAccount::where('company_id', $this->company_id)
 					->where(function (Builder $query) use ($search) {
@@ -40,7 +41,7 @@ class Index extends CustomComponent
                                 });
 					})->orderBy('code', 'asc')
                     ->with(['type'])
-                    ->paginate($this->limit);
+                    ->paginate($limit);
                         
         return view('livewire.chart-of-account.index', [
             'results' => $results

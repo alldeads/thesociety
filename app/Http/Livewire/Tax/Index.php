@@ -30,12 +30,13 @@ class Index extends CustomComponent
     public function render()
     {
     	$search = $this->search;
+        $limit  = $this->limit ?? 10;
 
     	$results = Tax::where('company_id', $this->company_id)
 					->where(function (Builder $query) use ($search) {
                         return $query->where('name', 'like', "%" . $search ."%")
                         	->orWhere('percentage', $search);
-					})->orderBy('name', 'asc')->paginate($this->limit);
+					})->orderBy('name', 'asc')->paginate($limit);
                         
         return view('livewire.tax.index', [
             'results' => $results
