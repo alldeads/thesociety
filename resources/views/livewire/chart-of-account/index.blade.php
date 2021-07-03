@@ -1,5 +1,5 @@
 <div>
-	<div class="row" id="table-hover-animation">
+	<div class="row">
 	  	<div class="col-12">
 			<div class="card">
 		  		<div class="card-body">

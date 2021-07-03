@@ -55,6 +55,7 @@ Route::middleware('auth')->group(function() {
 			Route::get('create', 'PurchaseOrderController@create')->name('purchase-orders-create');
 			Route::get('view/{purchase}', 'PurchaseOrderController@view')->name('purchase-orders-read');
 			Route::get('edit/{purchase}', 'PurchaseOrderController@edit')->name('purchase-orders-edit');
+			Route::get('export', 'PurchaseOrderController@export')->name('purchase-orders-export');
 		});
 	});
 

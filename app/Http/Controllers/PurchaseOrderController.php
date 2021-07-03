@@ -22,7 +22,7 @@ class PurchaseOrderController extends Controller
 	        ['name'=> "Purchase Orders"],
 	    ];
 
-	    $company = Company::findOrFail(auth()->user()->empCard->company_id);
+	    $company = Company::getCompanyDetails();
 
 		if ( $response->allowed() ) {
 		    return view('purchase-order.index', [
@@ -44,7 +44,7 @@ class PurchaseOrderController extends Controller
 	        ['name'=> "Create Purchase Order"],
 	    ];
 
-	    $company = Company::findOrFail(auth()->user()->empCard->company_id);
+	    $company = Company::getCompanyDetails();
 
 		if ( $response->allowed() ) {
 		    return view('purchase-order.create', [
@@ -60,11 +60,7 @@ class PurchaseOrderController extends Controller
     {
     	$response = Gate::inspect('purchase_order.read');
 
-    	$company = Company::findOrFail(auth()->user()->empCard->company_id);
-
-    	if ( $purchase->company_id !== $company->id ) {
-    		return view('misc.not-authorized');
-    	}
+    	$company = Company::getCompanyDetails();
 
     	$breadcrumbs = [
 	        ['link'=> route('home'), 'name'=>"Dashboard"], 
@@ -72,7 +68,7 @@ class PurchaseOrderController extends Controller
 	        ['name'=> $purchase->reference],
 	    ];
 
-		if ( $response->allowed() ) {
+		if ( $response->allowed() && ($purchase->company_id == $company->id) ) {
 		    return view('purchase-order.view', [
 		    	'breadcrumbs' => $breadcrumbs,
 		    	'company'     => $company,
@@ -87,7 +83,7 @@ class PurchaseOrderController extends Controller
     {
     	$response = Gate::inspect('purchase_order.update');
 
-    	$company = Company::findOrFail(auth()->user()->empCard->company_id);
+    	$company = Company::getCompanyDetails();
 
     	if ( $purchase->company_id !== $company->id ) {
     		return view('misc.not-authorized');
@@ -99,7 +95,7 @@ class PurchaseOrderController extends Controller
 	        ['name'=> $purchase->reference],
 	    ];
 
-		if ( $response->allowed() ) {
+		if ( $response->allowed() && ($purchase->company_id == $company->id) ) {
 		    return view('purchase-order.edit', [
 		    	'breadcrumbs' => $breadcrumbs,
 		    	'company'     => $company,
@@ -114,7 +110,7 @@ class PurchaseOrderController extends Controller
     {
     	set_time_limit(60);
 
-    	$company = Company::findOrFail(auth()->user()->empCard->company_id);
+    	$company = Company::getCompanyDetails();
 
     	$address['supplier_name']    = $purchase->supplier->user->profile->company ?? 'N/A';
 		$address['supplier_address'] = $purchase->supplier->address ?? [];
