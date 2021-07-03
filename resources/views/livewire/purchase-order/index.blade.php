@@ -18,7 +18,7 @@
 			              			<span>{{ __('Export') }}</span>
 			              		</button>
 					             <div class="dropdown-menu">
-					                <a class="dropdown-item" href="{{ route('cash-flow-export', [
+					                <a class="dropdown-item" href="{{ route('purchase-orders-export', [
 					                	'type' => 'csv',
 					                	'q'    => $this->search,
 					                	'from' => $this->date_from,
@@ -26,7 +26,7 @@
 					                ]) }}" target="_blank">
 			              				<span>{{ __('CSV') }}</span>
 				                	</a>
-				                	<a class="dropdown-item" href="{{ route('cash-flow-export', [
+				                	<a class="dropdown-item" href="{{ route('purchase-orders-export', [
 					                	'type' => 'xls',
 					                	'q'    => $this->search,
 					                	'from' => $this->date_from,
@@ -35,7 +35,7 @@
 			              				<span>{{ __('EXCEL (xls)') }}</span>
 				                	</a>
 
-				                	<a class="dropdown-item" href="{{ route('cash-flow-export', [
+				                	<a class="dropdown-item" href="{{ route('purchase-orders-export', [
 					                	'type' => 'xlsx',
 					                	'q'    => $this->search,
 					                	'from' => $this->date_from,
@@ -44,7 +44,7 @@
 			              				<span>{{ __('EXCEL (xlsx)') }}</span>
 				                	</a>
 
-				                	<a class="dropdown-item" href="{{ route('cash-flow-export', [
+				                	<a class="dropdown-item" href="{{ route('purchase-orders-export', [
 					                	'type' => 'ods',
 					                	'q'    => $this->search,
 					                	'from' => $this->date_from,

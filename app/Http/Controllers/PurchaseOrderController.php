@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Gate;
 
 use App\Models\Company;
 use App\Models\PurchaseOrder;
+use App\Exports\PurchaseOrderExport;
 
 use Dompdf\Dompdf;
 use Illuminate\Support\Facades\View; 
@@ -101,6 +102,33 @@ class PurchaseOrderController extends Controller
 		    	'company'     => $company,
 		    	'purchase'    => $purchase
 		    ]);
+		} else {
+		    return view('misc.not-authorized');
+		}
+    }
+
+    public function export(Request $request)
+    {
+    	$types = ['csv', 'pdf', 'xlsx', 'xls', 'ods'];
+
+    	$requested_type = isset($request['type']) ? strtolower($request['type']) : 'csv';
+    	$q = $request['q'];
+    	$from = $request['from'];
+    	$to = $request['to'];
+
+    	$response = Gate::inspect('purchase_order.export');
+
+    	$company = Company::getCompanyDetails();
+
+    	if ( $response->allowed() ) {
+		    
+		    // Set default type, if specified type is invalid
+	    	if ( !in_array($requested_type, $types) ) {
+	    		$requested_type = 'csv';
+	    	}
+
+	    	return (new PurchaseOrderExport($q, $company->id, $from, $to))
+	    			->download('purchase-orders-' . now()->format('Y-m-d') . '.' . $requested_type);
 		} else {
 		    return view('misc.not-authorized');
 		}
