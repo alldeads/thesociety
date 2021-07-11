@@ -79,10 +79,10 @@
 		  				<div class="col-md-2 col-lg-2 col-xl-2 col-sm-12 mt-1">
 		  					<div class="form-group">
 			                  	<select class="form-control" wire:model="limit">
-			                  		<option value="10">10 entries</option>
-			                  		<option value="25">25 entries</option>
-			                  		<option value="50">50 entries</option>
-			                  		<option value="100">100 entries</option>
+			                  		<option value="10">{{ __('10 entries') }}</option>
+			                  		<option value="25">{{ __('25 entries') }}</option>
+			                  		<option value="50">{{ __('50 entries') }}</option>
+			                  		<option value="100">{{ __('100 entries') }}</option>
 			                  	</select>
 	                		</div>
 		  				</div>

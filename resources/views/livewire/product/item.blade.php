@@ -9,6 +9,7 @@
 	<td>{{ number_format($item->cost, 2, '.', ',') }}</td>
 	<td>{{ number_format($item->srp_price, 2, '.', ',') }}</td>
 	<td>{{ number_format($item->markup, 2, '.', ',') }}%</td>
+	<td>{{ $item->quantity }}</td>
 	<td>{{ ucwords($item->status) }}</td>
 
 	<td>{{ $item->created_at->format('F j, Y') }}</td>

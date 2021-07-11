@@ -19,7 +19,7 @@ class ProductController extends Controller
 	        ['name'=> "Products"],
 	    ];
 
-	    $company = Company::findOrFail(auth()->user()->empCard->company_id);
+	    $company = Company::getCompanyDetails();
 
 		if ( $response->allowed() ) {
 		    return view('product.index', [
@@ -41,7 +41,7 @@ class ProductController extends Controller
 	        ['name'=> "Create Product"],
 	    ];
 
-	    $company = Company::findOrFail(auth()->user()->empCard->company_id);
+	    $company = Company::getCompanyDetails();
 
 		if ( $response->allowed() ) {
 		    return view('product.create', [
@@ -57,11 +57,7 @@ class ProductController extends Controller
     {
     	$response = Gate::inspect('product.read');
 
-    	$company = Company::findOrFail(auth()->user()->empCard->company_id);
-
-    	if ( $product->company_id !== $company->id ) {
-    		return view('misc.not-authorized');
-    	}
+    	$company = Company::getCompanyDetails();
 
     	$breadcrumbs = [
 	        ['link'=> route('home'), 'name'=>"Dashboard"], 
@@ -69,7 +65,7 @@ class ProductController extends Controller
 	        ['name'=> $product->name],
 	    ];
 
-		if ( $response->allowed() ) {
+		if ( $response->allowed() && ($product->company_id == $company->id) ) {
 		    return view('product.read', [
 		    	'breadcrumbs' => $breadcrumbs,
 		    	'company'     => $company,
@@ -84,11 +80,7 @@ class ProductController extends Controller
     {
     	$response = Gate::inspect('product.update');
 
-    	$company = Company::findOrFail(auth()->user()->empCard->company_id);
-
-    	if ( $product->company_id !== $company->id ) {
-    		return view('misc.not-authorized');
-    	}
+    	$company = Company::getCompanyDetails();
 
     	$breadcrumbs = [
 	        ['link'=> route('home'), 'name'=>"Dashboard"], 
@@ -96,7 +88,7 @@ class ProductController extends Controller
 	        ['name'=> "Edit Product"],
 	    ];
 
-		if ( $response->allowed() ) {
+		if ( $response->allowed() && ($product->company_id == $company->id) ) {
 		    return view('product.edit', [
 		    	'breadcrumbs' => $breadcrumbs,
 		    	'company'     => $company,
