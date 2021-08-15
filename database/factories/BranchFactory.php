@@ -25,7 +25,8 @@ class BranchFactory extends Factory
             'name'       => $this->faker->company,
             'phone'      => $this->faker->phoneNumber,
             'address'    => $this->faker->address,
-            'created_by' => 1
+            'created_by' => 1,
+            'updated_by' => 1
         ];
     }
 }

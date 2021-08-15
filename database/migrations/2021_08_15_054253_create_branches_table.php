@@ -17,11 +17,14 @@ class CreateBranchesTable extends Migration
             $table->id();
             $table->bigInteger('company_id')->unsigned();
             $table->bigInteger('created_by')->unsigned();
+            $table->bigInteger('updated_by')->unsigned();
             $table->string('name');
+            $table->string('abbr')->nullable();
             $table->text('address')->nullable();
             $table->string('phone')->nullable();
             $table->text('description')->nullable();
             $table->enum('status', ['active', 'inactive'])->default('active');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

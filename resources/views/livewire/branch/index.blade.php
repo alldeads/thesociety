@@ -68,7 +68,7 @@
                             <tr>
                                 <th>Name</th>
                                 <th>Phone</th>
-                                <th>Employees</th>
+                                <th>Status</th>
                                 @if( auth()->user()->can('branch.update') || auth()->user()->can('branch.delete') || auth()->user()->can('branch.read'))
                                     <th>Actions</th>
                                 @endif

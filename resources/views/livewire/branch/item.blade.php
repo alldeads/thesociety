@@ -1,7 +1,11 @@
 <tr>
     <td>{{ ucwords($item->name) }}</td>
     <td>{{ $item->phone }}</td>
-    <td>0</td>
+    <td>
+        <span class="badge badge-pill  badge-light-{{ $item->status == "active" ? "success" : "danger" }}">
+            {{ ucwords($item->status) }}
+        </span>
+    </td>
 
     @if( auth()->user()->can('branch.update') || auth()->user()->can('branch.delete') || auth()->user()->can('branch.read') )
 

@@ -21,14 +21,14 @@
 
                     <form class="form">
                         <div class="row">
+
                             <div class="col-md-6 col-12">
                                 <div class="form-group">
-                                    <label class="form-label" for="posting-date">
-                                        {{ __('Posting Date') }} <span class="asterisk">*</span>
-                                    </label>
-                                    <input type="date" id="posting-date" class="form-control @error('posting_date') is-invalid @enderror" wire:model="inputs.posting_date">
+                                    <label class="form-label" for="name">{{ __('Name') }} <span class="asterisk">*</span></label>
 
-                                    @error('posting_date')
+                                    <input type="text" wire:model="inputs.name" id="name" class="form-control @error('name') is-invalid @enderror">
+
+                                    @error('name')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
@@ -38,32 +38,13 @@
 
                             <div class="col-md-6 col-12">
                                 <div class="form-group">
-                                    <label class="form-label" for="account_number">{{ __('Account No.') }} (<em>{{ __('optional') }}</em>)</label>
-                                    <input type="number" wire:model="inputs.account_number" id="account_number" class="form-control">
-                                </div>
-                            </div>
-
-                            <div class="col-md-6 col-12">
-                                <div class="form-group">
-                                    <label class="form-label" for="check_no">
-                                        {{ __('Check No.') }} (<em>{{ __('optional') }}</em>)
+                                    <label class="form-label" for="abbr">
+                                        {{ __('Abbreviation (Code)') }} (<em>{{ __('optional') }}</em>)
                                     </label>
-                                    <input type="number" wire:model="inputs.check_no" id="check_no" class="form-control">
-                                </div>
-                            </div>
 
-                            <div class="col-md-6 col-12">
-                                <div class="form-group">
-                                    <label class="form-label" for="movement">
-                                        {{ __('Movement') }} <span class="asterisk">*</span>
-                                    </label>
-                                    <select class="form-control @error('movement') is-invalid @enderror" id="movement" wire:model="inputs.movement">
-                                        <option> {{ __('Select Movement') }}</option>
-                                        <option value="cr"> {{ __('Credit') }}</option>
-                                        <option value="dr"> {{ __('Debit') }}</option>
-                                    </select>
+                                    <input type="text" wire:model="inputs.abbr" id="abbr" class="form-control @error('abbr') is-invalid @enderror">
 
-                                    @error('movement')
+                                    @error('abbr')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
@@ -73,12 +54,13 @@
 
                             <div class="col-md-6 col-12">
                                 <div class="form-group">
-                                    <label class="form-label" for="amount">
-                                        {{ __('Amount') }} <span class="asterisk">*</span>
+                                    <label class="form-label" for="phone">
+                                        {{ __('Phone No.') }} (<em>{{ __('optional') }}</em>)
                                     </label>
-                                    <input type="number" wire:model="inputs.amount" id="amount" class="form-control @error('amount') is-invalid @enderror">
 
-                                    @error('amount')
+                                    <input type="text" wire:model="inputs.phone" id="phone" class="form-control @error('phone') is-invalid @enderror">
+
+                                    @error('phone')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
@@ -86,19 +68,26 @@
                                 </div>
                             </div>
 
-
                             <div class="col-md-6 col-12">
                                 <div class="form-group">
-                                    <label class="form-label" for="attachment">{{ __('Attachment') }} (<em>{{ __('optional') }}</em>)</label>
-                                    <input type="file" id="attachment" class="form-control" wire:model="inputs.attachment">
+                                    <label class="form-label" for="address">{{ __('Address') }} <span class="asterisk">*</span></label>
+
+                                    <input type="text" wire:model="inputs.address" id="address" class="form-control @error('address') is-invalid @enderror">
+
+                                    @error('address')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
                                 </div>
                             </div>
 
-                            <div class="col-md-6 col-12">
+                            <div class="col-md-12 col-12">
                                 <div class="form-group">
                                     <label class="form-label" for="description">
-                                        {{ __('Description') }} <span class="asterisk">*</span>
+                                        {{ __('Description') }} (<em>{{ __('optional') }}</em>)
                                     </label>
+
                                     <textarea rows="2" cols="5" class="form-control @error('description') is-invalid @enderror" id="description" wire:model="inputs.description"></textarea>
 
                                     @error('description')
@@ -111,8 +100,21 @@
 
                             <div class="col-md-6 col-12">
                                 <div class="form-group">
-                                    <label class="form-label" for="notes">{{ __('Notes') }} (<em>{{ __('optional') }}</em>)</label>
-                                    <textarea rows="2" cols="5" class="form-control" id="notes" wire:model="inputs.notes"></textarea>
+                                    <label class="form-label" for="status">
+                                        {{ __('Status') }} <span class="asterisk">*</span>
+                                    </label>
+
+                                    <select class="form-control @error('status') is-invalid @enderror" id="status" wire:model="inputs.status">
+                                        <option> {{ __('Select Status') }}</option>
+                                        <option value="active"> {{ __('Active') }}</option>
+                                        <option value="inactive"> {{ __('Inactive') }}</option>
+                                    </select>
+
+                                    @error('status')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
                                 </div>
                             </div>
               
