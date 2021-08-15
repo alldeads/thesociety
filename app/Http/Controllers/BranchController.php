@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 
 use App\Models\Company;
+use App\Models\Branch;
 
 class BranchController extends Controller
 {
@@ -46,6 +47,28 @@ class BranchController extends Controller
             return view('branch.create', [
                 'breadcrumbs' => $breadcrumbs,
                 'company'     => $company
+            ]);
+        } else {
+            return view('misc.not-authorized');
+        }
+    }
+
+    public function edit(Branch $branch)
+    {
+        $response = Gate::inspect('branch.update');
+
+        $breadcrumbs = [
+            ['link'=> route('home'), 'name'=>"Dashboard"], 
+            ['link'=> route('branches-view'), 'name'=>"Branch"], 
+            ['name'=>"Edit Branch"],
+        ];
+
+        $company = Company::getCompanyDetails();
+
+        if ( $response->allowed() && ($company->id == $branch->company_id) ) {
+            return view('branch.edit', [
+                'breadcrumbs' => $breadcrumbs,
+                'branch'      => $branch
             ]);
         } else {
             return view('misc.not-authorized');

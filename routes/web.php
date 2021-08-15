@@ -15,7 +15,7 @@ Route::middleware('auth')->group(function() {
 		Route::prefix('branches')->group( function() {
 			Route::get('view', 'BranchController@index')->name('branches-view');
 			Route::get('create', 'BranchController@create')->name('branches-create');
-			// Route::get('edit/{emp}', 'EmployeeController@edit')->name('employees-edit');
+			Route::get('edit/{branch}', 'BranchController@edit')->name('branches-edit');
 		});
 	});
 

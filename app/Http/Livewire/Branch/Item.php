@@ -17,6 +17,11 @@ class Item extends Component
         $this->emit('deleteBranchAccount', ['branch' => $this->item]);
     }
 
+    public function edit()
+    {
+        return redirect()->route('branches-edit', ['branch' => $this->item->id]);
+    }
+
     public function render()
     {
         return view('livewire.branch.item');
