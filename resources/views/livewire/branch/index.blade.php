@@ -93,5 +93,5 @@
         </div>
     </div>
 
-    @livewire('cash-flow.delete', ['company_id' => $company_id])
+    @livewire('branch.delete', ['company_id' => $company_id])
 </div>
