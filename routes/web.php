@@ -11,6 +11,12 @@ Route::middleware('auth')->group(function() {
 	Route::prefix('company')->group( function() {
 		Route::get('details', 'CompanyController@details')->name('company-details');
 		Route::get('edit', 'CompanyController@edit')->name('company-edit');
+
+		Route::prefix('branches')->group( function() {
+			Route::get('view', 'BranchController@index')->name('branches-view');
+			Route::get('create', 'BranchController@create')->name('branches-create');
+			// Route::get('edit/{emp}', 'EmployeeController@edit')->name('employees-edit');
+		});
 	});
 
 	Route::prefix('employees')->group( function() {

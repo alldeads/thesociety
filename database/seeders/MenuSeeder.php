@@ -32,6 +32,16 @@ class MenuSeeder extends Seeder
         ]);
 
         // $header->menus()->create([
+        //     'name'       => 'Dashboard',
+        //     'slug'       => 'home',
+        //     'url'        => 'home',
+        //     'icon'       => 'home',
+        //     'base'       => 'dashboard',
+        //     'is_export'  => false,
+        //     'permission' => 'dashboard.view'
+        // ]);
+
+        // $header->menus()->create([
         //     'name'       => 'Invoices',
         //     'slug'       => 'invoices',
         //     'url'        => 'home',
@@ -75,6 +85,16 @@ class MenuSeeder extends Seeder
             'icon'       => 'book',
             'permission' => 'journal_entry.view'
         ]);
+
+        // $header->menus()->create([
+        //     'name'       => 'General Ledger',
+        //     'slug'       => 'ledger',
+        //     'url'        => 'accounting/ledger',
+        //     'base'       => 'ledger',
+        //     'is_export'  => true,
+        //     'icon'       => 'columns',
+        //     'permission' => 'ledger.view'
+        // ]);
 
         $header->menus()->create([
             'name'       => 'Tax',
@@ -226,6 +246,16 @@ class MenuSeeder extends Seeder
             'base'       => 'company',
             'is_export'  => false,
             'permission' => 'company.view'
+        ]);
+
+        $header->menus()->create([
+            'name'       => 'Branches',
+            'slug'       => 'branches',
+            'url'        => 'company/branches/view',
+            'icon'       => 'map',
+            'base'       => 'branch',
+            'is_export'  => false,
+            'permission' => 'branch.view'
         ]);
     }
 }

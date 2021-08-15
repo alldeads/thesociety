@@ -21,7 +21,7 @@
     <div class="shadow-bottom"></div>
 
     <div class="main-menu-content mt-2">
-        <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation">
+        <ul class="navigation navigation-main pb-5" id="main-menu-navigation" data-menu="menu-navigation">
 
             @foreach($__headers as $key => $header)
                 <li class="navigation-header">
