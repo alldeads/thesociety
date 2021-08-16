@@ -54,6 +54,11 @@
 					</div>
 
 					<div class="form-group">
+		  				<label class="form-label" for="margin">Margin %</label>
+		  				<input type="text" id="margin" class="form-control" wire:model="margin" readonly />
+					</div>
+
+					<div class="form-group">
 		  				<label class="form-label" for="mark">Mark Up %</label>
 		  				<input type="text" id="mark" class="form-control" wire:model="mark_up" readonly />
 					</div>

@@ -16,6 +16,7 @@ class Create extends CustomComponent
 	public $company_id;
 
 	public $mark_up;
+	public $margin;
 
 	public $inputs = [
 		'cost',
@@ -29,6 +30,7 @@ class Create extends CustomComponent
 		$this->inputs['sku'] = Product::generate_sku($this->company_id);
 
 		$this->mark_up = 0;
+		$this->margin  = 0;
 	}
 
 	public function calculate()
@@ -38,6 +40,7 @@ class Create extends CustomComponent
 
 		if ( $srp > 0 && $cost > 0 ) {
 			$this->mark_up = number_format((($srp - $cost) / $cost) * 100, 2, '.', ',');
+			$this->margin  = number_format((($srp - $cost) / $srp) * 100, 2, '.', ',');
 		}
 	}
 
@@ -52,7 +55,6 @@ class Create extends CustomComponent
             'cost'         => ['required', 'numeric'],
             'price'        => ['required', 'numeric'],
             'discounted'   => ['nullable', 'numeric'],
-            'quantity'     => ['required', 'numeric'],
             'threshold'    => ['nullable', 'numeric'],
             'status'       => ['required', 'string']
         ])->validate();
@@ -82,12 +84,10 @@ class Create extends CustomComponent
 	        	'name'       => ucwords($this->inputs['name']),
 	        	'long_description' => ucwords($this->inputs['description']),
 	        	'short_description' => ucwords($this->inputs['brief_description']),
-	        	'quantity'  => $this->inputs['quantity'],
 	        	'threshold' => $this->inputs['threshold'] ?? 0,
 	        	'srp_price' => $this->inputs['price'],
 	        	'discounted_price' => $this->inputs['discounted'] ?? 0,
 	        	'cost'      => $this->inputs['cost'],
-	        	'markup'    => str_replace(',', '', $this->mark_up),
 	        	'updated_by' => auth()->id(),
 	        	'created_by' => auth()->id(),
 	        	'type'       => 'product',
