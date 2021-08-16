@@ -14,10 +14,10 @@ class Details extends Component
 
 	public function mount()
 	{
-		$this->employees = count($this->company->employees);
-		$this->branches  = 1;
-		$this->products  = count($this->company->products()->product()->get());
-		$this->supplies  = count($this->company->products()->supply()->get());
+		$this->employees = $this->company->employees()->count();
+		$this->branches  = $this->company->branches()->count();
+		$this->products  = $this->company->products()->product()->count();
+		$this->supplies  = $this->company->products()->supply()->count();
  	}
 
     public function render()

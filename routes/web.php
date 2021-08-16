@@ -16,6 +16,7 @@ Route::middleware('auth')->group(function() {
 			Route::get('view', 'BranchController@index')->name('branches-view');
 			Route::get('create', 'BranchController@create')->name('branches-create');
 			Route::get('edit/{branch}', 'BranchController@edit')->name('branches-edit');
+			Route::get('view/{branch}', 'BranchController@view')->name('branches-read');
 		});
 	});
 

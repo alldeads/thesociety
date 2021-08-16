@@ -22,6 +22,11 @@ class Item extends Component
         return redirect()->route('branches-edit', ['branch' => $this->item->id]);
     }
 
+    public function read()
+    {
+        return redirect()->route('branches-read', ['branch' => $this->item->id]);
+    }
+
     public function render()
     {
         return view('livewire.branch.item');
