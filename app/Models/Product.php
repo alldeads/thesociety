@@ -22,7 +22,6 @@ class Product extends Model
     	'name',
     	'long_description',
     	'short_description',
-    	'quantity',
     	'threshold',
     	'srp_price' ,
     	'discounted_price',
@@ -47,6 +46,16 @@ class Product extends Model
     	}
 
     	return Product::generate_sku($company_id);
+    }
+
+    public function getMarkUpAttribute()
+    {
+        return (($this->srp_price - $this->cost) / $this->cost) * 100;
+    }
+
+    public function getMarginAttribute()
+    {
+        return (($this->srp_price - $this->cost) / $this->srp_price) * 100;
     }
 
     public function scopeProduct($query)

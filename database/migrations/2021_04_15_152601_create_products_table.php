@@ -24,12 +24,10 @@ class CreateProductsTable extends Migration
             $table->string('name');
             $table->text('long_description')->nullable();
             $table->text('short_description')->nullable();
-            $table->double('quantity')->default(0);
             $table->bigInteger('threshold')->default(0);
             $table->double('srp_price');
             $table->double('discounted_price')->nullable();
             $table->double('cost');
-            $table->decimal('markup', 12, 2)->nullable();
             $table->bigInteger('updated_by')->nullable()->unsigned();
             $table->bigInteger('created_by')->nullable()->unsigned();
             $table->enum('type', ['product', 'supply'])->default('product');

@@ -77,9 +77,8 @@
 								<th>Cost</th>
 								<th>Srp</th>
 								<th>Mark Up %</th>
-								<th>Qty</th>
+								<th>Margin %</th>
 								<th>Status</th>
-								<th>Created At</th>
 								@if( auth()->user()->can('product.update') || auth()->user()->can('product.delete') || auth()->user()->can('product.read') )
 									<th>Actions</th>
 								@endif
@@ -90,7 +89,7 @@
 				  				@livewire('product.item', ['item' => $result], key($result->id))
 				  			@empty
 				  				<tr class="text-center">
-				  					<td colspan="7"> {{ __('No items found.') }}</td>
+				  					<td colspan="6"> {{ __('No items found.') }}</td>
 				  				</tr>
 				  			@endforelse
 			  			</tbody>
@@ -103,5 +102,6 @@
 			</div>
 	  	</div>
 	</div>
+
 	@livewire('product.delete', ['company_id' => $company_id])
 </div>

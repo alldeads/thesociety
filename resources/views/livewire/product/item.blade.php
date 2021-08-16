@@ -8,11 +8,9 @@
 	
 	<td>{{ number_format($item->cost, 2, '.', ',') }}</td>
 	<td>{{ number_format($item->srp_price, 2, '.', ',') }}</td>
-	<td>{{ number_format($item->markup, 2, '.', ',') }}%</td>
-	<td>{{ $item->quantity }}</td>
+	<td>{{ number_format($item->mark_up, 2, '.', ',') }}%</td>
+	<td>{{ number_format($item->margin, 2, '.', ',') }}%</td>
 	<td>{{ ucwords($item->status) }}</td>
-
-	<td>{{ $item->created_at->format('F j, Y') }}</td>
 
 	@if( auth()->user()->can('product.update') || auth()->user()->can('product.delete') )
 		<td>
