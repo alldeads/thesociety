@@ -3,20 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Gate;
 
-use App\Models\Company;
 use App\Models\Branch;
 
 class BranchController extends Controller
 {
-    public $company;
-
-    public function __construct()
-    {
-        $this->company = Company::getCompanyDetails();
-    }
-
     public function index()
     {
         $this->authorize('branch.view');

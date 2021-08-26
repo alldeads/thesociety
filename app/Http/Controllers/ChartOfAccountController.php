@@ -3,9 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Gate;
-
-use App\Models\Company;
 
 use App\Exports\ChartAccountExport;
 
@@ -20,11 +17,9 @@ class ChartOfAccountController extends Controller
 	        ['name' =>"Chart of Accounts"],
 	    ];
 
-	    $company = Company::getCompanyDetails();
-
 		return view('chart-account.index', [
 	    	'breadcrumbs' => $breadcrumbs,
-	    	'company'     => $company
+	    	'company'     => $this->company
 	    ]);
     }
 
@@ -37,12 +32,10 @@ class ChartOfAccountController extends Controller
     	$requested_type = isset($request['type']) ? strtolower($request['type']) : 'csv';
     	$q = $request['q'];
 
-    	$company = Company::getCompanyDetails();
-
     	if ( !in_array($requested_type, $types) ) {
     		$requested_type = 'csv';
     	}
 
-    	return (new ChartAccountExport($q, $company->id))->download('chart-of-accounts-' . now()->format('Y-m-d') . '.' . $requested_type);
+    	return (new ChartAccountExport($q, $this->company->id))->download('chart-of-accounts-' . now()->format('Y-m-d') . '.' . $requested_type);
     }
 }
