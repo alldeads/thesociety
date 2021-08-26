@@ -3,9 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Gate;
 
-use App\Models\Company;
 use App\Models\CashFlow;
 use App\Exports\CashFlowExport;
 
