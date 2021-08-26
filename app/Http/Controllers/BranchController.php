@@ -10,30 +10,31 @@ use App\Models\Branch;
 
 class BranchController extends Controller
 {
+    public $company;
+
+    public function __construct()
+    {
+        $this->company = Company::getCompanyDetails();
+    }
+
     public function index()
     {
-        $response = Gate::inspect('branch.view');
+        $this->authorize('branch.view');
 
         $breadcrumbs = [
             ['link'=> route('home'), 'name'=>"Dashboard"], 
             ['name'=> "Branches"],
         ];
 
-        $company = Company::getCompanyDetails();
-
-        if ( $response->allowed() ) {
-            return view('branch.index', [
-                'breadcrumbs' => $breadcrumbs,
-                'company'     => $company
-            ]);
-        } else {
-            return view('misc.not-authorized');
-        }
+        return view('branch.index', [
+            'breadcrumbs' => $breadcrumbs,
+            'company'     => $this->company
+        ]);
     }
 
     public function create()
     {
-        $response = Gate::inspect('branch.create');
+        $this->authorize('branch.create');
 
         $breadcrumbs = [
             ['link'=> route('home'), 'name'=>"Dashboard"], 
@@ -41,59 +42,49 @@ class BranchController extends Controller
             ['name'=>"New Branch"],
         ];
 
-        $company = Company::getCompanyDetails();
-
-        if ( $response->allowed() ) {
-            return view('branch.create', [
-                'breadcrumbs' => $breadcrumbs,
-                'company'     => $company
-            ]);
-        } else {
-            return view('misc.not-authorized');
-        }
+        return view('branch.create', [
+            'breadcrumbs' => $breadcrumbs,
+            'company'     => $this->company
+        ]);
     }
 
     public function edit(Branch $branch)
     {
-        $response = Gate::inspect('branch.update');
+        $this->authorize('branch.update');
 
         $breadcrumbs = [
             ['link'=> route('home'), 'name'=>"Dashboard"], 
-            ['link'=> route('branches-view'), 'name'=>"Branch"], 
+            ['link'=> route('branches-view'), 'name'=>"Branches"], 
             ['name'=>"Edit Branch"],
         ];
 
-        $company = Company::getCompanyDetails();
-
-        if ( $response->allowed() && ($company->id == $branch->company_id) ) {
+        if ($this->company->id == $branch->company_id) {
             return view('branch.edit', [
                 'breadcrumbs' => $breadcrumbs,
                 'branch'      => $branch
             ]);
-        } else {
-            return view('misc.not-authorized');
         }
+
+        return view('errors.403');
     }
 
     public function view(Branch $branch)
     {
-        $response = Gate::inspect('branch.read');
+        $this->authorize('branch.read');
 
         $breadcrumbs = [
             ['link'=> route('home'), 'name'=>"Dashboard"], 
-            ['link'=> route('branches-view'), 'name'=>"Branch"], 
+            ['link'=> route('branches-view'), 'name'=>"Branches"], 
             ['name'=> $branch->name],
         ];
 
-        $company = Company::getCompanyDetails();
-
-        if ( $response->allowed() && ($company->id == $branch->company_id) ) {
+        if ($this->company->id == $branch->company_id) {
             return view('branch.read', [
                 'breadcrumbs' => $breadcrumbs,
                 'branch'      => $branch
             ]);
-        } else {
-            return view('misc.not-authorized');
         }
+
+        return view('errors.403');
     }
 }

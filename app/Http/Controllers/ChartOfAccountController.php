@@ -13,7 +13,7 @@ class ChartOfAccountController extends Controller
 {
     public function index()
     {
-    	$response = Gate::inspect('chart.view');
+    	$this->authorize('chart.view');
 
     	$breadcrumbs = [
 	        ['link' => route('home'), 'name'=>"Dashboard"], 
@@ -22,38 +22,27 @@ class ChartOfAccountController extends Controller
 
 	    $company = Company::getCompanyDetails();
 
-		if ( $response->allowed() ) {
-		    return view('chart-account.index', [
-		    	'breadcrumbs' => $breadcrumbs,
-		    	'company'     => $company
-		    ]);
-		} else {
-		    return view('misc.not-authorized');
-		}
+		return view('chart-account.index', [
+	    	'breadcrumbs' => $breadcrumbs,
+	    	'company'     => $company
+	    ]);
     }
 
     public function export(Request $request)
     {
+    	$this->authorize('chart.export');
+
     	$types = ['csv', 'pdf', 'xlsx', 'xls', 'ods'];
 
     	$requested_type = isset($request['type']) ? strtolower($request['type']) : 'csv';
     	$q = $request['q'];
 
-    	$response = Gate::inspect('chart.export');
-
     	$company = Company::getCompanyDetails();
 
-    	if ( $response->allowed() ) {
-		    
-		    // Set default type, if specified type is invalid
-	    	if ( !in_array($requested_type, $types) ) {
-	    		$requested_type = 'csv';
-	    	}
+    	if ( !in_array($requested_type, $types) ) {
+    		$requested_type = 'csv';
+    	}
 
-	    	return (new ChartAccountExport($q, $company->id))
-	    			->download('chart-of-accounts-' . now()->format('Y-m-d') . '.' . $requested_type);
-		} else {
-		    return view('misc.not-authorized');
-		}
+    	return (new ChartAccountExport($q, $company->id))->download('chart-of-accounts-' . now()->format('Y-m-d') . '.' . $requested_type);
     }
 }

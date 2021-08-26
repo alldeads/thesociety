@@ -11,28 +11,24 @@ class CompanyController extends Controller
 {
     public function details()
     {
-    	$response = Gate::inspect('company.view');
+    	$this->authorize('company.view');
 
     	$breadcrumbs = [
 	        ['link'=> route('home'), 'name'=>"Dashboard"], 
 	        ['name'=>"Company Details"],
 	    ];
 
-	    $company = Company::findOrFail(auth()->user()->empCard->company_id);
+	    $company = Company::getCompanyDetails();
 
-		if ( $response->allowed() ) {
-		    return view('company.details', [
-		    	'breadcrumbs' => $breadcrumbs,
-		    	'company'     => $company
-		    ]);
-		} else {
-		    return view('misc.not-authorized');
-		}
+		return view('company.details', [
+	    	'breadcrumbs' => $breadcrumbs,
+	    	'company'     => $company
+	    ]);
     }
 
     public function edit()
     {
-    	$response = Gate::inspect('company.update');
+    	$this->authorize('company.update');
 
     	$breadcrumbs = [
 	        ['link'=> route('home'), 'name'=>"Dashboard"], 
@@ -40,15 +36,11 @@ class CompanyController extends Controller
 	        ['name'=>"Edit"], 
 	    ];
 
-	    $company = Company::findOrFail(auth()->user()->empCard->company_id);
+	    $company = Company::getCompanyDetails();
 
-		if ( $response->allowed() ) {
-		    return view('company.edit', [
-		    	'breadcrumbs' => $breadcrumbs,
-		    	'company'     => $company
-		    ]);
-		} else {
-		    return view('misc.not-authorized');
-		}
+		return view('company.edit', [
+	    	'breadcrumbs' => $breadcrumbs,
+	    	'company'     => $company
+	    ]);
     }
 }

@@ -12,28 +12,24 @@ class CustomerController extends Controller
 {
     public function index()
     {
-    	$response = Gate::inspect('customer.view');
+    	$this->authorize('customer.view');
 
     	$breadcrumbs = [
 	        ['link'=> route('home'), 'name'=>"Dashboard"], 
 	        ['name'=> "Customers"],
 	    ];
 
-	    $company = Company::findOrFail(auth()->user()->empCard->company_id);
+	    $company = Company::getCompanyDetails();
 
-		if ( $response->allowed() ) {
-		    return view('customer.index', [
-		    	'breadcrumbs' => $breadcrumbs,
-		    	'company'     => $company
-		    ]);
-		} else {
-		    return view('misc.not-authorized');
-		}
+		return view('customer.index', [
+	    	'breadcrumbs' => $breadcrumbs,
+	    	'company'     => $company
+	    ]);
     }
 
     public function create()
     {
-    	$response = Gate::inspect('customer.create');
+    	$this->authorize('customer.create');
 
     	$breadcrumbs = [
 	        ['link'=> route('home'), 'name'=>"Dashboard"], 
@@ -43,14 +39,10 @@ class CustomerController extends Controller
 
 	    $company = Company::findOrFail(auth()->user()->empCard->company_id);
 
-		if ( $response->allowed() ) {
-		    return view('customer.create', [
-		    	'breadcrumbs' => $breadcrumbs,
-		    	'company'     => $company
-		    ]);
-		} else {
-		    return view('misc.not-authorized');
-		}
+		return view('customer.create', [
+	    	'breadcrumbs' => $breadcrumbs,
+	    	'company'     => $company
+	    ]);
     }
 
     public function view(Customer $customer)
