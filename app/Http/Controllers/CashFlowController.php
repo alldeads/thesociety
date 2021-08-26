@@ -20,11 +20,9 @@ class CashFlowController extends Controller
 	        ['name'=>"Cash Flow"],
 	    ];
 
-	    $company = Company::getCompanyDetails();
-
 		return view('cash-flow.index', [
 	    	'breadcrumbs' => $breadcrumbs,
-	    	'company'     => $company
+	    	'company'     => $this->company
 	    ]);
     }
 
@@ -38,11 +36,9 @@ class CashFlowController extends Controller
 	        ['name'=>"New Entry"],
 	    ];
 
-	    $company = Company::getCompanyDetails();
-
 		return view('cash-flow.create', [
 	    	'breadcrumbs' => $breadcrumbs,
-	    	'company'     => $company
+	    	'company'     => $this->company
 	    ]);
     }
 
@@ -56,9 +52,7 @@ class CashFlowController extends Controller
 	        ['name'=>"View Entry"],
 	    ];
 
-	    $company = Company::getCompanyDetails();
-
-		if ($company->id == $cashflow->company_id) {
+		if ($this->company->id == $cashflow->company_id) {
 		    return view('cash-flow.read', [
 		    	'breadcrumbs' => $breadcrumbs,
 		    	'cashflow'    => $cashflow
@@ -78,10 +72,8 @@ class CashFlowController extends Controller
 	        ['name'=>"Edit Entry"],
 	    ];
 
-	    $company = Company::getCompanyDetails();
-
-		if ($company->id == $cashflow->company_id) {
-		    return view('cash-flow.read', [
+		if ($this->company->id == $cashflow->company_id) {
+		    return view('cash-flow.edit', [
 		    	'breadcrumbs' => $breadcrumbs,
 		    	'cashflow'    => $cashflow
 		    ]);
@@ -101,12 +93,10 @@ class CashFlowController extends Controller
     	$from = $request['from'];
     	$to = $request['to'];
 
-    	$company = Company::getCompanyDetails();
-
     	if ( !in_array($requested_type, $types) ) {
     		$requested_type = 'csv';
     	}
 
-	    return (new CashFlowExport($q, $company->id, $from, $to))->download('cash-flow-' . now()->format('Y-m-d') . '.' . $requested_type);
+	    return (new CashFlowExport($q, $this->company->id, $from, $to))->download('cash-flow-' . now()->format('Y-m-d') . '.' . $requested_type);
     }
 }
