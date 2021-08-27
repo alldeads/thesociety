@@ -104,7 +104,7 @@ class Create extends CustomComponent
 				$this->inputs['items'][$field[2]]['cost'] = $product->cost;
 			}
 
-			if ( $field[3] == "qty" ) {
+			if ( $field[3] == "qty" || $field[3] == "cost" ) {
 
 				$product = $this->inputs['items'][$field[2]]['product'] ?? 0;
 				$cost = $this->inputs['items'][$field[2]]['cost'] ?? 0;

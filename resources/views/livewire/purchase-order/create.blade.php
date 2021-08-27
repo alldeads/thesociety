@@ -127,7 +127,7 @@
 
 								  						<div class="col-lg-3 col-12 mb-lg-0 mb-2 mt-2">
 															<p class="card-text col-title mb-md-50 mb-0">Cost</p>
-															<input type="number" class="form-control" wire:model="inputs.items.{{ $key }}.cost" readonly />
+															<input type="number" class="form-control" wire:model="inputs.items.{{ $key }}.cost"/>
 								  						</div>
 
 								  						<div class="col-lg-2 col-12 mb-lg-0 mb-2 mt-2">

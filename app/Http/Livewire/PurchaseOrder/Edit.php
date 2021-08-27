@@ -21,22 +21,25 @@ class Edit extends CustomComponent
 	public $company;
 	public $purchase;
 	public $suppliers;
-	public $employees;
 	public $products;
 	public $statuses;
-	public $taxes;
 	public $emp;
 	public $inputs;
 
 	public function mount()
 	{
 		$this->suppliers = Supplier::where('company_id', $this->company->id)->get();
-		$this->employees = Employee::where('company_id', $this->company->id)->get();
 		$this->products  = Product::where('company_id', $this->company->id)->get();
-		$this->taxes     = Tax::where('company_id', $this->company->id)->get();
 		$this->statuses  = Status::where('is_purchase_order', 1)->get();
 
+		$this->resetBtn();
+	}
+
+	public function resetBtn()
+	{
 		$quantity = 0;
+
+		$this->inputs = [];
 
 		foreach ($this->purchase->items as $item) {
 			$this->inputs['items'][] = [
@@ -50,15 +53,15 @@ class Edit extends CustomComponent
 			$quantity += $item->quantity;
 		}
 
-		if ( !isset($this->inputs['items']) ) {
-			$this->inputs['items'][0] = [
-				'product' => '',
-				'name'    => '',
-				'cost'    => 0,
-				'qty'     => 0,
-				'price'   => 0
-			];
-		}
+		// if ( !isset($this->inputs['items']) ) {
+		// 	$this->inputs['items'][0] = [
+		// 		'product' => '',
+		// 		'name'    => '',
+		// 		'cost'    => 0,
+		// 		'qty'     => 0,
+		// 		'price'   => 0
+		// 	];
+		// }
 
 		$this->inputs['status'] = $this->purchase->status_id;
 		$this->inputs['created_by'] = $this->purchase->user_created->profile->name ?? "N/A";
@@ -68,19 +71,11 @@ class Edit extends CustomComponent
 		$this->inputs['updated_at'] = $this->purchase->updated_at;
 		$this->inputs['reference'] = $this->purchase->reference;
 		$this->inputs['supplier'] = $this->purchase->supplier_id;
-		$this->inputs['ship_to'] = $this->purchase->ship_to;
 		$this->inputs['subtotal']  = $this->purchase->sub_total;
 		$this->inputs['purchase_date'] = $this->purchase->purchase_date;
-		$this->inputs['discount']  = $this->purchase->discount;
-		$this->inputs['discount_total']  = $quantity;
-		$this->inputs['fixed']     = $this->purchase->fixed;
-		$this->inputs['tax']       = $this->purchase->tax;
+		$this->inputs['expected_on'] = $this->purchase->expected_on;
 		$this->inputs['total']     = $this->purchase->total;
-		$this->inputs['fee']       = $this->purchase->shipping;
 		$this->inputs['notes'] = $this->purchase->notes ?? "N/A";
-		$this->inputs['ship_via'] = $this->purchase->ship_via ?? "N/A";
-		$this->inputs['shipping_method'] = $this->purchase->shipping_method ?? "N/A";
-		$this->inputs['shipping_terms'] = $this->purchase->shipping_terms ?? "N/A";
 	}
 
 	public function preview()
@@ -143,7 +138,7 @@ class Edit extends CustomComponent
 				$this->inputs['items'][$field[2]]['cost'] = $product->cost;
 			}
 
-			if ( $field[3] == "qty" ) {
+			if ( $field[3] == "qty" || $field[3] == "cost" ) {
 
 				$product = $this->inputs['items'][$field[2]]['product'] ?? 0;
 				$cost = $this->inputs['items'][$field[2]]['cost'] ?? 0;
@@ -166,37 +161,6 @@ class Edit extends CustomComponent
 			$sub_total += str_replace(',', '',$item['price']);
 		}
 
-		$discount = $this->inputs['discount'] ?? 0;
-		$y = 0;
-
-		if ( $discount > 0 ) {
-			$y = $total * ($discount/100);
-
-			$total -= $y;
-		}
-
-		$fixed = $this->inputs['fixed'] ?? 0;
-
-		if ( $fixed > 0 ) {
-			$total -= $fixed;
-		}
-
-		$this->inputs['discount_total'] = number_format((int) $y + (int) $fixed, 2, '.', ',');
-
-		$tax = $this->inputs['tax'] ?? 0;
-
-		if ( $tax > 0 ) {
-			$x = $total * ($tax/100);
-
-			$total += $x;
-		}
-
-		$fee = $this->inputs['fee'] ?? 0;
-
-		if ( $fee > 0 ) {
-			$total += $fee;
-		}
-
 		$this->inputs['total']     = number_format($total, 2, '.', ',');
 		$this->inputs['subtotal']  = number_format($sub_total, 2, '.', ',');
 	}
@@ -207,29 +171,14 @@ class Edit extends CustomComponent
             'reference'        => ['required'],
             'status'           => ['required', 'exists:statuses,id'],
             'purchase_date'    => ['required', 'date'],
+            'expected_on'      => ['required', 'date'],
             'supplier'         => ['required', 'numeric', 'exists:suppliers,id'],
-            'ship_to'          => ['required', 'numeric', 'exists:employees,id'],
-            'approved_by'      => ['required', 'numeric', 'exists:employees,id'],
-            'requested_by'     => ['required', 'numeric', 'exists:employees,id'],
             'items'            => ['required', 'array'],
             'items.*.product'  => ['required', 'numeric'],
             'items.*.cost'     => ['required', 'numeric'],
             'items.*.qty'      => ['required', 'numeric'],
             'notes'            => ['nullable', 'string'],
-            'tax'              => ['nullable', 'numeric'],
-            'discount'         => ['nullable', 'numeric'],
-            'fixed'            => ['nullable', 'numeric'],
-            'ship_via'         => ['nullable', 'string'],
-            'shipping_method'  => ['nullable', 'string'],
-            'shipping_terms'   => ['nullable', 'string'],
-        ]);
-
-        if ($validator->fails()) {
-        	$error = $validator->errors();
-            foreach ($error->all() as $message) {
-			    return $this->message($message, 'error');
-			}
-        }
+        ])->validate();
 
         $po = PurchaseOrder::where([
         	'company_id' => $this->company->id,
@@ -254,28 +203,6 @@ class Edit extends CustomComponent
 				$sub_total += str_replace(',', '',$item['price']);
 			}
 
-			$discount = $this->inputs['discount'] ?? 0;
-
-			if ( $discount > 0 ) {
-				$y = $total * ($discount/100);
-
-				$total -= $y;
-			}
-
-			$fixed = $this->inputs['fixed'] ?? 0;
-
-			if ( $fixed > 0 ) {
-				$total -= $fixed;
-			}
-
-			$tax = $this->inputs['tax'] ?? 0;
-
-			if ( $tax > 0 ) {
-				$x = $total * ($tax/100);
-
-				$total += $x;
-			}
-
 			$purchase = PurchaseOrder::find($this->purchase->id);
 
 			$purchase->fill([
@@ -284,20 +211,12 @@ class Edit extends CustomComponent
 				'purchase_date' => $this->inputs['purchase_date'],
 				'sub_total'     => $sub_total,
 				'total'         => $total,
-				'discount'      => $discount,
-				'fixed'         => $fixed,
-				'tax'           => $tax,
 				'total'         => $total,
 				'quantity'      => $quantity,
-				'shipping'      => (int) $this->inputs['fee'],
 				'updated_by'    => auth()->id(),
 				'approved_by'   => $this->inputs['approved_by'],
 				'requested_by'  => $this->inputs['requested_by'],
 				'status_id'     => $this->inputs['status'],
-				'ship_to'         => $this->inputs['ship_to'],
-				'ship_via'        => $this->inputs['ship_via'] ?? null,
-				'shipping_method' => $this->inputs['shipping_method'] ?? null,
-				'shipping_terms'  => $this->inputs['shipping_terms'] ?? null,
 				'notes'           => $this->inputs['notes'] ?? null,
 			]);
 
