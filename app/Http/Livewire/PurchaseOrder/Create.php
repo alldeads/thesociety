@@ -33,9 +33,7 @@ class Create extends CustomComponent
 	public function mount()
 	{
 		$this->suppliers = Supplier::where('company_id', $this->company->id)->get();
-		$this->employees = Employee::where('company_id', $this->company->id)->get();
 		$this->products  = Product::where('company_id', $this->company->id)->get();
-		$this->taxes     = Tax::where('company_id', $this->company->id)->get();
 
 		$this->inputs['items'][0] = [
 			'product' => '',
@@ -48,12 +46,7 @@ class Create extends CustomComponent
 		$this->inputs['reference'] = PurchaseOrder::generate_reference($this->company->id);
 		$this->inputs['subtotal']  = 0;
 		$this->inputs['purchase_date'] = Carbon::now()->format('Y-m-d');
-		$this->inputs['discount']  = 0;
-		$this->inputs['discount_total']  = 0;
-		$this->inputs['fixed']     = 0;
-		$this->inputs['tax']       = 0;
 		$this->inputs['total']     = 0;
-		$this->inputs['fee']       = 0;
 	}
 
 	public function createItem()
@@ -134,67 +127,40 @@ class Create extends CustomComponent
 			$sub_total += str_replace(',', '',$item['price']);
 		}
 
-		$discount = $this->inputs['discount'] ?? 0;
-		$y = 0;
-
-		if ( $discount > 0 ) {
-			$y = $total * ($discount/100);
-
-			$total -= $y;
-		}
-
-		$fixed = $this->inputs['fixed'] ?? 0;
-
-		if ( $fixed > 0 ) {
-			$total -= $fixed;
-		}
-
-		$this->inputs['discount_total'] = number_format((int) $y + (int) $fixed, 2, '.', ',');
-
-		$tax = $this->inputs['tax'] ?? 0;
-
-		if ( $tax > 0 ) {
-			$x = $total * ($tax/100);
-
-			$total += $x;
-		}
-
-		$fee = $this->inputs['fee'] ?? 0;
-
-		if ( $fee > 0 ) {
-			$total += $fee;
-		}
-
 		$this->inputs['total']     = number_format($total, 2, '.', ',');
 		$this->inputs['subtotal']  = number_format($sub_total, 2, '.', ',');
 	}
+
+	public function resetBtn()
+    {
+        $this->inputs = [];
+
+        $this->inputs['items'][0] = [
+			'product' => '',
+			'name'    => '',
+			'cost'    => 0,
+			'qty'     => 0,
+			'price'   => 0
+		];
+
+		$this->inputs['total']     = 0;
+		$this->inputs['subtotal']  = 0;
+        $this->inputs['purchase_date'] = Carbon::now()->format('Y-m-d');
+    }
 
 	public function save()
 	{
 		$validator = Validator::make($this->inputs, [
             'reference'        => ['required'],
             'purchase_date'    => ['required', 'date'],
+            'expected_on'      => ['required', 'date'],
             'supplier'         => ['required', 'numeric', 'exists:suppliers,id'],
-            'ship_to'          => ['required', 'numeric', 'exists:employees,id'],
             'items'            => ['required', 'array'],
             'items.*.product'  => ['required', 'numeric'],
             'items.*.cost'     => ['required', 'numeric'],
             'items.*.qty'      => ['required', 'numeric'],
             'notes'            => ['nullable', 'string'],
-            'tax'              => ['nullable', 'numeric'],
-            'discount'         => ['nullable', 'numeric'],
-            'fixed'            => ['nullable', 'numeric'],
-            'ship_via'         => ['nullable', 'string'],
-            'shipping_method'  => ['nullable', 'string'],
-            'shipping_terms'   => ['nullable', 'string'],
-        ]);
-
-        if ($validator->fails()) {
-        	$error = $validator->errors();
-            foreach ($error->all() as $message) {
-			    return $this->message($message, 'error');
-			}
-        }
+        ])->validate();
 
         $po = PurchaseOrder::where([
         	'company_id' => $this->company->id,
@@ -219,28 +185,6 @@ class Create extends CustomComponent
 				$sub_total += str_replace(',', '',$item['price']);
 			}
 
-			$discount = $this->inputs['discount'] ?? 0;
-
-			if ( $discount > 0 ) {
-				$y = $total * ($discount/100);
-
-				$total -= $y;
-			}
-
-			$fixed = $this->inputs['fixed'] ?? 0;
-
-			if ( $fixed > 0 ) {
-				$total -= $fixed;
-			}
-
-			$tax = $this->inputs['tax'] ?? 0;
-
-			if ( $tax > 0 ) {
-				$x = $total * ($tax/100);
-
-				$total += $x;
-			}
-
 			$purchase = PurchaseOrder::create([
 				'company_id'    => $this->company->id,
 				'supplier_id'   => $this->inputs['supplier'],
@@ -248,20 +192,11 @@ class Create extends CustomComponent
 				'purchase_date' => $this->inputs['purchase_date'],
 				'sub_total'     => $sub_total,
 				'total'         => $total,
-				'discount'      => $discount,
-				'fixed'         => $fixed,
-				'tax'           => $tax,
-				'total'         => $total,
 				'quantity'      => $quantity,
-				'shipping'      => $this->inputs['fee'] ?? 0,
 				'created_by'    => auth()->id(),
 				'updated_by'    => auth()->id(),
 				'status_id'     => 1,
-				'ship_to'         => $this->inputs['ship_to'],
-				'ship_via'        => $this->inputs['ship_via'] ?? null,
-				'shipping_method' => $this->inputs['shipping_method'] ?? null,
-				'shipping_terms'  => $this->inputs['shipping_terms'] ?? null,
-				'notes'           => $this->inputs['notes'] ?? null,
+				'notes'         => $this->inputs['notes'] ?? null,
 			]);
 
 			foreach ($this->inputs['items'] as $item) {

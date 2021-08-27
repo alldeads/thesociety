@@ -58,6 +58,8 @@ class PurchaseOrderSeeder extends Seeder
                     'discount'   => $disc,
                     'shipping'   => $handling,
                     'status_id'  => $status->random(1)->first()->id,
+                    'purchase_date'=> now(),
+                    'expected_on'=> now(),
                     'approved_by'=> 1,
                     'created_by' => 1
                 ]);

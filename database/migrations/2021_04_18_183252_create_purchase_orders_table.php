@@ -30,7 +30,8 @@ class CreatePurchaseOrdersTable extends Migration
             $table->decimal('fixed', 12, 2)->default(0);
             $table->decimal('shipping', 12, 2)->default(0);
             $table->decimal('tax', 12, 2)->default(0);
-            $table->date('purchase_date')->nullable();
+            $table->date('purchase_date');
+            $table->date('expected_on')->nullable();
             $table->bigInteger('status_id')->nullable();
             $table->bigInteger('ship_to')->nullable()->unsigned();
             $table->bigInteger('approved_by')->nullable()->unsigned();

@@ -3,9 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Gate;
 
-use App\Models\Company;
 use App\Models\PurchaseOrder;
 use App\Exports\PurchaseOrderExport;
 
@@ -16,28 +14,22 @@ class PurchaseOrderController extends Controller
 {
     public function index()
     {
-    	$response = Gate::inspect('purchase_order.view');
+    	$this->authorize('purchase_order.view');
 
     	$breadcrumbs = [
 	        ['link'=> route('home'), 'name'=>"Dashboard"], 
 	        ['name'=> "Purchase Orders"],
 	    ];
 
-	    $company = Company::getCompanyDetails();
-
-		if ( $response->allowed() ) {
-		    return view('purchase-order.index', [
-		    	'breadcrumbs' => $breadcrumbs,
-		    	'company'     => $company
-		    ]);
-		} else {
-		    return view('misc.not-authorized');
-		}
+		return view('purchase-order.index', [
+	    	'breadcrumbs' => $breadcrumbs,
+	    	'company'     => $this->company
+	    ]);
     }
 
     public function create()
     {
-    	$response = Gate::inspect('purchase_order.create');
+    	$this->authorize('purchase_order.create');
 
     	$breadcrumbs = [
 	        ['link'=> route('home'), 'name'=>"Dashboard"], 
@@ -45,23 +37,15 @@ class PurchaseOrderController extends Controller
 	        ['name'=> "Create Purchase Order"],
 	    ];
 
-	    $company = Company::getCompanyDetails();
-
-		if ( $response->allowed() ) {
-		    return view('purchase-order.create', [
-		    	'breadcrumbs' => $breadcrumbs,
-		    	'company'     => $company
-		    ]);
-		} else {
-		    return view('misc.not-authorized');
-		}
+		return view('purchase-order.create', [
+	    	'breadcrumbs' => $breadcrumbs,
+	    	'company'     => $this->company
+	    ]);
     }
 
     public function view(PurchaseOrder $purchase)
     {
-    	$response = Gate::inspect('purchase_order.read');
-
-    	$company = Company::getCompanyDetails();
+    	$this->authorize('purchase_order.read');
 
     	$breadcrumbs = [
 	        ['link'=> route('home'), 'name'=>"Dashboard"], 
@@ -69,26 +53,20 @@ class PurchaseOrderController extends Controller
 	        ['name'=> $purchase->reference],
 	    ];
 
-		if ( $response->allowed() && ($purchase->company_id == $company->id) ) {
+		if ($purchase->company_id == $this->company->id) {
 		    return view('purchase-order.view', [
 		    	'breadcrumbs' => $breadcrumbs,
-		    	'company'     => $company,
+		    	'company'     => $this->company,
 		    	'purchase'    => $purchase
 		    ]);
-		} else {
-		    return view('misc.not-authorized');
 		}
+
+		return view('errors.403');
     }
 
     public function edit(PurchaseOrder $purchase)
     {
-    	$response = Gate::inspect('purchase_order.update');
-
-    	$company = Company::getCompanyDetails();
-
-    	if ( $purchase->company_id !== $company->id ) {
-    		return view('misc.not-authorized');
-    	}
+    	$this->authorize('purchase_order.update');
 
     	$breadcrumbs = [
 	        ['link'=> route('home'), 'name'=>"Dashboard"], 
@@ -96,19 +74,21 @@ class PurchaseOrderController extends Controller
 	        ['name'=> $purchase->reference],
 	    ];
 
-		if ( $response->allowed() && ($purchase->company_id == $company->id) ) {
+		if ($purchase->company_id == $this->company->id) {
 		    return view('purchase-order.edit', [
 		    	'breadcrumbs' => $breadcrumbs,
-		    	'company'     => $company,
+		    	'company'     => $this->company,
 		    	'purchase'    => $purchase
 		    ]);
-		} else {
-		    return view('misc.not-authorized');
 		}
+
+		return view('errors.403');
     }
 
     public function export(Request $request)
     {
+    	$this->authorize('purchase_order.export');
+
     	$types = ['csv', 'pdf', 'xlsx', 'xls', 'ods'];
 
     	$requested_type = isset($request['type']) ? strtolower($request['type']) : 'csv';
@@ -116,29 +96,19 @@ class PurchaseOrderController extends Controller
     	$from = $request['from'];
     	$to = $request['to'];
 
-    	$response = Gate::inspect('purchase_order.export');
+    	// Set default type, if specified type is invalid
+    	if ( !in_array($requested_type, $types) ) {
+    		$requested_type = 'csv';
+    	}
 
-    	$company = Company::getCompanyDetails();
-
-    	if ( $response->allowed() ) {
-		    
-		    // Set default type, if specified type is invalid
-	    	if ( !in_array($requested_type, $types) ) {
-	    		$requested_type = 'csv';
-	    	}
-
-	    	return (new PurchaseOrderExport($q, $company->id, $from, $to))
-	    			->download('purchase-orders-' . now()->format('Y-m-d') . '.' . $requested_type);
-		} else {
-		    return view('misc.not-authorized');
-		}
+    	return (new PurchaseOrderExport($q, $this->company->id, $from, $to))->download('purchase-orders-' . now()->format('Y-m-d') . '.' . $requested_type);
     }
 
     public function download(PurchaseOrder $purchase)
     {
     	set_time_limit(60);
 
-    	$company = Company::getCompanyDetails();
+    	$company = $this->company;
 
     	$address['supplier_name']    = $purchase->supplier->user->profile->company ?? 'N/A';
 		$address['supplier_address'] = $purchase->supplier->address ?? [];

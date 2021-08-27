@@ -98,7 +98,7 @@
 								<th>Quantity</th>
 								<th>Total</th>
 								<th>Status</th>
-								<th>Approved By</th>
+								<th>Expected On</th>
 								<th>Created At</th>
 								@if( auth()->user()->can('purchase_order.update') || auth()->user()->can('purchase_order.delete') || auth()->user()->can('purchase_order.read') )
 									<th>Actions</th>

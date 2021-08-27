@@ -33,6 +33,7 @@ class PurchaseOrder extends Model
         'status_id',
         'tax',
         'purchase_date',
+        'expected_on',
         'updated_by',
         'created_by',
         'approved_by',

@@ -1,245 +1,190 @@
-<section class="invoice-edit-wrapper">
-  	<div class="row invoice-edit">
-		<div class="col-xl-9 col-md-8 col-12">
-	  		<div class="card invoice-preview-card">
-				<!-- Header starts -->
-				<div class="card-body invoice-padding pb-0">
-		  			<div class="d-flex justify-content-between flex-md-row flex-column invoice-spacing mt-0">
-						<div>
-			  				<div class="logo-wrapper">
-								<img class="img-fluid rounded"
-									src="{{ $company->avatar ?? '' }}"
-									width="150"
-									alt="Company logo"/>
-			  				</div>
+<section>
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="card-title">{{ __('Purchase Order') }}</h4>
+                </div>
 
-			  				<p class="card-text mb-25">{{ $company->address[0] ?? "N/A" }}</p>
-			  				<p class="card-text mb-25">{{ $company->address[1] ?? "N/A" }}</p>
-			  				<p class="card-text mb-25">{{ $company->address[2] ?? "N/A" }}</p>
-			  				<p class="card-text mb-0">{{ $company->phone ?? "N/A" }}</p>
-			  				<p class="card-text mb-0">{{ $company->email ?? "N/A" }}</p>
-						</div>
+                <div class="card-body">
 
-						<div class="invoice-number-date mt-md-0 mt-2" wire:ignore>
-			  				<div class="d-flex align-items-center mb-1">
-				                <span class="title" style="font-weight: bold;">P.O:</span>
-				                <input type="text" class="form-control" wire:model="inputs.reference"/>
-				            </div>
+                    <div class="alert alert-danger" style="display: {{ count($errors) > 0 ? 'block' : 'none' }}" role="alert">
+                        <div class="alert-body">
+                            <i data-feather="info"></i>
+                            <ul style="list-style: none;">
+                                @foreach($errors->all() as $error)
+                                    <li>{{$error}}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    </div>
 
-			  				<div class="d-flex align-items-center mb-1">
-								<span class="title">Date:</span>
-								<input type="date" class="form-control" wire:model="inputs.purchase_date" />
-			  				</div>
-						</div>
-		  			</div>
-				</div>
-				<!-- Header ends -->
+                    <div class="row">
+                    	<div class="col-md-12 col-12">
+                            <div class="form-group">
+                                <label class="form-label" for="reference">
+                                    {{ __('Purchase Order No.') }} <span class="asterisk">*</span>
+                                </label>
 
-				<hr class="invoice-spacing" />
+                                <input type="text" class="form-control @error('reference') is-invalid @enderror" wire:model="inputs.reference"/>
 
-				<!-- Address and Contact starts -->
-				<div class="card-body invoice-padding pt-0">
-		  			<div class="d-flex justify-content-between">
-						<div>
-			  				<h6 class="mb-2">Supplier: </h6>
+                                @error('reference')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
 
-			  				<select class="form-control" wire:model="inputs.supplier">
-			  					<option>Select a supplier</option>
+                        <div class="col-md-12 col-12">
+                            <div class="form-group">
+                                <label class="form-label" for="posting-date">
+                                    {{ __('Supplier') }} <span class="asterisk">*</span>
+                                </label>
 
-			  					@foreach($suppliers as $supplier)
-			  						<option value="{{ $supplier->id }}"> {{ $supplier->user->profile->company }}</option>
-			  					@endforeach
-			  				</select>
-						</div>
+                                <select class="form-control @error('supplier') is-invalid @enderror" id="supplier" wire:model="inputs.supplier">
+                                    <option> {{ __('Select supplier') }}</option>
+                                    @foreach($suppliers as $supplier)
+                                        <option value="{{ $supplier->id }}"> {{ ucwords($supplier->user->profile->company) }}</option>
+                                    @endforeach
+                                </select>
 
-						<div>
-			  				<h6 class="mb-2">Ship To:</h6>
-			  				<select class="form-control" wire:model="inputs.ship_to">
-			  					<option>Select an employee</option>
+                                @error('supplier')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
 
-			  					@foreach($employees as $employee)
-			  						<option value="{{ $employee->id }}"> {{ $employee->user->profile->name }}</option>
-			  					@endforeach
-			  				</select>
-						</div>
-		  			</div>
+                        <div class="col-md-6 col-12">
+                            <div class="form-group">
+                                <label class="form-label" for="purchase_date">
+                                    {{ __('Purchase Order Date') }} <span class="asterisk">*</span>
+                                </label>
 
-		  			<hr>
+                                <input type="date" class="form-control @error('purchase_date') is-invalid @enderror" wire:model="inputs.purchase_date"/>
 
-		  			<div class="row mt-3">
-		  				<div class="col-md-4 col-lg-4 col-xl-4 col-sm-12">
-		  					<h6 class="mb-2">Ship Via: </h6>
+                                @error('purchase_date')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
 
-			  				<input type="text" class="form-control" wire:model="inputs.ship_via"/>
-		  				</div>
+                        <div class="col-md-6 col-12">
+                            <div class="form-group">
+                                <label class="form-label" for="expected_on">
+                                    {{ __('Expected On') }} <span class="asterisk">*</span>
+                                </label>
 
-		  				<div class="col-md-4 col-lg-4 col-xl-4 col-sm-12">
-		  					<h6 class="mb-2">Shipping Method: </h6>
+                                <input type="date" class="form-control @error('expected_on') is-invalid @enderror" wire:model="inputs.expected_on"/>
 
-			  				<input type="text" class="form-control" wire:model="inputs.shipping_method"/>
-		  				</div>
+                                @error('expected_on')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
 
-		  				<div class="col-md-4 col-lg-4 col-xl-4 col-sm-12">
-		  					<h6 class="mb-2">Shipping Terms: </h6>
+                        <div class="col-md-6 col-12">
+                            <div class="form-group">
+                                <label class="form-label" for="notes">
+                                    {{ __('Notes') }} <span class="asterisk">*</span>
+                                </label>
 
-			  				<input type="text" class="form-control" wire:model="inputs.shipping_terms"/>
-		  				</div>
-		  			</div>
-				</div>
-				<!-- Address and Contact ends -->
+                                <textarea class="form-control @error('notes') is-invalid @enderror" rows="4" id="note" wire:model="inputs.notes"></textarea>
 
-				<!-- Product Details starts -->
-				<div class="card-body invoice-padding invoice-product-details">
-					@foreach($inputs['items'] as $key => $item)
-						<div data-repeater-list="group-g" class="mt-3">
-			  				<div class="repeater-wrapper">
-								<div class="row">
-				  					<div class="col-12 d-flex product-details-border position-relative pr-0">
-										<div class="row w-100 pr-lg-0 pr-1 py-2">
-					  						<div class="col-lg-5 col-12 mb-lg-0 mb-2 mt-lg-0 mt-2">
-												<p class="card-text col-title mb-md-50 mb-0">Item</p>
+                                @error('notes')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
 
-												<select class="form-control" wire:model="inputs.items.{{ $key }}.product">
-													<option>Select product or supply</option>
-													
-													@foreach($products as $product)
-														<option value="{{ $product->id }}">{{ $product->name }}</option>
-													@endforeach
-												</select>
-					  						</div>
+                        <div class="col-md-12 col-12">
+                            <div class="card-body invoice-product-details">
+								@foreach($inputs['items'] as $key => $item)
+									<div data-repeater-list="group-g">
+						  				<div class="repeater-wrapper">
+											<div class="row">
+							  					<div class="col-12 d-flex product-details-border position-relative pr-0">
+													<div class="row w-100 pr-lg-0 pr-1 ">
+								  						<div class="col-lg-5 col-12 mb-lg-0 mb-2 mt-2">
+															<p class="card-text col-title mb-md-50 mb-0">Item</p>
 
-					  						<div class="col-lg-3 col-12 my-lg-0 my-2">
-												<p class="card-text col-title mb-md-2 mb-0">Cost</p>
-												<input type="number" class="form-control" wire:model="inputs.items.{{ $key }}.cost" readonly />
-					  						</div>
+															<select class="form-control" wire:model="inputs.items.{{ $key }}.product">
+																<option>Select product or supply</option>
+																
+																@foreach($products as $product)
+																	<option value="{{ $product->id }}">{{ $product->name }}</option>
+																@endforeach
+															</select>
+								  						</div>
 
-					  						<div class="col-lg-2 col-12 my-lg-0 my-2">
-												<p class="card-text col-title mb-md-2 mb-0">Qty</p>
-												<input type="number" class="form-control" wire:model="inputs.items.{{ $key }}.qty"/>
-					  						</div>
+								  						<div class="col-lg-3 col-12 mb-lg-0 mb-2 mt-2">
+															<p class="card-text col-title mb-md-50 mb-0">Cost</p>
+															<input type="number" class="form-control" wire:model="inputs.items.{{ $key }}.cost" readonly />
+								  						</div>
 
-					  						<div class="col-lg-2 col-12 mt-lg-0 mt-2">
-												<p class="card-text col-title mb-md-50 mb-0">Price</p>
-												<input type="text" class="form-control" wire:model="inputs.items.{{ $key }}.price" readonly />
-					  						</div>
-										</div>
+								  						<div class="col-lg-2 col-12 mb-lg-0 mb-2 mt-2">
+															<p class="card-text col-title mb-md-50 mb-0">Qty</p>
+															<input type="number" class="form-control" wire:model="inputs.items.{{ $key }}.qty"/>
+								  						</div>
 
-										<div  class="d-flex flex-column align-items-center justify-content-between border-left invoice-product-actions py-50 px-25" wire:ignore>
-					  						<i class="cursor-pointer font-medium-3" wire:click="deleteItem({{$key}})">
-					  							<span class="fa fa-times"></span>
-					  						</i>
-										</div>
-				  					</div>
+								  						<div class="col-lg-2 col-12 mb-lg-0 mb-2 mt-2">
+															<p class="card-text col-title mb-md-50 mb-0">Price</p>
+															<input type="text" class="form-control" wire:model="inputs.items.{{ $key }}.price" readonly />
+								  						</div>
+													</div>
+
+													<div  class="d-flex flex-column align-items-center justify-content-between border-left invoice-product-actions py-50 px-25" wire:ignore>
+								  						<i class="cursor-pointer font-medium-3" wire:click="deleteItem({{$key}})">
+								  							<span class="fa fa-times"></span>
+								  						</i>
+													</div>
+							  					</div>
+											</div>
+						  				</div>
+									</div>
+								@endforeach
+
+								<div class="row mt-1 text-right">
+					  				<div class="col-12 px-0">
+										<button class="btn btn-primary btn-sm" wire:click="createItem">
+						  					<i class="fa fa-plus mr-25"></i>
+						  					<span class="align-middle">Add Item</span>
+										</button>
+					  				</div>
 								</div>
-			  				</div>
-						</div>
-					@endforeach
+							</div>
+                        </div>
 
-					<div class="row mt-1">
-		  				<div class="col-12 px-0">
-							<button class="btn btn-primary btn-sm" wire:click="createItem">
-			  					<i class="fa fa-plus mr-25"></i>
-			  					<span class="align-middle">Add Item</span>
-							</button>
-		  				</div>
-					</div>
-				</div>
-				<!-- Product Details ends -->
+                        <div class="col-12" style="border-top: 1px solid;"></div>
 
-				<!-- Invoice Total starts -->
-				<div class="card-body invoice-padding">
-		  			<div class="row invoice-sales-total-wrapper">
-						<div class="col-md-6 order-md-1 order-2 mt-md-0 mt-3">
-			  				<div class="d-flex align-items-center mb-1">
-								<label for="note" class="form-label font-weight-bold mr-2">Notes:</label>
-								<textarea class="form-control" rows="4" id="note" wire:model="inputs.notes"></textarea>
-			  				</div>
-						</div>
-
-						<div class="col-md-6 d-flex justify-content-end order-md-2 order-1">
-
-							<table class="table">
-								<tr>
+                        <div class="col-md-5 col-12 m-auto">
+                        	<table class="table">
+                        		<tr>
 									<td>Subtotal:</td>
 									<td>{{ $inputs['subtotal'] }}</td>
-								</tr>
-								<tr>
-									<td>Discount(%):</td>
-									<td><input type="number" class="form-control" wire:model="inputs.discount"/></td>
-								</tr>
-								<tr>
-									<td>Discount(Fixed):</td>
-									<td><input type="number" class="form-control" wire:model="inputs.fixed"/></td>
-								</tr>
-								<tr>
-									<td>Tax(%):</td>
-									<td>
-										<select class="form-control" wire:model="inputs.tax">
-											<option value="0">No tax</option>
-											@foreach($taxes as $tax)
-												<option value="{{ $tax->percentage }}">
-													{{ $tax->name }}({{ $tax->percentage }}%)
-												</option>
-											@endforeach
-										</select>
-									</td>
-								</tr>
-								<tr>
-									<td>Shipping(Fee):</td>
-									<td><input type="number" class="form-control" wire:model="inputs.fee"/></td>
-								</tr>
-								<tr>
-									<td>Total Discount:</td>
-									<td>{{ $inputs['discount_total'] }}</td>
 								</tr>
 								<tr>
 									<td>Total:</td>
 									<td>{{ $inputs['total'] }}</td>
 								</tr>
-							</table>
-						</div>
-		  			</div>
-				</div>
-				<!-- Invoice Total ends -->
+                        	</table>
+                        </div>
 
-				<hr class="invoice-spacing mt-0" />
-	  		</div>
-		</div>
-		<!-- Invoice Edit Left ends -->
-
-		<!-- Invoice Edit Right starts -->
-		<div class="col-xl-3 col-md-4 col-12">
-	  		<div class="card">
-				<div class="card-body">
-		  			<button class="btn btn-primary btn-block mb-75" data-toggle="modal" data-target="#send-invoice-sidebar">
-						Send Purchase Order
-		  			</button>
-					<button type="button" class="btn btn-outline-primary btn-block mb-75" wire:click="save">Save</button>
-					<button class="btn btn-success btn-block mb-75" data-toggle="modal" data-target="#add-payment-sidebar">
-						Add Payment
-		  			</button>
-				</div>
-	 		</div>
-
-	  		<div class="mt-2">
-				<div class="invoice-terms mt-1">
-		  			<div class="d-flex justify-content-between">
-						<label class="invoice-terms-title mb-0" for="paymentTerms">Pending</label>
-						<div class="custom-control custom-switch">
-							<input type="checkbox" class="custom-control-input" checked id="paymentTerms" />
-							<label class="custom-control-label" for="paymentTerms"></label>
-						</div>
-		  			</div>
-		  			<div class="d-flex justify-content-between py-1">
-						<label class="invoice-terms-title mb-0" for="clientNotes">Draft</label>
-						<div class="custom-control custom-switch">
-			  				<input type="checkbox" class="custom-control-input" checked id="clientNotes" />
-			  				<label class="custom-control-label" for="clientNotes"></label>
-						</div>
-		  			</div>
-				</div>
-	  		</div>
-		</div>
-		<!-- Invoice Edit Right ends -->
-  	</div>
+                        <div class="col-12 mt-2">
+                            <button wire:click.prevent="save" class="btn btn-primary mr-1">{{ __('Create') }}</button>
+                            <button wire:click.prevent="resetBtn" class="btn btn-outline-secondary">{{ __('Reset') }}</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </section>
