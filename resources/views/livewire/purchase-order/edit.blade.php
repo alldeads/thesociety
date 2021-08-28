@@ -105,6 +105,27 @@
                             </div>
                         </div>
 
+                        <div class="col-md-6 col-12">
+                            <div class="form-group">
+                                <label class="form-label" for="status">
+                                    {{ __('Status') }} <span class="asterisk">*</span>
+                                </label>
+
+                                <select class="form-control @error('status') is-invalid @enderror" id="status" wire:model="inputs.status">
+                                    <option> {{ __('Select status') }}</option>
+                                    @foreach($statuses as $status)
+                                        <option value="{{ $status->id }}"> {{ ucwords($status->name) }}</option>
+                                    @endforeach
+                                </select>
+
+                                @error('status')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
                         <div class="col-md-12 col-12">
                             <div class="card-body invoice-product-details">
 								@foreach($inputs['items'] as $key => $item)
@@ -180,6 +201,7 @@
 
                         <div class="col-12 mt-2">
                             <button wire:click.prevent="save" class="btn btn-primary mr-1">{{ __('Update') }}</button>
+                            <button wire:click.prevent="preview" class="btn btn-secondary mr-1">{{ __('Preview') }}</button>
                             <button wire:click.prevent="resetBtn" class="btn btn-outline-secondary">{{ __('Reset') }}</button>
                         </div>
                     </div>

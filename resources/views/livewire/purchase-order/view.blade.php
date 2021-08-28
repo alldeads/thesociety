@@ -1,211 +1,170 @@
-<section class="invoice-preview-wrapper">
-	<div class="row invoice-preview">
-		<div class="col-xl-9 col-md-8 col-12">
-			<div class="card invoice-preview-card">
-				<div class="card-body invoice-padding pb-0">
-					<div class="d-flex justify-content-between flex-md-row flex-column invoice-spacing mt-0">
-						<div>
-							<div class="logo-wrapper">
-								<img class="img-fluid rounded"
-									src="{{ $company->avatar ?? '' }}"
-									width="150"
-									alt="Company logo"/>
+<section>
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="card-title">{{ __('View Purchase Order') }}</h4>
+                </div>
+
+                <div class="card-body">
+                    <div class="row">
+                    	<div class="col-md-12 col-12">
+                            <div class="form-group">
+                                <label class="form-label" for="reference">
+                                    {{ __('Purchase Order No.') }}
+                                </label>
+
+                                <input type="text" class="form-control" wire:model="inputs.reference" readonly/>
+                            </div>
+                        </div>
+
+                        <div class="col-md-12 col-12">
+                            <div class="form-group">
+                                <label class="form-label" for="posting-date">
+                                    {{ __('Supplier') }}
+                                </label>
+
+                                <input type="text" class="form-control" wire:model="inputs.supplier" readonly/>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 col-12">
+                            <div class="form-group">
+                                <label class="form-label" for="purchase_date">
+                                    {{ __('Purchase Order Date') }}
+                                </label>
+
+                                <input type="text" class="form-control" wire:model="inputs.purchase_date" readonly/>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 col-12">
+                            <div class="form-group">
+                                <label class="form-label" for="expected_on">
+                                    {{ __('Expected On') }}
+                                </label>
+
+                                <input type="text" class="form-control" wire:model="inputs.expected_on" readonly/>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 col-12">
+                            <div class="form-group">
+                                <label class="form-label" for="notes">
+                                    {{ __('Notes') }}
+                                </label>
+
+                                <textarea class="form-control" rows="4" id="note" wire:model="inputs.notes" disabled></textarea>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 col-12">
+                            <div class="form-group">
+                                <label class="form-label" for="status">
+                                    {{ __('Status') }}
+                                </label>
+
+                                <input type="text" class="form-control" wire:model="inputs.status" readonly/>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 col-12">
+                            <div class="form-group">
+                                <label class="form-label" for="created_at">
+                                    {{ __('Created At') }}
+                                </label>
+
+                                <input type="text" class="form-control" wire:model="inputs.created_at" readonly/>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 col-12">
+                            <div class="form-group">
+                                <label class="form-label" for="created_by">
+                                    {{ __('Created By') }}
+                                </label>
+
+                                <input type="text" class="form-control" wire:model="inputs.created_by" readonly/>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 col-12">
+                            <div class="form-group">
+                                <label class="form-label" for="updated_at">
+                                    {{ __('Updated At') }}
+                                </label>
+
+                                <input type="text" class="form-control" wire:model="inputs.created_at" readonly/>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 col-12">
+                            <div class="form-group">
+                                <label class="form-label" for="updated_by">
+                                    {{ __('Updated By') }}
+                                </label>
+
+                                <input type="text" class="form-control" wire:model="inputs.updated_by" readonly/>
+                            </div>
+                        </div>
+
+                        <div class="col-md-12 col-12">
+                            <div class="card-body invoice-product-details">
+								@foreach($inputs['items'] as $key => $item)
+									<div data-repeater-list="group-g">
+						  				<div class="repeater-wrapper">
+											<div class="row">
+							  					<div class="col-12 d-flex product-details-border position-relative pr-0">
+													<div class="row w-100 pr-lg-0 pr-1 ">
+								  						<div class="col-lg-5 col-12 mb-lg-0 mb-2 mt-2">
+															<p class="card-text col-title mb-md-50 mb-0">Item</p>
+															<input type="text" class="form-control" value="{{ $item->name }}" readonly />
+								  						</div>
+
+								  						<div class="col-lg-3 col-12 mb-lg-0 mb-2 mt-2">
+															<p class="card-text col-title mb-md-50 mb-0">Cost</p>
+															<input type="number" class="form-control" value="{{ $item->cost }}" readonly />
+								  						</div>
+
+								  						<div class="col-lg-2 col-12 mb-lg-0 mb-2 mt-2">
+															<p class="card-text col-title mb-md-50 mb-0">Qty</p>
+															<input type="number" class="form-control" value="{{ $item->quantity }}" readonly/>
+								  						</div>
+
+								  						<div class="col-lg-2 col-12 mb-lg-0 mb-2 mt-2">
+															<p class="card-text col-title mb-md-50 mb-0">Price</p>
+															<input type="text" class="form-control" value="{{ number_format($item->cost * $item->quantity, 2, '.', ',') }}" readonly />
+								  						</div>
+													</div>
+							  					</div>
+											</div>
+						  				</div>
+									</div>
+								@endforeach
 							</div>
+                        </div>
 
-							<p class="card-text mb-25">{{ $company->name }}</p>
-							<p class="card-text mb-25">{{ $company->address[0] ?? "N/A" }}</p>
-							<p class="card-text mb-25">{{ $company->address[1] ?? "N/A" }}</p>
-							<p class="card-text mb-25">{{ $company->address[2] ?? "N/A" }}</p>
-							<p class="card-text mb-0">{{ $company->phone ?? "N/A" }}</p>
-							<p class="card-text mb-0">{{ $company->email ?? "N/A" }}</p>
-						</div>
+                        <div class="col-12" style="border-top: 1px solid;"></div>
 
-						<div class="mt-md-0 mt-2">
-							<h4 class="invoice-title">
-								P.O
-								<span class="invoice-number">#{{ $inputs['reference'] }}</span>
-							</h4>
-							<div class="invoice-date-wrapper">
-								<p class="invoice-date-title">Date Issued:</p>
-								<p class="invoice-date">{{ $inputs['purchase_date'] }}</p>
-							</div>
-						</div>
-					</div>
-				</div>
-
-				<hr class="invoice-spacing" />
-
-				<div class="card-body invoice-padding pt-0">
-					<div class="row invoice-spacing">
-						<div class="col-xl-8 p-0">
-							<h6 class="mb-2">Supplier:</h6>
-							<h6 class="mb-25">{{ $inputs['supplier_name'] }}</h6>
-							<p class="card-text mb-25">{{ $inputs['supplier_address'][0] ?? "N/A" }}</p>
-							<p class="card-text mb-25">{{ $inputs['supplier_address'][1] ?? "N/A" }}</p>
-							<p class="card-text mb-25">{{ $inputs['supplier_address'][2] ?? "N/A" }}</p>
-
-							@if ($inputs['supplier_phone'] != null)
-								<p class="card-text mb-0">{{ $inputs['supplier_phone'] }}</p>
-							@endif
-
-							<p class="card-text mb-0">{{ $inputs['supplier_email'] }}</p>
-						</div>
-
-						<div class="col-xl-4 p-0 mt-xl-0 mt-2">
-							<h6 class="mb-2">Ship To:</h6>
-							<h6 class="mb-25">{{ $inputs['ship_to_name'] }}</h6>
-							<p class="card-text mb-25">{{ $company->address[0] ?? "N/A" }}</p>
-							<p class="card-text mb-25">{{ $company->address[1] ?? "N/A" }}</p>
-							<p class="card-text mb-25">{{ $company->address[2] ?? "N/A" }}</p>
-							<p class="card-text mb-0">{{ $company->phone ?? "N/A" }}</p>
-							<p class="card-text mb-0">{{ $company->email ?? "N/A" }}</p>
-						</div>
-					</div>
-				</div>
-
-				<div class="table-responsive">
-					<table class="table">
-						<thead>
-							<tr>
-								<th class="py-1">Item / Description</th>
-								<th class="py-1">Cost</th>
-								<th class="py-1">Qty</th>
-								<th class="py-1">Total</th>
-							</tr>
-						</thead>
-						
-						<tbody>
-							@foreach($inputs['items'] as $item)
-								<tr>
-									<td class="py-1">
-										<p class="card-text font-weight-bold mb-25">{{ $item->name ?? '' }}</p>
-									</td>
-									<td class="py-1">
-										<p class="card-text font-weight-bold mb-25">
-											{{ number_format($item->cost ?? 0, 2, '.', ',') }} 
-										</p>
-									</td>
-									<td class="py-1">
-										<p class="card-text font-weight-bold mb-25">
-											{{ number_format($item->quantity ?? 0, 2, '.', ',') }} 
-										</p>
-									</td>
-									<td class="py-1">
-										<p class="card-text font-weight-bold mb-25">
-											{{ number_format($item->cost * $item->quantity, 2, '.', ',') }} 
-										</p>
-									</td>
+                        <div class="col-md-5 col-12 m-auto">
+                        	<table class="table">
+                        		<tr>
+									<td>Subtotal:</td>
+									<td>{{ $inputs['subtotal'] }}</td>
 								</tr>
-							@endforeach
-						</tbody>
-					</table>
-				</div>
+								<tr>
+									<td>Total:</td>
+									<td>{{ $inputs['total'] }}</td>
+								</tr>
+                        	</table>
+                        </div>
 
-				<div class="card-body invoice-padding pb-0">
-					<div class="row invoice-sales-total-wrapper">
-						<div class="col-md-6 order-md-1 order-2 mt-md-0 mt-3">
-							<p class="card-text mb-1">
-								<span class="font-weight-bold">Ship Via:</span> 
-								<span class="ml-75">{{ $inputs['ship_via'] }}</span>
-							</p>
-
-							<p class="card-text mb-1">
-								<span class="font-weight-bold">Shipping Method:</span> 
-								<span class="ml-75">{{ $inputs['shipping_method'] }}</span>
-							</p>
-
-							<p class="card-text mb-1">
-								<span class="font-weight-bold">Shipping Terms:</span> 
-								<span class="ml-75">{{ $inputs['shipping_terms'] }}</span>
-							</p>
-
-							<p class="card-text mb-1">
-								<span class="font-weight-bold">Approved By:</span> 
-								<span class="ml-75">{{ $inputs['approved_by'] }}</span>
-							</p>
-
-							<p class="card-text mb-1">
-								<span class="font-weight-bold">Created By:</span> 
-								<span class="ml-75">{{ $inputs['created_by'] }}</span>
-							</p>
-						</div>
-
-						<div class="col-md-6 d-flex justify-content-end order-md-2 order-1">
-							<div class="invoice-total-wrapper">
-								<div class="invoice-total-item">
-									<p class="invoice-total-title">Subtotal:</p>
-									<p class="invoice-total-amount">
-										{{ number_format($inputs['sub_total'], 2, '.', ',') }}
-									</p>
-								</div>
-
-								<div class="invoice-total-item">
-									<p class="invoice-total-title">Discount(%):</p>
-									<p class="invoice-total-amount">{{ number_format($inputs['discount'], 0) }}%</p>
-								</div>
-
-								<div class="invoice-total-item">
-									<p class="invoice-total-title">Discount(fixed):</p>
-									<p class="invoice-total-amount">
-										{{ number_format($inputs['fixed'], 2, '.', ',') }}
-									</p>
-								</div>
-
-								<div class="invoice-total-item">
-									<p class="invoice-total-title">Tax:</p>
-									<p class="invoice-total-amount">
-										{{ number_format($inputs['tax'], 0) }}%
-									</p>
-								</div>
-
-								<div class="invoice-total-item">
-									<p class="invoice-total-title">Shipping Fee:</p>
-									<p class="invoice-total-amount">
-										{{ number_format($inputs['shipping'], 2, '.', ',') }}
-									</p>
-								</div>
-
-								<hr class="my-50" />
-
-								<div class="invoice-total-item">
-									<p class="invoice-total-title">Total:</p>
-									<p class="invoice-total-amount">{{ number_format($inputs['total'], 2, '.', ',') }}</p>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-
-				<hr class="invoice-spacing" />
-
-				<div class="card-body invoice-padding pt-0">
-					<div class="row">
-						<div class="col-12">
-							<span class="font-weight-bold">Notes:</span>
-							<span>{{ $inputs['notes'] }}</span>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-
-		<div class="col-xl-3 col-md-4 col-12 invoice-actions mt-md-0 mt-2">
-			<div class="card">
-				<div class="card-body">
-					<button class="btn btn-primary btn-block mb-75" data-toggle="modal" data-target="#send-invoice-sidebar">
-						Send Invoice
-					</button>
-					<a class="btn btn-outline-secondary btn-block btn-download-invoice mb-75" href="{{ route('purchase-orders-download', ['purchase' => $purchase->id]) }}" target="_blank">
-						Download
-					</a>
-					<a class="btn btn-outline-secondary btn-block mb-75" href="{{ route('purchase-orders-edit', [
-						'purchase' => $purchase
-					]) }}"> Edit </a>
-					<button class="btn btn-success btn-block" data-toggle="modal" data-target="#add-payment-sidebar">
-						Add Payment
-					</button>
-				</div>
-			</div>
-		</div>
-  </div>
+                        <div class="col-12 mt-2">
+                            <button wire:click.prevent="edit" class="btn btn-primary mr-1">{{ __('Edit') }}</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </section>

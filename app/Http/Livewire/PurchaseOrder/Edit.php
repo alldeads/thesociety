@@ -53,15 +53,15 @@ class Edit extends CustomComponent
 			$quantity += $item->quantity;
 		}
 
-		// if ( !isset($this->inputs['items']) ) {
-		// 	$this->inputs['items'][0] = [
-		// 		'product' => '',
-		// 		'name'    => '',
-		// 		'cost'    => 0,
-		// 		'qty'     => 0,
-		// 		'price'   => 0
-		// 	];
-		// }
+		if ( !isset($this->inputs['items']) ) {
+			$this->inputs['items'][0] = [
+				'product' => '',
+				'name'    => '',
+				'cost'    => 0,
+				'qty'     => 0,
+				'price'   => 0
+			];
+		}
 
 		$this->inputs['status'] = $this->purchase->status_id;
 		$this->inputs['created_by'] = $this->purchase->user_created->profile->name ?? "N/A";
@@ -217,7 +217,7 @@ class Edit extends CustomComponent
 				'approved_by'   => $this->inputs['approved_by'],
 				'requested_by'  => $this->inputs['requested_by'],
 				'status_id'     => $this->inputs['status'],
-				'notes'           => $this->inputs['notes'] ?? null,
+				'notes'         => $this->inputs['notes'] ?? null,
 			]);
 
 			$purchase->save();
