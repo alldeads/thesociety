@@ -21,7 +21,7 @@ class PermissionSeeder extends Seeder
             'dashboard', 'company', 'employee', 'role',
             'chart', 'cashflow', 'customer', 'supplier',
             'product', 'supply', 'purchase_order', 'tax',
-            'journal_entry', 'ledger', 'branch'
+            'journal_entry', 'ledger', 'branch', 'stock_level'
         ];
 
         foreach ($menus as $menu) {

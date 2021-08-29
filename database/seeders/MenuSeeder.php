@@ -138,15 +138,15 @@ class MenuSeeder extends Seeder
             'permission' => 'purchase_order.view'
         ]);
 
-        // $header->menus()->create([
-        //     'name'       => 'Stock Cards',
-        //     'slug'       => 'suppliers',
-        //     'url'        => 'inventory/suppliers',
-        //     'base'       => 'supplier',
-        //     'is_export'  => true,
-        //     'icon'       => 'layers',
-        //     'permission' => 'supplier.view'
-        // ]);
+        $header->menus()->create([
+            'name'       => 'Stock Level',
+            'slug'       => 'stock-levels',
+            'url'        => 'inventory/stock-levels/view',
+            'base'       => 'stock_level',
+            'is_export'  => true,
+            'icon'       => 'layers',
+            'permission' => 'stock_level.view'
+        ]);
 
         // $header->menus()->create([
         //     'name'       => 'Inventory',
@@ -182,16 +182,6 @@ class MenuSeeder extends Seeder
             'icon'       => 'package',
             'permission' => 'supply.view'
         ]);
-
-        // $header->menus()->create([
-        //     'name'       => 'Services',
-        //     'slug'       => 'services',
-        //     'url'        => 'inventory/suppliers',
-        //     'base'       => 'supplier',
-        //     'is_export'  => true,
-        //     'icon'       => 'list',
-        //     'permission' => 'supplier.view'
-        // ]);
 
         $header = Header::create([
             'name'  => 'Customers Management',
