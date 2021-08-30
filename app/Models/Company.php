@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Auth;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -64,6 +65,16 @@ class Company extends Model
     public static function getCompanyDetails()
     {
         return cache()->remember('company-details', 60*60*24, function () {
+
+            if (!Auth::check()) {
+                Auth::logout();
+
+                session()->invalidate();
+                session()->regenerateToken();
+
+                return redirect('/');
+            }
+
             return Company::findOrFail(auth()->user()->empCard->company_id);
         });
     }
