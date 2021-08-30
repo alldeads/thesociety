@@ -68,10 +68,14 @@ Route::middleware('auth')->group(function() {
 		Route::prefix('stock-levels')->group( function() {
 			Route::get('view', 'StockLevelController@index')->name('stock-levels-view');
 			Route::get('download/{purchase}', 'PurchaseOrderController@download')->name('purchase-orders-download');
-			Route::get('create', 'PurchaseOrderController@create')->name('purchase-orders-create');
+			Route::get('create', 'StockLevelController@create')->name('stock-levels-create');
 			Route::get('view/{purchase}', 'PurchaseOrderController@view')->name('purchase-orders-read');
 			Route::get('edit/{purchase}', 'PurchaseOrderController@edit')->name('purchase-orders-edit');
 			Route::get('export', 'PurchaseOrderController@export')->name('purchase-orders-export');
+		});
+
+		Route::prefix('histories')->group( function() {
+			Route::get('view', 'InventoryHistoryController@index')->name('histories-view');
 		});
 	});
 

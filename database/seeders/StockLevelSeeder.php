@@ -7,6 +7,7 @@ use Illuminate\Database\Seeder;
 use App\Models\Company;
 use App\Models\StockLevel;
 use App\Models\InventoryType;
+use App\Models\InventoryHistory;
 use App\Models\Branch;
 
 class StockLevelSeeder extends Seeder
@@ -26,8 +27,13 @@ class StockLevelSeeder extends Seeder
                 $branch = Branch::where('company_id', $company->id)->inRandomOrder()->first();
                 $inventory = InventoryType::inRandomOrder()->first();
 
-                $in_stock = rand(10, 100);
-                $on_hand  = rand(10, 100);
+                $in_stock = rand(50, 100);
+                $on_hand  = rand(50, 100);
+
+                $difference = rand(1, 20);
+                $type = rand(0, 1);
+
+                $after = $type == 0 ?  $in_stock - $difference : $in_stock + $difference;
  
                 StockLevel::create([
                     'reference'  => 'SL-' . rand(100000, 999999),
@@ -35,9 +41,24 @@ class StockLevelSeeder extends Seeder
                     'product_id' => $product->id,
                     'branch_id'  => $branch->id,
                     'inventory_type_id' => $inventory->id,
-                    'in_stock'   => $in_stock,
-                    'on_hand'    => $on_hand,
-                    'differences'=> $in_stock - $on_hand
+                    'in_stock'    => $in_stock,
+                    'after_stock' => $after,
+                    'created_by' => 1,
+                    'updated_by' => 1
+                ]);
+
+                InventoryHistory::create([
+                    'reference'  => 'IN-' . rand(100000, 999999),
+                    'company_id' => $company->id,
+                    'product_id' => $product->id,
+                    'branch_id'  => $branch->id,
+                    'inventory_type_id' => $inventory->id,
+                    'in_stock'    => $in_stock,
+                    'on_hand'     => $after,
+                    'type'        => $type,
+                    'difference'  => $difference,
+                    'created_by' => 1,
+                    'updated_by' => 1
                 ]);
             }
         }

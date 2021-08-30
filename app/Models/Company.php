@@ -65,18 +65,22 @@ class Company extends Model
     public static function getCompanyDetails()
     {
         return cache()->remember('company-details', 60*60*24, function () {
-
-            if (!Auth::check()) {
-                Auth::logout();
-
-                session()->invalidate();
-                session()->regenerateToken();
-
-                return redirect('/');
-            }
-
             return Company::findOrFail(auth()->user()->empCard->company_id);
         });
+    }
+
+    public static function getProducts()
+    {
+        $company = Company::findOrFail(auth()->user()->empCard->company_id);
+
+        return $company->products;
+    }
+
+    public static function getBranches()
+    {
+        $company = Company::findOrFail(auth()->user()->empCard->company_id);
+
+        return $company->branches;
     }
 
     public function employees()

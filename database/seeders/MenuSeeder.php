@@ -148,15 +148,15 @@ class MenuSeeder extends Seeder
             'permission' => 'stock_level.view'
         ]);
 
-        // $header->menus()->create([
-        //     'name'       => 'Inventory',
-        //     'slug'       => 'suppliers',
-        //     'url'        => 'inventory/suppliers',
-        //     'base'       => 'supplier',
-        //     'is_export'  => true,
-        //     'icon'       => 'archive',
-        //     'permission' => 'supplier.view'
-        // ]);
+        $header->menus()->create([
+            'name'       => 'Inventory History',
+            'slug'       => 'history',
+            'url'        => 'inventory/histories/view',
+            'base'       => 'history',
+            'is_export'  => true,
+            'icon'       => 'list',
+            'permission' => 'history.view'
+        ]);
 
         $header = Header::create([
             'name'  => 'Product Management',

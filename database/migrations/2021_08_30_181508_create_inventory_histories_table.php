@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateStockLevelsTable extends Migration
+class CreateInventoryHistoriesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateStockLevelsTable extends Migration
      */
     public function up()
     {
-        Schema::create('stock_levels', function (Blueprint $table) {
+        Schema::create('inventory_histories', function (Blueprint $table) {
             $table->id();
             $table->string('reference');
             $table->bigInteger('company_id')->unsigned();
@@ -21,8 +21,9 @@ class CreateStockLevelsTable extends Migration
             $table->bigInteger('branch_id')->unsigned();
             $table->bigInteger('inventory_type_id')->unsigned();
             $table->bigInteger('in_stock')->default(0);
-            $table->bigInteger('after_stock')->default(0);
-            $table->text('notes')->nullable();
+            $table->bigInteger('difference')->default(0);
+            $table->bigInteger('on_hand')->default(0);
+            $table->boolean('type')->default(1);
             $table->bigInteger('created_by')->unsigned();
             $table->bigInteger('updated_by')->unsigned();
             $table->timestamps();
@@ -36,6 +37,6 @@ class CreateStockLevelsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('stock_levels');
+        Schema::dropIfExists('inventory_histories');
     }
 }

@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Livewire\StockLevel;
+namespace App\Http\Livewire\History;
 
 use App\Http\Livewire\CustomComponent;
 use Illuminate\Database\Eloquent\Builder;
 use Livewire\WithPagination;
 
-use App\Models\StockLevel;
+use App\Models\InventoryHistory;
 
 class Index extends CustomComponent
 {
@@ -20,18 +20,9 @@ class Index extends CustomComponent
     public $date_from;
     public $date_to;
 
-    public $listeners = [
-        'refreshStockLevelParent' => '$refresh'
-    ];
-
     public function updatingSearch()
     {
         $this->resetPage();
-    }
-
-    public function create()
-    {
-        return redirect()->route('stock-levels-create');
     }
 
     public function render()
@@ -41,17 +32,16 @@ class Index extends CustomComponent
         $to     = $this->date_to;
         $limit  = $this->limit ?? 10;
 
-        $results = StockLevel::where('company_id', $this->company_id)
+        $results = InventoryHistory::where('company_id', $this->company_id)
                     ->where( function (Builder $query) use ($search) {
                         return $query->where('reference', 'like', "%". $search . "%")
-                            ->orWhere('notes', 'like', "%". $search . "%")
                             ->orWhereHas('product', function($query) use ($search) {
                                 return $query->where('name', 'like', "%" . $search ."%");
                             })
                             ->orWhereHas('branch', function($query) use ($search) {
                                 return $query->where('name', 'like', "%" . $search ."%");
                             })
-                            ->orWhereHas('type', function($query) use ($search) {
+                            ->orWhereHas('reason', function($query) use ($search) {
                                 return $query->where('name', 'like', "%" . $search ."%");
                             });
                     });
@@ -64,11 +54,11 @@ class Index extends CustomComponent
             $results = $results->whereDate('created_at', '<=', $to );
         }            
 
-        $results  =  $results->with(['product', 'branch', 'type'])
+        $results  =  $results->with(['product', 'branch', 'reason'])
                             ->orderBy('id', 'desc')
                             ->paginate($limit);
                         
-        return view('livewire.stock-level.index', [
+        return view('livewire.history.index', [
             'results' => $results
         ]);
     }

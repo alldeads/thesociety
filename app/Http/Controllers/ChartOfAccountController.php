@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Exports\ChartAccountExport;
+use App\Models\Company;
 
 class ChartOfAccountController extends Controller
 {
@@ -19,7 +20,7 @@ class ChartOfAccountController extends Controller
 
 		return view('chart-account.index', [
 	    	'breadcrumbs' => $breadcrumbs,
-	    	'company'     => $this->company
+	    	'company'     => $this->getCompany()
 	    ]);
     }
 

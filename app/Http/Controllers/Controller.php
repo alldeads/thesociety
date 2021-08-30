@@ -7,16 +7,11 @@ use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Routing\Controller as BaseController;
 
+use App\Traits\CompanyTrait;
+
 use App\Models\Company;
 
 class Controller extends BaseController
 {
-    use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
-
-    public $company;
-
-    public function __construct()
-    {
-        $this->company = Company::getCompanyDetails();
-    }
+    use AuthorizesRequests, DispatchesJobs, ValidatesRequests, CompanyTrait;
 }

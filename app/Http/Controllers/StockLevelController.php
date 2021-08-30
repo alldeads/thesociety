@@ -17,7 +17,23 @@ class StockLevelController extends Controller
 
         return view('stock-level.index', [
             'breadcrumbs' => $breadcrumbs,
-            'company'     => $this->company
+            'company'     => $this->getCompany()
+        ]);
+    }
+
+    public function create()
+    {
+        $this->authorize('stock_level.create');
+
+        $breadcrumbs = [
+            ['link'=> route('home'), 'name'=>"Dashboard"], 
+            ['link'=> route('branches-view'), 'name'=>"Stock Level"], 
+            ['name'=>"New Stock Level"],
+        ];
+
+        return view('stock-level.create', [
+            'breadcrumbs' => $breadcrumbs,
+            'company'     => $this->getCompany()
         ]);
     }
 }
