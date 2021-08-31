@@ -37,6 +37,6 @@ class ChartOfAccountController extends Controller
     		$requested_type = 'csv';
     	}
 
-    	return (new ChartAccountExport($q, $this->company->id))->download('chart-of-accounts-' . now()->format('Y-m-d') . '.' . $requested_type);
+    	return (new ChartAccountExport($q, $this->getCompany()->id))->download('chart-of-accounts-' . now()->format('Y-m-d') . '.' . $requested_type);
     }
 }

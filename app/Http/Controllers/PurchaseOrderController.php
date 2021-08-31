@@ -23,7 +23,7 @@ class PurchaseOrderController extends Controller
 
 		return view('purchase-order.index', [
 	    	'breadcrumbs' => $breadcrumbs,
-	    	'company'     => $this->company
+	    	'company'     => $this->getCompany()
 	    ]);
     }
 
@@ -39,7 +39,7 @@ class PurchaseOrderController extends Controller
 
 		return view('purchase-order.create', [
 	    	'breadcrumbs' => $breadcrumbs,
-	    	'company'     => $this->company
+	    	'company'     => $this->getCompany()
 	    ]);
     }
 
@@ -53,10 +53,10 @@ class PurchaseOrderController extends Controller
 	        ['name'=> $purchase->reference],
 	    ];
 
-		if ($purchase->company_id == $this->company->id) {
+		if ($purchase->company_id == $this->getCompany()->id) {
 		    return view('purchase-order.view', [
 		    	'breadcrumbs' => $breadcrumbs,
-		    	'company'     => $this->company,
+		    	'company'     => $this->getCompany(),
 		    	'purchase'    => $purchase
 		    ]);
 		}
@@ -74,10 +74,10 @@ class PurchaseOrderController extends Controller
 	        ['name'=> $purchase->reference],
 	    ];
 
-		if ($purchase->company_id == $this->company->id) {
+		if ($purchase->company_id == $this->getCompany()->id) {
 		    return view('purchase-order.edit', [
 		    	'breadcrumbs' => $breadcrumbs,
-		    	'company'     => $this->company,
+		    	'company'     => $this->getCompany(),
 		    	'purchase'    => $purchase
 		    ]);
 		}
@@ -101,14 +101,14 @@ class PurchaseOrderController extends Controller
     		$requested_type = 'csv';
     	}
 
-    	return (new PurchaseOrderExport($q, $this->company->id, $from, $to))->download('purchase-orders-' . now()->format('Y-m-d') . '.' . $requested_type);
+    	return (new PurchaseOrderExport($q, $this->getCompany()->id, $from, $to))->download('purchase-orders-' . now()->format('Y-m-d') . '.' . $requested_type);
     }
 
     public function download(PurchaseOrder $purchase)
     {
     	set_time_limit(60);
 
-    	$company = $this->company;
+    	$company = $this->getCompany();
 
     	$address['supplier_name']    = $purchase->supplier->user->profile->company ?? 'N/A';
 		$address['supplier_address'] = $purchase->supplier->address ?? [];

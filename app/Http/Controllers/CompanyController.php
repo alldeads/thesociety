@@ -18,11 +18,9 @@ class CompanyController extends Controller
 	        ['name'=>"Company Details"],
 	    ];
 
-	    $company = Company::getCompanyDetails();
-
 		return view('company.details', [
 	    	'breadcrumbs' => $breadcrumbs,
-	    	'company'     => $company
+	    	'company'     => $this->getCompany()
 	    ]);
     }
 
@@ -36,11 +34,9 @@ class CompanyController extends Controller
 	        ['name'=>"Edit"], 
 	    ];
 
-	    $company = Company::getCompanyDetails();
-
 		return view('company.edit', [
 	    	'breadcrumbs' => $breadcrumbs,
-	    	'company'     => $company
+	    	'company'     => $this->getCompany()
 	    ]);
     }
 }

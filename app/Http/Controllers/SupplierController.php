@@ -20,7 +20,7 @@ class SupplierController extends Controller
 
 		return view('supplier.index', [
 	    	'breadcrumbs' => $breadcrumbs,
-	    	'company'     => $this->company
+	    	'company'     => $this->getCompany()
 	    ]);
     }
 
@@ -36,7 +36,7 @@ class SupplierController extends Controller
 
 		return view('supplier.create', [
 	    	'breadcrumbs' => $breadcrumbs,
-	    	'company'     => $this->company
+	    	'company'     => $this->getCompany()
 	    ]);
     }
 
@@ -50,10 +50,10 @@ class SupplierController extends Controller
 	        ['name'=> $supplier->user->profile->company], 
 	    ];
 
-		if ($supplier->company_id == $this->company->id) {
+		if ($supplier->company_id == $this->getCompany()->id) {
 		    return view('supplier.read', [
 		    	'breadcrumbs' => $breadcrumbs,
-		    	'company'     => $company,
+		    	'company'     => $this->getCompany(),
 		    	'supplier'    => $supplier
 		    ]);
 		}
@@ -71,10 +71,10 @@ class SupplierController extends Controller
 	        ['name'=> $supplier->user->profile->company], 
 	    ];
 
-		if ($supplier->company_id == $this->company->id) {
+		if ($supplier->company_id == $this->getCompany()->id) {
 		    return view('supplier.edit', [
 		    	'breadcrumbs' => $breadcrumbs,
-		    	'company'     => $company,
+		    	'company'     => $this->getCompany(),
 		    	'supplier'    => $supplier
 		    ]);
 		}
@@ -98,6 +98,6 @@ class SupplierController extends Controller
     		$requested_type = 'csv';
     	}
 
-    	return (new SupplierExport($q, $this->company->id, $from, $to))->download('suppliers-' . now()->format('Y-m-d') . '.' . $requested_type);
+    	return (new SupplierExport($q, $this->getCompany()->id, $from, $to))->download('suppliers-' . now()->format('Y-m-d') . '.' . $requested_type);
     }
 }

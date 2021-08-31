@@ -20,7 +20,7 @@ class JournalEntryController extends Controller
 
 		return view('journal-entry.index', [
 	    	'breadcrumbs' => $breadcrumbs,
-	    	'company'     => $this->company
+	    	'company'     => $this->getCompany()
 	    ]);
     }
 
@@ -36,7 +36,7 @@ class JournalEntryController extends Controller
 
 		return view('journal-entry.create', [
 	    	'breadcrumbs' => $breadcrumbs,
-	    	'company'     => $this->company
+	    	'company'     => $this->getCompany()
 	    ]);
     }
 
@@ -50,7 +50,7 @@ class JournalEntryController extends Controller
 	        ['name'=>"Update Entry"],
 	    ];
 
-		if ($this->company->id == $journal->company_id) {
+		if ($this->getCompany()->id == $journal->company_id) {
 		    return view('journal-entry.edit', [
 		    	'breadcrumbs' => $breadcrumbs,
 		    	'journal'     => $journal
@@ -70,7 +70,7 @@ class JournalEntryController extends Controller
 	        ['name'=>"View Entry"],
 	    ];
 
-		if ($this->company->id == $journal->company_id) {
+		if ($this->getCompany()->id == $journal->company_id) {
 		    return view('journal-entry.read', [
 		    	'breadcrumbs' => $breadcrumbs,
 		    	'journal'     => $journal
@@ -96,6 +96,6 @@ class JournalEntryController extends Controller
     		$requested_type = 'csv';
     	}
 
-    	return (new JournalEntryExport($q, $this->company->id, $from, $to))->download('journal-entries-' . now()->format('Y-m-d') . '.' . $requested_type);
+    	return (new JournalEntryExport($q, $this->getCompany()->id, $from, $to))->download('journal-entries-' . now()->format('Y-m-d') . '.' . $requested_type);
     }
 }

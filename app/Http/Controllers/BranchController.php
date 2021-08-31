@@ -19,7 +19,7 @@ class BranchController extends Controller
 
         return view('branch.index', [
             'breadcrumbs' => $breadcrumbs,
-            'company'     => $this->company
+            'company'     => $this->getCompany()
         ]);
     }
 
@@ -35,7 +35,7 @@ class BranchController extends Controller
 
         return view('branch.create', [
             'breadcrumbs' => $breadcrumbs,
-            'company'     => $this->company
+            'company'     => $this->getCompany()
         ]);
     }
 
@@ -49,7 +49,7 @@ class BranchController extends Controller
             ['name'=>"Edit Branch"],
         ];
 
-        if ($this->company->id == $branch->company_id) {
+        if ($this->getCompany()->id == $branch->company_id) {
             return view('branch.edit', [
                 'breadcrumbs' => $breadcrumbs,
                 'branch'      => $branch
@@ -69,7 +69,7 @@ class BranchController extends Controller
             ['name'=> $branch->name],
         ];
 
-        if ($this->company->id == $branch->company_id) {
+        if ($this->getCompany()->id == $branch->company_id) {
             return view('branch.read', [
                 'breadcrumbs' => $breadcrumbs,
                 'branch'      => $branch

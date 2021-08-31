@@ -19,11 +19,9 @@ class CustomerController extends Controller
 	        ['name'=> "Customers"],
 	    ];
 
-	    $company = Company::getCompanyDetails();
-
 		return view('customer.index', [
 	    	'breadcrumbs' => $breadcrumbs,
-	    	'company'     => $company
+	    	'company'     => $this->getCompany()
 	    ]);
     }
 
@@ -37,11 +35,9 @@ class CustomerController extends Controller
 	        ['name'=>"Create Customer"], 
 	    ];
 
-	    $company = Company::findOrFail(auth()->user()->empCard->company_id);
-
 		return view('customer.create', [
 	    	'breadcrumbs' => $breadcrumbs,
-	    	'company'     => $company
+	    	'company'     => $this->getCompany()
 	    ]);
     }
 
@@ -49,9 +45,7 @@ class CustomerController extends Controller
     {
     	$response = Gate::inspect('customer.read');
 
-    	$company = Company::findOrFail(auth()->user()->empCard->company_id);
-
-    	if ( $customer->company_id != $company->id ) {
+    	if ( $customer->company_id != $this->getCompany()->id ) {
     		return view('misc.not-authorized');
     	}
 
@@ -64,7 +58,7 @@ class CustomerController extends Controller
 		if ( $response->allowed() ) {
 		    return view('customer.read', [
 		    	'breadcrumbs' => $breadcrumbs,
-		    	'company'     => $company,
+		    	'company'     => $this->getCompany(),
 		    	'customer'    => $customer
 		    ]);
 		} else {
@@ -78,7 +72,7 @@ class CustomerController extends Controller
 
     	$company = Company::findOrFail(auth()->user()->empCard->company_id);
 
-    	if ( $customer->company_id != $company->id ) {
+    	if ( $customer->company_id != $this->getCompany()->id ) {
     		return view('misc.not-authorized');
     	}
 
@@ -91,7 +85,7 @@ class CustomerController extends Controller
 		if ( $response->allowed() ) {
 		    return view('customer.edit', [
 		    	'breadcrumbs' => $breadcrumbs,
-		    	'company'     => $company,
+		    	'company'     => $this->getCompany(),
 		    	'customer'    => $customer
 		    ]);
 		} else {

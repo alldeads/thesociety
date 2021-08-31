@@ -19,7 +19,7 @@ class TaxController extends Controller
 
 		return view('tax.index', [
 	    	'breadcrumbs' => $breadcrumbs,
-	    	'company'     => $this->company
+	    	'company'     => $this->getCompany()
 	    ]);
     }
 
@@ -37,6 +37,6 @@ class TaxController extends Controller
     		$requested_type = 'csv';
     	}
 
-    	return (new TaxExport($q, $this->company->id))->download('tax-' . now()->format('Y-m-d') . '.' . $requested_type);
+    	return (new TaxExport($q, $this->getCompany()->id))->download('tax-' . now()->format('Y-m-d') . '.' . $requested_type);
     }
 }

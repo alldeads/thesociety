@@ -20,7 +20,7 @@ class CashFlowController extends Controller
 
 		return view('cash-flow.index', [
 	    	'breadcrumbs' => $breadcrumbs,
-	    	'company'     => $this->company
+	    	'company'     => $this->getCompany()
 	    ]);
     }
 
@@ -36,7 +36,7 @@ class CashFlowController extends Controller
 
 		return view('cash-flow.create', [
 	    	'breadcrumbs' => $breadcrumbs,
-	    	'company'     => $this->company
+	    	'company'     => $this->getCompany()
 	    ]);
     }
 
@@ -50,7 +50,7 @@ class CashFlowController extends Controller
 	        ['name'=>"View Entry"],
 	    ];
 
-		if ($this->company->id == $cashflow->company_id) {
+		if ($this->getCompany()->id == $cashflow->company_id) {
 		    return view('cash-flow.read', [
 		    	'breadcrumbs' => $breadcrumbs,
 		    	'cashflow'    => $cashflow
@@ -70,7 +70,7 @@ class CashFlowController extends Controller
 	        ['name'=>"Edit Entry"],
 	    ];
 
-		if ($this->company->id == $cashflow->company_id) {
+		if ($this->getCompany()->id == $cashflow->company_id) {
 		    return view('cash-flow.edit', [
 		    	'breadcrumbs' => $breadcrumbs,
 		    	'cashflow'    => $cashflow
@@ -95,6 +95,6 @@ class CashFlowController extends Controller
     		$requested_type = 'csv';
     	}
 
-	    return (new CashFlowExport($q, $this->company->id, $from, $to))->download('cash-flow-' . now()->format('Y-m-d') . '.' . $requested_type);
+	    return (new CashFlowExport($q, $this->getCompany()->id, $from, $to))->download('cash-flow-' . now()->format('Y-m-d') . '.' . $requested_type);
     }
 }
