@@ -14,7 +14,7 @@ class Nav extends Component
 
 	public function mount()
 	{
-		$this->details = User::getUserDetails();
+		$this->details  = User::getUserDetails();
 	}
 
 	public function switch()

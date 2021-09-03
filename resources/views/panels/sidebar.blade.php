@@ -30,7 +30,7 @@
                 </li>
 
                 @foreach($header as $menu) 
-                    <li class="nav-item {{  strrpos(Route::currentRouteName(), $menu->slug) !== false ? 'active' : '' }} {{ $menu->classList }}">
+                    <li class="nav-item {{ strrpos(Route::currentRouteName(), $menu->slug) !== false ? 'active' : '' }} {{ $menu->classList }}">
                         <a href="{{isset($menu->url)? url($menu->url):'javascript:void(0)'}}" class="d-flex align-items-center" target="{{$menu->newTab ? '_blank':'_self'}}">
                             <i data-feather="{{ $menu->icon }}"></i>
                             <span class="menu-title text-truncate">{{ $menu->name }}</span>

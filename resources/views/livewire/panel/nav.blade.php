@@ -1,4 +1,13 @@
-<nav class="header-navbar navbar navbar-expand-lg align-items-center {{ $configData['navbarClass'] }} navbar-light navbar-shadow {{ $configData['navbarColor'] }}">
+@php
+    $route = Route::currentRouteName();
+    $class = '';
+
+    if ( strrpos(Route::currentRouteName(), 'pos') !== false ) {
+        $class = "width: calc(100vw - (100vw - 100%) - calc(2rem * 2))";
+    }
+@endphp
+
+<nav class="header-navbar navbar navbar-expand-lg align-items-center floating-nav navbar-light navbar-shadow {{ $configData['navbarColor'] }}" style="{{ $class }}">
     <div class="navbar-container d-flex content">
         <div class="bookmark-wrapper d-flex align-items-center">
             <ul class="nav navbar-nav d-xl-none">
