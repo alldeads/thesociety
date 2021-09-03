@@ -28,6 +28,4 @@
 		<script defer src="{{ asset(mix('js/scripts/all.min.js')) }}"></script>
 </head>
 
-@isset($configData["mainLayoutType"])
-	@extends((( $configData["mainLayoutType"] === 'horizontal') ? 'layouts.horizontalLayoutMaster' :'layouts.verticalLayoutMaster' ))
-@endisset
+@extends('layouts.verticalLayoutMaster')

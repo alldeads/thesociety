@@ -150,7 +150,7 @@ class MenuSeeder extends Seeder
 
         $header->menus()->create([
             'name'       => 'Inventory History',
-            'slug'       => 'history',
+            'slug'       => 'histories',
             'url'        => 'inventory/histories/view',
             'base'       => 'history',
             'is_export'  => true,
