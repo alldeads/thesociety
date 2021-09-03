@@ -1,6 +1,6 @@
 <section class="bs-validation">
   	<div class="row">
-		<div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 m-auto">
+		<div class="col-12">
 	  		<div class="card">
 				<div class="card-header">
 		  			<h4 class="card-title">Create Product</h4>
@@ -66,11 +66,6 @@
 					<div class="form-group">
 		  				<label class="form-label" for="discounted">Discounted Price</label>
 		  				<input type="number" id="discounted" class="form-control" placeholder="Enter Discounted Price" wire:model="inputs.discounted"/>
-					</div>
-
-					<div class="form-group">
-		  				<label class="form-label" for="quantity">Quantity <span style="color:red;">*</span></label>
-		  				<input type="number" id="quantity" class="form-control" placeholder="Enter Initial Quantity" wire:model="inputs.quantity"/>
 					</div>
 
 					<div class="form-group">

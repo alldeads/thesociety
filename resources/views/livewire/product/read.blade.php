@@ -49,11 +49,6 @@
 					</div>
 
 					<div class="form-group">
-		  				<label class="form-label" for="quantity">Quantity</label>
-		  				<input type="number" id="quantity" class="form-control" readonly wire:model="inputs.quantity"/>
-					</div>
-
-					<div class="form-group">
 		  				<label class="form-label" for="threshold">Threshold</label>
 		  				<input type="number" id="threshold" class="form-control" readonly wire:model="inputs.threshold"/>
 					</div>

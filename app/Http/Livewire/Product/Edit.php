@@ -30,7 +30,6 @@ class Edit extends CustomComponent
 			'cost'              => $this->product->cost ?? 0,
 			'price'             => $this->product->srp_price ?? 0,
 			'discounted'        => $this->product->discounted_price ?? 0,
-			'quantity'          => $this->product->quantity ?? 0,
 			'threshold'         => $this->product->threshold ?? 0,
 			'status'            => $this->product->status ?? ''
 		];
@@ -49,7 +48,6 @@ class Edit extends CustomComponent
             'cost'         => ['required', 'numeric'],
             'price'        => ['required', 'numeric'],
             'discounted'   => ['nullable', 'numeric'],
-            'quantity'     => ['required', 'numeric'],
             'threshold'    => ['nullable', 'numeric'],
             'status'       => ['required', 'string']
         ])->validate();
@@ -80,7 +78,6 @@ class Edit extends CustomComponent
 	        	'name'       => ucwords($this->inputs['name']),
 	        	'long_description' => ucwords($this->inputs['description']),
 	        	'short_description' => ucwords($this->inputs['brief_description']),
-	        	'quantity'  => $this->inputs['quantity'],
 	        	'threshold' => $this->inputs['threshold'] ?? 0,
 	        	'srp_price' => $this->inputs['price'],
 	        	'discounted_price' => $this->inputs['discounted'] ?? 0,

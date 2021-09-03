@@ -64,11 +64,6 @@
 					</div>
 
 					<div class="form-group">
-		  				<label class="form-label" for="quantity">Quantity <span style="color:red;">*</span></label>
-		  				<input type="number" id="quantity" class="form-control" placeholder="Enter Initial Quantity" wire:model="inputs.quantity"/>
-					</div>
-
-					<div class="form-group">
 		  				<label class="form-label" for="threshold">Threshold</label>
 		  				<input type="number" id="threshold" class="form-control" placeholder="Enter Threshold" wire:model="inputs.threshold"/>
 					</div>
