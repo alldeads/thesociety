@@ -1,6 +1,6 @@
 <div class="card ecommerce-card">
     <div class="item-img text-center">
-        <a href="#" wire:click.prevent="add">
+        <a href="#" wire:click.prevent="add({{$item->id}})">
             <img class="img-fluid card-img-top" src="{{ asset('images/pages/eCommerce/5.png') }}" alt="img-placeholder" />
         </a>
         {{-- <img class="img-fluid card-img-top" src="{{ asset('images/default_product.png') }}" alt="img-placeholder" /> --}}
@@ -39,7 +39,7 @@
                 </h4>
             </div>
         </div>
-        <a href="javascript:void(0)" class="btn btn-primary btn-cart" wire:click.prevent="add">
+        <a href="javascript:void(0)" class="btn btn-primary btn-cart" wire:click.prevent="add({{$item->id}})">
             <span class="add-to-cart">Add to cart</span>
         </a>
     </div>

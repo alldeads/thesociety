@@ -8,9 +8,9 @@ class Item extends Component
 {
     public $item;
 
-    public function add()
+    public function add($id)
     {
-        dd(1);
+        $this->emit('addPosItem', $this->item);
     }
 
     public function render()

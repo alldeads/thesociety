@@ -19,10 +19,6 @@ class Product extends CustomComponent
     public $limit;
     public $count;
 
-    public $listeners = [
-        'refreshPosProductParent' => '$refresh'
-    ];
-
     public function mount()
     {
         $this->count = 0;
@@ -44,7 +40,7 @@ class Product extends CustomComponent
                     ->where( function (Builder $query) use ($search) {
                         return $query->where('name', 'like', "%". $search . "%");
                     })
-                    ->orderBy('id', 'desc')
+                    ->orderBy('name', 'asc')
                     ->paginate($limit);
 
         $this->count = $results->total();

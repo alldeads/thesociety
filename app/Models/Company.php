@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Auth;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Model;
 
 class Company extends Model
@@ -69,6 +70,21 @@ class Company extends Model
         });
     }
 
+    public static function getCustomers()
+    {
+        return cache()->remember('company-customers', 60*60*24, function () {
+            $company = Company::findOrFail(auth()->user()->empCard->company_id);
+
+            return DB::table('customers')
+                    ->join('users', 'users.id', '=', 'customers.user_id')
+                    ->join('profiles', 'users.id', '=', 'profiles.user_id')
+                    ->select('profiles.first_name', 'profiles.last_name', 'customers.id' )
+                    ->where('customers.company_id', $company->id)
+                    ->orderBy('profiles.first_name', 'asc')
+                    ->get();
+        });
+    }
+
     public static function getProducts()
     {
         $company = Company::findOrFail(auth()->user()->empCard->company_id);
@@ -86,6 +102,11 @@ class Company extends Model
     public function employees()
     {
     	return $this->hasMany(Employee::class);
+    }
+
+    public function customers()
+    {
+        return $this->hasMany(Customer::class);
     }
 
     public function branches()

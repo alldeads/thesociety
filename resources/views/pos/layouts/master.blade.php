@@ -70,11 +70,23 @@
 		$(window).on('load', function() {
 			if (feather) {
 				feather.replace({
-					width: 14
-					, height: 14
+					width: 14, 
+					height: 14
 				})
 			}
 		})
+
+		window.livewire.on('alert', param => {
+			toastr[param['type']](param['message']);
+		});
+
+		window.livewire.on('showModal', param => {
+			$("#" + param['el']).modal('show');
+		});
+
+		window.livewire.on('dissmissModal', param => {
+			$("#" + param['el']).modal('hide');
+		});
 	</script>
 </body>
 </html>
