@@ -54,12 +54,14 @@ class Cart extends CustomComponent
 
     public function deleteItem($id)
     {
-        $price = $this->items[$id]['price'] * $this->items[$id]['quantity'];
-        
-        $this->inputs['sub_total'] -= $price;
-        $this->inputs['total']     -= $price;
+        if (isset($this->items[$id])) {
+            $price = $this->items[$id]['price'] * $this->items[$id]['quantity'];
 
-        unset($this->items[$id]);
+            $this->inputs['sub_total'] -= $price;
+            $this->inputs['total']     -= $price;
+
+            unset($this->items[$id]);
+        }
     }
 
     public function updatedDiscount()

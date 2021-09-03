@@ -31,15 +31,15 @@ class MenuSeeder extends Seeder
             'permission' => 'dashboard.view'
         ]);
 
-        // $header->menus()->create([
-        //     'name'       => 'Dashboard',
-        //     'slug'       => 'home',
-        //     'url'        => 'home',
-        //     'icon'       => 'home',
-        //     'base'       => 'dashboard',
-        //     'is_export'  => false,
-        //     'permission' => 'dashboard.view'
-        // ]);
+        $header->menus()->create([
+            'name'       => 'Point Sytem (POS)',
+            'slug'       => 'pos',
+            'url'        => 'pos',
+            'icon'       => 'airplay',
+            'base'       => 'pos',
+            'is_export'  => false,
+            'permission' => 'pos.view'
+        ]);
 
         // $header->menus()->create([
         //     'name'       => 'Invoices',
