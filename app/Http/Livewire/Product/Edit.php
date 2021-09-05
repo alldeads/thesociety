@@ -19,6 +19,7 @@ class Edit extends CustomComponent
 	public $product;
 	public $inputs;
 	public $mark_up;
+	public $margin;
 
 	public function mount()
 	{
@@ -28,25 +29,28 @@ class Edit extends CustomComponent
 			'description'       => $this->product->long_description ?? '',
 			'brief_description' => $this->product->short_description ?? '',
 			'cost'              => $this->product->cost ?? 0,
-			'price'             => $this->product->srp_price ?? 0,
+			'srp'               => $this->product->srp_price ?? 0,
 			'discounted'        => $this->product->discounted_price ?? 0,
 			'threshold'         => $this->product->threshold ?? 0,
 			'status'            => $this->product->status ?? ''
 		];
+	}
 
-		$this->mark_up = $this->product->markup ?? 0;
+	public function read()
+	{
+		return redirect()->route('products-read', ['product' => $this->product->id]);
 	}
 
 	public function submit()
 	{
 		Validator::make($this->inputs, [
             'name'         => ['required', 'string', 'max:255'],
-            'sku'          => ['nullable'],
+            'sku'          => ['required'],
             'description'  => ['required', 'string', 'max:255'],
             'brief_description' => ['required', 'string', 'max:30'],
             'avatar'       => ['nullable', 'image'],
             'cost'         => ['required', 'numeric'],
-            'price'        => ['required', 'numeric'],
+            'srp'          => ['required', 'numeric'],
             'discounted'   => ['nullable', 'numeric'],
             'threshold'    => ['nullable', 'numeric'],
             'status'       => ['required', 'string']
@@ -74,15 +78,14 @@ class Edit extends CustomComponent
 
 	        $product->fill([
 	        	'avatar'     => $path ?? null,
-	        	'sku'        => $this->inputs['sku'] ?? null,
+	        	'sku'        => $this->inputs['sku'],
 	        	'name'       => ucwords($this->inputs['name']),
 	        	'long_description' => ucwords($this->inputs['description']),
 	        	'short_description' => ucwords($this->inputs['brief_description']),
 	        	'threshold' => $this->inputs['threshold'] ?? 0,
-	        	'srp_price' => $this->inputs['price'],
+	        	'srp_price' => $this->inputs['srp'],
 	        	'discounted_price' => $this->inputs['discounted'] ?? 0,
 	        	'cost'      => $this->inputs['cost'],
-	        	'markup'    => str_replace(',', '', $this->mark_up),
 	        	'updated_by' => auth()->id(),
 	        	'type'       => 'product',
 	        	'status'     => $this->inputs['status'],
@@ -101,11 +104,12 @@ class Edit extends CustomComponent
 
 	public function calculate()
 	{
-		$srp  = (int) ($this->inputs['price'] ?? 0);
+		$srp  = (int) ($this->inputs['srp'] ?? 0);
 		$cost = (int) ($this->inputs['cost'] ?? 0);
 
 		if ( $srp > 0 && $cost > 0 ) {
 			$this->mark_up = number_format((($srp - $cost) / $cost) * 100, 2, '.', ',');
+			$this->margin  = number_format((($srp - $cost) / $srp) * 100, 2, '.', ',');
 		}
 	}
 

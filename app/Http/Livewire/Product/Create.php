@@ -26,7 +26,7 @@ class Create extends CustomComponent
 	public function mount()
 	{
 		$this->inputs['cost']  = 0;
-		$this->inputs['price'] = 0;
+		$this->inputs['srp'] = 0;
 		$this->inputs['sku'] = Product::generate_sku($this->company_id);
 
 		$this->mark_up = 0;
@@ -35,7 +35,7 @@ class Create extends CustomComponent
 
 	public function calculate()
 	{
-		$srp  = (int) ($this->inputs['price'] ?? 0);
+		$srp  = (int) ($this->inputs['srp'] ?? 0);
 		$cost = (int) ($this->inputs['cost'] ?? 0);
 
 		if ( $srp > 0 && $cost > 0 ) {
@@ -48,12 +48,12 @@ class Create extends CustomComponent
 	{
 		Validator::make($this->inputs, [
             'name'         => ['required', 'string', 'max:255'],
-            'sku'          => ['nullable'],
+            'sku'          => ['required'],
             'description'  => ['required', 'string', 'max:255'],
             'brief_description' => ['required', 'string', 'max:30'],
             'avatar'       => ['nullable', 'image'],
             'cost'         => ['required', 'numeric'],
-            'price'        => ['required', 'numeric'],
+            'srp'          => ['required', 'numeric'],
             'discounted'   => ['nullable', 'numeric'],
             'threshold'    => ['nullable', 'numeric'],
             'status'       => ['required', 'string']
@@ -80,12 +80,12 @@ class Create extends CustomComponent
 	        Product::create([
 	        	'company_id' => $this->company_id,
 	        	'avatar'     => $path ?? null,
-	        	'sku'        => $this->inputs['sku'] ?? null,
+	        	'sku'        => $this->inputs['sku'],
 	        	'name'       => ucwords($this->inputs['name']),
 	        	'long_description' => ucwords($this->inputs['description']),
 	        	'short_description' => ucwords($this->inputs['brief_description']),
 	        	'threshold' => $this->inputs['threshold'] ?? 0,
-	        	'srp_price' => $this->inputs['price'],
+	        	'srp_price' => $this->inputs['srp'],
 	        	'discounted_price' => $this->inputs['discounted'] ?? 0,
 	        	'cost'      => $this->inputs['cost'],
 	        	'updated_by' => auth()->id(),

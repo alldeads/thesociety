@@ -1,5 +1,6 @@
 <tr>
-	<td>{{ $item->sku }}</td>
+	<td> <a href="#" wire:click.prevent="read"> {{ $item->sku }} </a></td>
+
 	@if ( strlen($item->name) > 20 ) 
 		<td>{{ substr($item->name, 0, 20) }}...</td>
 	@else
