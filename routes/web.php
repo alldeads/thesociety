@@ -70,7 +70,7 @@ Route::middleware('auth')->group(function() {
 			Route::get('download/{purchase}', 'PurchaseOrderController@download')->name('purchase-orders-download');
 			Route::get('create', 'StockLevelController@create')->name('stock-levels-create');
 			Route::get('view/{purchase}', 'PurchaseOrderController@view')->name('purchase-orders-read');
-			Route::get('edit/{purchase}', 'PurchaseOrderController@edit')->name('purchase-orders-edit');
+			Route::get('edit/{stock}', 'StockLevelController@edit')->name('stock-levels-edit');
 			Route::get('export', 'PurchaseOrderController@export')->name('purchase-orders-export');
 		});
 

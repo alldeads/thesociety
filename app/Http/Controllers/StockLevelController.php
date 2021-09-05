@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\StockLevel;
 
 class StockLevelController extends Controller
 {
@@ -35,5 +36,26 @@ class StockLevelController extends Controller
             'breadcrumbs' => $breadcrumbs,
             'company'     => $this->getCompany()
         ]);
+    }
+
+    public function edit(StockLevel $stock)
+    {
+        $this->authorize('stock_level.update');
+
+        $breadcrumbs = [
+            ['link'=> route('home'), 'name'=>"Dashboard"], 
+            ['link'=> route('stock-levels-view'), 'name'=>"Stock Level"],
+            ['name'=> $stock->reference],
+        ];
+
+        if ($stock->company_id == $this->getCompany()->id) {
+            return view('stock-level.edit', [
+                'breadcrumbs' => $breadcrumbs,
+                'company'     => $this->getCompany(),
+                'stock'       => $stock
+            ]);
+        }
+
+        return view('errors.403');
     }
 }

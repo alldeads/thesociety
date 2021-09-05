@@ -26,6 +26,7 @@ class CreateInventoryHistoriesTable extends Migration
             $table->boolean('type')->default(1);
             $table->text('notes')->nullable();
             $table->bigInteger('created_by')->unsigned();
+            $table->softDeletes();
             $table->timestamps();
         });
     }
