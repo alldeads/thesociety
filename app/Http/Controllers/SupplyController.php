@@ -12,28 +12,22 @@ class SupplyController extends Controller
 {
     public function index()
     {
-    	$response = Gate::inspect('supply.view');
+    	$this->authorize('supply.view');
 
     	$breadcrumbs = [
 	        ['link'=> route('home'), 'name'=>"Dashboard"], 
 	        ['name'=> "Supplies"],
 	    ];
 
-	    $company = Company::findOrFail(auth()->user()->empCard->company_id);
-
-		if ( $response->allowed() ) {
-		    return view('supply.index', [
-		    	'breadcrumbs' => $breadcrumbs,
-		    	'company'     => $company
-		    ]);
-		} else {
-		    return view('misc.not-authorized');
-		}
+		return view('supply.index', [
+	    	'breadcrumbs' => $breadcrumbs,
+	    	'company'     => $this->getCompany()
+	    ]);
     }
 
     public function create()
     {
-    	$response = Gate::inspect('supply.create');
+    	$this->authorize('supply.create');
 
     	$breadcrumbs = [
 	        ['link'=> route('home'), 'name'=>"Dashboard"], 
@@ -41,27 +35,15 @@ class SupplyController extends Controller
 	        ['name'=> "Create Supply"],
 	    ];
 
-	    $company = Company::findOrFail(auth()->user()->empCard->company_id);
-
-		if ( $response->allowed() ) {
-		    return view('supply.create', [
-		    	'breadcrumbs' => $breadcrumbs,
-		    	'company'     => $company
-		    ]);
-		} else {
-		    return view('misc.not-authorized');
-		}
+		return view('supply.create', [
+	    	'breadcrumbs' => $breadcrumbs,
+	    	'company'     => $this->getCompany()
+	    ]);
     }
 
     public function view(Product $product)
     {
-    	$response = Gate::inspect('supply.read');
-
-    	$company = Company::findOrFail(auth()->user()->empCard->company_id);
-
-    	if ( $product->company_id !== $company->id ) {
-    		return view('misc.not-authorized');
-    	}
+    	$this->authorize('supply.read');
 
     	$breadcrumbs = [
 	        ['link'=> route('home'), 'name'=>"Dashboard"], 
@@ -69,26 +51,20 @@ class SupplyController extends Controller
 	        ['name'=> $product->name],
 	    ];
 
-		if ( $response->allowed() ) {
+		if ($product->company_id == $this->getCompany()->id) {
 		    return view('supply.read', [
 		    	'breadcrumbs' => $breadcrumbs,
-		    	'company'     => $company,
+		    	'company'     => $this->getCompany(),
 		    	'supply'      => $product
 		    ]);
-		} else {
-		    return view('misc.not-authorized');
 		}
+
+		return view('errors.403');
     }
 
     public function edit(Product $product)
     {
-    	$response = Gate::inspect('supply.update');
-
-    	$company = Company::findOrFail(auth()->user()->empCard->company_id);
-
-    	if ( $product->company_id !== $company->id ) {
-    		return view('misc.not-authorized');
-    	}
+    	$this->authorize('supply.update');
 
     	$breadcrumbs = [
 	        ['link'=> route('home'), 'name'=>"Dashboard"], 
@@ -96,14 +72,14 @@ class SupplyController extends Controller
 	        ['name'=> "Edit Supply"],
 	    ];
 
-		if ( $response->allowed() ) {
+		if ($product->company_id == $this->getCompany()->id) {
 		    return view('supply.edit', [
 		    	'breadcrumbs' => $breadcrumbs,
-		    	'company'     => $company,
+		    	'company'     => $this->getCompany(),
 		    	'supply'      => $product
 		    ]);
-		} else {
-		    return view('misc.not-authorized');
 		}
+
+		return view('errors.403');
     }
 }

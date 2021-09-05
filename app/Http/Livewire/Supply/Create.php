@@ -28,12 +28,11 @@ class Create extends CustomComponent
 	{
 		Validator::make($this->inputs, [
             'name'         => ['required', 'string', 'max:255'],
-            'sku'          => ['nullable'],
+            'sku'          => ['required'],
             'description'  => ['required', 'string', 'max:255'],
             'avatar'       => ['nullable', 'image'],
             'cost'         => ['required', 'numeric'],
-            'quantity'     => ['required', 'numeric'],
-            'threshold'    => ['required', 'numeric'],
+            'threshold'    => ['nullable', 'numeric'],
             'status'       => ['required', 'string']
         ])->validate();
 
@@ -41,16 +40,14 @@ class Create extends CustomComponent
         	$path = Storage::url($this->inputs['avatar']->store('products'));
         }
 
-        if ( !empty($this->inputs['sku']) ) {
-	        $results = Product::where([
-	        	'company_id' => $this->company_id,
-	        	'sku'        => $this->inputs['sku']
-	        ])->first();
+        $results = Product::where([
+        	'company_id' => $this->company_id,
+        	'sku'        => $this->inputs['sku']
+        ])->first();
 
-	        if ( $results ) {
-	        	return $this->message('Supply sku has been used.', 'error');
-	        }
-	    }
+        if ( $results ) {
+        	return $this->message('Supply sku has been used.', 'error');
+        }
 
         try {
 			DB::beginTransaction();
@@ -58,11 +55,10 @@ class Create extends CustomComponent
 	        Product::create([
 	        	'company_id' => $this->company_id,
 	        	'avatar'     => $path ?? null,
-	        	'sku'        => $this->inputs['sku'] ?? null,
+	        	'sku'        => $this->inputs['sku'],
 	        	'srp_price'  => 0,
 	        	'name'       => ucwords($this->inputs['name']),
 	        	'long_description' => ucwords($this->inputs['description'] ?? null),
-	        	'quantity'  => $this->inputs['quantity'],
 	        	'threshold' => $this->inputs['threshold'] ?? 0,
 	        	'cost'      => $this->inputs['cost'],
 	        	'updated_by' => auth()->id(),

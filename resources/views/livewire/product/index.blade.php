@@ -57,12 +57,12 @@
 		  			</div>
 		  			<hr>
 		  			<div class="row">
-		  				<div class="col-md-10 col-lg-10 col-xl-10 col-sm-12 mt-1">
+		  				<div class="col-md-10 col-12 mt-1">
 		  					<div class="form-group">
 			                  	<input type="text" class="form-control" placeholder="Search product name, status, description and category" wire:model="search"/>
 	                		</div>
 		  				</div>
-		  				<div class="col-md-2 col-lg-2 col-xl-2 col-sm-12 mt-1">
+		  				<div class="col-md-2 col-12 mt-1">
 		  					<div class="form-group">
 			                  	<select class="form-control" wire:model="limit">
 			                  		<option value="10">{{ __('10 entries') }}</option>

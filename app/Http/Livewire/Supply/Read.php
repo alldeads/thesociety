@@ -7,7 +7,6 @@ use Livewire\Component;
 class Read extends Component
 {
 	public $supply;
-
 	public $inputs;
 
 	public function mount()
@@ -25,6 +24,11 @@ class Read extends Component
 			'created_by'        => ucwords($this->supply->user_created->profile->name) ?? '',
 			'updated_by'        => ucwords($this->supply->user_updated->profile->name) ?? '',
 		];
+	}
+
+	public function edit()
+	{
+		return redirect()->route('supplies-edit', ['product' => $this->supply->id]);
 	}
 
     public function render()

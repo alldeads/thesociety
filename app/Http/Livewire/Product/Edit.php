@@ -60,16 +60,14 @@ class Edit extends CustomComponent
         	$path = Storage::url($this->inputs['avatar']->store('products'));
         }
 
-        if ( !empty($this->inputs['sku']) ) {
-	        $results = Product::where([
-	        	'company_id' => $this->company_id,
-	        	'sku'        => $this->inputs['sku']
-	        ])->where('id', '!=', $this->product->id)->first();
+        $results = Product::where([
+        	'company_id' => $this->company_id,
+        	'sku'        => $this->inputs['sku']
+        ])->where('id', '!=', $this->product->id)->first();
 
-	        if ( $results ) {
-	        	return $this->message('Product sku has been used.', 'error');
-	        }
-	    }
+        if ( $results ) {
+        	return $this->message('Product sku has been used.', 'error');
+        }
 
         try {
 			DB::beginTransaction();

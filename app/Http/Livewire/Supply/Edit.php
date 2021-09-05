@@ -23,23 +23,26 @@ class Edit extends CustomComponent
 			'name'              => $this->supply->name ?? '',
 			'sku'               => $this->supply->sku ?? '',
 			'description'       => $this->supply->long_description ?? '',
-			'cost'              => $this->supply->cost ?? '',
-			'quantity'          => $this->supply->quantity ?? '',
-			'threshold'         => $this->supply->threshold ?? '',
+			'cost'              => $this->supply->cost ?? 0,
+			'threshold'         => $this->supply->threshold ?? 0,
 			'status'            => $this->supply->status ?? '',
 		];
+	}
+
+	public function read()
+	{
+		return redirect()->route('supplies-read', ['product' => $this->supply->id]);
 	}
 
 	public function submit()
 	{
 		Validator::make($this->inputs, [
             'name'         => ['required', 'string', 'max:255'],
-            'sku'          => ['nullable'],
+            'sku'          => ['required'],
             'description'  => ['required', 'string', 'max:255'],
             'avatar'       => ['nullable', 'image'],
             'cost'         => ['required', 'numeric'],
-            'quantity'     => ['required', 'numeric'],
-            'threshold'    => ['required', 'numeric'],
+            'threshold'    => ['nullable', 'numeric'],
             'status'       => ['required', 'string']
         ])->validate();
 
@@ -47,15 +50,13 @@ class Edit extends CustomComponent
         	$path = Storage::url($this->inputs['avatar']->store('products'));
         }
 
-        if ( !empty($this->inputs['sku']) ) {
-        	$results = Product::where([
-	        	'company_id' => $this->company_id,
-	        	'sku'        => $this->inputs['sku']
-	        ])->where('id', '!=', $this->supply->id)->first();
+        $results = Product::where([
+        	'company_id' => $this->company_id,
+        	'sku'        => $this->inputs['sku']
+        ])->where('id', '!=', $this->supply->id)->first();
 
-	        if ( $results ) {
-	        	return $this->message('Sku has been used.', 'error');
-	        }
+        if ( $results ) {
+        	return $this->message('Sku has been used.', 'error');
         }
 
         try {
@@ -65,10 +66,9 @@ class Edit extends CustomComponent
 
 	        $supply->fill([
 	        	'avatar'     => $path ?? null,
-	        	'sku'        => $this->inputs['sku'] ?? null,
+	        	'sku'        => $this->inputs['sku'],
 	        	'name'       => ucwords($this->inputs['name']),
 	        	'long_description' => ucwords($this->inputs['description']),
-	        	'quantity'  => $this->inputs['quantity'],
 	        	'threshold' => $this->inputs['threshold'] ?? 0,
 	        	'cost'      => $this->inputs['cost'],
 	        	'updated_by' => auth()->id(),
