@@ -94,8 +94,8 @@
                         <thead>
                             <tr>
                                 <th>#</th>
-                                <th>Branch</th>
                                 <th>Product</th>
+                                <th>Branch</th>
                                 <th>Quantity</th>
                                 <th>Updated At</th>
                                 @if( auth()->user()->can('stock_level.update') || auth()->user()->can('stock_level.delete') || auth()->user()->can('stock_level.read') )

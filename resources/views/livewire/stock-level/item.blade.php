@@ -1,7 +1,7 @@
 <tr>
     <td>{{ $item->reference }}</td>
-    <td>{{ $item->branch->name }}</td>
     <td>{{ $item->product->name }}</td>
+    <td>{{ $item->branch->name }}</td>
     <td>{{ $item->after_stock }}</td>
     <td>{{ \Carbon\Carbon::parse($item->updated_at)->format('F j, Y h:i:s a') }}</td>
 
