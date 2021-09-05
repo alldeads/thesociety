@@ -7,33 +7,28 @@ use Illuminate\Support\Facades\Gate;
 
 use App\Models\Company;
 use App\Models\Product;
+use App\Exports\ProductExport;
 
 class ProductController extends Controller
 {
     public function index()
     {
-    	$response = Gate::inspect('product.view');
+    	$this->authorize('product.view');
 
     	$breadcrumbs = [
 	        ['link'=> route('home'), 'name'=>"Dashboard"], 
 	        ['name'=> "Products"],
 	    ];
 
-	    $company = Company::getCompanyDetails();
-
-		if ( $response->allowed() ) {
-		    return view('product.index', [
-		    	'breadcrumbs' => $breadcrumbs,
-		    	'company'     => $company
-		    ]);
-		} else {
-		    return view('misc.not-authorized');
-		}
+		return view('product.index', [
+	    	'breadcrumbs' => $breadcrumbs,
+	    	'company'     => $this->getCompany()
+	    ]);
     }
 
     public function create()
     {
-    	$response = Gate::inspect('product.create');
+    	$this->authorize('product.create');
 
     	$breadcrumbs = [
 	        ['link'=> route('home'), 'name'=>"Dashboard"], 
@@ -41,23 +36,15 @@ class ProductController extends Controller
 	        ['name'=> "Create Product"],
 	    ];
 
-	    $company = Company::getCompanyDetails();
-
-		if ( $response->allowed() ) {
-		    return view('product.create', [
-		    	'breadcrumbs' => $breadcrumbs,
-		    	'company'     => $company
-		    ]);
-		} else {
-		    return view('misc.not-authorized');
-		}
+		return view('product.create', [
+	    	'breadcrumbs' => $breadcrumbs,
+	    	'company'     => $this->getCompany()
+	    ]);
     }
 
     public function view(Product $product)
     {
-    	$response = Gate::inspect('product.read');
-
-    	$company = Company::getCompanyDetails();
+    	$this->authorize('product.read');
 
     	$breadcrumbs = [
 	        ['link'=> route('home'), 'name'=>"Dashboard"], 
@@ -65,22 +52,20 @@ class ProductController extends Controller
 	        ['name'=> $product->name],
 	    ];
 
-		if ( $response->allowed() && ($product->company_id == $company->id) ) {
+		if ($product->company_id == $this->getCompany()->id) {
 		    return view('product.read', [
 		    	'breadcrumbs' => $breadcrumbs,
-		    	'company'     => $company,
+		    	'company'     => $this->getCompany(),
 		    	'product'     => $product
 		    ]);
-		} else {
-		    return view('misc.not-authorized');
 		}
+
+		return view('errors.403');
     }
 
     public function edit(Product $product)
     {
-    	$response = Gate::inspect('product.update');
-
-    	$company = Company::getCompanyDetails();
+    	$this->authorize('product.update');
 
     	$breadcrumbs = [
 	        ['link'=> route('home'), 'name'=>"Dashboard"], 
@@ -88,14 +73,30 @@ class ProductController extends Controller
 	        ['name'=> "Edit Product"],
 	    ];
 
-		if ( $response->allowed() && ($product->company_id == $company->id) ) {
+		if ($product->company_id == $this->getCompany()->id) {
 		    return view('product.edit', [
 		    	'breadcrumbs' => $breadcrumbs,
-		    	'company'     => $company,
+		    	'company'     => $this->getCompany(),
 		    	'product'     => $product
 		    ]);
-		} else {
-		    return view('misc.not-authorized');
 		}
+
+		return view('errors.403');
+    }
+
+    public function export(Request $request)
+    {
+        $this->authorize('product.export');
+
+        $types = ['csv', 'pdf', 'xlsx', 'xls', 'ods'];
+
+        $requested_type = isset($request['type']) ? strtolower($request['type']) : 'csv';
+        $q = $request['q'];
+
+        if ( !in_array($requested_type, $types) ) {
+            $requested_type = 'csv';
+        }
+
+        return (new ProductExport($q, $this->getCompany()->id))->download('products-' . now()->format('Y-m-d') . '.' . $requested_type);
     }
 }

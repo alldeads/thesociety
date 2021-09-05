@@ -18,27 +18,34 @@
 			              			<span>{{ __('Export') }}</span>
 			              		</button>
 					             <div class="dropdown-menu">
-					                <a class="dropdown-item" href="{{ route('journal-entry-export', [
+					                <a class="dropdown-item" href="{{ route('products-export', [
 					                	'type' => 'csv',
 					                	'q'    => $this->search
 					                ]) }}" target="_blank">
 			              				<span>{{ __('CSV') }}</span>
 				                	</a>
-				                	<a class="dropdown-item" href="{{ route('journal-entry-export', [
+				                	<a class="dropdown-item" href="{{ route('products-export', [
 					                	'type' => 'xls',
 					                	'q'    => $this->search
 					                ]) }}" target="_blank">
 			              				<span>{{ __('EXCEL (xls)') }}</span>
 				                	</a>
 
-				                	<a class="dropdown-item" href="{{ route('journal-entry-export', [
+				                	<a class="dropdown-item" href="{{ route('products-export', [
 					                	'type' => 'xlsx',
 					                	'q'    => $this->search
 					                ]) }}" target="_blank">
 			              				<span>{{ __('EXCEL (xlsx)') }}</span>
 				                	</a>
 
-				                	<a class="dropdown-item" href="{{ route('journal-entry-export', [
+				                	<a class="dropdown-item" href="{{ route('products-export', [
+					                	'type' => 'pdf',
+					                	'q'    => $this->search
+					                ]) }}" target="_blank">
+			              				<span>{{ __('PDF') }}</span>
+				                	</a>
+
+				                	<a class="dropdown-item" href="{{ route('products-export', [
 					                	'type' => 'ods',
 					                	'q'    => $this->search
 					                ]) }}" target="_blank">

@@ -96,7 +96,6 @@ class PurchaseOrderController extends Controller
     	$from = $request['from'];
     	$to = $request['to'];
 
-    	// Set default type, if specified type is invalid
     	if ( !in_array($requested_type, $types) ) {
     		$requested_type = 'csv';
     	}

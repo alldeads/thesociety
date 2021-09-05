@@ -38,6 +38,7 @@ Route::middleware('auth')->group(function() {
 		Route::get('create', 'ProductController@create')->name('products-create');
 		Route::get('view/{product}', 'ProductController@view')->name('products-read');
 		Route::get('edit/{product}', 'ProductController@edit')->name('products-edit');
+		Route::get('export', 'ProductController@export')->name('products-export');
 	});
 
 	Route::prefix('supplies')->group( function() {
