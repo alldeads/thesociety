@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Models\InventoryHistory;
+use App\Exports\InventoryHistoryExport;
 
 class InventoryHistoryController extends Controller
 {
@@ -41,5 +42,23 @@ class InventoryHistoryController extends Controller
         }
 
         return view('errors.403');
+    }
+
+    public function export(Request $request)
+    {
+        $this->authorize('history.export');
+
+        $types = ['csv', 'pdf', 'xlsx', 'xls', 'ods'];
+
+        $requested_type = isset($request['type']) ? strtolower($request['type']) : 'csv';
+        $q = $request['q'];
+        $from = $request['from'];
+        $to = $request['to'];
+
+        if ( !in_array($requested_type, $types) ) {
+            $requested_type = 'csv';
+        }
+
+        return (new InventoryHistoryExport($q, $this->getCompany()->id, $from, $to))->download('inventory-histories-' . now()->format('Y-m-d') . '.' . $requested_type);
     }
 }
