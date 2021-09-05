@@ -40,4 +40,14 @@ class StockLevel extends Model
     {
         return $this->belongsTo(Branch::class);
     }
+
+    public function user_created()
+    {
+        return $this->belongsTo(User::class, 'created_by', 'id');
+    }
+
+    public function user_updated()
+    {
+        return $this->belongsTo(User::class, 'updated_by', 'id');
+    }
 }

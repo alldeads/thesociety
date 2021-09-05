@@ -67,9 +67,8 @@ Route::middleware('auth')->group(function() {
 
 		Route::prefix('stock-levels')->group( function() {
 			Route::get('view', 'StockLevelController@index')->name('stock-levels-view');
-			Route::get('download/{purchase}', 'PurchaseOrderController@download')->name('purchase-orders-download');
 			Route::get('create', 'StockLevelController@create')->name('stock-levels-create');
-			Route::get('view/{purchase}', 'PurchaseOrderController@view')->name('purchase-orders-read');
+			Route::get('view/{stock}', 'StockLevelController@view')->name('stock-levels-read');
 			Route::get('edit/{stock}', 'StockLevelController@edit')->name('stock-levels-edit');
 			Route::get('export', 'PurchaseOrderController@export')->name('purchase-orders-export');
 		});

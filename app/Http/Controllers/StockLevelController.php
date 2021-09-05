@@ -28,7 +28,7 @@ class StockLevelController extends Controller
 
         $breadcrumbs = [
             ['link'=> route('home'), 'name'=>"Dashboard"], 
-            ['link'=> route('branches-view'), 'name'=>"Stock Level"], 
+            ['link'=> route('stock-levels-view'), 'name'=>"Stock Level"], 
             ['name'=>"New Stock Level"],
         ];
 
@@ -50,6 +50,27 @@ class StockLevelController extends Controller
 
         if ($stock->company_id == $this->getCompany()->id) {
             return view('stock-level.edit', [
+                'breadcrumbs' => $breadcrumbs,
+                'company'     => $this->getCompany(),
+                'stock'       => $stock
+            ]);
+        }
+
+        return view('errors.403');
+    }
+
+    public function view(StockLevel $stock)
+    {
+        $this->authorize('stock_level.read');
+
+        $breadcrumbs = [
+            ['link'=> route('home'), 'name'=>"Dashboard"], 
+            ['link'=> route('stock-levels-view'), 'name'=>"Stock Level"],
+            ['name'=> $stock->reference],
+        ];
+
+        if ($stock->company_id == $this->getCompany()->id) {
+            return view('stock-level.read', [
                 'breadcrumbs' => $breadcrumbs,
                 'company'     => $this->getCompany(),
                 'stock'       => $stock
