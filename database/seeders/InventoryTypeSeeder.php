@@ -39,5 +39,10 @@ class InventoryTypeSeeder extends Seeder
             'name' => 'Loss',
             'abbr' => 'ls'
         ]);
+
+        InventoryType::create([
+            'name' => 'Manually Removed',
+            'abbr' => 'mr'
+        ]);
     }
 }

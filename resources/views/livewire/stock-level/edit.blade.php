@@ -68,7 +68,7 @@
                                     <option> {{ __('Select a reason') }}</option>
 
                                     @foreach( $reasons as $reason )
-                                        @if ($reason->id != 1)
+                                        @if ($reason->id != 1 && $reason->id != 6)
                                             <option value="{{ $reason->id }}"> {{ __($reason->name) }}</option>
                                         @endif
                                     @endforeach
