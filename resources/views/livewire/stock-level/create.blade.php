@@ -86,7 +86,7 @@
                             <div class="form-group">
                                 <label class="form-label" for="stock">{{ __('Current Stock') }} <span class="asterisk">*</span></label>
 
-                                <input type="number" name="stock" class="form-control @error('reason') is-invalid @enderror"  wire:model="inputs.stock" readonly>
+                                <input type="number" name="stock" class="form-control @error('stock') is-invalid @enderror"  wire:model="inputs.stock" readonly>
 
                                 @error('stock')
                                     <span class="invalid-feedback" role="alert">

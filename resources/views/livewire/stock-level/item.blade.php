@@ -2,8 +2,8 @@
     <td>{{ $item->reference }}</td>
     <td>{{ $item->branch->name }}</td>
     <td>{{ $item->product->name }}</td>
-    <td>{{ $item->in_stock }}</td>
-    <td>{{ \Carbon\Carbon::parse($item->purchase_date)->format('F j, Y') }}</td>
+    <td>{{ $item->after_stock }}</td>
+    <td>{{ \Carbon\Carbon::parse($item->updated_at)->format('F j, Y h:i:s a') }}</td>
 
     @if( auth()->user()->can('stock_level.update') || auth()->user()->can('stock_level.delete') || auth()->user()->can('stock_level.read') )
         <td>

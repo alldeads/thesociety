@@ -97,7 +97,7 @@
                                 <th>Branch</th>
                                 <th>Product</th>
                                 <th>Quantity</th>
-                                <th>Created At</th>
+                                <th>Updated At</th>
                                 @if( auth()->user()->can('stock_level.update') || auth()->user()->can('stock_level.delete') || auth()->user()->can('stock_level.read') )
                                     <th>Actions</th>
                                 @endif

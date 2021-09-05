@@ -19,10 +19,8 @@ class CreateStockLevelsTable extends Migration
             $table->bigInteger('company_id')->unsigned();
             $table->bigInteger('product_id')->unsigned();
             $table->bigInteger('branch_id')->unsigned();
-            $table->bigInteger('inventory_type_id')->unsigned();
             $table->bigInteger('in_stock')->default(0);
             $table->bigInteger('after_stock')->default(0);
-            $table->text('notes')->nullable();
             $table->bigInteger('created_by')->unsigned();
             $table->bigInteger('updated_by')->unsigned();
             $table->timestamps();

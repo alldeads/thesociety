@@ -9,6 +9,25 @@ class InventoryHistory extends Model
 {
     use HasFactory;
 
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'reference',
+        'company_id',
+        'product_id',
+        'branch_id',
+        'in_stock',
+        'on_hand',
+        'type',
+        'difference',
+        'inventory_type_id',
+        'notes',
+        'created_by',
+    ];
+
     public function company()
     {
         return $this->belongsTo(Company::class);

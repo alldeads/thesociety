@@ -34,13 +34,13 @@ class StockLevelSeeder extends Seeder
                 $type = rand(0, 1);
 
                 $after = $type == 0 ?  $in_stock - $difference : $in_stock + $difference;
+                $notes = "Test notes";
  
                 StockLevel::create([
                     'reference'  => 'SL-' . rand(100000, 999999),
                     'company_id' => $company->id,
                     'product_id' => $product->id,
                     'branch_id'  => $branch->id,
-                    'inventory_type_id' => $inventory->id,
                     'in_stock'    => $in_stock,
                     'after_stock' => $after,
                     'created_by' => 1,
@@ -54,11 +54,11 @@ class StockLevelSeeder extends Seeder
                     'branch_id'  => $branch->id,
                     'inventory_type_id' => $inventory->id,
                     'in_stock'    => $in_stock,
+                    'notes'       => $notes,
                     'on_hand'     => $after,
                     'type'        => $type,
                     'difference'  => $difference,
                     'created_by' => 1,
-                    'updated_by' => 1
                 ]);
             }
         }

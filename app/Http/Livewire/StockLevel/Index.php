@@ -50,9 +50,6 @@ class Index extends CustomComponent
                             })
                             ->orWhereHas('branch', function($query) use ($search) {
                                 return $query->where('name', 'like', "%" . $search ."%");
-                            })
-                            ->orWhereHas('type', function($query) use ($search) {
-                                return $query->where('name', 'like', "%" . $search ."%");
                             });
                     });
                     
@@ -64,8 +61,8 @@ class Index extends CustomComponent
             $results = $results->whereDate('created_at', '<=', $to );
         }            
 
-        $results  =  $results->with(['product', 'branch', 'type'])
-                            ->orderBy('id', 'desc')
+        $results  =  $results->with(['product', 'branch'])
+                            ->orderBy('updated_at', 'desc')
                             ->paginate($limit);
                         
         return view('livewire.stock-level.index', [

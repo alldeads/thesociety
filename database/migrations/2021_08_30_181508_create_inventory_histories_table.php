@@ -24,8 +24,8 @@ class CreateInventoryHistoriesTable extends Migration
             $table->bigInteger('difference')->default(0);
             $table->bigInteger('on_hand')->default(0);
             $table->boolean('type')->default(1);
+            $table->text('notes')->nullable();
             $table->bigInteger('created_by')->unsigned();
-            $table->bigInteger('updated_by')->unsigned();
             $table->timestamps();
         });
     }
