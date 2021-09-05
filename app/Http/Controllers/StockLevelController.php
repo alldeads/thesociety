@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\StockLevel;
+use App\Exports\StockLevelExport;
 
 class StockLevelController extends Controller
 {
@@ -78,5 +79,22 @@ class StockLevelController extends Controller
         }
 
         return view('errors.403');
+    }
+
+    public function export(Request $request)
+    {
+        $this->authorize('stock_level.export');
+
+        $types = ['csv', 'pdf', 'xlsx', 'xls', 'ods'];
+
+        $requested_type = isset($request['type']) ? strtolower($request['type']) : 'csv';
+        $q = $request['q'];
+
+        // Set default type, if specified type is invalid
+        if ( !in_array($requested_type, $types) ) {
+            $requested_type = 'csv';
+        }
+
+        return (new StockLevelExport($q, $this->getCompany()->id))->download('stock-levels-' . now()->format('Y-m-d') . '.' . $requested_type);
     }
 }

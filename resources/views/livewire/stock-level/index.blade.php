@@ -18,7 +18,7 @@
                                     <span>{{ __('Export') }}</span>
                                 </button>
                                  <div class="dropdown-menu">
-                                    <a class="dropdown-item" href="{{ route('purchase-orders-export', [
+                                    <a class="dropdown-item" href="{{ route('stock-levels-export', [
                                         'type' => 'csv',
                                         'q'    => $this->search,
                                         'from' => $this->date_from,
@@ -26,7 +26,7 @@
                                     ]) }}" target="_blank">
                                         <span>{{ __('CSV') }}</span>
                                     </a>
-                                    <a class="dropdown-item" href="{{ route('purchase-orders-export', [
+                                    <a class="dropdown-item" href="{{ route('stock-levels-export', [
                                         'type' => 'xls',
                                         'q'    => $this->search,
                                         'from' => $this->date_from,
@@ -35,7 +35,7 @@
                                         <span>{{ __('EXCEL (xls)') }}</span>
                                     </a>
 
-                                    <a class="dropdown-item" href="{{ route('purchase-orders-export', [
+                                    <a class="dropdown-item" href="{{ route('stock-levels-export', [
                                         'type' => 'xlsx',
                                         'q'    => $this->search,
                                         'from' => $this->date_from,
@@ -44,7 +44,16 @@
                                         <span>{{ __('EXCEL (xlsx)') }}</span>
                                     </a>
 
-                                    <a class="dropdown-item" href="{{ route('purchase-orders-export', [
+                                    <a class="dropdown-item" href="{{ route('stock-levels-export', [
+                                        'type' => 'pdf',
+                                        'q'    => $this->search,
+                                        'from' => $this->date_from,
+                                        'to'   => $this->date_to
+                                    ]) }}" target="_blank">
+                                        <span>{{ __('PDF') }}</span>
+                                    </a>
+
+                                    <a class="dropdown-item" href="{{ route('stock-levels-export', [
                                         'type' => 'ods',
                                         'q'    => $this->search,
                                         'from' => $this->date_from,
@@ -58,25 +67,13 @@
                     </div>
                     <hr>
                     <div class="row">
-                        <div class="col-md-6 col-lg-6 col-xl-6 col-sm-12 mt-1">
+                        <div class="col-md-10 col-12 mt-1">
                             <div class="form-group">
                                 <input type="text" class="form-control" placeholder="Search reference no, product, and branch" wire:model="search"/>
                             </div>
                         </div>
 
-                        <div class="col-md-2 col-lg-2 col-xl-2 col-sm-12 mt-1">
-                            <div class="form-group">
-                                <input type="text" class="form-control basicpkr" placeholder="Date From" wire:model="date_from" />
-                            </div>
-                        </div>
-
-                        <div class="col-md-2 col-lg-2 col-xl-2 col-sm-12 mt-1">
-                            <div class="form-group">
-                                <input type="text" class="form-control basicpkr" placeholder="Date To" wire:model="date_to" />
-                            </div>
-                        </div>
-
-                        <div class="col-md-2 col-lg-2 col-xl-2 col-sm-12 mt-1">
+                        <div class="col-md-2 col-12 mt-1">
                             <div class="form-group">
                                 <select class="form-control" wire:model="limit">
                                     <option value="10">{{ __('10 entries') }}</option>

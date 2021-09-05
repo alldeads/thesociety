@@ -70,7 +70,7 @@ Route::middleware('auth')->group(function() {
 			Route::get('create', 'StockLevelController@create')->name('stock-levels-create');
 			Route::get('view/{stock}', 'StockLevelController@view')->name('stock-levels-read');
 			Route::get('edit/{stock}', 'StockLevelController@edit')->name('stock-levels-edit');
-			Route::get('export', 'PurchaseOrderController@export')->name('purchase-orders-export');
+			Route::get('export', 'StockLevelController@export')->name('stock-levels-export');
 		});
 
 		Route::prefix('histories')->group( function() {
