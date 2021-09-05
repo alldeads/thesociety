@@ -76,6 +76,7 @@ Route::middleware('auth')->group(function() {
 
 		Route::prefix('histories')->group( function() {
 			Route::get('view', 'InventoryHistoryController@index')->name('histories-view');
+			Route::get('view/{history}', 'InventoryHistoryController@view')->name('histories-read');
 		});
 	});
 

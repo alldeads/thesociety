@@ -1,5 +1,5 @@
 <tr>
-    <td>{{ $item->reference }}</td>
+    <td> <a href="#" wire:click.prevent="read"> {{ $item->reference }} </a></td>
     <td>{{ $item->reason->name }}</td>
     <td>{{ $item->branch->name }}</td>
     <td>{{ $item->product->name }}</td>

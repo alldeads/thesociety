@@ -4,8 +4,16 @@
             <div class="card">
                 <div class="card-body">
                     <div class="d-flex justify-content-between">
+
+                        @can('stock_level.create')
+                            <button type="button" class="btn btn-primary rounded" wire:click="create" wire:ignore>
+                                <i data-feather="plus" class="mr-25"></i>
+                                <span>Create</span>
+                            </button>
+                        @endcan
+
                         @can('history.export')
-                            <div class="btn-group">
+                            <div class="btn-group" style="float: right;">
                                 <button type="button" class="btn btn-outline-primary ml-2 dropdown-toggle rounded" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     <i class="fas fa-download mr-1"></i>
                                     <span>{{ __('Export') }}</span>

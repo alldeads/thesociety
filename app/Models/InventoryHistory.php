@@ -47,4 +47,9 @@ class InventoryHistory extends Model
     {
         return $this->belongsTo(InventoryType::class, 'inventory_type_id');
     }
+
+    public function user_created()
+    {
+        return $this->belongsTo(User::class, 'created_by', 'id');
+    }
 }
