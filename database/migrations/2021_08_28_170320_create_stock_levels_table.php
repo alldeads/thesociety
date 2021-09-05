@@ -23,6 +23,7 @@ class CreateStockLevelsTable extends Migration
             $table->bigInteger('after_stock')->default(0);
             $table->bigInteger('created_by')->unsigned();
             $table->bigInteger('updated_by')->unsigned();
+            $table->softDeletes();
             $table->timestamps();
         });
     }

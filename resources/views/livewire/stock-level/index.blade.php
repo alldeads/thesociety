@@ -60,7 +60,7 @@
                     <div class="row">
                         <div class="col-md-6 col-lg-6 col-xl-6 col-sm-12 mt-1">
                             <div class="form-group">
-                                <input type="text" class="form-control" placeholder="Search reference no, product, branch, and notes" wire:model="search"/>
+                                <input type="text" class="form-control" placeholder="Search reference no, product, and branch" wire:model="search"/>
                             </div>
                         </div>
 
@@ -122,5 +122,5 @@
         </div>
     </div>
 
-    @livewire('purchase-order.delete')
+    @livewire('stock-level.delete')
 </div>

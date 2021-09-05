@@ -44,7 +44,6 @@ class Index extends CustomComponent
         $results = StockLevel::where('company_id', $this->company_id)
                     ->where( function (Builder $query) use ($search) {
                         return $query->where('reference', 'like', "%". $search . "%")
-                            ->orWhere('notes', 'like', "%". $search . "%")
                             ->orWhereHas('product', function($query) use ($search) {
                                 return $query->where('name', 'like', "%" . $search ."%");
                             })
