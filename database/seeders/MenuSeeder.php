@@ -106,12 +106,20 @@ class MenuSeeder extends Seeder
             'permission' => 'tax.view'
         ]);
 
-        // $header->menus()->create([
-        // 	'name'  => 'Ledger',
-        // 	'slug'  => 'ledger',
-        // 	'url'   => 'accounting/ledger',
-        // 	'icon'  => 'book-open'
-        // ]);
+        $header = Header::create([
+            'name'  => 'Sales & Orders',
+            'order' => 3
+        ]);
+
+        $header->menus()->create([
+            'name'       => 'Sales Order',
+            'slug'       => 'sales',
+            'url'        => 'sales/view',
+            'base'       => 'sale',
+            'is_export'  => true,
+            'icon'       => 'shopping-bag',
+            'permission' => 'sale.view'
+        ]);
 
         $header = Header::create([
         	'name'  => 'Stocks & Inventory',
@@ -169,7 +177,7 @@ class MenuSeeder extends Seeder
             'url'        => 'products/view',
             'base'       => 'product',
             'is_export'  => true,
-            'icon'       => 'shopping-bag',
+            'icon'       => 'box',
             'permission' => 'product.view'
         ]);
 
