@@ -115,6 +115,7 @@ Route::middleware('auth')->group(function() {
 
 	Route::prefix('roles')->group( function() {
 		Route::get('view', 'RoleController@index')->name('roles-view');
+		Route::get('export', 'RoleController@export')->name('roles-export');
 	});
 
 	Route::prefix('pos')->group( function() {

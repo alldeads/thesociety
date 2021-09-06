@@ -18,34 +18,27 @@
 			              			<span>{{ __('Export') }}</span>
 			              		</button>
 					             <div class="dropdown-menu">
-					                <a class="dropdown-item" href="{{ route('chart-of-accounts-export', [
+					                <a class="dropdown-item" href="{{ route('roles-export', [
 					                	'type' => 'csv',
 					                	'q'    => $this->search
 					                ]) }}" target="_blank">
 			              				<span>{{ __('CSV') }}</span>
 				                	</a>
-				                	<a class="dropdown-item" href="{{ route('chart-of-accounts-export', [
+				                	<a class="dropdown-item" href="{{ route('roles-export', [
 					                	'type' => 'xls',
 					                	'q'    => $this->search
 					                ]) }}" target="_blank">
 			              				<span>{{ __('EXCEL (xls)') }}</span>
 				                	</a>
 
-				                	<a class="dropdown-item" href="{{ route('chart-of-accounts-export', [
+				                	<a class="dropdown-item" href="{{ route('roles-export', [
 					                	'type' => 'xlsx',
 					                	'q'    => $this->search
 					                ]) }}" target="_blank">
 			              				<span>{{ __('EXCEL (xlsx)') }}</span>
 				                	</a>
 
-				                	<a class="dropdown-item" href="{{ route('chart-of-accounts-export', [
-					                	'type' => 'ods',
-					                	'q'    => $this->search
-					                ]) }}" target="_blank">
-			              				<span>{{ __('ODS') }}</span>
-				                	</a>
-
-				                	<a class="dropdown-item" href="{{ route('chart-of-accounts-export', [
+				                	<a class="dropdown-item" href="{{ route('roles-export', [
 					                	'type' => 'pdf',
 					                	'q'    => $this->search
 					                ]) }}" target="_blank">
