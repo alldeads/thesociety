@@ -46,6 +46,7 @@ Route::middleware('auth')->group(function() {
 		Route::get('create', 'SupplyController@create')->name('supplies-create');
 		Route::get('view/{product}', 'SupplyController@view')->name('supplies-read');
 		Route::get('edit/{product}', 'SupplyController@edit')->name('supplies-edit');
+		Route::get('export', 'SupplyController@export')->name('supplies-export');
 	});
 
 	Route::prefix('inventory')->group( function() {

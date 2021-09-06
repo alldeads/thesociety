@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Gate;
 
 use App\Models\Company;
 use App\Models\Product;
+use App\Exports\SupplyExport;
 
 class SupplyController extends Controller
 {
@@ -81,5 +82,21 @@ class SupplyController extends Controller
 		}
 
 		return view('errors.403');
+    }
+
+    public function export(Request $request)
+    {
+        $this->authorize('supply.export');
+
+        $types = ['csv', 'pdf', 'xlsx', 'xls', 'ods'];
+
+        $requested_type = isset($request['type']) ? strtolower($request['type']) : 'csv';
+        $q = $request['q'];
+
+        if ( !in_array($requested_type, $types) ) {
+            $requested_type = 'csv';
+        }
+
+        return (new SupplyExport($q, $this->getCompany()->id))->download('supplies-' . now()->format('Y-m-d') . '.' . $requested_type);
     }
 }

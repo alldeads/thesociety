@@ -34,14 +34,15 @@ class Index extends CustomComponent
 
     public function render()
     {
-    	$search = $this->search;
+    	$search = $this->search ?? '';
+        $limit  = $this->limit ?? 10;
 
     	$results = Product::where('company_id', $this->company_id)
     				->where('type', 'supply')
     				->where( function (Builder $query) use ($search) {
 		                return $query->where('name', 'like', "%". $search . "%")
 		                	->orWhere('status', 'like', "%". $search . "%");
-		            })->orderBy('id', 'desc')->paginate($this->limit);
+		            })->orderBy('id', 'desc')->paginate($limit);
                         
         return view('livewire.supply.index', [
             'results' => $results
