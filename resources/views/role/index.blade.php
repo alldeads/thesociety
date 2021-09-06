@@ -3,5 +3,5 @@
 @section('title', 'Roles')
 
 @section('content')
-	@livewire('role.index')
+	@livewire('role.index', ['company_id' => $company->id])
 @endsection

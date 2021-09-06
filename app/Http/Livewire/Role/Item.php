@@ -22,6 +22,11 @@ class Item extends Component
 		$this->emit('updateRoleItem', ['item' => $this->item]);
 	}
 
+	public function read()
+	{
+		$this->emit('readRoleItem', ['item' => $this->item]);
+	}
+
     public function render()
     {
         return view('livewire.role.item');

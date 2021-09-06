@@ -25,29 +25,29 @@
 	            		<input type="text" class="form-control" id="read-type" readonly wire:model="inputs.account_type"/>
 	          		</div>
 
-	          		<div class="form-group">	
-	            		<label class="form-label" for="read-created-by">{{ __('Created By') }}</label>
+	          		<div class="form-group">    
+                        <label class="form-label" for="read-created-by">{{ __('Created By') }}</label>
 
-	            		<input type="text" class="form-control" id="read-created-by" readonly wire:model="inputs.created_by"/>
-	          		</div>
+                        <input type="text" class="form-control" id="read-created-by" readonly wire:model="inputs.created_by"/>
+                    </div>
 
-	          		<div class="form-group">	
-	            		<label class="form-label" for="read-created-at">{{ __('Date Created') }}</label>
+                    <div class="form-group">    
+                        <label class="form-label" for="read-created-at">{{ __('Created On') }}</label>
 
-	            		<input type="text" class="form-control" id="read-created-at" readonly wire:model="inputs.created_at"/>
-	          		</div>
+                        <input type="text" class="form-control" id="read-created-at" readonly wire:model="inputs.created_at"/>
+                    </div>
 
-	          		<div class="form-group">	
-	            		<label class="form-label" for="read-updated-by">{{ __('Last Updated By') }}</label>
+                    <div class="form-group">    
+                        <label class="form-label" for="read-updated-by">{{ __('Updated By') }}</label>
 
-	            		<input type="text" class="form-control" id="read-updated-by" readonly wire:model="inputs.updated_by"/>
-	          		</div>
+                        <input type="text" class="form-control" id="read-updated-by" readonly wire:model="inputs.updated_by"/>
+                    </div>
 
-	          		<div class="form-group">	
-	            		<label class="form-label" for="read-created-at">{{ __('Last Date Updated') }}</label>
+                    <div class="form-group">    
+                        <label class="form-label" for="read-created-at">{{ __('Updated On') }}</label>
 
-	            		<input type="text" class="form-control" id="read-updated-at" readonly wire:model="inputs.updated_at"/>
-	          		</div>
+                        <input type="text" class="form-control" id="read-updated-at" readonly wire:model="inputs.updated_at"/>
+                    </div>
 
 					<button type="reset" class="btn btn-success" data-dismiss="modal">{{ __('Close') }}</button>
 	        	</div>

@@ -7,19 +7,18 @@ use Illuminate\Support\Facades\Gate;
 
 class RoleController extends Controller
 {
-    public function get_all()
+    public function index()
     {
-    	$response = Gate::inspect('role.view');
+    	$this->authorize('role.view');
 
     	$breadcrumbs = [
 	        ['link'=> route('home'), 'name'=>"Dashboard"], 
 	        ['name'=> "Roles"],
 	    ];
 
-		if ( $response->allowed() ) {
-		    return view('role.index', ['breadcrumbs' => $breadcrumbs]);
-		} else {
-		    return view('misc.not-authorized');
-		}
+		return view('role.index', [
+	    	'breadcrumbs' => $breadcrumbs,
+	    	'company'     => $this->getCompany()
+	    ]);
     }
 }

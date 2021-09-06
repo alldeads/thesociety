@@ -114,7 +114,7 @@ Route::middleware('auth')->group(function() {
 	});
 
 	Route::prefix('roles')->group( function() {
-		Route::get('view', 'RoleController@get_all')->name('roles-view');
+		Route::get('view', 'RoleController@index')->name('roles-view');
 	});
 
 	Route::prefix('pos')->group( function() {

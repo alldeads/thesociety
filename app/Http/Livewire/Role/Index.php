@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\Role;
 
 use Livewire\Component;
+use Illuminate\Database\Eloquent\Builder;
 use Livewire\WithPagination;
 
 use App\Models\CompanyRole;
@@ -23,11 +24,6 @@ class Index extends Component
         'refreshItemParent' => '$refresh'
     ];
 
-	public function mount()
-	{
-		$this->company_id = auth()->user()->empCard->company_id;
-	}
-
     public function updatingSearch()
     {
         $this->resetPage();
@@ -35,13 +31,15 @@ class Index extends Component
 
     public function render()
     {
-    	$search = $this->search;
+    	$search = $this->search ?? '';
+        $limit  = $this->limit ?? 10;
 
-    	$results = CompanyRole::where('role_name', 'like', "%". $search ."%")
-        ->where('company_id', $this->company_id)
-    	->where('role_name', 'not like', "%owner%")
-        ->orderBy('id', 'desc')
-    	->paginate($this->limit);
+        $results = CompanyRole::where('company_id', $this->company_id)
+                        ->where('role_name', 'not like', "%owner%")
+                        ->where(function (Builder $query) use ($search) {
+                            return $query->where('role_name', 'like', "%". $search ."%");
+                        })->orderBy('id', 'desc')
+                        ->paginate($limit);
     	
         return view('livewire.role.index', [
         	'results' => $results
