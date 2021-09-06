@@ -14,7 +14,6 @@
 	<td>{{ ucwords($item->status) }}</td>
 
 	@if( auth()->user()->can('product.update') || auth()->user()->can('product.delete') || auth()->user()->can('product.read') )
-
 		<td>
 			<div class="dropdown">
                 <button type="button" class="btn btn-sm dropdown-toggle hide-arrow" data-toggle="dropdown">

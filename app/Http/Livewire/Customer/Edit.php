@@ -67,12 +67,12 @@ class Edit extends CustomComponent
             'position'       => ['nullable', 'string'],
             'telephone'      => ['nullable', 'string'],
             'fax'            => ['nullable', 'string'],
-            'address_line_1' => ['required', 'string'],
+            'address_line_1' => ['nullable', 'string'],
 			'address_line_2' => ['nullable', 'string'],
-			'city'           => ['required', 'string'],
-			'state'          => ['required', 'string'],
-			'postal'         => ['required', 'string'],
-			'country'        => ['required', 'string'],
+			'city'           => ['nullable', 'string'],
+			'state'          => ['nullable', 'string'],
+			'postal'         => ['nullable', 'string'],
+			'country'        => ['nullable', 'string'],
 			'facebook'       => ['nullable', 'url'],
 	        'instagram'      => ['nullable', 'url'],
 	        'linkedin'       => ['nullable', 'url'],
@@ -131,6 +131,8 @@ class Edit extends CustomComponent
 
 			DB::commit();
 
+			cache()->forget('app-company-users');
+
 			$this->init($customer);
 
 			$this->message('Customer has been updated.', 'success');
@@ -138,6 +140,11 @@ class Edit extends CustomComponent
 			DB::rollback();
 			$this->message($e->getMessage(), 'error');
 		}
+	}
+
+	public function read()
+	{
+		return redirect()->route('customers-read', ['customer' => $this->customer->id]);
 	}
 
     public function render()

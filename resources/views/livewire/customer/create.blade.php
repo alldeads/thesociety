@@ -1,259 +1,337 @@
 <section>
-	<div class="alert alert-danger" style="display: {{ count($errors) > 0 ? 'block' : 'none' }}" role="alert">
-		<div class="alert-body">
-			<i data-feather="info"></i>
-			<ul style="list-style: none;">
-		        @foreach($errors->all() as $error)
-		        	<li>{{$error}}</li>
-		        @endforeach
-    		</ul>
-		</div>
-	</div>
+    <div class="row card">
+        <div class="col-12 card-body">
 
-  	<div class="bs-stepper vertical vertical-wizard-example">
-		<div class="bs-stepper-header">
-	  		<div class="step" data-target="#account-details-vertical" wire:ignore>
-				<button type="button" class="step-trigger">
-			  		<span class="bs-stepper-box">1</span>
-			  			<span class="bs-stepper-label">
-						<span class="bs-stepper-title">Basic Information</span>
-						<span class="bs-stepper-subtitle">Add Information</span>
-			  		</span>
-				</button>
-	  		</div>
+            <div class="alert alert-danger" style="display: {{ count($errors) > 0 ? 'block' : 'none' }}" role="alert">
+                <div class="alert-body">
+                    <i data-feather="info"></i>
+                    <ul style="list-style: none;">
+                        @foreach($errors->all() as $error)
+                            <li>{{$error}}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            </div>
 
-	  		<div class="step" data-target="#personal-info-vertical" wire:ignore>
-				<button type="button" class="step-trigger">
-		  			<span class="bs-stepper-box">2</span>
-		  			<span class="bs-stepper-label">
-						<span class="bs-stepper-title">Details</span>
-						<span class="bs-stepper-subtitle">Add Company Details</span>
-		  			</span>
-				</button>
-	  		</div>
+            <div id="account-details-vertical">
+                <div class="content-header">
+                    <h5 class="mb-0 p-1">Basic Information</h5>
+                </div>
 
-	  		<div class="step" data-target="#address-step-vertical" wire:ignore>
-				<button type="button" class="step-trigger">
-		  			<span class="bs-stepper-box">3</span>
-		  			<span class="bs-stepper-label">
-						<span class="bs-stepper-title">Address</span>
-						<span class="bs-stepper-subtitle">Add Address</span>
-		  			</span>
-				</button>
-	  		</div>
+                <div class="row">
+                    <div class="form-group col-md-6">
+                        <label class="form-label" for="first_name">
+                            First Name <span class="asterisk">*</span>
+                        </label>
 
-  			<div class="step" data-target="#social-links-vertical" wire:ignore>
-				<button type="button" class="step-trigger">
-		  			<span class="bs-stepper-box">4</span>
-		  			<span class="bs-stepper-label">
-						<span class="bs-stepper-title">Social Links</span>
-						<span class="bs-stepper-subtitle">Add Social Links</span>
-	  				</span>
-				</button>
-	  		</div>
+                        <input type="text" id="first_name" class="form-control @error('first_name') is-invalid @enderror" placeholder="Enter First Name" wire:model="inputs.first_name"/>
 
-	  		<div wire:ignore>
-				<button class="btn btn-success" wire:click="submit">Submit</button>
-	  		</div>
-		</div>
+                        @error('first_name')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
 
-		<div class="bs-stepper-content" wire:ignore>
-	  		<div id="account-details-vertical" class="content" wire:ignore>
-				<div class="content-header">
-		  			<h5 class="mb-0">Basic Information</h5>
-		  			<small class="text-muted">Enter Customer Information.</small>
-				</div>
+                    <div class="form-group col-md-6">
+                        <label class="form-label" for="last_name">
+                            Last Name <span class="asterisk">*</span>
+                        </label>
 
-				<div class="row">
-		  			<div class="form-group col-md-6">
-						<label class="form-label" for="first-name">First Name</label>
-						<input type="text" id="first-name" class="form-control" placeholder="Enter First Name" wire:model="inputs.first_name"/>
-		  			</div>
+                        <input type="text" id="last-name" class="form-control @error('last_name') is-invalid @enderror" placeholder="Enter Last Name" wire:model="inputs.last_name"/>
 
-		  			<div class="form-group col-md-6">
-						<label class="form-label" for="last-name">Last Name</label>
-						<input type="text" id="last-name" class="form-control" placeholder="Enter Last Name" wire:model="inputs.last_name"/>
-		  			</div>
-				</div>
+                        @error('last_name')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+                </div>
 
-				<div class="row">
-		  			<div class="form-group col-md-6">
-						<label class="form-label" for="vertical-username">Phone No.</label>
-						<input type="text" id="vertical-username" class="form-control" placeholder="Enter Phone No." wire:model="inputs.phone"/>
-		  			</div>
+                <div class="row">
+                    <div class="form-group col-md-6">
+                        <label class="form-label" for="phone">
+                            Phone No. <span class="asterisk">*</span>
+                        </label>
 
-		  			<div class="form-group col-md-6">
-						<label class="form-label" for="vertical-email">Email</label>
-						<input type="email" id="vertical-email" class="form-control" placeholder="Enter Email Address" wire:model="inputs.email"/>
-		  			</div>
-				</div>
+                        <input type="text" id="phone" class="form-control @error('phone') is-invalid @enderror" placeholder="Enter Phone No." wire:model="inputs.phone"/>
 
-				<div class="row">
-		  			<div class="form-group col-md-6">
-						<label class="form-label" for="status">Status</label>
-						<select class="form-control" id="status" wire:model="inputs.status">
-							<option>Select status</option>
-							@foreach($statuses as $status)
-								<option value="{{ $status->id }}"> {{ ucwords($status->name) }}</option>
-							@endforeach
-						</select>
-		  			</div>
-				</div>
+                        @error('phone')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
 
-				<div class="d-flex justify-content-between">
-		  			<button class="btn btn-outline-secondary btn-prev" disabled>
-						<i data-feather="arrow-left" class="align-middle mr-sm-25 mr-0"></i>
-						<span class="align-middle d-sm-inline-block d-none">Previous</span>
-		  			</button>
-		  			<button class="btn btn-primary btn-next">
-						<span class="align-middle d-sm-inline-block d-none">Next</span>
-						<i data-feather="arrow-right" class="align-middle ml-sm-25 ml-0"></i>
-		  			</button>
-				</div>
-	  		</div>
+                    <div class="form-group col-md-6">
+                        <label class="form-label" for="email">
+                            Email <span class="asterisk">*</span>
+                        </label>
 
-	  		<div id="personal-info-vertical" class="content" wire:ignore>
-				<div class="content-header">
-		  			<h5 class="mb-0">Company Details</h5>
-		  			<small>Enter Customer Company Details</small>
-				</div>
+                        <input type="email" id="email" class="form-control @error('email') is-invalid @enderror" placeholder="Enter Email Address" wire:model="inputs.email"/>
 
-				<div class="row">
-		  			<div class="form-group col-md-6">
-						<label class="form-label" for="company-name">Company Name</label>
-						<input type="text" id="company-name" class="form-control" placeholder="Enter Company Name" wire:model="inputs.company" />
-		  			</div>
+                        @error('email')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+                </div>
 
-		  			<div class="form-group col-md-6">
-						<label class="form-label" for="position">Position</label>
-						<input type="text" id="position" class="form-control" placeholder="Enter Position" wire:model="inputs.position"/>
-		  			</div>
-				</div>
+                <div class="row">
+                    <div class="form-group col-md-6">
+                        <label class="form-label" for="status">
+                            Status <span class="asterisk">*</span>
+                        </label>
 
-				<div class="row">
-		  			<div class="form-group col-md-6">
-						<label class="form-label" for="telephone">Telephone No.</label>
-						<input type="text" id="telephone" class="form-control" placeholder="Enter Telephone No." wire:model="inputs.telephone"/>
-		  			</div>
+                        <select class="form-control @error('status') is-invalid @enderror" id="status" wire:model="inputs.status">
+                            <option>Select status</option>
+                            @foreach($statuses as $status)
+                                <option value="{{ $status->id }}"> {{ ucwords($status->name) }}</option>
+                            @endforeach
+                        </select>
 
-		  			<div class="form-group col-md-6">
-						<label class="form-label" for="vertical-business">Fax No.</label>
-						<input type="text" id="fax" class="form-control" placeholder="Enter Fax No." wire:model="inputs.fax"/>
-		  			</div>
-				</div>
+                        @error('status')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+                </div>
+            </div>
 
-				<div class="d-flex justify-content-between">
-		  			<button class="btn btn-primary btn-prev">
-						<i data-feather="arrow-left" class="align-middle mr-sm-25 mr-0"></i>
-						<span class="align-middle d-sm-inline-block d-none">Previous</span>
-		  			</button>
-		  			<button class="btn btn-primary btn-next">
-						<span class="align-middle d-sm-inline-block d-none">Next</span>
-						<i data-feather="arrow-right" class="align-middle ml-sm-25 ml-0"></i>
-		  			</button>
-				</div>
-	  		</div>
+            <hr/>
 
-	  		<div id="address-step-vertical" class="content" wire:ignore>
-				<div class="content-header">
-		  			<h5 class="mb-0">Billing Address</h5>
-		  			<small>Enter Billing Address.</small>
-				</div>
+            <div id="personal-info-vertical">
+                <div class="content-header">
+                    <h5 class="mb-0 p-1">Company Details</h5>
+                </div>
 
-				<div class="row">
-		  			<div class="form-group col-md-6">
-						<label class="form-label" for="address_line_1">Address Line 1</label>
-						<input type="text" id="address_line_1" class="form-control" placeholder="Enter Address Line 1" wire:model="inputs.address_line_1" />
-		  			</div>
+                <div class="row">
+                    <div class="form-group col-md-6">
+                        <label class="form-label" for="company">Company Name</label>
 
-		  			<div class="form-group col-md-6">
-						<label class="form-label" for="address-2">Address Line 2</label>
-						<input type="text" id="address-2" class="form-control" placeholder="Enter Address Line 2" wire:model="inputs.address_line_2"/>
-		  			</div>
-				</div>
+                        <input type="text" id="company" class="form-control @error('company') is-invalid @enderror" placeholder="Enter Company Name" wire:model="inputs.company" />
 
-				<div class="row">
-		  			<div class="form-group col-md-6">
-						<label class="form-label" for="city">City</label>
-						<input type="text" id="city" class="form-control" placeholder="Enter City" wire:model="inputs.city"/>
-		  			</div>
+                        @error('company')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
 
-		  			<div class="form-group col-md-6">
-						<label class="form-label" for="state">State / Province</label>
-						<input type="email" id="state" class="form-control" placeholder="Enter State or Province" wire:model="inputs.state"/>
-		  			</div>
-				</div>
+                    <div class="form-group col-md-6">
+                        <label class="form-label" for="position">Position</label>
 
-				<div class="row">
-		  			<div class="form-group col-md-6">
-						<label class="form-label" for="postal">Zip / Postal Code</label>
-						<input type="text" id="postal" class="form-control" placeholder="Enter Zip Code" wire:model="inputs.postal"/>
-		  			</div>
+                        <input type="text" id="position" class="form-control @error('position') is-invalid @enderror" placeholder="Enter Position" wire:model="inputs.position"/>
 
-		  			<div class="form-group col-md-6">
-						<label class="form-label" for="country">Country</label>
-						<input type="text" id="country" class="form-control" placeholder="Enter Country" wire:model="inputs.country"/>
-		  			</div>
-				</div>
+                        @error('position')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+                </div>
 
-				<div class="d-flex justify-content-between">
-		  			<button class="btn btn-primary btn-prev">
-						<i data-feather="arrow-left" class="align-middle mr-sm-25 mr-0"></i>
-						<span class="align-middle d-sm-inline-block d-none">Previous</span>
-		  			</button>
-		  			<button class="btn btn-primary btn-next">
-						<span class="align-middle d-sm-inline-block d-none">Next</span>
-						<i data-feather="arrow-right" class="align-middle ml-sm-25 ml-0"></i>
-		  			</button>
-				</div>
-	  		</div>
+                <div class="row">
+                    <div class="form-group col-md-6">
+                        <label class="form-label" for="telephone">Telephone No.</label>
 
-	  		<div id="social-links-vertical" class="content" wire:ignore>
-				<div class="content-header">
-					<h5 class="mb-0">Social Links</h5>
-					<small>Enter Customer Social Links.</small>
-				</div>
+                        <input type="text" id="telephone" class="form-control @error('telephone') is-invalid @enderror" placeholder="Enter Telephone No." wire:model="inputs.telephone"/>
 
-				<div class="row">
-		  			<div class="form-group col-md-6">
-						<label class="form-label" for="vertical-twitter">Twitter</label>
-						<input type="text" id="vertical-twitter" class="form-control" placeholder="https://twitter.com/abc" wire:model="inputs.twitter"/>
-		  			</div>
-		  			<div class="form-group col-md-6">
-						<label class="form-label" for="vertical-facebook">Facebook</label>
-						<input type="text" id="vertical-facebook" class="form-control" placeholder="https://facebook.com/abc" wire:model="inputs.facebook"/>
-		  			</div>
-				</div>
+                        @error('telephone')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
 
-				<div class="row">
-		  			<div class="form-group col-md-6">
-						<label class="form-label" for="vertical-instagram">Instagram</label>
-						<input type="text" id="vertical-instagram" class="form-control" placeholder="https://instagram.com/abc" wire:model="inputs.instagram"/>
-		  			</div>
-		  			<div class="form-group col-md-6">
-						<label class="form-label" for="vertical-linkedin">Linkedin</label>
-						<input type="text" id="vertical-linkedin" class="form-control" placeholder="https://linkedin.com/abc" wire:model="inputs.linkedin"/>
-		  			</div>
-				</div>
+                    <div class="form-group col-md-6">
+                        <label class="form-label" for="fax">Fax No.</label>
 
-				<div class="row">
-		  			<div class="form-group col-md-6">
-						<label class="form-label" for="vertical-pinterest">Pinterest</label>
-						<input type="text" id="vertical-pinterest" class="form-control" placeholder="https://pinterest.com/abc" wire:model="inputs.pinterest"/>
-		  			</div>
-		  			<div class="form-group col-md-6">
-						<label class="form-label" for="vertical-youtube">Youtube</label>
-						<input type="text" id="vertical-youtube" class="form-control" placeholder="https://youtube.com/abc" wire:model="inputs.youtube"/>
-		  			</div>
-				</div>
-				<div class="d-flex justify-content-between">
-		  			<button class="btn btn-primary btn-prev">
-						<i data-feather="arrow-left" class="align-middle mr-sm-25 mr-0"></i>
-						<span class="align-middle d-sm-inline-block d-none">Previous</span>
-		  			</button>
-	  				<button class="btn btn-success" wire:click="submit">Submit</button>
-				</div>
-	  		</div>
-		</div>
-  	</div>
+                        <input type="text" id="fax" class="form-control @error('fax') is-invalid @enderror" placeholder="Enter Fax No." wire:model="inputs.fax"/>
+
+                        @error('fax')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+                </div>
+            </div>
+
+            <hr/>
+
+            <div id="address-step-vertical">
+                <div class="content-header">
+                    <h5 class="mb-0 p-1">Address</h5>
+                </div>
+
+                <div class="row">
+                    <div class="form-group col-md-6">
+                        <label class="form-label" for="address_line_1">Address Line 1</label>
+
+                        <input type="text" id="address_line_1" class="form-control @error('address_line_1') is-invalid @enderror" placeholder="Enter Address Line 1" wire:model="inputs.address_line_1" />
+
+                        @error('address_line_1')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label class="form-label" for="address_line_2">Address Line 2</label>
+
+                        <input type="text" id="address_line_2" class="form-control @error('address_line_2') is-invalid @enderror" placeholder="Enter Address Line 2" wire:model="inputs.address_line_2"/>
+
+                        @error('address_line_2')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="form-group col-md-6">
+                        <label class="form-label" for="city">City</label>
+
+                        <input type="text" id="city" class="form-control @error('city') is-invalid @enderror" placeholder="Enter City" wire:model="inputs.city"/>
+
+                        @error('city')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label class="form-label" for="state">State / Province</label>
+
+                        <input type="text" id="state" class="form-control @error('state') is-invalid @enderror" placeholder="Enter State or Province" wire:model="inputs.state"/>
+
+                        @error('state')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="form-group col-md-6">
+                        <label class="form-label" for="postal">Zip / Postal Code</label>
+
+                        <input type="text" id="postal" class="form-control @error('postal') is-invalid @enderror" placeholder="Enter Zip Code" wire:model="inputs.postal"/>
+
+                        @error('postal')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label class="form-label" for="country">Country</label>
+
+                        <input type="text" id="country" class="form-control @error('country') is-invalid @enderror" placeholder="Enter Country" wire:model="inputs.country"/>
+
+                        @error('country')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+                </div>
+            </div>
+
+            <hr/>
+
+            <div id="social-links-vertical">
+
+                <div class="content-header">
+                    <h5 class="mb-0 p-1">Social Media</h5>
+                </div>
+
+                <div class="row">
+                    <div class="form-group col-md-6">
+                        <label class="form-label" for="twitter">Twitter</label>
+
+                        <input type="text" id="twitter" class="form-control @error('twitter') is-invalid @enderror" placeholder="https://twitter.com/abc" wire:model="inputs.twitter"/>
+
+                        @error('twitter')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label class="form-label" for="facebook">Facebook</label>
+
+                        <input type="text" id="facebook" class="form-control @error('facebook') is-invalid @enderror" placeholder="https://facebook.com/abc" wire:model="inputs.facebook"/>
+
+                        @error('facebook')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="form-group col-md-6">
+                        <label class="form-label" for="instagram">Instagram</label>
+
+                        <input type="text" id="instagram" class="form-control @error('instagram') is-invalid @enderror" placeholder="https://instagram.com/abc" wire:model="inputs.instagram"/>
+
+                        @error('instagram')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label class="form-label" for="linkedin">Linkedin</label>
+
+                        <input type="text" id="linkedin" class="form-control @error('linkedin') is-invalid @enderror" placeholder="https://linkedin.com/abc" wire:model="inputs.linkedin"/>
+
+                        @error('linkedin')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="form-group col-md-6">
+                        <label class="form-label" for="pinterest">Pinterest</label>
+
+                        <input type="text" id="pinterest" class="form-control @error('pinterest') is-invalid @enderror" placeholder="https://pinterest.com/abc" wire:model="inputs.pinterest"/>
+
+                        @error('pinterest')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label class="form-label" for="youtube">Youtube</label>
+
+                        <input type="text" id="youtube" class="form-control @error('youtube') is-invalid @enderror" placeholder="https://youtube.com/abc" wire:model="inputs.youtube"/>
+
+                        @error('youtube')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+                </div>
+                <div class="d-flex justify-content-between">
+                    <button class="btn btn-success" wire:click="submit">Submit</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </section>

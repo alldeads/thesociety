@@ -26,6 +26,7 @@
                                     <label class="form-label" for="posting-date">
                                         {{ __('Posting Date') }} <span class="asterisk">*</span>
                                     </label>
+                                    
                                     <input type="date" id="posting-date" class="form-control @error('posting_date') is-invalid @enderror" wire:model="inputs.posting_date">
 
                                     @error('posting_date')

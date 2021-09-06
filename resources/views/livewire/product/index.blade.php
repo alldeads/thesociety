@@ -4,6 +4,7 @@
 			<div class="card">
 		  		<div class="card-body">
 		  			<div class="d-flex justify-content-between">
+		  				
 		  				@can('product.create')
 	  						<button type="button" class="btn btn-primary rounded" wire:click="create" wire:ignore>
 			          			<i data-feather="plus" class="mr-25"></i>

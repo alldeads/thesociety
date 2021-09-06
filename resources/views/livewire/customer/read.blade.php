@@ -1,280 +1,228 @@
 <section>
-  	<div class="bs-stepper vertical vertical-wizard-example">
-		<div class="bs-stepper-header">
-	  		<div class="step" data-target="#account-details-vertical" wire:ignore>
-				<button type="button" class="step-trigger">
-			  		<span class="bs-stepper-box">1</span>
-			  			<span class="bs-stepper-label">
-						<span class="bs-stepper-title">Basic Information</span>
-						<span class="bs-stepper-subtitle">Add Information</span>
-			  		</span>
-				</button>
-	  		</div>
+    <div class="row card">
+        <div class="col-12 card-body">
+            <div id="account-details-vertical">
+                <div class="content-header">
+                    <h5 class="mb-0 p-1">Basic Information</h5>
+                </div>
 
-	  		<div class="step" data-target="#personal-info-vertical" wire:ignore>
-				<button type="button" class="step-trigger">
-		  			<span class="bs-stepper-box">2</span>
-		  			<span class="bs-stepper-label">
-						<span class="bs-stepper-title">Details</span>
-						<span class="bs-stepper-subtitle">Add Company Details</span>
-		  			</span>
-				</button>
-	  		</div>
+                <div class="row">
+                    <div class="form-group col-md-6">
+                        <label class="form-label" for="first_name">
+                            First Name
+                        </label>
 
-	  		<div class="step" data-target="#address-step-vertical" wire:ignore>
-				<button type="button" class="step-trigger">
-		  			<span class="bs-stepper-box">3</span>
-		  			<span class="bs-stepper-label">
-						<span class="bs-stepper-title">Address</span>
-						<span class="bs-stepper-subtitle">Add Address</span>
-		  			</span>
-				</button>
-	  		</div>
+                        <input type="text" id="first_name" class="form-control" wire:model="inputs.first_name" readonly/>
+                    </div>
 
-  			<div class="step" data-target="#social-links-vertical" wire:ignore>
-				<button type="button" class="step-trigger">
-		  			<span class="bs-stepper-box">4</span>
-		  			<span class="bs-stepper-label">
-						<span class="bs-stepper-title">Social Links</span>
-						<span class="bs-stepper-subtitle">Add Social Links</span>
-	  				</span>
-				</button>
-	  		</div>
+                    <div class="form-group col-md-6">
+                        <label class="form-label" for="last_name">
+                            Last Name
+                        </label>
 
-	  		<div class="step" data-target="#others" wire:ignore>
-				<button type="button" class="step-trigger">
-			  		<span class="bs-stepper-box">-</span>
-			  			<span class="bs-stepper-label">
-						<span class="bs-stepper-title">Others</span>
-						<span class="bs-stepper-subtitle">Other Information</span>
-			  		</span>
-				</button>
-	  		</div>
+                        <input type="text" id="last-name" class="form-control" readonly wire:model="inputs.last_name"/>
+                    </div>
+                </div>
 
-	  		<div wire:ignore>
-				<button class="btn btn-success" wire:click="edit">Edit Customer</button>
-	  		</div>
-		</div>
+                <div class="row">
+                    <div class="form-group col-md-6">
+                        <label class="form-label" for="phone">
+                            Phone No.
+                        </label>
 
-		<div class="bs-stepper-content" wire:ignore>
-	  		<div id="account-details-vertical" class="content" wire:ignore>
-				<div class="content-header">
-		  			<h5 class="mb-0">Basic Information</h5>
-		  			<small class="text-muted">Enter Customer Information.</small>
-				</div>
+                        <input type="text" id="phone" class="form-control" readonly wire:model="inputs.phone"/>
+                    </div>
 
-				<div class="row">
-		  			<div class="form-group col-md-6">
-						<label class="form-label" for="first-name">First Name</label>
-						<input type="text" id="first-name" class="form-control" readonly wire:model="inputs.first_name"/>
-		  			</div>
+                    <div class="form-group col-md-6">
+                        <label class="form-label" for="email">Email</label>
 
-		  			<div class="form-group col-md-6">
-						<label class="form-label" for="last-name">Last Name</label>
-						<input type="text" id="last-name" class="form-control"readonly wire:model="inputs.last_name"/>
-		  			</div>
-				</div>
+                        <input type="email" id="email" class="form-control" wire:model="inputs.email" readonly/>
+                    </div>
+                </div>
 
-				<div class="row">
-		  			<div class="form-group col-md-6">
-						<label class="form-label" for="vertical-username">Phone No.</label>
-						<input type="text" id="vertical-username" class="form-control" readonly wire:model="inputs.phone"/>
-		  			</div>
+                <div class="row">
+                    <div class="form-group col-md-6">
+                        <label class="form-label" for="status">
+                            Status <span class="asterisk">*</span>
+                        </label>
 
-		  			<div class="form-group col-md-6">
-						<label class="form-label" for="vertical-email">Email</label>
-						<input type="email" id="vertical-email" class="form-control" readonly wire:model="inputs.email"/>
-		  			</div>
-				</div>
+                        <input type="text" id="status" class="form-control" wire:model="inputs.status" readonly/>
+                    </div>
+                </div>
+            </div>
 
-				<div class="row">
-		  			<div class="form-group col-md-6">
-						<label class="form-label" for="status">Status</label>
-						<input type="text" id="status" class="form-control" readonly wire:model="inputs.status"/>
-		  			</div>
-				</div>
+            <hr/>
 
-				<div class="d-flex justify-content-between">
-		  			<button class="btn btn-outline-secondary btn-prev" disabled>
-						<i data-feather="arrow-left" class="align-middle mr-sm-25 mr-0"></i>
-						<span class="align-middle d-sm-inline-block d-none">Previous</span>
-		  			</button>
-		  			<button class="btn btn-primary btn-next">
-						<span class="align-middle d-sm-inline-block d-none">Next</span>
-						<i data-feather="arrow-right" class="align-middle ml-sm-25 ml-0"></i>
-		  			</button>
-				</div>
-	  		</div>
+            <div id="personal-info-vertical">
+                <div class="content-header">
+                    <h5 class="mb-0 p-1">Company Details</h5>
+                </div>
 
-	  		<div id="personal-info-vertical" class="content" wire:ignore>
-				<div class="content-header">
-		  			<h5 class="mb-0">Company Details</h5>
-		  			<small>Enter Customer Company Details</small>
-				</div>
+                <div class="row">
+                    <div class="form-group col-md-6">
+                        <label class="form-label" for="company">Company Name</label>
 
-				<div class="row">
-		  			<div class="form-group col-md-6">
-						<label class="form-label" for="company-name">Company Name</label>
-						<input type="text" id="company-name" class="form-control" wire:model="inputs.company" readonly />
-		  			</div>
+                        <input type="text" id="company" class="form-control" wire:model="inputs.company" readonly/>
+                    </div>
 
-		  			<div class="form-group col-md-6">
-						<label class="form-label" for="position">Position</label>
-						<input type="text" id="position" class="form-control" wire:model="inputs.position" readonly/>
-		  			</div>
-				</div>
+                    <div class="form-group col-md-6">
+                        <label class="form-label" for="position">Position</label>
 
-				<div class="row">
-		  			<div class="form-group col-md-6">
-						<label class="form-label" for="telephone">Telephone No.</label>
-						<input type="text" id="telephone" class="form-control" wire:model="inputs.telephone" readonly/>
-		  			</div>
+                        <input type="text" id="position" class="form-control" readonly wire:model="inputs.position"/>
+                    </div>
+                </div>
 
-		  			<div class="form-group col-md-6">
-						<label class="form-label" for="vertical-business">Fax No.</label>
-						<input type="text" id="fax" class="form-control" wire:model="inputs.fax" readonly/>
-		  			</div>
-				</div>
+                <div class="row">
+                    <div class="form-group col-md-6">
+                        <label class="form-label" for="telephone">Telephone No.</label>
 
-				<div class="d-flex justify-content-between">
-		  			<button class="btn btn-primary btn-prev">
-						<i data-feather="arrow-left" class="align-middle mr-sm-25 mr-0"></i>
-						<span class="align-middle d-sm-inline-block d-none">Previous</span>
-		  			</button>
-		  			<button class="btn btn-primary btn-next">
-						<span class="align-middle d-sm-inline-block d-none">Next</span>
-						<i data-feather="arrow-right" class="align-middle ml-sm-25 ml-0"></i>
-		  			</button>
-				</div>
-	  		</div>
+                        <input type="text" id="telephone" class="form-control" readonly wire:model="inputs.telephone"/>
+                    </div>
 
-	  		<div id="address-step-vertical" class="content" wire:ignore>
-				<div class="content-header">
-		  			<h5 class="mb-0">Billing Address</h5>
-		  			<small>Enter Billing Address.</small>
-				</div>
+                    <div class="form-group col-md-6">
+                        <label class="form-label" for="fax">Fax No.</label>
 
-				<div class="row">
-		  			<div class="form-group col-md-6">
-						<label class="form-label" for="address_line_1">Address Line 1</label>
-						<input type="text" id="address_line_1" class="form-control" readonly wire:model="inputs.address_line_1" />
-		  			</div>
+                        <input type="text" id="fax" class="form-control" readonly wire:model="inputs.fax"/>
+                    </div>
+                </div>
+            </div>
 
-		  			<div class="form-group col-md-6">
-						<label class="form-label" for="address-2">Address Line 2</label>
-						<input type="text" id="address-2" class="form-control" readonly wire:model="inputs.address_line_2"/>
-		  			</div>
-				</div>
+            <hr/>
 
-				<div class="row">
-		  			<div class="form-group col-md-6">
-						<label class="form-label" for="city">City</label>
-						<input type="text" id="city" class="form-control" readonly wire:model="inputs.city"/>
-		  			</div>
+            <div id="address-step-vertical">
+                <div class="content-header">
+                    <h5 class="mb-0 p-1">Address</h5>
+                </div>
 
-		  			<div class="form-group col-md-6">
-						<label class="form-label" for="state">State / Province</label>
-						<input type="email" id="state" class="form-control" readonly wire:model="inputs.state"/>
-		  			</div>
-				</div>
+                <div class="row">
+                    <div class="form-group col-md-6">
+                        <label class="form-label" for="address_line_1">Address Line 1</label>
 
-				<div class="row">
-		  			<div class="form-group col-md-6">
-						<label class="form-label" for="postal">Zip / Postal Code</label>
-						<input type="text" id="postal" class="form-control" readonly wire:model="inputs.postal"/>
-		  			</div>
+                        <input type="text" id="address_line_1" class="form-control" readonly wire:model="inputs.address_line_1" />
+                    </div>
 
-		  			<div class="form-group col-md-6">
-						<label class="form-label" for="country">Country</label>
-						<input type="text" id="country" class="form-control" readonly wire:model="inputs.country"/>
-		  			</div>
-				</div>
+                    <div class="form-group col-md-6">
+                        <label class="form-label" for="address_line_2">Address Line 2</label>
 
-				<div class="d-flex justify-content-between">
-		  			<button class="btn btn-primary btn-prev">
-						<i data-feather="arrow-left" class="align-middle mr-sm-25 mr-0"></i>
-						<span class="align-middle d-sm-inline-block d-none">Previous</span>
-		  			</button>
-		  			<button class="btn btn-primary btn-next">
-						<span class="align-middle d-sm-inline-block d-none">Next</span>
-						<i data-feather="arrow-right" class="align-middle ml-sm-25 ml-0"></i>
-		  			</button>
-				</div>
-	  		</div>
+                        <input type="text" id="address_line_2" class="form-control" readonly wire:model="inputs.address_line_2"/>
+                    </div>
+                </div>
 
-	  		<div id="social-links-vertical" class="content" wire:ignore>
-				<div class="content-header">
-					<h5 class="mb-0">Social Links</h5>
-					<small>Enter Customer Social Links.</small>
-				</div>
+                <div class="row">
+                    <div class="form-group col-md-6">
+                        <label class="form-label" for="city">City</label>
 
-				<div class="row">
-		  			<div class="form-group col-md-6">
-						<label class="form-label" for="vertical-twitter">Twitter</label>
-						<input type="text" id="vertical-twitter" class="form-control" readonly wire:model="inputs.twitter"/>
-		  			</div>
-		  			<div class="form-group col-md-6">
-						<label class="form-label" for="vertical-facebook">Facebook</label>
-						<input type="text" id="vertical-facebook" class="form-control" readonly wire:model="inputs.facebook"/>
-		  			</div>
-				</div>
+                        <input type="text" id="city" class="form-control" readonly wire:model="inputs.city"/>
+                    </div>
 
-				<div class="row">
-		  			<div class="form-group col-md-6">
-						<label class="form-label" for="vertical-instagram">Instagram</label>
-						<input type="text" id="vertical-instagram" class="form-control"readonly wire:model="inputs.instagram"/>
-		  			</div>
-		  			<div class="form-group col-md-6">
-						<label class="form-label" for="vertical-linkedin">Linkedin</label>
-						<input type="text" id="vertical-linkedin" class="form-control" readonly wire:model="inputs.linkedin"/>
-		  			</div>
-				</div>
+                    <div class="form-group col-md-6">
+                        <label class="form-label" for="state">State / Province</label>
 
-				<div class="row">
-		  			<div class="form-group col-md-6">
-						<label class="form-label" for="vertical-pinterest">Pinterest</label>
-						<input type="text" id="vertical-pinterest" class="form-control" readonly wire:model="inputs.pinterest"/>
-		  			</div>
-		  			<div class="form-group col-md-6">
-						<label class="form-label" for="vertical-youtube">Youtube</label>
-						<input type="text" id="vertical-youtube" class="form-control" readonly wire:model="inputs.youtube"/>
-		  			</div>
-				</div>
-				<div class="d-flex justify-content-between">
-		  			<button class="btn btn-primary btn-prev">
-						<i data-feather="arrow-left" class="align-middle mr-sm-25 mr-0"></i>
-						<span class="align-middle d-sm-inline-block d-none">Previous</span>
-		  			</button>
-				</div>
-	  		</div>
+                        <input type="text" id="state" class="form-control" readonly wire:model="inputs.state"/>
+                    </div>
+                </div>
 
-	  		<div id="others" class="content" wire:ignore>
-				<div class="content-header">
-					<h5 class="mb-0">Other Information</h5>
-				</div>
+                <div class="row">
+                    <div class="form-group col-md-6">
+                        <label class="form-label" for="postal">Zip / Postal Code</label>
 
-				<div class="row">
-		  			<div class="form-group col-md-6">
-						<label class="form-label" for="vertical-twitter">Created By</label>
-						<input type="text" id="vertical-twitter" class="form-control" readonly wire:model="inputs.created_by"/>
-		  			</div>
-		  			<div class="form-group col-md-6">
-						<label class="form-label" for="vertical-facebook">Last Updated By</label>
-						<input type="text" id="vertical-facebook" class="form-control" readonly wire:model="inputs.updated_by"/>
-		  			</div>
-				</div>
+                        <input type="text" id="postal" class="form-control" readonly wire:model="inputs.postal"/>
+                    </div>
 
-				<div class="row">
-		  			<div class="form-group col-md-6">
-						<label class="form-label" for="vertical-twitter">Created At</label>
-						<input type="text" id="vertical-twitter" class="form-control" readonly wire:model="inputs.created_at"/>
-		  			</div>
-		  			<div class="form-group col-md-6">
-						<label class="form-label" for="vertical-facebook">Last Updated At</label>
-						<input type="text" id="vertical-facebook" class="form-control" readonly wire:model="inputs.updated_at"/>
-		  			</div>
-				</div>
-			</div>
-		</div>
-  	</div>
+                    <div class="form-group col-md-6">
+                        <label class="form-label" for="country">Country</label>
+
+                        <input type="text" id="country" class="form-control" readonly wire:model="inputs.country"/>
+                    </div>
+                </div>
+            </div>
+
+            <hr/>
+
+            <div id="social-links-vertical">
+
+                <div class="content-header">
+                    <h5 class="mb-0 p-1">Social Media</h5>
+                </div>
+
+                <div class="row">
+                    <div class="form-group col-md-6">
+                        <label class="form-label" for="twitter">Twitter</label>
+
+                        <input type="text" id="twitter" class="form-control" readonly wire:model="inputs.twitter"/>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label class="form-label" for="facebook">Facebook</label>
+
+                        <input type="text" id="facebook" class="form-control" readonly wire:model="inputs.facebook"/>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="form-group col-md-6">
+                        <label class="form-label" for="instagram">Instagram</label>
+
+                        <input type="text" id="instagram" class="form-control" readonly wire:model="inputs.instagram"/>
+
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label class="form-label" for="linkedin">Linkedin</label>
+
+                        <input type="text" id="linkedin" class="form-control" readonly wire:model="inputs.linkedin"/>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="form-group col-md-6">
+                        <label class="form-label" for="pinterest">Pinterest</label>
+
+                        <input type="text" id="pinterest" class="form-control" readonly wire:model="inputs.pinterest"/>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label class="form-label" for="youtube">Youtube</label>
+
+                        <input type="text" id="youtube" class="form-control" readonly wire:model="inputs.youtube"/>
+                    </div>
+                </div>
+            </div>
+
+            <div id="other-details-vertical">
+
+                <div class="content-header">
+                    <h5 class="mb-0 p-1">Others</h5>
+                </div>
+
+                <div class="row">
+                    <div class="form-group col-md-6">
+                        <label class="form-label" for="created_by">Created By</label>
+
+                        <input type="text" id="created_by" class="form-control" readonly wire:model="inputs.created_by"/>
+
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label class="form-label" for="created_at">Created On</label>
+
+                        <input type="text" id="created_at" class="form-control" readonly wire:model="inputs.created_at"/>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="form-group col-md-6">
+                        <label class="form-label" for="updated_by">Updated By</label>
+
+                        <input type="text" id="updated_by" class="form-control" readonly wire:model="inputs.updated_by"/>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label class="form-label" for="youtube">Updated On</label>
+
+                        <input type="text" id="updated_at" class="form-control" readonly wire:model="inputs.updated_at"/>
+                    </div>
+                </div>
+
+                <div>
+                    <button class="btn btn-primary" wire:click="edit">Edit</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </section>
