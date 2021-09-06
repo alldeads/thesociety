@@ -35,6 +35,7 @@ class Index extends CustomComponent
     public function render()
     {
     	$search = $this->search;
+        $limit  = $this->limit ?? 10;
 
     	$results = Customer::where('company_id', $this->company_id)
     				->where( function (Builder $query) use ($search) {
@@ -49,7 +50,11 @@ class Index extends CustomComponent
 		                })->orWherehas('status',function($query) use ($search) {
                             return $query->where('name', 'like', "%" . $search ."%");
                         });
-		            })->orderBy('id', 'desc')->paginate($this->limit);
+		            });
+
+        $results = $results->orderBy('id', 'desc')
+                    ->with(['user.profile', 'status'])
+                    ->paginate($limit);
                         
         return view('livewire.customer.index', [
             'results' => $results

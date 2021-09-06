@@ -1,5 +1,5 @@
 <tr>
-	<td>{{ $item->id }}</td>
+	<td> <a href="#" wire:click.prevent="read"> {{ $item->id }} </a></td>
 	<td>{{ $item->user->profile->name }}</td>
 	<td>{{ $item->user->profile->phone_number }}</td>
 
