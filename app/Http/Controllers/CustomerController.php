@@ -5,8 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 
-use App\Models\Company;
 use App\Models\Customer;
+use App\Exports\CustomerExport;
 
 class CustomerController extends Controller
 {
@@ -43,11 +43,7 @@ class CustomerController extends Controller
 
     public function view(Customer $customer)
     {
-    	$response = Gate::inspect('customer.read');
-
-    	if ( $customer->company_id != $this->getCompany()->id ) {
-    		return view('misc.not-authorized');
-    	}
+    	$this->authorize('customer.read');
 
     	$breadcrumbs = [
 	        ['link'=> route('home'), 'name'=>"Dashboard"], 
@@ -55,26 +51,20 @@ class CustomerController extends Controller
 	        ['name'=> ucwords($customer->user->profile->name)], 
 	    ];
 
-		if ( $response->allowed() ) {
-		    return view('customer.read', [
+		if ($this->getCompany()->id == $customer->company_id) {
+		 	return view('customer.read', [
 		    	'breadcrumbs' => $breadcrumbs,
 		    	'company'     => $this->getCompany(),
 		    	'customer'    => $customer
-		    ]);
-		} else {
-		    return view('misc.not-authorized');
+		    ]);   
 		}
+
+		return view('errors.403');
     }
 
     public function edit(Customer $customer)
     {
-    	$response = Gate::inspect('customer.update');
-
-    	$company = Company::findOrFail(auth()->user()->empCard->company_id);
-
-    	if ( $customer->company_id != $this->getCompany()->id ) {
-    		return view('misc.not-authorized');
-    	}
+    	$this->authorize('customer.update');
 
     	$breadcrumbs = [
 	        ['link'=> route('home'), 'name'=>"Dashboard"], 
@@ -82,14 +72,30 @@ class CustomerController extends Controller
 	        ['name'=> ucwords($customer->user->profile->name)], 
 	    ];
 
-		if ( $response->allowed() ) {
-		    return view('customer.edit', [
+		if ($this->getCompany()->id == $customer->company_id) {
+		 	return view('customer.edit', [
 		    	'breadcrumbs' => $breadcrumbs,
 		    	'company'     => $this->getCompany(),
 		    	'customer'    => $customer
-		    ]);
-		} else {
-		    return view('misc.not-authorized');
+		    ]);   
 		}
+
+		return view('errors.403');
+    }
+
+    public function export(Request $request)
+    {
+    	$this->authorize('customer.export');
+
+    	$types = ['csv', 'pdf', 'xlsx', 'xls', 'ods'];
+
+    	$requested_type = isset($request['type']) ? strtolower($request['type']) : 'csv';
+    	$q = $request['q'];
+
+    	if ( !in_array($requested_type, $types) ) {
+    		$requested_type = 'csv';
+    	}
+
+    	return (new CustomerExport($q, $this->getCompany()->id))->download('customers-' . now()->format('Y-m-d') . '.' . $requested_type);
     }
 }

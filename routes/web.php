@@ -31,6 +31,7 @@ Route::middleware('auth')->group(function() {
 		Route::get('create', 'CustomerController@create')->name('customers-create');
 		Route::get('view/{customer}', 'CustomerController@view')->name('customers-read');
 		Route::get('edit/{customer}', 'CustomerController@edit')->name('customers-edit');
+		Route::get('export', 'CustomerController@export')->name('customers-export');
 	});
 
 	Route::prefix('products')->group( function() {
