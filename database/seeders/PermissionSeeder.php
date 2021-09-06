@@ -22,7 +22,7 @@ class PermissionSeeder extends Seeder
             'chart', 'cashflow', 'customer', 'supplier',
             'product', 'supply', 'purchase_order', 'tax',
             'journal_entry', 'ledger', 'branch', 'stock_level',
-            'history', 'pos', 'sale'
+            'history', 'pos', 'sale', 'covid'
         ];
 
         foreach ($menus as $menu) {
