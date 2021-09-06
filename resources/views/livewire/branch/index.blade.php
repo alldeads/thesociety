@@ -18,20 +18,25 @@
                                     <span>{{ __('Export') }}</span>
                                 </button>
                                  <div class="dropdown-menu">
-                                    <a class="dropdown-item" href="{{ route('cash-flow-export', [
+                                    <a class="dropdown-item" href="{{ route('branches-export', [
                                         'type' => 'csv',
                                         'q'    => $this->search
                                     ]) }}" target="_blank">
                                         <span>{{ __('CSV') }}</span>
                                     </a>
-                                    <a class="dropdown-item" href="{{ route('cash-flow-export', [
+                                    <a class="dropdown-item" href="{{ route('branches-export', [
+                                        'type' => 'pdf',
+                                        'q'    => $this->search
+                                    ]) }}" target="_blank">
+                                        <span>{{ __('PDF') }}</span>
+                                    </a>
+                                    <a class="dropdown-item" href="{{ route('branches-export', [
                                         'type' => 'xls',
                                         'q'    => $this->search
                                     ]) }}" target="_blank">
                                         <span>{{ __('EXCEL (xls)') }}</span>
                                     </a>
-
-                                    <a class="dropdown-item" href="{{ route('cash-flow-export', [
+                                    <a class="dropdown-item" href="{{ route('branches-export', [
                                         'type' => 'xlsx',
                                         'q'    => $this->search
                                     ]) }}" target="_blank">

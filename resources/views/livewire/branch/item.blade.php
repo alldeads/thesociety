@@ -1,5 +1,5 @@
 <tr>
-    <td>{{ ucwords($item->name) }}</td>
+    <td><a href="#" wire:click.prevent="read">{{ ucwords($item->name) }}</a></td>
     <td>{{ $item->phone }}</td>
     <td>
         <span class="badge badge-pill  badge-light-{{ $item->status == "active" ? "success" : "danger" }}">

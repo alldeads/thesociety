@@ -33,6 +33,11 @@ class Edit extends CustomComponent
         ];
     }
 
+    public function read()
+    {
+        return redirect()->route('branches-read', ['branch' => $this->branch->id]);
+    }
+
     public function resetBtn()
     {
         $this->prefill();

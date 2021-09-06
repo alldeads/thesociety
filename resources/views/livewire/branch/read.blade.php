@@ -3,7 +3,7 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-header">
-                    <h4 class="card-title">{{ __('View Branch') }}</h4>
+                    <h4 class="card-title">{{ $inputs['name'] }}</h4>
                 </div>
 
                 <div class="card-body">
@@ -105,6 +105,10 @@
 
                                     <input type="text" wire:model="inputs.updated_at" id="updated_at" class="form-control" readonly>
                                 </div>
+                            </div>
+
+                            <div class="col-12">
+                                <button wire:click.prevent="edit" class="btn btn-primary mr-1">{{ __('Edit') }}</button>
                             </div>
                         </div>
                     </form>

@@ -27,6 +27,11 @@ class Read extends Component
         ];
     }
 
+    public function edit()
+    {
+        return redirect()->route('branches-edit', ['branch' => $this->branch->id]);
+    }
+
     public function render()
     {
         return view('livewire.branch.read');

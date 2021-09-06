@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Models\Branch;
+use App\Exports\BranchExport;
 
 class BranchController extends Controller
 {
@@ -29,7 +30,7 @@ class BranchController extends Controller
 
         $breadcrumbs = [
             ['link'=> route('home'), 'name'=>"Dashboard"], 
-            ['link'=> route('branches-view'), 'name'=>"Branch"], 
+            ['link'=> route('branches-view'), 'name'=>"Branches"], 
             ['name'=>"New Branch"],
         ];
 
@@ -46,7 +47,7 @@ class BranchController extends Controller
         $breadcrumbs = [
             ['link'=> route('home'), 'name'=>"Dashboard"], 
             ['link'=> route('branches-view'), 'name'=>"Branches"], 
-            ['name'=>"Edit Branch"],
+            ['name'=> ucwords($branch->name)],
         ];
 
         if ($this->getCompany()->id == $branch->company_id) {
@@ -66,7 +67,7 @@ class BranchController extends Controller
         $breadcrumbs = [
             ['link'=> route('home'), 'name'=>"Dashboard"], 
             ['link'=> route('branches-view'), 'name'=>"Branches"], 
-            ['name'=> $branch->name],
+            ['name'=> ucwords($branch->name)],
         ];
 
         if ($this->getCompany()->id == $branch->company_id) {
@@ -77,5 +78,21 @@ class BranchController extends Controller
         }
 
         return view('errors.403');
+    }
+
+    public function export(Request $request)
+    {
+        $this->authorize('branch.export');
+
+        $types = ['csv', 'pdf', 'xlsx', 'xls', 'ods'];
+
+        $requested_type = isset($request['type']) ? strtolower($request['type']) : 'csv';
+        $q = $request['q'];
+
+        if ( !in_array($requested_type, $types) ) {
+            $requested_type = 'csv';
+        }
+
+        return (new BranchExport($q, $this->getCompany()->id))->download('branches-' . now()->format('Y-m-d') . '.' . $requested_type);
     }
 }

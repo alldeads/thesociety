@@ -3,7 +3,7 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-header">
-                    <h4 class="card-title">{{ __('Edit Branch') }}</h4>
+                    <h4 class="card-title">{{ $inputs['name'] }}</h4>
                 </div>
 
                 <div class="card-body">
@@ -120,7 +120,8 @@
               
                             <div class="col-12">
                                 <button wire:click.prevent="submit" class="btn btn-primary mr-1">{{ __('Update') }}</button>
-                                <button wire:click.prevent="resetBtn" class="btn btn-outline-secondary">{{ __('Reset') }}</button>
+                                <button wire:click.prevent="resetBtn" class="btn btn-outline-secondary mr-1">{{ __('Reset') }}</button>
+                                <button wire:click.prevent="read" class="btn btn-secondary">{{ __('View') }}</button>
                             </div>
                         </div>
                     </form>
