@@ -34,7 +34,8 @@ class DatabaseSeeder extends Seeder
             PurchaseOrderSeeder::class,
             JournalEntrySeeder::class,
             InventoryTypeSeeder::class,
-            StockLevelSeeder::class
+            StockLevelSeeder::class,
+            SalesOrderSeeder::class
         ]);
     }
 }
