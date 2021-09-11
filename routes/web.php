@@ -4,6 +4,16 @@ Auth::routes(['register' => false]);
 	
 Route::get('/', 'WebController@index')->name('index');
 
+Route::get('qr', function () {
+  
+    \QrCode::size(500)
+            ->format('png')
+            ->generate('ItSolutionStuff.com', public_path('images/qrcode.png'));
+    
+  	return view('qrcode');
+    
+});
+
 Route::middleware('auth')->group(function() {
 
 	Route::get('home', 'DashboardController@index')->name('home');
