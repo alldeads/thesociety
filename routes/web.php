@@ -135,6 +135,6 @@ Route::middleware('auth')->group(function() {
 		Route::get('create', 'CovidController@create')->name('sales-create');
 		Route::get('edit/{sales}', 'CovidController@edit')->name('sales-edit');
 		Route::get('view/{sales}', 'CovidController@read')->name('sales-read');
-		Route::get('export', 'CovidController@export')->name('sales-export');
+		Route::get('export', 'CovidController@export')->name('covid-export');
 	});
 });

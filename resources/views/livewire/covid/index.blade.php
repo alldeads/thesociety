@@ -18,7 +18,7 @@
                                     <span>{{ __('Export') }}</span>
                                 </button>
                                  <div class="dropdown-menu">
-                                    <a class="dropdown-item" href="{{ route('journal-entry-export', [
+                                    <a class="dropdown-item" href="{{ route('covid-export', [
                                         'type' => 'csv',
                                         'q'    => $this->search,
                                         'from' => $this->date_from,
@@ -26,7 +26,7 @@
                                     ]) }}" target="_blank">
                                         <span>{{ __('CSV') }}</span>
                                     </a>
-                                    <a class="dropdown-item" href="{{ route('journal-entry-export', [
+                                    <a class="dropdown-item" href="{{ route('covid-export', [
                                         'type' => 'xls',
                                         'q'    => $this->search,
                                         'from' => $this->date_from,
@@ -35,7 +35,7 @@
                                         <span>{{ __('EXCEL (xls)') }}</span>
                                     </a>
 
-                                    <a class="dropdown-item" href="{{ route('journal-entry-export', [
+                                    <a class="dropdown-item" href="{{ route('covid-export', [
                                         'type' => 'xlsx',
                                         'q'    => $this->search,
                                         'from' => $this->date_from,
@@ -44,13 +44,13 @@
                                         <span>{{ __('EXCEL (xlsx)') }}</span>
                                     </a>
 
-                                    <a class="dropdown-item" href="{{ route('journal-entry-export', [
-                                        'type' => 'ods',
+                                    <a class="dropdown-item" href="{{ route('covid-export', [
+                                        'type' => 'pdf',
                                         'q'    => $this->search,
                                         'from' => $this->date_from,
                                         'to'   => $this->date_to
                                     ]) }}" target="_blank">
-                                        <span>{{ __('ODS') }}</span>
+                                        <span>{{ __('PDF') }}</span>
                                     </a>
                                 </div>
                             </div>

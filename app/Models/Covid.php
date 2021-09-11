@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Covid extends Model
 {
     use HasFactory;
+
+    public function getNameAttribute()
+    {
+        return $this->first_name . ' ' . $this->last_name;
+    }
 }
