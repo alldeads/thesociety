@@ -11,7 +11,7 @@
 			            	</button>
 		            	@endcan
 
-		            	@can('chart.export')
+		            	@can('role.export')
 			            	<div class="btn-group">
 			              		<button type="button" class="btn btn-outline-primary ml-2 dropdown-toggle rounded" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 			              			<i class="fas fa-download mr-1"></i>
