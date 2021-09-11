@@ -127,6 +127,6 @@ Route::middleware('auth')->group(function() {
 		Route::get('create', 'SalesOrderController@create')->name('sales-create');
 		Route::get('edit/{sales}', 'SalesOrderController@edit')->name('sales-edit');
 		Route::get('view/{sales}', 'SalesOrderController@read')->name('sales-read');
-		Route::get('export', 'SalesOrderController@export')->name('roles-export');
+		Route::get('export', 'SalesOrderController@export')->name('sales-export');
 	});
 });

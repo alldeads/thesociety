@@ -1,45 +1,36 @@
 <?php
 
-namespace App\Http\Livewire\Sale;
-
-use App\Http\Livewire\CustomComponent;
-use Illuminate\Database\Eloquent\Builder;
-use Livewire\WithPagination;
+namespace App\Exports;
 
 use App\Models\SalesOrder;
+use Illuminate\Contracts\View\View;
+use Maatwebsite\Excel\Concerns\FromView;
+use Maatwebsite\Excel\Concerns\Exportable;
 
-class Index extends CustomComponent
+use Illuminate\Database\Eloquent\Builder;
+
+class SalesOrderExport implements FromView
 {
-    use WithPagination;
+	use Exportable;
 
-    protected $paginationTheme = 'bootstrap';
+	public $search;
+	public $company_id;
+	public $from;
+	public $to;
 
-    public $company_id;
-    public $search = '';
-    public $limit;
-    public $date_from;
-    public $date_to;
-
-    public $listeners = [
-        'refreshSalesOrderParent' => '$refresh'
-    ];
-
-    public function updatingSearch()
+    public function __construct($search, $company_id, $from, $to)
     {
-        $this->resetPage();
+        $this->search     = $search;
+        $this->company_id = $company_id;
+        $this->from = $from;
+        $this->to = $to;
     }
 
-    public function create()
-    {
-        return redirect()->route('sales-create');
-    }
-
-    public function render()
+    public function view(): View
     {
         $search = $this->search;
-        $from   = $this->date_from;
-        $to     = $this->date_to;
-        $limit  = $this->limit ?? 10;
+        $from = $this->from;
+        $to = $this->to;
 
         $results = SalesOrder::where('company_id', $this->company_id)
                         ->where( function (Builder $query) use ($search) {
@@ -67,10 +58,10 @@ class Index extends CustomComponent
 
         $results  =  $results->with(['customer.user.profile'])
                             ->orderBy('created_at', 'desc')
-                            ->paginate($limit);
-                        
-        return view('livewire.sale.index', [
-            'results' => $results
+                            ->get();
+
+        return view('exports.sales-order', [
+            'sales' => $results
         ]);
     }
 }
