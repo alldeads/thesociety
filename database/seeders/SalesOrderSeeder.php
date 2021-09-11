@@ -47,14 +47,20 @@ class SalesOrderSeeder extends Seeder
                     }
                 }
 
+                $customer = rand(0, 1) == 0 ? null : $company->customers()->inRandomOrder()->first()->id;
+
+                $stats = ['paid', 'cancelled'];
+
                 $sl = SalesOrder::create([
                     'reference'   => 'SL-' . rand(111111, 999999),
                     'company_id'  => $company->id,
-                    'customer_id' => rand(0, 1) == 0 ? null : $company->customers()->inRandomOrder()->first()->id,
+                    'customer_id' => $customer,
                     'total'       => $total - $discount,
                     'sub_total'   => $sub_total,
                     'discount'    => $discount,
                     'quantity'    => $q,
+                    'type'        => $customer == null ? 'guest' : 'customer',
+                    'status'      => $stats[rand(0,1)],
                     'created_by'  => 1,
                     'updated_by'  => 1
                 ]);

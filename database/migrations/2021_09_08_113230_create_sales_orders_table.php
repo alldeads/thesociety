@@ -13,7 +13,7 @@ class CreateSalesOrdersTable extends Migration
      */
     public function up()
     {
-        Schema::create('sales_orders', function (Blueprint $table) {
+        Schema::create('sales_orders', function (Blueprint $table) {    
             $table->id();
             $table->string('reference');
             $table->bigInteger('company_id')->unsigned();
@@ -22,8 +22,12 @@ class CreateSalesOrdersTable extends Migration
             $table->double('sub_total')->default(0);
             $table->double('discount')->default(0);
             $table->bigInteger('quantity')->default(0);
+            $table->enum('type', ['guest', 'customer'])->default('guest');
             $table->bigInteger('created_by')->unsigned();
             $table->bigInteger('updated_by')->unsigned();
+            $table->string('status');
+            $table->text('notes')->nullable();
+            $table->softDeletes();
             $table->timestamps();
         });
     }

@@ -121,4 +121,12 @@ Route::middleware('auth')->group(function() {
 	Route::prefix('pos')->group( function() {
 		Route::get('/', 'POSController@index')->name('pos-index');
 	});
+
+	Route::prefix('sales')->group( function() {
+		Route::get('view', 'SalesOrderController@index')->name('sales-view');
+		Route::get('create', 'SalesOrderController@create')->name('sales-create');
+		Route::get('edit/{sales}', 'SalesOrderController@edit')->name('sales-edit');
+		Route::get('view/{sales}', 'SalesOrderController@read')->name('sales-read');
+		Route::get('export', 'SalesOrderController@export')->name('roles-export');
+	});
 });

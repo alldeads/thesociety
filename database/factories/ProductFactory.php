@@ -21,8 +21,8 @@ class ProductFactory extends Factory
      */
     public function definition()
     {
-        $cost = rand(50, 200);
-        $srp  = rand(500, 2000);
+        $cost = rand(50, 99);
+        $srp  = rand(100, 1999);
 
         return [     
             'avatar'            => $this->faker->imageUrl(600,480),
