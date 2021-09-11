@@ -121,5 +121,7 @@
             </div>
         </div>
     </div>
+
+    @livewire('covid.delete')
 </div>
 
