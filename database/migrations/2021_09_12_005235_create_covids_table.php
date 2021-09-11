@@ -15,6 +15,7 @@ class CreateCovidsTable extends Migration
     {
         Schema::create('covids', function (Blueprint $table) {
             $table->id();
+            $table->bigInteger('company_id')->unsigned();
             $table->string('first_name');
             $table->string('last_name');
             $table->string('phone');
@@ -24,6 +25,7 @@ class CreateCovidsTable extends Migration
             $table->boolean('q3')->default(0);
             $table->boolean('q4')->default(0);
             $table->boolean('q5')->default(0);
+            $table->softDeletes();
             $table->timestamps();
         });
     }
