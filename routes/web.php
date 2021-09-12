@@ -142,9 +142,9 @@ Route::middleware('auth')->group(function() {
 
 	Route::prefix('covid')->group( function() {
 		Route::get('view', 'CovidController@index')->name('covid-view');
-		Route::get('create', 'CovidController@create')->name('sales-create');
-		Route::get('edit/{sales}', 'CovidController@edit')->name('sales-edit');
-		Route::get('view/{sales}', 'CovidController@read')->name('sales-read');
+		Route::get('create', 'CovidController@create')->name('covid-create');
+		Route::get('edit/{sales}', 'CovidController@edit')->name('covid-edit');
+		Route::get('view/{sales}', 'CovidController@read')->name('covid-read');
 		Route::get('export', 'CovidController@export')->name('covid-export');
 	});
 });

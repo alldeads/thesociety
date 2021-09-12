@@ -44,8 +44,8 @@ class MenuSeeder extends Seeder
         $header->menus()->create([
             'name'       => 'Covid-19 Tracing',
             'slug'       => 'covid',
-            'url'        => 'covid',
-            'icon'       => 'phone-outgoing',
+            'url'        => 'covid/view',
+            'icon'       => 'external-link',
             'base'       => 'covid',
             'is_export'  => false,
             'permission' => 'covid.view'
