@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Gate;
 
 use App\Models\Employee;
 use App\Models\User;
+use App\Exports\EmployeeExport;
 
 class EmployeeController extends Controller
 {
@@ -27,7 +28,7 @@ class EmployeeController extends Controller
 
     public function create()
     {
-    	$response = Gate::inspect('employee.create');
+    	$this->authorize('employee.create');
 
     	$breadcrumbs = [
 	        ['link'=> route('home'), 'name'=>"Dashboard"], 
@@ -35,48 +36,46 @@ class EmployeeController extends Controller
 	        ['name'=> "Create Employee"],
 	    ];
 
-	    $company_id = auth()->user()->empCard->company_id ?? 0;
-
-	    $employee = Employee::findOrFail($company_id);
-
-		if ( $response->allowed() ) {
-		    return view('employee.create', [
-		    	'breadcrumbs' => $breadcrumbs,
-		    	'company'     => $employee->company
-		    ]);
-		} else {
-		    return view('misc.not-authorized');
-		}
+		return view('employee.create', [
+	    	'breadcrumbs' => $breadcrumbs,
+	    	'company'     => $this->getCompany()
+	    ]);
     }
 
     public function edit(Employee $emp)
     {
-    	$response = Gate::inspect('employee.update');
+    	$this->authorize('employee.update');
 
     	$breadcrumbs = [
 	        ['link'=> route('home'), 'name'=>"Dashboard"], 
 	        ['link'=> route('employees-view'), 'name'=> "Employees"],
-	        ['name'=> "Edit Employee"],
+	        ['name'=> $emp->user->profile->name ?? ''],
 	    ];
 
-	    $company_id = auth()->user()->empCard->company_id ?? 0;
-
-	    $employee = Employee::findOrFail($company_id);
-
-	    $success = true;
-
-	    if ( $emp->company_id != $company_id ) {
-	    	$success = false;
-	    }
-
-		if ( $response->allowed() && $success ) {
+	    if ($this->getCompany()->id == $emp->company_id) {
 		    return view('employee.edit', [
 		    	'breadcrumbs' => $breadcrumbs,
-		    	'company'     => $employee->company,
+		    	'company'     => $this->getCompany(),
 		    	'emp'         => $emp
 		    ]);
-		} else {
-		    return view('misc.not-authorized');
 		}
+    }
+
+    public function export(Request $request)
+    {
+    	$this->authorize('employee.export');
+
+    	$types = ['csv', 'pdf', 'xlsx', 'xls', 'ods'];
+
+    	$requested_type = isset($request['type']) ? strtolower($request['type']) : 'csv';
+    	$q = $request['q'];
+    	$from = $request['from'];
+    	$to = $request['to'];
+
+    	if ( !in_array($requested_type, $types) ) {
+    		$requested_type = 'csv';
+    	}
+
+    	return (new EmployeeExport($q, $this->getCompany()->id, $from, $to))->download('employees-' . now()->format('Y-m-d') . '.' . $requested_type);
     }
 }

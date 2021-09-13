@@ -17,36 +17,47 @@
 		              			<span>{{ __('Export') }}</span>
 		              		</button>
 				             <div class="dropdown-menu">
-				                <a class="dropdown-item" href="{{ route('customers-export', [
+				                <a class="dropdown-item" href="{{ route('employees-export', [
 				                	'type' => 'csv',
-				                	'q'    => $this->search
+				                	'q'    => $this->search,
+				                	'from' => $this->date_from,
+				                	'to'   => $this->date_to
 				                ]) }}" target="_blank">
 		              				<span>{{ __('CSV') }}</span>
 			                	</a>
-			                	<a class="dropdown-item" href="{{ route('customers-export', [
-				                	'type' => 'xls',
-				                	'q'    => $this->search
-				                ]) }}" target="_blank">
-		              				<span>{{ __('EXCEL (xls)') }}</span>
-			                	</a>
 
-			                	<a class="dropdown-item" href="{{ route('customers-export', [
-				                	'type' => 'xlsx',
-				                	'q'    => $this->search
-				                ]) }}" target="_blank">
-		              				<span>{{ __('EXCEL (xlsx)') }}</span>
-			                	</a>
-
-			                	<a class="dropdown-item" href="{{ route('customers-export', [
+			                	<a class="dropdown-item" href="{{ route('employees-export', [
 				                	'type' => 'pdf',
-				                	'q'    => $this->search
+				                	'q'    => $this->search,
+				                	'from' => $this->date_from,
+				                	'to'   => $this->date_to
 				                ]) }}" target="_blank">
 		              				<span>{{ __('PDF') }}</span>
 			                	</a>
 
-			                	<a class="dropdown-item" href="{{ route('customers-export', [
+			                	<a class="dropdown-item" href="{{ route('employees-export', [
+				                	'type' => 'xls',
+				                	'q'    => $this->search,
+				                	'from' => $this->date_from,
+				                	'to'   => $this->date_to
+				                ]) }}" target="_blank">
+		              				<span>{{ __('EXCEL (xls)') }}</span>
+			                	</a>
+
+			                	<a class="dropdown-item" href="{{ route('employees-export', [
+				                	'type' => 'xlsx',
+				                	'q'    => $this->search,
+				                	'from' => $this->date_from,
+				                	'to'   => $this->date_to
+				                ]) }}" target="_blank">
+		              				<span>{{ __('EXCEL (xlsx)') }}</span>
+			                	</a>
+
+			                	<a class="dropdown-item" href="{{ route('employees-export', [
 				                	'type' => 'ods',
-				                	'q'    => $this->search
+				                	'q'    => $this->search,
+				                	'from' => $this->date_from,
+				                	'to'   => $this->date_to
 				                ]) }}" target="_blank">
 		              				<span>{{ __('ODS') }}</span>
 			                	</a>

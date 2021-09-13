@@ -1,53 +1,36 @@
 <?php
 
-namespace App\Http\Livewire\Employee;
-
-use App\Http\Livewire\CustomComponent;
-
-use Carbon\Carbon;
-use Illuminate\Database\Eloquent\Builder;
-use Livewire\WithPagination;
+namespace App\Exports;
 
 use App\Models\Employee;
+use Illuminate\Contracts\View\View;
+use Maatwebsite\Excel\Concerns\FromView;
+use Maatwebsite\Excel\Concerns\Exportable;
 
-class Index extends CustomComponent
+use Illuminate\Database\Eloquent\Builder;
+
+class EmployeeExport implements FromView
 {
-    use WithPagination;
+	use Exportable;
 
-    protected $paginationTheme = 'bootstrap';
+	public $search;
+	public $company_id;
+	public $from;
+	public $to;
 
-    public $company_id;
-    public $search = '';
-    public $limit;
-    public $date_from;
-    public $date_to;
-
-    public $listeners = [
-        'refreshEmployeeParent' => '$refresh'
-    ];
-
-    public function mount()
+    public function __construct($search, $company_id, $from, $to)
     {
-        $this->date_from = Carbon::parse('2000-01-01')->format('Y-m-d');
-        $this->date_to   = Carbon::now()->format('Y-m-d');
+        $this->search     = $search;
+        $this->company_id = $company_id;
+        $this->from = $from;
+        $this->to = $to;
     }
 
-    public function updatingSearch()
-    {
-        $this->resetPage();
-    }
-
-    public function create()
-    {
-        return redirect()->route('employees-create');
-    }
-
-    public function render()
+    public function view(): View
     {
         $search = $this->search;
-        $from   = $this->date_from;
-        $to     = $this->date_to;
-        $limit  = $this->limit ?? 10;
+        $from = $this->from;
+        $to = $this->to;
 
         $results = Employee::where('company_id', $this->company_id)
             ->where('is_owner', false)
@@ -75,10 +58,10 @@ class Index extends CustomComponent
         
         $results = $results->orderBy('id', 'desc')
                     ->with(['user.profile', 'role'])
-                    ->paginate($limit);
-        
-        return view('livewire.employee.index', [
-            'results' => $results
+                    ->get();
+
+        return view('exports.employee', [
+            'employees' => $results
         ]);
     }
 }

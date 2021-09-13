@@ -28,10 +28,9 @@ class Edit extends CustomComponent
 	public $menus;
 	public $employee;
 
-	public function mount($company_id, $employee)
+	public function mount()
 	{
-		$this->company_id = $company_id;
-		$this->employee   = $employee;
+		$employee   = $this->employee;
 		$this->roles = CompanyRole::getCompanyRoles($this->company_id);
 		$this->menus = CompanyMenu::getCompanyMenus($this->company_id);
 
