@@ -17,14 +17,14 @@
                 </button>
 
                 <div class="dropdown-menu">
-                    @can('journal_entry.update')
+                    @can('payment_type.update')
                         <a class="dropdown-item" wire:click="edit" href="javascript:void(0);">
                             <i class="fas fa-pen mr-1"></i>
                             <span>Edit</span>
                         </a>
                     @endcan
 
-                    @can('journal_entry.delete')
+                    @can('payment_type.delete')
                         <a class="dropdown-item" wire:click="delete" href="javascript:void(0);">
                             <i class="fas fa-trash mr-1"></i>
                             <span>Delete</span>
