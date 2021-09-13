@@ -32,7 +32,7 @@ Route::middleware('auth')->group(function() {
 	});
 
 	Route::prefix('employees')->group( function() {
-		Route::get('view', 'EmployeeController@get_all')->name('employees-view');
+		Route::get('view', 'EmployeeController@index')->name('employees-view');
 		Route::get('create', 'EmployeeController@create')->name('employees-create');
 		Route::get('edit/{emp}', 'EmployeeController@edit')->name('employees-edit');
 	});

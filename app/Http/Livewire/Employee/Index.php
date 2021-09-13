@@ -22,11 +22,6 @@ class Index extends CustomComponent
         'refreshEmployeeParent' => '$refresh'
     ];
 
-    public function mount()
-    {
-        $this->company_id = auth()->user()->empCard->company_id;
-    }
-
     public function updatingSearch()
     {
         $this->resetPage();
@@ -40,6 +35,7 @@ class Index extends CustomComponent
     public function render()
     {
         $search = $this->search;
+        $limit  = $this->limit ?? 10;
 
         $results = Employee::where('company_id', $this->company_id)
             ->where('is_owner', false)
@@ -54,8 +50,11 @@ class Index extends CustomComponent
                 })->orWhereHas('role', function($query) use ($search) {
                     return $query->where('role_name', 'like', "%" . $search ."%");
                 });
-            })
-            ->orderBy('created_at', 'desc')->paginate($this->limit);
+            });
+        
+        $results = $results->orderBy('id', 'desc')
+                    ->with(['user.profile', 'role'])
+                    ->paginate($limit);
         
         return view('livewire.employee.index', [
             'results' => $results

@@ -10,20 +10,19 @@ use App\Models\User;
 
 class EmployeeController extends Controller
 {
-    public function get_all()
+    public function index()
     {
-    	$response = Gate::inspect('employee.view');
+    	$this->authorize('employee.view');
 
     	$breadcrumbs = [
 	        ['link'=> route('home'), 'name'=>"Dashboard"], 
 	        ['name'=> "Employees"],
 	    ];
 
-		if ( $response->allowed() ) {
-		    return view('employee.index', ['breadcrumbs' => $breadcrumbs]);
-		} else {
-		    return view('misc.not-authorized');
-		}
+	    return view('employee.index', [
+            'breadcrumbs' => $breadcrumbs,
+            'company'     => $this->getCompany()
+        ]);
     }
 
     public function create()
