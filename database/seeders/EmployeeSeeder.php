@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use Carbon\Carbon;
 
 use App\Models\Company;
 use App\Models\CompanyRole;
@@ -50,6 +51,7 @@ class EmployeeSeeder extends Seeder
         			'company_id' => $company->id,
         			'user_id' => $user[0]->id,
         			'role_id' => $role->id,
+                    'date_hired' => Carbon::now()->format('Y-m-d'), 
                     'updated_by' => 1,
                     'created_by' => 1
         		]);

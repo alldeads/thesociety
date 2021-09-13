@@ -3,6 +3,8 @@
 namespace App\Http\Livewire\Employee;
 
 use App\Http\Livewire\CustomComponent;
+
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 use Livewire\WithPagination;
 
@@ -17,10 +19,18 @@ class Index extends CustomComponent
     public $company_id;
     public $search = '';
     public $limit;
+    public $date_from;
+    public $date_to;
 
     public $listeners = [
         'refreshEmployeeParent' => '$refresh'
     ];
+
+    public function mount()
+    {
+        $this->date_from = Carbon::parse('2000-01-01')->format('Y-m-d');
+        $this->date_to   = Carbon::now()->format('Y-m-d');
+    }
 
     public function updatingSearch()
     {
@@ -35,6 +45,8 @@ class Index extends CustomComponent
     public function render()
     {
         $search = $this->search;
+        $from   = $this->date_from;
+        $to     = $this->date_to;
         $limit  = $this->limit ?? 10;
 
         $results = Employee::where('company_id', $this->company_id)
@@ -51,6 +63,14 @@ class Index extends CustomComponent
                     return $query->where('role_name', 'like', "%" . $search ."%");
                 });
             });
+
+        if ( !empty($from) ) {
+            $results = $results->whereDate('date_hired', '>=', $from );
+        }
+
+        if ( !empty($to) ) {
+            $results = $results->whereDate('date_hired', '<=', $to );
+        }
         
         $results = $results->orderBy('id', 'desc')
                     ->with(['user.profile', 'role'])

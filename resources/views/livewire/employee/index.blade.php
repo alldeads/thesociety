@@ -56,11 +56,24 @@
 	  			</div>
 	  			<hr>
 	  			<div class="row">
-	  				<div class="col-md-10 col-sm-12 mt-1">
+	  				<div class="col-md-6 col-sm-12 mt-1">
 	  					<div class="form-group">
-		                  	<input type="text" class="form-control" placeholder="Search employee name, email, role, and status" wire:model="search"/>
+		                  	<input type="text" class="form-control" placeholder="Search employee name, role, or status" wire:model="search"/>
                 		</div>
 	  				</div>
+
+	  				<div class="col-md-2 col-sm-12 mt-1">
+	  					<div class="form-group">
+		                  	<input type="text" class="form-control basicpkr" placeholder="Date From" wire:model="date_from" />
+                		</div>
+	  				</div>
+
+	  				<div class="col-md-2 col-sm-12 mt-1">
+	  					<div class="form-group">
+		                  	<input type="text" class="form-control basicpkr" placeholder="Date To" wire:model="date_to" />
+                		</div>
+	  				</div>
+
 	  				<div class="col-md-2 col-sm-12 mt-1">
 	  					<div class="form-group">
 		                  	<select class="form-control" wire:model="limit">

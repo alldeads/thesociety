@@ -10,7 +10,7 @@
         <span class="font-weight-bold">{{ ucwords($user->user->profile->name_with_mi) }}</span>
 	</td>
 	<td>{{ ucwords($user->role->role_name) }}</td>
-	<td>{{ $user->created_at->format('F j, Y') }}</td>
+	<td>{{ \Carbon\Carbon::parse($user->date_hired)->format('F j, Y') }}</td>
 	<td>
 		<span class="badge badge-pill  badge-light-{{ $user->user->status == "active" ? "success" : "danger" }}">
 			{{ ucwords($user->user->status) }}
