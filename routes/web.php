@@ -29,6 +29,13 @@ Route::middleware('auth')->group(function() {
 			Route::get('view/{branch}', 'BranchController@view')->name('branches-read');
 			Route::get('export', 'BranchController@export')->name('branches-export');
 		});
+
+		Route::prefix('payment-types')->group( function() {
+			Route::get('view', 'PaymentTypeController@index')->name('payment_types-view');
+			Route::get('create', 'PaymentTypeController@create')->name('payment_types-create');
+			Route::get('edit/{branch}', 'PaymentTypeController@edit')->name('payment_types-edit');
+			Route::get('view/{branch}', 'PaymentTypeController@view')->name('payment_types-read');
+		});
 	});
 
 	Route::prefix('employees')->group( function() {

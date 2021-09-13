@@ -262,8 +262,18 @@ class MenuSeeder extends Seeder
             'url'        => 'company/branches/view',
             'icon'       => 'map',
             'base'       => 'branch',
-            'is_export'  => false,
+            'is_export'  => true,
             'permission' => 'branch.view'
+        ]);
+
+        $header->menus()->create([
+            'name'       => 'Payment Types',
+            'slug'       => 'payment_types',
+            'url'        => 'company/payment-types/view',
+            'icon'       => 'credit-card',
+            'base'       => 'payment_type',
+            'is_export'  => false,
+            'permission' => 'payment_type.view'
         ]);
     }
 }
