@@ -13,6 +13,7 @@ use App\Models\Product;
 use App\Models\SalesOrder;
 use App\Models\SalesOrderItem;
 use App\Models\PaymentType;
+use App\Models\Payment;
 
 class Create extends CustomComponent
 {
@@ -150,6 +151,9 @@ class Create extends CustomComponent
             'items'            => ['required', 'array'],
             'items.*.product'  => ['required', 'numeric'],
             'items.*.qty'      => ['required', 'numeric'],
+            'payment'          => ['required', 'numeric'],
+            'transaction'      => ['nullable'],
+            'amount'           => ['required', 'numeric'],
         ])->validate();
 
         $so = SalesOrder::where([
@@ -176,19 +180,37 @@ class Create extends CustomComponent
                 $sub_total += str_replace(',', '',$item['price']);
             }
 
+            $total = $total - $discount;
+
             $sales = SalesOrder::create([
                 'company_id'    => $this->company->id,
                 'customer_id'   => $this->inputs['customer'] == 0 ? NULL : $this->inputs['customer'],
                 'reference'     => $this->inputs['reference'],
                 'sub_total'     => $sub_total,
                 'discount'      => $discount,
-                'total'         => $total - $discount,
+                'total'         => $total,
                 'quantity'      => $quantity,
                 'created_by'    => auth()->id(),
                 'updated_by'    => auth()->id(),
                 'type'          => $this->inputs['customer'] == 0 ? 'guest' : 'customer',
                 'status'        => $this->inputs['status'],
-                'notes'         => $this->inputs['notes']
+                'notes'         => $this->inputs['notes'] ?? null
+            ]);
+
+            $balance = $total - $this->inputs['amount'];
+
+            Payment::create([
+                'transaction'   => $this->inputs['transaction'] ?? 'PY-' . rand(111111, 999999),
+                'payment_type_id' => $this->inputs['payment'],
+                'company_id'    => $this->company->id,
+                'created_by'    => auth()->id(),
+                'updated_by'    => auth()->id(),
+                'sub_total'     => $sub_total,
+                'discount'      => $discount,
+                'total'         => $total,
+                'amount'        => $this->inputs['amount'],
+                'balance'       => $balance <= 0 ? 0 : $balance,
+                'order_id'      => $sales->id
             ]);
 
             foreach ($this->inputs['items'] as $item) {
