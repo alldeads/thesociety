@@ -24,6 +24,13 @@
                         </a>
                     @endcan
 
+                    @can('payment_type.read')
+                        <a class="dropdown-item" wire:click="read" href="javascript:void(0);">
+                            <i class="fas fa-eye mr-1"></i>
+                            <span>View</span>
+                        </a>
+                    @endcan
+
                     @can('payment_type.delete')
                         <a class="dropdown-item" wire:click="delete" href="javascript:void(0);">
                             <i class="fas fa-trash mr-1"></i>

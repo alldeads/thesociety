@@ -12,6 +12,11 @@ class Item extends Component
     {
         $this->emit('deletePaymentType', ['payment' => $this->item]);
     }
+
+    public function edit()
+    {
+        return redirect()->route('payment_types-edit', ['payment' => $this->item->id]);
+    }
     
     public function render()
     {

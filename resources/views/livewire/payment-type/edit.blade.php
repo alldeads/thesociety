@@ -2,7 +2,7 @@
     <div class="col-12">
         <div class="card">
             <div class="card-header">
-                <h4 class="card-title">{{ __('New Payment Type') }}</h4>
+                <h4 class="card-title">{{ __('Edit Payment Type') }}</h4>
             </div>
 
             <div class="card-body">
@@ -55,9 +55,31 @@
                                 @enderror
                             </div>
                         </div>
+
+                        <div class="col-md-6 col-12">
+                            <div class="form-group">
+                                <label class="form-label" for="status">
+                                    {{ __('Status') }} <span class="asterisk">*</span>
+                                </label>
+
+                                <select class="form-control @error('status') is-invalid @enderror" id="status" wire:model="inputs.status">
+                                    <option> {{ __('Select a status') }}</option>
+                                    <option value="active"> {{ __('Active') }}</option>
+                                    <option value="inactive"> {{ __('Inactive') }}</option>
+                                </select>
+
+                                @error('status')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
           
                         <div class="col-12">
-                            <button wire:click.prevent="submit" class="btn btn-primary mr-1">{{ __('Create') }}</button>
+                            <button wire:click.prevent="submit" class="btn btn-primary mr-1">{{ __('Update') }}</button>
+                            <button wire:click.prevent="resetBtn" class="btn btn-outline-secondary mr-1">{{ __('Reset') }}</button>
+                            <button wire:click.prevent="read" class="btn btn-secondary">{{ __('View') }}</button>
                         </div>
                     </div>
                 </form>
