@@ -19,6 +19,8 @@ class CreatePaymentTypesTable extends Migration
             $table->string('name');
             $table->enum('type', ['card', 'check', 'other']);
             $table->enum('status', ['active', 'inactive']);
+            $table->bigInteger('created_by')->unsigned();
+            $table->bigInteger('updated_by')->unsigned();
             $table->softDeletes();
             $table->timestamps();
         });

@@ -7,6 +7,11 @@ use Livewire\Component;
 class Item extends Component
 {
     public $item;
+
+    public function delete()
+    {
+        $this->emit('deletePaymentType', ['payment' => $this->item]);
+    }
     
     public function render()
     {

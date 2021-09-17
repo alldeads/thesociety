@@ -62,6 +62,6 @@
         </div>
     </div>
 
-    {{-- @livewire('payment-type.delete', ['company_id' => $company_id]) --}}
+    @livewire('payment-type.delete')
 </div>
 

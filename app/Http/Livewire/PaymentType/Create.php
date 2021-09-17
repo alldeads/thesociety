@@ -27,7 +27,9 @@ class Create extends CustomComponent
             'company_id'  => $this->company_id,
             'name'        => $this->inputs['name'],
             'type'        => $this->inputs['type'],
-            'status'      => 'active'
+            'status'      => 'active',
+            'created_by'  => auth()->id(),
+            'updated_by'  => auth()->id()
         ]);
 
         $this->message('Payment Type has been created', 'success');

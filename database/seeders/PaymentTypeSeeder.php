@@ -22,13 +22,17 @@ class PaymentTypeSeeder extends Seeder
             PaymentType::create([
                 'company_id' => $company->id,
                 'name' => 'cash',
-                'type' => 'other'
+                'type' => 'other',
+                'created_by' => 1,
+                'updated_by' => 1
             ]);
 
             PaymentType::create([
                 'company_id' => $company->id,
                 'name' => 'gcash',
-                'type' => 'other'
+                'type' => 'other',
+                'created_by' => 1,
+                'updated_by' => 1
             ]);
         }
     }

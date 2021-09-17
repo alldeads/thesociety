@@ -20,5 +20,7 @@ class PaymentType extends Model
         'name',
         'type',      
         'status',
+        'created_by',
+        'updated_by'
     ];
 }
