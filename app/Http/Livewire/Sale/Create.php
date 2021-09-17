@@ -12,12 +12,14 @@ use App\Models\Customer;
 use App\Models\Product;
 use App\Models\SalesOrder;
 use App\Models\SalesOrderItem;
+use App\Models\PaymentType;
 
 class Create extends CustomComponent
 {
     public $company;
     public $customers;
     public $products;
+    public $payments;
 
     public $inputs = [
         'customer',
@@ -28,6 +30,7 @@ class Create extends CustomComponent
     public function mount()
     {
         $this->customers = Customer::where('company_id', $this->company->id)->get();
+        $this->payments  = PaymentType::where('company_id', $this->company->id)->active()->get();
         $this->products  = Product::where([
             'company_id' => $this->company->id,
             'type' => 'product'
@@ -99,6 +102,7 @@ class Create extends CustomComponent
     {
         $total = 0;
         $sub_total = 0;
+        $amount   = (double) $this->inputs['amount'] ?? 0;
         $discount = (double) $this->inputs['discount'] ?? 0;
 
         foreach ($this->inputs['items'] as $item) {
@@ -109,6 +113,10 @@ class Create extends CustomComponent
         $this->inputs['discount']  = $discount;
         $this->inputs['subtotal']  = number_format($sub_total, 2, '.', ',');
         $this->inputs['total']     = number_format($sub_total - $discount, 2, '.', ',');
+
+        if ( $amount > 0 ) {
+            $this->inputs['change']  = $amount - ($sub_total - $discount);
+        }
     }
 
     public function resetBtn()
@@ -125,6 +133,7 @@ class Create extends CustomComponent
         $this->inputs['reference'] = 'SL-' . rand(111111, 999999);
         $this->inputs['discount']  = 0;
         $this->inputs['subtotal']  = 0;
+        $this->inputs['amount']    = 0;
         $this->inputs['total']     = 0;
         $this->inputs['customer']  = 0;
         $this->inputs['status']    = 'paid';

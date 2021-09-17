@@ -171,6 +171,72 @@
                             </table>
                         </div>
 
+                        <div class="col-12 mb-2" style="border-top: 1px solid;"></div>
+
+                        <div class="col-md-3 col-12">
+                            <div class="form-group">
+                                <label class="form-label" for="payment">
+                                    {{ __('Payment Type') }}
+                                </label>
+
+                                <select class="form-control @error('payment') is-invalid @enderror" id="payment" wire:model="inputs.payment">
+                                    <option> Select a payment method</option>
+
+                                    @foreach($payments as $payment)
+                                        <option value="{{ $payment->id }}"> {{ ucwords($payment->name) }}</option>
+                                    @endforeach
+                                </select>
+
+                                @error('payment')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="col-md-3 col-12">
+                            <div class="form-group">
+                                <label class="form-label" for="transaction">
+                                    {{ __('Transaction #') }}
+                                </label>
+
+                                <input type="text" class="form-control @error('transaction') is-invalid @enderror" wire:model="inputs.transaction"/>
+
+                                @error('transaction')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="col-md-3 col-12">
+                            <div class="form-group">
+                                <label class="form-label" for="amount">
+                                    {{ __('Amount') }}
+                                </label>
+
+                                <input type="number" class="form-control @error('amount') is-invalid @enderror" wire:model="inputs.amount"/>
+
+                                @error('amount')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="col-md-3 col-12">
+                            <div class="form-group">
+                                <label class="form-label" for="change">
+                                    {{ __('Change') }}
+                                </label>
+
+                                <input type="text" class="form-control" wire:model="inputs.change" readonly/>
+                            </div>
+                        </div>
+
                         <div class="col-12 mt-2">
                             <button wire:click.prevent="save" class="btn btn-primary mr-1">{{ __('Create') }}</button>
                             <button wire:click.prevent="resetBtn" class="btn btn-outline-secondary">{{ __('Reset') }}</button>
