@@ -20,4 +20,20 @@ class PaymentTypeController extends Controller
             'company'     => $this->getCompany()
         ]);
     }
+
+    public function create()
+    {
+        $this->authorize('payment_type.create');
+
+        $breadcrumbs = [
+            ['link'=> route('home'), 'name'=>"Dashboard"], 
+            ['link'=> route('payment_types-view'), 'name'=>"Payment Types"], 
+            ['name'=>"Create Payment Type"],
+        ];
+
+        return view('payment-type.create', [
+            'breadcrumbs' => $breadcrumbs,
+            'company'     => $this->getCompany()
+        ]);
+    }
 }

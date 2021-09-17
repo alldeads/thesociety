@@ -29,6 +29,11 @@ class Index extends Component
         $this->resetPage();
     }
 
+    public function create()
+    {
+        return redirect()->route('payment_types-create');
+    }
+
     public function render()
     {
         $search = $this->search ?? '';
