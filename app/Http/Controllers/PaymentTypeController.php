@@ -59,4 +59,25 @@ class PaymentTypeController extends Controller
 
         return view('errors.403');
     }
+
+    public function read(PaymentType $payment)
+    {
+        $this->authorize('payment_type.read');
+
+        $breadcrumbs = [
+            ['link'=> route('home'), 'name'=>"Dashboard"], 
+            ['link'=> route('payment_types-view'), 'name'=>"Payment Types"],
+            ['name'=> ucwords($payment->name)],
+        ];
+
+        if ($payment->company_id == $this->getCompany()->id) {
+            return view('payment-type.read', [
+                'breadcrumbs' => $breadcrumbs,
+                'company'     => $this->getCompany(),
+                'payment'     => $payment
+            ]);
+        }
+
+        return view('errors.403');
+    }
 }

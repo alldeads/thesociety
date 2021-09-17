@@ -34,7 +34,7 @@ Route::middleware('auth')->group(function() {
 			Route::get('view', 'PaymentTypeController@index')->name('payment_types-view');
 			Route::get('create', 'PaymentTypeController@create')->name('payment_types-create');
 			Route::get('edit/{payment}', 'PaymentTypeController@edit')->name('payment_types-edit');
-			Route::get('view/{payment}', 'PaymentTypeController@view')->name('payment_types-read');
+			Route::get('view/{payment}', 'PaymentTypeController@read')->name('payment_types-read');
 		});
 	});
 

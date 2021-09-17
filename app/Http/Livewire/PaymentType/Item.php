@@ -17,6 +17,11 @@ class Item extends Component
     {
         return redirect()->route('payment_types-edit', ['payment' => $this->item->id]);
     }
+
+    public function read()
+    {
+        return redirect()->route('payment_types-read', ['payment' => $this->item->id]);
+    }
     
     public function render()
     {
