@@ -31,15 +31,15 @@ class MenuSeeder extends Seeder
             'permission' => 'dashboard.view'
         ]);
 
-        $header->menus()->create([
-            'name'       => 'Point Sytem (POS)',
-            'slug'       => 'pos',
-            'url'        => 'pos',
-            'icon'       => 'airplay',
-            'base'       => 'pos',
-            'is_export'  => false,
-            'permission' => 'pos.view'
-        ]);
+        // $header->menus()->create([
+        //     'name'       => 'Point Sytem (POS)',
+        //     'slug'       => 'pos',
+        //     'url'        => 'pos',
+        //     'icon'       => 'airplay',
+        //     'base'       => 'pos',
+        //     'is_export'  => false,
+        //     'permission' => 'pos.view'
+        // ]);
 
         $header->menus()->create([
             'name'       => 'Covid-19 Tracing',
@@ -50,16 +50,6 @@ class MenuSeeder extends Seeder
             'is_export'  => false,
             'permission' => 'covid.view'
         ]);
-
-        // $header->menus()->create([
-        //     'name'       => 'Invoices',
-        //     'slug'       => 'invoices',
-        //     'url'        => 'home',
-        //     'icon'       => 'file-text',
-        //     'base'       => 'dashboard',
-        //     'is_export'  => false,
-        //     'permission' => 'dashboard.view'
-        // ]);
 
         $header = Header::create([
         	'name'  => 'Accounting & Finance',
@@ -116,6 +106,16 @@ class MenuSeeder extends Seeder
             'permission' => 'tax.view'
         ]);
 
+        $header->menus()->create([
+            'name'       => 'Expenses',
+            'slug'       => 'expenses',
+            'url'        => 'expenses/view',
+            'icon'       => 'hash',
+            'base'       => 'expense',
+            'is_export'  => true,
+            'permission' => 'expense.view'
+        ]);
+
         $header = Header::create([
             'name'  => 'Sales & Orders',
             'order' => 3
@@ -129,6 +129,26 @@ class MenuSeeder extends Seeder
             'is_export'  => true,
             'icon'       => 'shopping-bag',
             'permission' => 'sale.view'
+        ]);
+
+        $header->menus()->create([
+            'name'       => 'Payments',
+            'slug'       => 'payments',
+            'url'        => 'payments/view',
+            'icon'       => 'dollar-sign',
+            'base'       => 'payment',
+            'is_export'  => false,
+            'permission' => 'access.view'
+        ]);
+
+        $header->menus()->create([
+            'name'       => 'Invoices',
+            'slug'       => 'invoices',
+            'url'        => 'invoices/view',
+            'icon'       => 'file-text',
+            'base'       => 'invoice',
+            'is_export'  => false,
+            'permission' => 'invoice.view'
         ]);
 
         $header = Header::create([
@@ -232,6 +252,16 @@ class MenuSeeder extends Seeder
         ]);
 
         $header->menus()->create([
+            'name'       => 'Access Rights',
+            'slug'       => 'access',
+            'url'        => 'access/view',
+            'icon'       => 'lock',
+            'base'       => 'access',
+            'is_export'  => false,
+            'permission' => 'access.view'
+        ]);
+
+        $header->menus()->create([
             'name'       => 'Roles',
             'slug'       => 'roles',
             'url'        => 'roles/view',
@@ -242,7 +272,7 @@ class MenuSeeder extends Seeder
         ]);
 
         $header = Header::create([
-            'name'  => 'Settings',
+            'name'  => 'System Settings',
             'order' => 5
         ]);
 
