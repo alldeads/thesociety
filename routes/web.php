@@ -1,8 +1,8 @@
 <?php
 
 Auth::routes(['register' => false]);
-	
-Route::get('/', 'WebController@index')->name('index');
+
+Route::view('/', 'web.index')->name('index');
 
 Route::get('qr', function () {
   
