@@ -4,20 +4,11 @@ namespace App\Http\Livewire\ChartOfAccount;
 
 use App\Http\Livewire\CustomComponent;
 use Illuminate\Database\Eloquent\Builder;
-use Livewire\WithPagination;
 
 use App\Models\CompanyChartAccount;
 
 class Index extends CustomComponent
 {
-	use WithPagination;
-
-    protected $paginationTheme = 'bootstrap';
-
-    public $company_id;
-    public $search = '';
-    public $limit;
-
     public $listeners = [
         'refreshChartParent' => '$refresh'
     ];
@@ -29,8 +20,10 @@ class Index extends CustomComponent
 
     public function render()
     {
-    	$search = $this->search;
-        $limit  = $this->limit ?? 10;
+    	$search    = $this->search ?? '';
+        $limit     = $this->limit ?? 10;
+        $date_from = $this->date_from ?? null;
+        $date_to   = $this->date_to ?? now();
 
     	$results = CompanyChartAccount::where('company_id', $this->company_id)
 					->where(function (Builder $query) use ($search) {
@@ -39,12 +32,18 @@ class Index extends CustomComponent
                                 ->orWhereHas('type', function($query) use ($search) {
                                     return $query->where('name', 'like', "%" . $search ."%");
                                 });
-					})->orderBy('code', 'asc')
-                    ->with(['type'])
-                    ->paginate($limit);
-                        
+					})->orderBy('code', 'asc');
+
+        if ( !empty($from) ) {
+            $results = $results->whereDate('created_at', '>=', $from );
+        }
+
+        if ( !empty($to) ) {
+            $results = $results->whereDate('created_at', '<=', $to );
+        }
+
         return view('livewire.chart-of-account.index', [
-            'results' => $results
+            'results' => $results->with('type')->paginate($limit)
         ]);
     }
 }
