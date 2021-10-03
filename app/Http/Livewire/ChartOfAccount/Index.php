@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\ChartOfAccount;
 
+use Carbon\Carbon;
 use App\Http\Livewire\CustomComponent;
 use Illuminate\Database\Eloquent\Builder;
 
@@ -20,17 +21,19 @@ class Index extends CustomComponent
 
     public function render()
     {
-    	$search    = $this->search ?? '';
-        $limit     = $this->limit ?? 10;
-        $date_from = $this->date_from ?? null;
-        $date_to   = $this->date_to ?? now();
+        $this->placeholder = "Search account title, account type, and code";
+        $this->permission  = "chart";
+        $this->export      = "chart-of-accounts-export";
+
+    	$search = $this->search ?? '';
+        $limit  = $this->limit ?? 10;
 
     	$results = CompanyChartAccount::where('company_id', $this->company_id)
 					->where(function (Builder $query) use ($search) {
-                        return $query->where('chart_name', 'like', "%" . $search ."%")
+                        return $query->where('chart_name', 'like', "%" . $this->search ."%")
 								->orWhere('code', $search)
                                 ->orWhereHas('type', function($query) use ($search) {
-                                    return $query->where('name', 'like', "%" . $search ."%");
+                                    return $query->where('name', 'like', "%" . $this->search ."%");
                                 });
 					})->orderBy('code', 'asc');
 
