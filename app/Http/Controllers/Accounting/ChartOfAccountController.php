@@ -87,30 +87,24 @@ class ChartOfAccountController extends Controller
      */
     public function edit($id)
     {
-        //
-    }
+        $this->authorize('chart.update');
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
+        $account = CompanyChartAccount::findOrFail($id);
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+        $breadcrumbs = [
+            ['link' => route('home'), 'name'=>"Dashboard"], 
+            ['link' => route('chart-accounts.index'), 'name' => "Chart of Accounts"],
+            ['name' => ucwords($account->chart_name) . " ($account->code)"],
+        ];
+
+        if ($this->getCompany()->id == $account->company_id) {
+            return view('chart-account.edit', [
+                'breadcrumbs' => $breadcrumbs,
+                'account'     => $account
+            ]);
+        }
+
+        return view('errors.403');
     }
 
     public function export(Request $request)

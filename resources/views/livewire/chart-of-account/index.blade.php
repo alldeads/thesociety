@@ -32,6 +32,5 @@
 		</div>
   	</div>
 
-	@livewire('chart-of-account.edit')
 	@livewire('chart-of-account.delete')
 </div>

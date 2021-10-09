@@ -10,31 +10,15 @@ use App\Models\ChartType;
 
 class Edit extends CustomComponent
 {
-	public $listeners = [
-        'editChartAccount' => 'edit'
-    ];
-
     public $account;
-    public $el = "modal-chart-edit";
     public $inputs = [];
     public $types;
 
     public function mount()
     {
     	$this->types = ChartType::getChartTypes();
-    }
 
-    public function edit($account)
-    {
-    	$this->account = $account;
-
-    	$this->inputs = [
-    		'account_title' => $this->account['account']['chart_name'],
-    		'account_code'  => $this->account['account']['code'],
-    		'account_type'  => $this->account['account']['chart_type_id'],
-    	];
-
-    	$this->emit('showModal', ['el' => $this->el]);
+        $this->initialize();
     }
 
     public function submit()
@@ -43,17 +27,9 @@ class Edit extends CustomComponent
             'account_title' => ['required', 'string', 'max:255'],
             'account_code'  => ['required', 'string', 'max:255'],
             'account_type'  => ['required', 'numeric', 'exists:chart_types,id'],
-        ]);
+        ])->validate();
 
-        if ($validator->fails()) {
-        	$error = $validator->errors();
-            foreach ($error->all() as $message) {
-			    $this->message($message, 'error');
-			    return;
-			}
-        }
-
-        $cca = CompanyChartAccount::find($this->account['account']['id']);
+        $cca = CompanyChartAccount::find($this->account->id);
 
         $cca->fill([
 			'chart_name'    => ucwords($this->inputs['account_title']),
@@ -64,13 +40,27 @@ class Edit extends CustomComponent
 
 		$cca->save();
 
+        cache()->forget('app-company-charts');
+
 		$this->emit('refreshChartItem');
 
         $this->message('Account has been updated', 'success');
 
-        $this->inputs = [];
+        $this->account = $cca;
+    }
 
-        $this->emit('dissmissModal', ['el' => $this->el]);
+    public function initialize()
+    {
+        $this->inputs = [
+            'account_title' => $this->account->chart_name,
+            'account_code'  => $this->account->code,
+            'account_type'  => $this->account->chart_type_id,
+        ];
+    }
+
+    public function read()
+    {
+        return redirect()->route('chart-accounts.show', [$this->account->id]);
     }
 
     public function render()

@@ -19,7 +19,7 @@ class Item extends CustomComponent
 
 	public function edit()
 	{
-		$this->emit('editChartAccount', ['account' => $this->account]);
+		return redirect()->route('chart-accounts.edit', [$this->account->id]);
 	}
 
 	public function read()

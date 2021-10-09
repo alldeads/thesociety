@@ -1,39 +1,86 @@
-<div>
-    <div class="modal modal-slide-in fade" id="modal-chart-edit" wire:ignore>
-	    <div class="modal-dialog sidebar-sm">
-	      	<form class="add-new-record modal-content pt-0">
-	        	<button type="button" class="close" data-dismiss="modal" aria-label="Close">×</button>
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title">{{ __('Edit Account') }}</h4>
+            </div>
 
-	        	<div class="modal-header mb-1">
-	          		<h5 class="modal-title">{{ __('Edit Account') }}</h5>
-	        	</div>
+            <div class="card-body">
 
-	        	<div class="modal-body flex-grow-1">
-	          		<div class="form-group">	
-	            		<label class="form-label" for="edit-account-title">{{ __('Account Title') }}</label>
-	            		<input type="text" class="form-control" id="edit-account-title" required placeholder="Enter Account Title" wire:model="inputs.account_title"/>
-	          		</div>
+                <div class="alert alert-danger" style="display: {{ count($errors) > 0 ? 'block' : 'none' }}" role="alert">
+                    <div class="alert-body">
+                        <i data-feather="info"></i>
+                        <ul style="list-style: none;">
+                            @foreach($errors->all() as $error)
+                                <li>{{$error}}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                </div>
 
-	          		<div class="form-group">	
-	            		<label class="form-label" for="edit-account-code">{{ __('Account Code') }}</label>
-	            		<input type="text" class="form-control" id="edit-account-code" required placeholder="Enter Account Code" wire:model="inputs.account_code"/>
-	          		</div>
+                <form class="form">
+                    <div class="row">
+                        <div class="col-md-4 col-12">
+                            <div class="form-group">
+                                <label class="form-label" for="account_title">
+                                    {{ __('Account Title') }} <span class="asterisk">*</span>
+                                </label>
 
-	          		<div class="form-group">	
-	            		<label class="form-label" for="edit-account-type">{{ __('Account Type') }}</label>
+                                <input type="text" class="form-control @error('account_type') is-invalid @enderror" id="account_title" required wire:model="inputs.account_title"/>
 
-	            		<select class="form-control" id="edit-account-type" wire:model="inputs.account_type">
-	            			<option> Select Account Type</option>
-	            			@foreach( $types as $type)
-	            				<option value="{{ $type->id }}">{{ ucwords($type->name) }}</option>
-	            			@endforeach
-	            		</select>
-	          		</div>
+                                @error('account_title')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
 
-					<button wire:click.prevent="submit" class="btn btn-primary data-submit mr-1">{{ __('Update') }}</button>
-					<button type="reset" class="btn btn-outline-secondary" data-dismiss="modal">{{ __('Cancel') }}</button>
-	        	</div>
-	      	</form>
-	    </div>
-	</div>
+                        <div class="col-md-4 col-12">
+                            <div class="form-group">
+                                <label class="form-label" for="account_code">
+                                    {{ __('Account Code') }} <span class="asterisk">*</span>
+                                </label>
+
+                                <input type="text" class="form-control @error('account_code') is-invalid @enderror" id="account_code" required wire:model="inputs.account_code"/>
+
+                                @error('account_code')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="col-md-4 col-12">
+                            <div class="form-group">
+                                <label class="form-label" for="account-type">
+                                    {{ __('Account Type') }} <span class="asterisk">*</span>
+                                </label>
+
+                                <select class="form-control @error('account_type') is-invalid @enderror" id="account-type" wire:model="inputs.account_type">
+			            			<option> {{ __('Select Account Type') }}</option>
+			            			@foreach( $types as $type)
+			            				<option value="{{ $type->id }}">{{ ucwords($type->name) }}</option>
+			            			@endforeach
+			            		</select>
+
+                                @error('account_type')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+          
+                        <div class="col-12">
+                            <button wire:click.prevent="submit" class="btn btn-primary mr-1">{{ __('Update') }}</button>
+                            <button wire:click.prevent="read" class="btn btn-secondary mr-1">{{ __('View') }}</button>
+                            <button wire:click.prevent="initialize" class="btn btn-outline-secondary">{{ __('Reset') }}</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 </div>

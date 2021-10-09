@@ -26,15 +26,7 @@ class Create extends CustomComponent
             'account_title' => ['required', 'string', 'max:255'],
             'account_code'  => ['required', 'string', 'max:255'],
             'account_type'  => ['required', 'numeric', 'exists:chart_types,id'],
-        ]);
-
-        if ($validator->fails()) {
-        	$error = $validator->errors();
-            foreach ($error->all() as $message) {
-			    $this->message($message, 'error');
-			    return;
-			}
-        }
+        ])->validate();
 
         CompanyChartAccount::create([
 			'chart_name'    => ucwords($this->inputs['account_title']),
@@ -50,9 +42,7 @@ class Create extends CustomComponent
 
         $this->message('New Account has been created', 'success');
 
-        $this->inputs = [];
-
-        $this->emit('dissmissModal', ['el' => 'modal-chart-create']);
+        $this->initialize();
 	}
 
 	public function initialize()

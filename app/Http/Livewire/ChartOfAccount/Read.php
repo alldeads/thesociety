@@ -28,6 +28,11 @@ class Read extends CustomComponent
         return redirect()->route('chart-accounts.create');
     }
 
+    public function edit()
+    {
+        return redirect()->route('chart-accounts.edit', [$this->account->id]);
+    }
+
     public function render()
     {
         return view('livewire.chart-of-account.read');
