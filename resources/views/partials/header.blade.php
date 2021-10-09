@@ -89,6 +89,16 @@
 												Contact Us
 											</a>
 										</li>
+										<li class="dropdown">
+											<a class="dropdown-item dropdown-toggle" href="#">
+												Account
+											</a>
+											<ul class="dropdown-menu">
+												<li>
+													<a class="nav-link" href="{{ route('login') }}">Login</a>
+												</li>
+											</ul>
+										</li>
 									</ul>
 								</nav>
 							</div>
