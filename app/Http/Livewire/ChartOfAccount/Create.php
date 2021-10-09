@@ -16,7 +16,6 @@ class Create extends CustomComponent
 		'account_type'
 	];
 
-	public $company_id;
 	public $types;
 
 	public function mount()

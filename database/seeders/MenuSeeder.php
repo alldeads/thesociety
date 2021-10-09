@@ -58,8 +58,8 @@ class MenuSeeder extends Seeder
 
         $header->menus()->create([
         	'name'       => 'Chart of Accounts',
-        	'slug'       => 'chart-of-accounts',
-        	'url'        => 'accounting/chart-of-accounts',
+        	'slug'       => 'chart-accounts',
+        	'url'        => 'accounting/chart-accounts',
         	'icon'       => 'columns',
             'base'       => 'chart',
             'is_export'  => true,

@@ -3,5 +3,5 @@
 @section('title', 'Chart of Accounts')
 
 @section('content')
-	@livewire('chart-of-account.index', ['company_id' => $company->id])
+	@livewire('chart-of-account.create', ['company_id' => $company->id])
 @endsection

@@ -17,11 +17,11 @@
 	             <div class="dropdown-menu">
 	             	@foreach($file_types as $x => $type)
 	             		<a class="dropdown-item" href="{{ route($export, [
-	             			'type' => $x, 
-	             			'q'    => $search,
-	             			'from' => $from,
-	             			'to'   => $to
-	             		]) }}" target="_blank">
+		             			'type' => $x, 
+		             			'q'    => $search,
+		             			'from' => $from,
+		             			'to'   => $to
+		             		]) }}" target="_blank">
 		      				<span>
 		      					{{ __($type) }}
 		      				</span>

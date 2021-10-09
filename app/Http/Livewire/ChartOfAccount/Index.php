@@ -14,17 +14,25 @@ class Index extends CustomComponent
         'refreshChartParent' => '$refresh'
     ];
 
+    public function mount()
+    {
+        $this->placeholder = "Search account title, account type, and code";
+        $this->permission  = "chart";
+        $this->export      = "chart-accounts-export";
+    }
+
     public function updatingSearch()
     {
         $this->resetPage();
     }
 
+    public function create()
+    {
+        return redirect()->route('chart-accounts.create');
+    }
+
     public function render()
     {
-        $this->placeholder = "Search account title, account type, and code";
-        $this->permission  = "chart";
-        $this->export      = "chart-of-accounts-export";
-
     	$search = $this->search ?? '';
         $limit  = $this->limit ?? 10;
 

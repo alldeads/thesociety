@@ -18,6 +18,35 @@ Route::middleware('auth')->group(function() {
 
 	Route::get('home', 'DashboardController@index')->name('home');
 
+	Route::prefix('accounting')->group( function() {
+
+		Route::get('chart-accounts/export', 'Accounting\ChartOfAccountController@export')->name('chart-accounts-export');
+		Route::resource('chart-accounts', Accounting\ChartOfAccountController::class);
+		
+
+		Route::prefix('cash-flow')->group(function () {
+			Route::get('/', 'CashFlowController@index')->name('cash-flow');
+			Route::get('create', 'CashFlowController@create')->name('cash-flow-create');
+			Route::get('edit/{cashflow}', 'CashFlowController@edit')->name('cash-flow-edit');
+			Route::get('view/{cashflow}', 'CashFlowController@view')->name('cash-flow-read');
+			Route::get('export', 'CashFlowController@export')->name('cash-flow-export');
+		});
+
+		Route::prefix('journal-entry')->group(function () {
+			Route::get('/', 'JournalEntryController@index')->name('journal-entry');
+			Route::get('create', 'JournalEntryController@create')->name('journal-entry-create');
+			Route::get('edit/{journal}', 'JournalEntryController@edit')->name('journal-entry-edit');
+			Route::get('view/{journal}', 'JournalEntryController@view')->name('journal-entry-read');
+			Route::get('export', 'JournalEntryController@export')->name('journal-entry-export');
+		});
+
+		Route::prefix('tax')->group(function () {
+			Route::get('/', 'TaxController@index')->name('tax');
+			Route::get('export', 'TaxController@export')->name('tax-export');
+		});
+	});
+
+
 	Route::prefix('company')->group( function() {
 		Route::get('details', 'CompanyController@details')->name('company-details');
 		Route::get('edit', 'CompanyController@edit')->name('company-edit');
@@ -99,35 +128,6 @@ Route::middleware('auth')->group(function() {
 			Route::get('view', 'InventoryHistoryController@index')->name('histories-view');
 			Route::get('view/{history}', 'InventoryHistoryController@view')->name('histories-read');
 			Route::get('export', 'InventoryHistoryController@export')->name('histories-export');
-		});
-	});
-
-	Route::prefix('accounting')->group( function() {
-
-		Route::prefix('chart-of-accounts')->group(function () {
-			Route::get('/', 'ChartOfAccountController@index')->name('chart-of-accounts');
-			Route::get('export', 'ChartOfAccountController@export')->name('chart-of-accounts-export');
-		});
-
-		Route::prefix('cash-flow')->group(function () {
-			Route::get('/', 'CashFlowController@index')->name('cash-flow');
-			Route::get('create', 'CashFlowController@create')->name('cash-flow-create');
-			Route::get('edit/{cashflow}', 'CashFlowController@edit')->name('cash-flow-edit');
-			Route::get('view/{cashflow}', 'CashFlowController@view')->name('cash-flow-read');
-			Route::get('export', 'CashFlowController@export')->name('cash-flow-export');
-		});
-
-		Route::prefix('journal-entry')->group(function () {
-			Route::get('/', 'JournalEntryController@index')->name('journal-entry');
-			Route::get('create', 'JournalEntryController@create')->name('journal-entry-create');
-			Route::get('edit/{journal}', 'JournalEntryController@edit')->name('journal-entry-edit');
-			Route::get('view/{journal}', 'JournalEntryController@view')->name('journal-entry-read');
-			Route::get('export', 'JournalEntryController@export')->name('journal-entry-export');
-		});
-
-		Route::prefix('tax')->group(function () {
-			Route::get('/', 'TaxController@index')->name('tax');
-			Route::get('export', 'TaxController@export')->name('tax-export');
 		});
 	});
 
