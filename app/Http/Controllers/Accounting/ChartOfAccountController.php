@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Accounting;
 
 use App\Http\Controllers\Controller;
-use App\Exports\ChartAccountExport;
 use App\Models\CompanyChartAccount;
 
 use Illuminate\Http\Request;
@@ -107,19 +106,16 @@ class ChartOfAccountController extends Controller
         return view('errors.403');
     }
 
+    /**
+     * Export module
+     *
+     * @param  Illuminate\Http\Request $request
+     * @return \Illuminate\Http\Response
+     */
     public function export(Request $request)
     {
         $this->authorize('chart.export');
 
-        $types = ['csv', 'pdf', 'xlsx', 'xls', 'ods'];
-
-        $requested_type = isset($request['type']) ? strtolower($request['type']) : 'csv';
-        $q = $request['q'];
-
-        if ( !in_array($requested_type, $types) ) {
-            $requested_type = 'csv';
-        }
-
-        return (new ChartAccountExport($q, $this->getCompany()->id))->download('chart-of-accounts-' . now()->format('Y-m-d') . '.' . $requested_type);
+        return $this->exportModule($request->all(), 'ChartAccountExport', $this->getCompany()->id);
     }
 }

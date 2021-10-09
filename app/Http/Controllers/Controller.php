@@ -8,10 +8,9 @@ use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Routing\Controller as BaseController;
 
 use App\Traits\CompanyTrait;
-
-use App\Models\Company;
+use App\Traits\ExportTrait;
 
 class Controller extends BaseController
 {
-    use AuthorizesRequests, DispatchesJobs, ValidatesRequests, CompanyTrait;
+    use AuthorizesRequests, DispatchesJobs, ValidatesRequests, CompanyTrait, ExportTrait;
 }
