@@ -35,6 +35,8 @@ class Index extends CustomComponent
     {
     	$search = $this->search ?? '';
         $limit  = $this->limit ?? 10;
+        $from   = $this->from;
+        $to     = $this->to;
 
     	$results = CompanyChartAccount::where('company_id', $this->company_id)
 					->where(function (Builder $query) use ($search) {
@@ -43,7 +45,7 @@ class Index extends CustomComponent
                                 ->orWhereHas('type', function($query) use ($search) {
                                     return $query->where('name', 'like', "%" . $this->search ."%");
                                 });
-					})->orderBy('code', 'asc');
+					});
 
         if ( !empty($from) ) {
             $results = $results->whereDate('created_at', '>=', $from );
@@ -54,7 +56,7 @@ class Index extends CustomComponent
         }
 
         return view('livewire.chart-of-account.index', [
-            'results' => $results->with('type')->paginate($limit)
+            'results' => $results->with('type')->orderBy('code', 'asc')->paginate($limit)
         ]);
     }
 }
