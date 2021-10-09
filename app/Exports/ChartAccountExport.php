@@ -7,7 +7,6 @@ use App\Exports\Export;
 
 use Illuminate\Contracts\View\View;
 use Maatwebsite\Excel\Concerns\FromView;
-use Maatwebsite\Excel\Concerns\Exportable;
 
 use Illuminate\Database\Eloquent\Builder;
 
