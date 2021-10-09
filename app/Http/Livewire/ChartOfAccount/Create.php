@@ -10,17 +10,14 @@ use App\Models\CompanyChartAccount;
 
 class Create extends CustomComponent
 {
-	public $inputs = [
-		'account_title',
-		'account_code',
-		'account_type'
-	];
+	public $inputs;
 
 	public $types;
 
 	public function mount()
 	{
 		$this->types = ChartType::getChartTypes();
+		$this->initialize();
 	}
 
 	public function submit()
@@ -56,6 +53,15 @@ class Create extends CustomComponent
         $this->inputs = [];
 
         $this->emit('dissmissModal', ['el' => 'modal-chart-create']);
+	}
+
+	public function initialize()
+	{
+		$this->inputs = [
+			'account_title' => '',
+			'account_code'  => '',
+			'account_type'  => 0
+		];
 	}
 
     public function render()

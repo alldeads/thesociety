@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Accounting;
 
 use App\Http\Controllers\Controller;
 use App\Exports\ChartAccountExport;
+use App\Models\CompanyChartAccount;
+
 use Illuminate\Http\Request;
 
 class ChartOfAccountController extends Controller
@@ -50,17 +52,6 @@ class ChartOfAccountController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
      * Display the specified resource.
      *
      * @param  int  $id
@@ -68,7 +59,24 @@ class ChartOfAccountController extends Controller
      */
     public function show($id)
     {
-        //
+        $this->authorize('chart.read');
+
+        $account = CompanyChartAccount::findOrFail($id);
+
+        $breadcrumbs = [
+            ['link' => route('home'), 'name'=>"Dashboard"], 
+            ['link' => route('chart-accounts.index'), 'name' => "Chart of Accounts"],
+            ['name' => ucwords($account->chart_name) . " ($account->code)"],
+        ];
+
+        if ($this->getCompany()->id == $account->company_id) {
+            return view('chart-account.read', [
+                'breadcrumbs' => $breadcrumbs,
+                'account'     => $account
+            ]);
+        }
+
+        return view('errors.403');
     }
 
     /**

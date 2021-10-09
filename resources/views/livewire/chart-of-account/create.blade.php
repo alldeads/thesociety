@@ -75,7 +75,7 @@
           
                         <div class="col-12">
                             <button wire:click.prevent="submit" class="btn btn-primary mr-1">{{ __('Create') }}</button>
-                            <button wire:click.prevent="resetBtn" class="btn btn-outline-secondary">{{ __('Reset') }}</button>
+                            <button wire:click.prevent="initialize" class="btn btn-outline-secondary">{{ __('Reset') }}</button>
                         </div>
                     </div>
                 </form>

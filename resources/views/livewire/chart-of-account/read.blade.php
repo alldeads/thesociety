@@ -1,57 +1,88 @@
-<div>
-    <div class="modal modal-slide-in fade" id="modal-chart-read" wire:ignore>
-	    <div class="modal-dialog sidebar-sm">
-	      	<form class="add-new-record modal-content pt-0">
-	        	<button type="button" class="close" data-dismiss="modal" aria-label="Close">×</button>
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title">{{ ucwords($account->account_title) }}</h4>
+            </div>
 
-	        	<div class="modal-header mb-1">
-	          		<h5 class="modal-title" id="exampleModalLabel">{{ __('Account Details') }}</h5>
-	        	</div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-4 col-12">
+                        <div class="form-group">
+                            <label class="form-label" for="account_title">
+                                {{ __('Account Title') }}
+                            </label>
 
-	        	<div class="modal-body flex-grow-1">
-	          		<div class="form-group">	
-	            		<label class="form-label" for="read-title">{{ __('Account Title') }}</label>
-	            		<input type="text" class="form-control" id="read-title" readonly wire:model="inputs.account_title"/>
-	          		</div>
-
-	          		<div class="form-group">	
-	            		<label class="form-label" for="read-code">{{ __('Account Code') }}</label>
-	            		<input type="text" class="form-control" id="read-code" readonly wire:model="inputs.account_code"/>
-	          		</div>
-
-	          		<div class="form-group">	
-	            		<label class="form-label" for="read-type">{{ __('Account Type') }}</label>
-
-	            		<input type="text" class="form-control" id="read-type" readonly wire:model="inputs.account_type"/>
-	          		</div>
-
-	          		<div class="form-group">    
-                        <label class="form-label" for="read-created-by">{{ __('Created By') }}</label>
-
-                        <input type="text" class="form-control" id="read-created-by" readonly wire:model="inputs.created_by"/>
+                            <input type="text" class="form-control" id="account_title" wire:model="inputs.account_title" readonly/>
+                        </div>
                     </div>
 
-                    <div class="form-group">    
-                        <label class="form-label" for="read-created-at">{{ __('Created On') }}</label>
+                    <div class="col-md-4 col-12">
+                        <div class="form-group">
+                            <label class="form-label" for="account_code">
+                                {{ __('Account Code') }}
+                            </label>
 
-                        <input type="text" class="form-control" id="read-created-at" readonly wire:model="inputs.created_at"/>
+                            <input type="text" class="form-control" id="account_code" readonly wire:model="inputs.account_code"/>
+                        </div>
                     </div>
 
-                    <div class="form-group">    
-                        <label class="form-label" for="read-updated-by">{{ __('Updated By') }}</label>
+                    <div class="col-md-4 col-12">
+                        <div class="form-group">
+                            <label class="form-label" for="account_type">
+                                {{ __('Account Type') }}
+                            </label>
 
-                        <input type="text" class="form-control" id="read-updated-by" readonly wire:model="inputs.updated_by"/>
+                            <input type="text" class="form-control" id="account_type" readonly wire:model="inputs.account_type"/>
+                        </div>
                     </div>
 
-                    <div class="form-group">    
-                        <label class="form-label" for="read-created-at">{{ __('Updated On') }}</label>
+                    <div class="col-md-6 col-12">
+                        <div class="form-group">
+                            <label class="form-label" for="created_by">
+                                {{ __('Created By') }}
+                            </label>
 
-                        <input type="text" class="form-control" id="read-updated-at" readonly wire:model="inputs.updated_at"/>
+                            <input type="text" class="form-control" id="created_by" readonly wire:model="inputs.created_by"/>
+                        </div>
                     </div>
 
-					<button type="reset" class="btn btn-success" data-dismiss="modal">{{ __('Close') }}</button>
-	        	</div>
-	      	</form>
-	    </div>
-	</div>
+                    <div class="col-md-6 col-12">
+                        <div class="form-group">
+                            <label class="form-label" for="created_at">
+                                {{ __('Created On') }}
+                            </label>
+
+                            <input type="text" class="form-control" id="created_at" readonly wire:model="inputs.created_at"/>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 col-12">
+                        <div class="form-group">
+                            <label class="form-label" for="updated_by">
+                                {{ __('Updated By') }}
+                            </label>
+
+                            <input type="text" class="form-control" id="updated_by" readonly wire:model="inputs.updated_by"/>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 col-12">
+                        <div class="form-group">
+                            <label class="form-label" for="update_at">
+                                {{ __('Updated On') }}
+                            </label>
+
+                            <input type="text" class="form-control" id="update_at" readonly wire:model="inputs.updated_at"/>
+                        </div>
+                    </div>
+      
+                    <div class="col-12">
+                        <button wire:click.prevent="edit" class="btn btn-primary mr-1">{{ __('Edit') }}</button>
+                        <button wire:click.prevent="create" class="btn btn-outline-secondary">{{ __('Create Another') }}</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

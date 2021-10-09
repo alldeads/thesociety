@@ -24,7 +24,7 @@ class Item extends CustomComponent
 
 	public function read()
 	{
-		$this->emit('readChartAccount', ['account' => $this->account]);
+		return redirect()->route('chart-accounts.show', [$this->account->id]);
 	}
 
     public function render()
