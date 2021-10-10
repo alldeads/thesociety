@@ -20,7 +20,7 @@ class Covid extends Model
         'first_name',
         'last_name',
         'phone',
-        'city',
+        'address',
         'q1',
         'q2',
         'q3',

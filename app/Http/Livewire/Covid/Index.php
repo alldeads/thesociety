@@ -17,7 +17,7 @@ class Index extends CustomComponent
 
     public function mount()
     {
-        $this->placeholder = "Search first name, last name, phone, or city";
+        $this->placeholder = "Search first name, last name, phone, or address";
         $this->permission  = "covid";
         $this->export      = "covid-export";
     }
@@ -43,7 +43,7 @@ class Index extends CustomComponent
                         ->where(function (Builder $query) use ($search) {
                             return $query->where('first_name', 'like', "%". $search ."%")
                                         ->orWhere('phone', 'like', "%". $search ."%")
-                                        ->orWhere('city', 'like', "%". $search ."%")
+                                        ->orWhere('address', 'like', "%". $search ."%")
                                         ->orWhere('last_name', 'like', "%". $search ."%");
                         });
 
