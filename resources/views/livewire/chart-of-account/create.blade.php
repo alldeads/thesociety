@@ -26,7 +26,7 @@
                                     {{ __('Account Title') }} <span class="asterisk">*</span>
                                 </label>
 
-                                <input type="text" class="form-control @error('account_type') is-invalid @enderror" id="account_title" required wire:model="inputs.account_title"/>
+                                <input type="text" class="form-control @error('account_type') is-invalid @enderror" id="account_title" wire:model.defer="inputs.account_title"/>
 
                                 @error('account_title')
                                     <span class="invalid-feedback" role="alert">
@@ -42,7 +42,7 @@
                                     {{ __('Account Code') }} <span class="asterisk">*</span>
                                 </label>
 
-                                <input type="text" class="form-control @error('account_code') is-invalid @enderror" id="account_code" required wire:model="inputs.account_code"/>
+                                <input type="text" class="form-control @error('account_code') is-invalid @enderror" id="account_code" wire:model.defer="inputs.account_code"/>
 
                                 @error('account_code')
                                     <span class="invalid-feedback" role="alert">
@@ -58,7 +58,7 @@
                                     {{ __('Account Type') }} <span class="asterisk">*</span>
                                 </label>
 
-                                <select class="form-control @error('account_type') is-invalid @enderror" id="account-type" wire:model="inputs.account_type">
+                                <select class="form-control @error('account_type') is-invalid @enderror" id="account-type" wire:model.defer="inputs.account_type">
 			            			<option> {{ __('Select Account Type') }}</option>
 			            			@foreach( $types as $type)
 			            				<option value="{{ $type->id }}">{{ ucwords($type->name) }}</option>
