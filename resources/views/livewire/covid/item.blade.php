@@ -3,7 +3,7 @@
     <td>{{ ucwords($item->first_name) }}</td>
     <td>{{ ucwords($item->last_name) }}</td>
     <td>{{ $item->phone }}</td>
-    <td>{{ $item->created_at->format('F j, Y h:i:s a') }}</td>
+    <td>{{ \Carbon\Carbon::parse($item->date_visited)->format('F j, Y') }}</td>
 
     @if( auth()->user()->can('covid.delete') || auth()->user()->can('covid.read') )
         <td>

@@ -21,6 +21,7 @@ class Covid extends Model
         'last_name',
         'phone',
         'address',
+        'date_visited',
         'q1',
         'q2',
         'q3',

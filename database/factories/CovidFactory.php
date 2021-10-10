@@ -22,10 +22,11 @@ class CovidFactory extends Factory
     public function definition()
     {
         return [
-            'first_name' => $this->faker->firstName,
-            'last_name'  => $this->faker->lastName,
-            'phone'      => $this->faker->phoneNumber,
-            'address'    => $this->faker->address,
+            'first_name'   => $this->faker->firstName,
+            'last_name'    => $this->faker->lastName,
+            'phone'        => $this->faker->phoneNumber,
+            'address'      => $this->faker->address,
+            'date_visited' => $this->faker->date  
         ];
     }
 }

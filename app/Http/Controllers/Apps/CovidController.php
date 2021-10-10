@@ -34,7 +34,18 @@ class CovidController extends Controller
      */
     public function create()
     {
-        //
+        $this->authorize('covid.create');
+
+        $breadcrumbs = [
+            ['link' => route('home'), 'name'=>"Dashboard"],
+            ['link' => route('covid.index'), 'name'=>"Contact Tracing"], 
+            ['name' => "New Record"],
+        ];
+
+        return view('covid.create', [
+            'breadcrumbs' => $breadcrumbs,
+            'company'     => $this->getCompany()
+        ]);
     }
 
     /**

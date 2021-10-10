@@ -20,6 +20,7 @@ class CreateCovidsTable extends Migration
             $table->string('last_name');
             $table->string('phone');
             $table->text('address')->nullable();
+            $table->date('date_visited')->nullable();
             $table->boolean('q1')->default(0);
             $table->boolean('q2')->default(0);
             $table->boolean('q3')->default(0);
