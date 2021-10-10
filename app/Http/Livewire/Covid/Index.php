@@ -2,40 +2,41 @@
 
 namespace App\Http\Livewire\Covid;
 
-use Livewire\Component;
+use App\Http\Livewire\CustomComponent;
 use Illuminate\Database\Eloquent\Builder;
-use Livewire\WithPagination;
 
 use App\Models\Covid;
 
 use Illuminate\Support\Facades\Validator;
 
-class Index extends Component
+class Index extends CustomComponent
 {
-    use WithPagination;
-
-    protected $paginationTheme = 'bootstrap';
-
-    public $company_id;
-    public $search = '';
-    public $limit;
-    public $date_from;
-    public $date_to;
-
     public $listeners = [
         'refreshCovidParent' => '$refresh'
     ];
+
+    public function mount()
+    {
+        $this->placeholder = "Search first name, last name, phone, or city";
+        $this->permission  = "covid";
+        $this->export      = "covid-export";
+    }
 
     public function updatingSearch()
     {
         $this->resetPage();
     }
 
+    public function create()
+    {
+        return redirect()->route('covid.create');
+    }
+
     public function render()
     {
         $search = $this->search ?? '';
-        $from   = $this->date_from;
-        $to     = $this->date_to;
+        $from   = $this->from;
+        $to     = $this->to;
         $limit  = $this->limit ?? 10;
 
         $results = Covid::where('company_id', $this->company_id)

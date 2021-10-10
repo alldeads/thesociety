@@ -18,11 +18,15 @@ Route::middleware('auth')->group(function() {
 
 	Route::get('home', 'DashboardController@index')->name('home');
 
+	Route::prefix('app')->group( function () {
+		Route::get('covid/export', 'Apps\CovidController@export')->name('covid-export');
+		Route::resource('covid', Apps\CovidController::class);
+	});
+
 	Route::prefix('accounting')->group( function() {
 
 		Route::get('chart-accounts/export', 'Accounting\ChartOfAccountController@export')->name('chart-accounts-export');
 		Route::resource('chart-accounts', Accounting\ChartOfAccountController::class);
-		
 
 		Route::prefix('cash-flow')->group(function () {
 			Route::get('/', 'CashFlowController@index')->name('cash-flow');
@@ -146,13 +150,5 @@ Route::middleware('auth')->group(function() {
 		Route::get('edit/{sales}', 'SalesOrderController@edit')->name('sales-edit');
 		Route::get('view/{sales}', 'SalesOrderController@read')->name('sales-read');
 		Route::get('export', 'SalesOrderController@export')->name('sales-export');
-	});
-
-	Route::prefix('covid')->group( function() {
-		Route::get('view', 'CovidController@index')->name('covid-view');
-		Route::get('create', 'CovidController@create')->name('covid-create');
-		Route::get('edit/{sales}', 'CovidController@edit')->name('covid-edit');
-		Route::get('view/{sales}', 'CovidController@read')->name('covid-read');
-		Route::get('export', 'CovidController@export')->name('covid-export');
 	});
 });
