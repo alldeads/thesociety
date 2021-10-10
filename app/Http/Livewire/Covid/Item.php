@@ -13,6 +13,11 @@ class Item extends Component
         $this->emit('deleteCovidItem', ['item' => $this->item]);
     }
 
+    public function read()
+    {
+        return redirect()->route('covid.show', [$this->item->id]);
+    }
+
     public function render()
     {
         return view('livewire.covid.item');

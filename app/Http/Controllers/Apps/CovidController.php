@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Apps;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
+use App\Models\Covid;
+
 class CovidController extends Controller
 {
     /**
@@ -49,17 +51,6 @@ class CovidController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
      * Display the specified resource.
      *
      * @param  int  $id
@@ -67,7 +58,24 @@ class CovidController extends Controller
      */
     public function show($id)
     {
-        //
+        $this->authorize('covid.read');
+
+        $covid = Covid::findOrFail($id);
+
+        $breadcrumbs = [
+            ['link' => route('home'), 'name'=>"Dashboard"], 
+            ['link' => route('covid.index'), 'name'=>"Contact Tracing"], 
+            ['name' => ucwords($covid->name)],
+        ];
+
+        if ($this->getCompany()->id == $covid->company_id) {
+            return view('covid.read', [
+                'breadcrumbs' => $breadcrumbs,
+                'covid'       => $covid
+            ]);
+        }
+
+        return view('errors.403');
     }
 
     /**

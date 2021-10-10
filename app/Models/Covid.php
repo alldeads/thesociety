@@ -22,6 +22,8 @@ class Covid extends Model
         'phone',
         'address',
         'date_visited',
+        'created_by',
+        'updated_by',
         'q1',
         'q2',
         'q3',
@@ -32,5 +34,15 @@ class Covid extends Model
     public function getNameAttribute()
     {
         return $this->first_name . ' ' . $this->last_name;
+    }
+
+    public function user_updated()
+    {
+        return $this->belongsTo(User::class, 'updated_by', 'id');
+    }
+
+    public function user_created()
+    {
+        return $this->belongsTo(User::class, 'created_by', 'id');
     }
 }

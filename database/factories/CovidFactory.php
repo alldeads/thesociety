@@ -26,7 +26,9 @@ class CovidFactory extends Factory
             'last_name'    => $this->faker->lastName,
             'phone'        => $this->faker->phoneNumber,
             'address'      => $this->faker->address,
-            'date_visited' => $this->faker->date  
+            'date_visited' => $this->faker->date,
+            'created_by'   => 1,
+            'updated_by'   => 1
         ];
     }
 }

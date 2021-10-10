@@ -32,6 +32,7 @@ class Create extends CustomComponent
             'address'       => $this->inputs['address'],
             'phone'         => $this->inputs['phone'],
             'created_by'    => auth()->id(),
+            'updated_by'    => auth()->id(),
             'company_id'    => $this->company_id
         ]);
 

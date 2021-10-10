@@ -26,6 +26,8 @@ class CreateCovidsTable extends Migration
             $table->boolean('q3')->default(0);
             $table->boolean('q4')->default(0);
             $table->boolean('q5')->default(0);
+            $table->bigInteger('created_by')->unsigned();
+            $table->bigInteger('updated_by')->unsigned();
             $table->softDeletes();
             $table->timestamps();
         });
