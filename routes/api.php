@@ -8,4 +8,5 @@ Route::post('signin', 'Api\LoginController@authenticate');
 Route::middleware('auth:sanctum')->group(function() {
 
     Route::get('products', 'Api\ProductController@index');
+    Route::get('customers', 'Api\CustomerController@index');
 });
