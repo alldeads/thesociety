@@ -18,6 +18,7 @@
         "jxlwqq/data-table": "^1.0",
         "jxlwqq/material-ui": "^1.0",
         "laravel/framework": "^8.12",
+        "laravel/sanctum": "^2.11",
         "laravel/tinker": "^2.5",
         "laravel/ui": "^3.0",
         "livewire/livewire": "^2.4",
