@@ -23,6 +23,15 @@ trait ResponseTrait
         ]);
     }
 
+    protected function response($message, $data = [], $status = 201)
+    {
+        return response([
+            'success' => true,
+            'data' => $data,
+            'message' => $message,
+        ], $status);
+    }
+
     // The request has been successful and this will send back the resulting data with a message
     protected function created($message, $data = [], $withLogging = true, $status = 201)
     {

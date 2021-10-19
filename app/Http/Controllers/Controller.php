@@ -9,8 +9,9 @@ use Illuminate\Routing\Controller as BaseController;
 
 use App\Traits\CompanyTrait;
 use App\Traits\ExportTrait;
+use App\Traits\ResponseTrait;
 
 class Controller extends BaseController
 {
-    use AuthorizesRequests, DispatchesJobs, ValidatesRequests, CompanyTrait, ExportTrait;
+    use AuthorizesRequests, DispatchesJobs, ValidatesRequests, CompanyTrait, ExportTrait, ResponseTrait;
 }

@@ -63,4 +63,9 @@ class Profile extends Model
 
         return $this->last_name . ', ' . $this->first_name . $str;
     }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }
