@@ -7,5 +7,5 @@ Route::post('signin', 'Api\LoginController@authenticate');
 
 Route::middleware('auth:sanctum')->group(function() {
 
-    Route::get('test', 'Api\LoginController@test');
+    Route::get('products', 'Api\ProductController@index');
 });

@@ -27,9 +27,4 @@ class LoginController extends Controller
 
         return $this->response('The provided credentials do not match our records.', $request->all(), 402);
     }
-
-    public function test(Request $request)
-    {
-        return response()->json($request->user());
-    }
 }
