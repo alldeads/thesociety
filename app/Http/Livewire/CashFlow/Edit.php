@@ -58,7 +58,7 @@ class Edit extends CustomComponent
 
 	public function read()
 	{
-		return redirect()->route('cash-flow-read', ['cashflow' => $this->cashflow->id]);
+		return redirect()->route('cash-flow.show', ['cash_flow' => $this->cashflow->id]);
 	}
 
 	public function save()

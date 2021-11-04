@@ -28,13 +28,8 @@ Route::middleware('auth')->group(function() {
 		Route::get('chart-accounts/export', 'Accounting\ChartOfAccountController@export')->name('chart-accounts-export');
 		Route::resource('chart-accounts', Accounting\ChartOfAccountController::class);
 
-		Route::prefix('cash-flow')->group(function () {
-			Route::get('/', 'CashFlowController@index')->name('cash-flow');
-			Route::get('create', 'CashFlowController@create')->name('cash-flow-create');
-			Route::get('edit/{cashflow}', 'CashFlowController@edit')->name('cash-flow-edit');
-			Route::get('view/{cashflow}', 'CashFlowController@view')->name('cash-flow-read');
-			Route::get('export', 'CashFlowController@export')->name('cash-flow-export');
-		});
+		Route::get('cash-flow/export', 'Accounting\CashFlowController@export')->name('cash-flow-export');
+		Route::resource('cash-flow', Accounting\CashFlowController::class);
 
 		Route::prefix('journal-entry')->group(function () {
 			Route::get('/', 'JournalEntryController@index')->name('journal-entry');

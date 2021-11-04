@@ -36,12 +36,12 @@ class Read extends Component
 
 	public function create()
 	{
-		return redirect()->route('cash-flow-create');
+		return redirect()->route('cash-flow.create');
 	}
 
 	public function edit()
 	{
-		return redirect()->route('cash-flow-edit', ['cashflow' => $this->cashflow->id]);
+		return redirect()->route('cash-flow.edit', ['cash_flow' => $this->cashflow->id]);
 	}
 
     public function render()

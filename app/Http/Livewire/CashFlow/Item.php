@@ -22,12 +22,12 @@ class Item extends Component
 
 	public function read()
 	{
-		return redirect()->route('cash-flow-read', ['cashflow' => $this->item->id]);
+		return redirect()->route('cash-flow.show', ['cash_flow' => $this->item->id]);
 	}
 
 	public function edit()
 	{
-		return redirect()->route('cash-flow-edit', ['cashflow' => $this->item->id]);
+		return redirect()->route('cash-flow.edit', ['cash_flow' => $this->item->id]);
 	}
 
     public function render()

@@ -10,19 +10,16 @@ use App\Models\CashFlow;
 
 class Index extends CustomComponent
 {
-	use WithPagination;
-
-    protected $paginationTheme = 'bootstrap';
-
-    public $company_id;
-    public $search = '';
-    public $limit;
-    public $date_from;
-    public $date_to;
-
     public $listeners = [
         'refreshCashFlowParent' => '$refresh'
     ];
+
+    public function mount()
+    {
+        $this->placeholder = "Search account title, type, payee, or payor";
+        $this->permission  = "cashflow";
+        $this->export      = "cash-flow-export";
+    }
 
     public function updatingSearch()
     {
@@ -31,14 +28,14 @@ class Index extends CustomComponent
 
     public function create()
     {
-        return redirect()->route('cash-flow-create');
+        return redirect()->route('cash-flow.create');
     }
 
     public function render()
     {
-    	$search = $this->search;
-        $from   = $this->date_from;
-        $to     = $this->date_to;
+    	$search = $this->search ?? '';
+        $from   = $this->from;
+        $to     = $this->to;
         $limit  = $this->limit ?? 10;
 
     	$results = CashFlow::where('company_id', $this->company_id)
