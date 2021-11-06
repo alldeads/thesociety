@@ -1,28 +1,63 @@
-<div>
-    <div class="modal modal-slide-in fade" id="modal-tax-edit" wire:ignore>
-	    <div class="modal-dialog sidebar-sm">
-	      	<form class="add-new-record modal-content pt-0">
-	        	<button type="button" class="close" data-dismiss="modal" aria-label="Close">×</button>
+<section>
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
 
-	        	<div class="modal-header mb-1">
-	          		<h5 class="modal-title" id="exampleModalLabel">Edit Tax</h5>
-	        	</div>
+                    <div class="alert alert-danger" style="display: {{ count($errors) > 0 ? 'block' : 'none' }}" role="alert">
+                        <div class="alert-body">
+                            <i data-feather="info"></i>
+                            <ul style="list-style: none;">
+                                @foreach($errors->all() as $error)
+                                    <li>{{$error}}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    </div>
 
-	        	<div class="modal-body flex-grow-1">
-	          		<div class="form-group">	
-	            		<label class="form-label" for="tax-name-edit">Tax Name</label>
-	            		<input type="text" class="form-control" id="tax-name-edit" required placeholder="Enter Tax Name" wire:model="inputs.tax_name"/>
-	          		</div>
+                    <form class="form">
+                        <div class="row">
+                            <div class="col-md-6 col-12">
+                                <div class="form-group">
+                                    <label class="form-label" for="name">
+                                        {{ __('Name') }} <span class="asterisk">*</span>
+                                    </label>
+                                    
+                                    <input type="text" id="name" class="form-control @error('name') is-invalid @enderror" wire:model.defer="inputs.name">
 
-	          		<div class="form-group">	
-	            		<label class="form-label" for="percentage-edit">Percentage(%)</label>
-	            		<input type="number" class="form-control" id="percentage-edit" required placeholder="Enter Percentage" wire:model="inputs.percentage"/>
-	          		</div>
+                                    @error('name')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                            </div>
 
-					<button wire:click.prevent="submit" class="btn btn-primary data-submit mr-1">Save Changes</button>
-					<button type="reset" class="btn btn-outline-secondary" data-dismiss="modal">Cancel</button>
-	        	</div>
-	      	</form>
-	    </div>
-	</div>
-</div>
+                            <div class="col-md-6 col-12">
+                                <div class="form-group">
+                                    <label class="form-label" for="percentage">
+                                        {{ __('Percentage') }} <span class="asterisk">*</span>
+                                    </label>
+                                    
+                                    <input type="number" id="percentage" class="form-control @error('percentage') is-invalid @enderror" wire:model.defer="inputs.percentage">
+
+                                    @error('percentage')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                            </div>
+              
+                            <div class="col-12">
+                                <button wire:click.prevent="submit" class="btn btn-primary mr-1">{{ __('Update') }}</button>
+                                <button wire:click.prevent="read" class="btn btn-secondary mr-1">{{ __('View') }}</button>
+                                <button wire:click.prevent="resetBtn" class="btn btn-outline-secondary">{{ __('Reset') }}</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

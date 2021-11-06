@@ -19,12 +19,12 @@ class Item extends Component
 
 	public function edit()
 	{
-		$this->emit('editTaxItem', ['item' => $this->item]);
+		return redirect()->route('tax.edit', ['tax' => $this->item->id]);
 	}
 
 	public function read()
 	{
-		$this->emit('readTaxItem', ['item' => $this->item]);
+		return redirect()->route('tax.show', ['tax' => $this->item->id]);
 	}
 
     public function render()

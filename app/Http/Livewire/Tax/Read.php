@@ -10,28 +10,29 @@ use Carbon\Carbon;
 
 class Read extends Component
 {
-    public $listeners = [
-        'readTaxItem' => 'read'
-    ];
-
-    public $el = "modal-tax-read";
     public $inputs = [];
+    public $tax;
 
-    public function read($item)
+    public function mount()
     {
-        $created = User::find($item['item']['created_by']);
-        $updated = User::find($item['item']['updated_by']);
-
         $this->inputs = [
-            'tax_name'      => $item['item']['name'],
-            'percentage'    => $item['item']['percentage'],
-            'created_by'    => $created->profile->name ?? "N/A",
-            'created_at'    => Carbon::parse($item['item']['created_at'])->format('F j, Y h:i:s a'),
-            'updated_by'    => $updated->profile->name ?? "N/A",
-            'updated_at'    => Carbon::parse($item['item']['updated_at'])->format('F j, Y h:i:s a'),
+            'name'          => $this->tax->name,
+            'percentage'    => $this->tax->percentage,
+            'created_by'    => $this->tax->user_created->profile->name ?? "N/A",
+            'created_at'    => Carbon::parse($this->tax->created_at)->format('F j, Y h:i:s a'),
+            'updated_by'    => $this->tax->user_updated->profile->name ?? "N/A",
+            'updated_at'    => Carbon::parse($this->tax->updated_at)->format('F j, Y h:i:s a'),
         ];
+    }
 
-        $this->emit('showModal', ['el' => $this->el]);
+    public function create()
+    {
+        return redirect()->route('tax.create');
+    }
+
+    public function edit()
+    {
+        return redirect()->route('tax.edit', ['tax' => $this->tax->id]);
     }
 
     public function render()

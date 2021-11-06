@@ -24,7 +24,6 @@ Route::middleware('auth')->group(function() {
 	});
 
 	Route::prefix('accounting')->group( function() {
-
 		Route::get('chart-accounts/export', 'Accounting\ChartOfAccountController@export')->name('chart-accounts-export');
 		Route::resource('chart-accounts', Accounting\ChartOfAccountController::class);
 
@@ -34,10 +33,8 @@ Route::middleware('auth')->group(function() {
 		Route::get('journal-entry/export', 'Accounting\JournalEntryController@export')->name('journal-entry-export');
 		Route::resource('journal-entry', Accounting\JournalEntryController::class);
 
-		Route::prefix('tax')->group(function () {
-			Route::get('/', 'TaxController@index')->name('tax');
-			Route::get('export', 'TaxController@export')->name('tax-export');
-		});
+		Route::get('tax/export', 'Accounting\TaxController@export')->name('tax-export');
+		Route::resource('tax', Accounting\TaxController::class);
 	});
 
 

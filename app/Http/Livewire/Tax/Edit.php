@@ -9,58 +9,49 @@ use App\Models\Tax;
 
 class Edit extends CustomComponent
 {
-	public $listeners = [
-        'editTaxItem' => 'edit'
-    ];
-
-    public $item;
-    public $el = "modal-tax-edit";
+    public $tax;
     public $inputs = [];
 
-    public function edit($item)
+    public function mount()
     {
-    	$this->item = $item;
-
     	$this->inputs = [
-    		'tax_name' => $this->item['item']['name'],
-    		'percentage'  => $this->item['item']['percentage'],
+    		'name'        => $this->tax->name,
+    		'percentage'  => $this->tax->percentage,
     	];
-
-    	$this->emit('showModal', ['el' => $this->el]);
     }
 
     public function submit()
     {
     	$validator = Validator::make($this->inputs, [
-            'tax_name'    => ['required', 'string', 'max:255'],
+            'name'        => ['required', 'string', 'max:255'],
             'percentage'  => ['required', 'numeric'],
-        ]);
+        ])->validate();
 
-        if ($validator->fails()) {
-        	$error = $validator->errors();
-            foreach ($error->all() as $message) {
-			    $this->message($message, 'error');
-			    return;
-			}
-        }
 
-        $tax = Tax::find($this->item['item']['id']);
+        $tax = Tax::find($this->tax->id);
 
         $tax->fill([
-			'name'        => ucwords($this->inputs['tax_name']),
+			'name'        => ucwords($this->inputs['name']),
 			'percentage'  => $this->inputs['percentage'],
 			'updated_by'  => auth()->id()
 		]);
 
 		$tax->save();
 
-		$this->emit('refreshTax');
-
         $this->message('Tax has been updated', 'success');
+    }
 
-        $this->inputs = [];
+    public function read()
+    {
+        return redirect()->route('tax.show', ['tax' => $this->tax->id]);
+    }
 
-        $this->emit('dissmissModal', ['el' => $this->el]);
+    public function resetBtn()
+    {
+        $this->inputs = [
+            'name'        => $this->tax->name,
+            'percentage'  => $this->tax->percentage,
+        ];
     }
 
     public function render()

@@ -1,51 +1,83 @@
-<div>
-    <div class="modal modal-slide-in fade" id="modal-tax-read" wire:ignore>
-        <div class="modal-dialog sidebar-sm">
-            <form class="add-new-record modal-content pt-0">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">×</button>
-
-                <div class="modal-header mb-1">
-                    <h5 class="modal-title" id="exampleModalLabel">{{ __('View Tax') }}</h5>
+<section>
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="card-title">{{ $inputs['name'] }}</h4>
                 </div>
 
-                <div class="modal-body flex-grow-1">
-                    <div class="form-group">    
-                        <label class="form-label" for="tax-name-edit">{{ __('Tax Name') }}</label>
-                        <input type="text" class="form-control" id="tax-name-edit" wire:model="inputs.tax_name" readonly />
-                    </div>
+                <div class="card-body">
 
-                    <div class="form-group">    
-                        <label class="form-label" for="percentage-edit">{{ __('Percentage %') }}</label>
-                        <input type="number" class="form-control" id="percentage-edit" wire:model="inputs.percentage" readonly />
-                    </div>
+                    <form class="form">
+                        <div class="row">
+                            <div class="col-md-6 col-12">
+                                <div class="form-group">
+                                    <label class="form-label" for="name">
+                                        {{ __('Name') }}
+                                    </label>
+                                    
+                                    <input type="text" id="name" class="form-control" wire:model.defer="inputs.name" readonly>
+                                </div>
+                            </div>
 
-                    <div class="form-group">    
-                        <label class="form-label" for="read-created-by">{{ __('Created By') }}</label>
+                            <div class="col-md-6 col-12">
+                                <div class="form-group">
+                                    <label class="form-label" for="percentage">
+                                        {{ __('Percentage') }}
+                                    </label>
+                                    
+                                    <input type="number" id="percentage" class="form-control" wire:model.defer="inputs.percentage" readonly>
+                                </div>
+                            </div>
 
-                        <input type="text" class="form-control" id="read-created-by" readonly wire:model="inputs.created_by"/>
-                    </div>
+                            <div class="col-md-6 col-12">
+                                <div class="form-group">
+                                    <label class="form-label" for="created_by">
+                                        {{ __('Created By') }}
+                                    </label>
+                                    
+                                    <input type="text" id="created_by" class="form-control" wire:model.defer="inputs.created_by" readonly>
+                                </div>
+                            </div>
 
-                    <div class="form-group">    
-                        <label class="form-label" for="read-created-at">{{ __('Date Created') }}</label>
+                            <div class="col-md-6 col-12">
+                                <div class="form-group">
+                                    <label class="form-label" for="created_at">
+                                        {{ __('Created On') }}
+                                    </label>
+                                    
+                                    <input type="text" id="created_at" class="form-control" wire:model.defer="inputs.created_at" readonly>
+                                </div>
+                            </div>
 
-                        <input type="text" class="form-control" id="read-created-at" readonly wire:model="inputs.created_at"/>
-                    </div>
+                            <div class="col-md-6 col-12">
+                                <div class="form-group">
+                                    <label class="form-label" for="updated_by">
+                                        {{ __('Updated By') }}
+                                    </label>
+                                    
+                                    <input type="text" id="updated_by" class="form-control" wire:model.defer="inputs.updated_by" readonly>
+                                </div>
+                            </div>
 
-                    <div class="form-group">    
-                        <label class="form-label" for="read-updated-by">{{ __('Last Updated By') }}</label>
-
-                        <input type="text" class="form-control" id="read-updated-by" readonly wire:model="inputs.updated_by"/>
-                    </div>
-
-                    <div class="form-group">    
-                        <label class="form-label" for="read-created-at">{{ __('Last Date Updated') }}</label>
-
-                        <input type="text" class="form-control" id="read-updated-at" readonly wire:model="inputs.updated_at"/>
-                    </div>
-
-                    <button type="reset" class="btn btn-outline-secondary" data-dismiss="modal">Cancel</button>
+                            <div class="col-md-6 col-12">
+                                <div class="form-group">
+                                    <label class="form-label" for="updated_at">
+                                        {{ __('Updated On') }}
+                                    </label>
+                                    
+                                    <input type="text" id="updated_at" class="form-control" wire:model.defer="inputs.updated_at" readonly>
+                                </div>
+                            </div>
+              
+                            <div class="col-12">
+                                <button wire:click.prevent="edit" class="btn btn-primary mr-1">{{ __('Edit') }}</button>
+                                <button wire:click.prevent="create" class="btn btn-outline-secondary">{{ __('Create Another') }}</button>
+                            </div>
+                        </div>
+                    </form>
                 </div>
-            </form>
+            </div>
         </div>
     </div>
-</div>
+</section>
