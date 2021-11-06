@@ -109,7 +109,7 @@ class MenuSeeder extends Seeder
         $header->menus()->create([
             'name'       => 'Expenses',
             'slug'       => 'expenses',
-            'url'        => 'expenses/view',
+            'url'        => 'accounting/expenses',
             'icon'       => 'hash',
             'base'       => 'expense',
             'is_export'  => true,

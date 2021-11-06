@@ -35,6 +35,9 @@ Route::middleware('auth')->group(function() {
 
 		Route::get('tax/export', 'Accounting\TaxController@export')->name('tax-export');
 		Route::resource('tax', Accounting\TaxController::class);
+
+		Route::get('expenses/export', 'Accounting\ExpenseController@export')->name('expense-export');
+		Route::resource('expenses', Accounting\ExpenseController::class);
 	});
 
 
