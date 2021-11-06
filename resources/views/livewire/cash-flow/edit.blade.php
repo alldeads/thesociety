@@ -1,12 +1,7 @@
 <div class="row">
 	<div class="col-12">
 		<div class="card">
-			<div class="card-header">
-				<h4 class="card-title">{{ __('Edit Entry') }}</h4>
-			</div>
-
 			<div class="card-body">
-
 				<div class="alert alert-danger" style="display: {{ count($errors) > 0 ? 'block' : 'none' }}" role="alert">
 					<div class="alert-body">
 						<i data-feather="info"></i>

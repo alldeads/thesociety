@@ -10,19 +10,16 @@ use App\Models\JournalEntry;
 
 class Index extends CustomComponent
 {
-	use WithPagination;
-
-    protected $paginationTheme = 'bootstrap';
-
-    public $company_id;
-    public $search = '';
-    public $limit;
-    public $date_from;
-    public $date_to;
-
     public $listeners = [
         'refreshJournalEntryParent' => '$refresh'
     ];
+
+    public function mount()
+    {
+        $this->placeholder = "Search account title, type, payee, or payor";
+        $this->permission  = "journal_entry";
+        $this->export      = "journal-entry-export";
+    }
 
     public function updatingSearch()
     {
@@ -31,14 +28,14 @@ class Index extends CustomComponent
 
     public function create()
     {
-        return redirect()->route('journal-entry-create');
+        return redirect()->route('journal-entry.create');
     }
 
     public function render()
     {
     	$search = $this->search;
-        $from   = $this->date_from;
-        $to     = $this->date_to;
+        $from   = $this->from;
+        $to     = $this->to;
         $limit  = $this->limit ?? 10;
 
     	$results = JournalEntry::where('company_id', $this->company_id)

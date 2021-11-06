@@ -15,12 +15,12 @@ class Item extends Component
 
 	public function read()
 	{
-		return redirect()->route('journal-entry-read', ['journal' => $this->item->id]);
+		return redirect()->route('journal-entry.show', ['journal_entry' => $this->item->id]);
 	}
 
 	public function edit()
 	{
-		return redirect()->route('journal-entry-edit', ['journal' => $this->item->id]);
+		return redirect()->route('journal-entry.edit', ['journal_entry' => $this->item->id]);
 	}
 	
     public function render()

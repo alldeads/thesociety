@@ -55,7 +55,7 @@ class Edit extends CustomComponent
 
     public function read()
     {
-        return redirect()->route('journal-entry-read', ['journal' => $this->journal->id]);
+        return redirect()->route('journal-entry.show', ['journal_entry' => $this->journal->id]);
     }
 
     public function save()

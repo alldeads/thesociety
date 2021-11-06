@@ -31,13 +31,8 @@ Route::middleware('auth')->group(function() {
 		Route::get('cash-flow/export', 'Accounting\CashFlowController@export')->name('cash-flow-export');
 		Route::resource('cash-flow', Accounting\CashFlowController::class);
 
-		Route::prefix('journal-entry')->group(function () {
-			Route::get('/', 'JournalEntryController@index')->name('journal-entry');
-			Route::get('create', 'JournalEntryController@create')->name('journal-entry-create');
-			Route::get('edit/{journal}', 'JournalEntryController@edit')->name('journal-entry-edit');
-			Route::get('view/{journal}', 'JournalEntryController@view')->name('journal-entry-read');
-			Route::get('export', 'JournalEntryController@export')->name('journal-entry-export');
-		});
+		Route::get('journal-entry/export', 'Accounting\JournalEntryController@export')->name('journal-entry-export');
+		Route::resource('journal-entry', Accounting\JournalEntryController::class);
 
 		Route::prefix('tax')->group(function () {
 			Route::get('/', 'TaxController@index')->name('tax');
