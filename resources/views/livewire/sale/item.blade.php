@@ -6,8 +6,10 @@
 
     @if ( $item->status == "cancelled" )
         <td style="color: red;"> {{ ucwords($item->status) }} </td>
+    @elseif ( $item->status == "pending" )
+        <td style="color: blue;"> {{ ucwords($item->status) }} </td>
     @else
-        <td> {{ ucwords($item->status) }} </td>
+        <td style="color: green;"> {{ ucwords($item->status) }} </td>
     @endif
     
     <td>{{ \Carbon\Carbon::parse($item->created_at)->format('F j, Y h:i:s a') }}</td>

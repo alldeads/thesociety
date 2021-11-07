@@ -1,21 +1,25 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Sales;
 
+use App\Http\Controllers\Controller;
+use App\Models\SalesOrder;
 use Illuminate\Http\Request;
 
-use App\Models\SalesOrder;
-use App\Exports\SalesOrderExport;
-
-class SalesOrderController extends Controller
+class OrderController extends Controller
 {
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function index()
     {
         $this->authorize('sale.view');
 
         $breadcrumbs = [
             ['link'=> route('home'), 'name'=>"Dashboard"], 
-            ['name'=> "Sales Order"],
+            ['name'=> "Orders"],
         ];
 
         return view('sale.index', [
@@ -24,14 +28,19 @@ class SalesOrderController extends Controller
         ]);
     }
 
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function create()
     {
         $this->authorize('sale.create');
 
         $breadcrumbs = [
             ['link'=> route('home'), 'name'=>"Dashboard"], 
-            ['link'=> route('sales-view'), 'name'=>"Sales Order"], 
-            ['name'=>"New Sales"],
+            ['link'=> route('orders.index'), 'name'=>"Orders"], 
+            ['name'=>"New Order"],
         ];
 
         return view('sale.create', [
@@ -40,34 +49,21 @@ class SalesOrderController extends Controller
         ]);
     }
 
-    public function edit(SalesOrder $sales)
-    {
-        $this->authorize('sale.update');
-
-        $breadcrumbs = [
-            ['link'=> route('home'), 'name'=>"Dashboard"], 
-            ['link'=> route('sales-view'), 'name'=>"Sales Order"],
-            ['name'=> $sales->reference],
-        ];
-
-        if ($sales->company_id == $this->getCompany()->id) {
-            return view('sale.edit', [
-                'breadcrumbs' => $breadcrumbs,
-                'company'     => $this->getCompany(),
-                'sales'       => $sales
-            ]);
-        }
-
-        return view('errors.403');
-    }
-
-    public function read(SalesOrder $sales)
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
     {
         $this->authorize('sale.read');
 
+        $sales = SalesOrder::findOrFail($id);
+
         $breadcrumbs = [
             ['link'=> route('home'), 'name'=>"Dashboard"], 
-            ['link'=> route('sales-view'), 'name'=>"Sales Order"],
+            ['link'=> route('orders.index'), 'name'=>"Sales Order"],
             ['name'=> $sales->reference],
         ];
 
@@ -82,21 +78,45 @@ class SalesOrderController extends Controller
         return view('errors.403');
     }
 
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
+        $this->authorize('sale.update');
+
+        $sales = SalesOrder::findOrFail($id);
+
+        $breadcrumbs = [
+            ['link'=> route('home'), 'name'=>"Dashboard"], 
+            ['link'=> route('orders.index'), 'name'=>"Orders"],
+            ['name'=> $sales->reference],
+        ];
+
+        if ($sales->company_id == $this->getCompany()->id) {
+            return view('sale.edit', [
+                'breadcrumbs' => $breadcrumbs,
+                'company'     => $this->getCompany(),
+                'sales'       => $sales
+            ]);
+        }
+
+        return view('errors.403');
+    }
+
+    /**
+     * Export module
+     *
+     * @param  Illuminate\Http\Request $request
+     * @return \Illuminate\Http\Response
+     */
     public function export(Request $request)
     {
         $this->authorize('sale.export');
 
-        $types = ['csv', 'pdf', 'xlsx', 'xls'];
-
-        $requested_type = isset($request['type']) ? strtolower($request['type']) : 'csv';
-        $q = $request['q'];
-        $from = $request['from'];
-        $to = $request['to'];
-
-        if ( !in_array($requested_type, $types) ) {
-            $requested_type = 'csv';
-        }
-
-        return (new SalesOrderExport($q, $this->getCompany()->id, $from, $to))->download('sales-order-' . now()->format('Y-m-d') . '.' . $requested_type);
+        return $this->exportModule($request->all(), 'SalesOrderExport', $this->getCompany()->id);
     }
 }

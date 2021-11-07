@@ -14,7 +14,7 @@ class Read extends Component
     public function mount()
     {
         $this->inputs['reference']     = $this->sales->reference;
-        $this->inputs['customer']      = $this->sales->customer->user->profile->name ?? 'N/A';
+        $this->inputs['customer']      = $this->sales->customer->user->profile->name ?? 'Guest Customer';
         $this->inputs['items']         = $this->sales->items;
         $this->inputs['notes']         = $this->sales->notes ?? "N/A";
         $this->inputs['created_by']    = $this->sales->user_created->profile->name ?? "N/A";
@@ -29,7 +29,7 @@ class Read extends Component
 
     public function edit()
     {
-        return redirect()->route('sales-edit', ['sales' => $this->sales->id]);
+        return redirect()->route('orders.edit', ['order' => $this->sales->id]);
     }
 
     public function render()

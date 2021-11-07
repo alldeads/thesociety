@@ -7,7 +7,6 @@
                 </div>
 
                 <div class="card-body">
-
                     <div class="alert alert-danger" style="display: {{ count($errors) > 0 ? 'block' : 'none' }}" role="alert">
                         <div class="alert-body">
                             <i data-feather="info"></i>
@@ -26,7 +25,7 @@
                                     {{ __('Sales Order No.') }} <span class="asterisk">*</span>
                                 </label>
 
-                                <input type="text" class="form-control @error('reference') is-invalid @enderror" wire:model="inputs.reference"/>
+                                <input type="text" class="form-control @error('reference') is-invalid @enderror" wire:model.defer="inputs.reference"/>
 
                                 @error('reference')
                                     <span class="invalid-feedback" role="alert">
@@ -42,7 +41,7 @@
                                     {{ __('Customer') }} <span class="asterisk">*</span>
                                 </label>
 
-                                <select class="form-control @error('customer') is-invalid @enderror" id="customer" wire:model="inputs.customer">
+                                <select class="form-control @error('customer') is-invalid @enderror" id="customer" wire:model.defer="inputs.customer">
                                     <option value="0"> {{ __('Guest Customer') }}</option>
                                     @foreach($customers as $customer)
                                         <option value="{{ $customer->id }}"> {{ ucwords($customer->user->profile->name) }}</option>
@@ -63,8 +62,9 @@
                                     {{ __('Status') }} <span class="asterisk">*</span>
                                 </label>
 
-                                <select class="form-control @error('status') is-invalid @enderror" id="status" wire:model="inputs.status">
+                                <select class="form-control @error('status') is-invalid @enderror" id="status" wire:model.defer="inputs.status">
                                     <option value="paid"> {{ __('Paid') }}</option>
+                                    <option value="pending"> {{ __('Pending') }}</option>
                                     <option value="cancelled"> {{ __('Cancelled') }}</option>
                                 </select>
 
@@ -82,7 +82,7 @@
                                     {{ __('Notes') }}
                                 </label>
 
-                                <textarea class="form-control @error('notes') is-invalid @enderror" wire:model="inputs.notes"/></textarea>
+                                <textarea class="form-control @error('notes') is-invalid @enderror" wire:model.defer="inputs.notes"/></textarea>
 
                                 @error('notes')
                                     <span class="invalid-feedback" role="alert">
@@ -169,6 +169,72 @@
                                     <td>{{ $inputs['total'] }}</td>
                                 </tr>
                             </table>
+                        </div>
+
+                        <div class="col-12 mb-2" style="border-top: 1px solid;"></div>
+
+                        <div class="col-md-3 col-12">
+                            <div class="form-group">
+                                <label class="form-label" for="payment">
+                                    {{ __('Payment Type') }}
+                                </label>
+
+                                <select class="form-control @error('payment') is-invalid @enderror" id="payment" wire:model.defer="inputs.payment">
+                                    <option> Select a payment method</option>
+
+                                    @foreach($payments as $payment)
+                                        <option value="{{ $payment->id }}"> {{ ucwords($payment->name) }}</option>
+                                    @endforeach
+                                </select>
+
+                                @error('payment')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="col-md-3 col-12">
+                            <div class="form-group">
+                                <label class="form-label" for="transaction">
+                                    {{ __('Transaction #') }}
+                                </label>
+
+                                <input type="text" class="form-control @error('transaction') is-invalid @enderror" wire:model="inputs.transaction"/>
+
+                                @error('transaction')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="col-md-3 col-12">
+                            <div class="form-group">
+                                <label class="form-label" for="amount">
+                                    {{ __('Amount') }}
+                                </label>
+
+                                <input type="number" class="form-control @error('amount') is-invalid @enderror" wire:model="inputs.amount"/>
+
+                                @error('amount')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="col-md-3 col-12">
+                            <div class="form-group">
+                                <label class="form-label" for="change">
+                                    {{ __('Balance') }}
+                                </label>
+
+                                <input type="text" class="form-control" wire:model="inputs.change" readonly/>
+                            </div>
                         </div>
 
                         <div class="col-12 mt-2">

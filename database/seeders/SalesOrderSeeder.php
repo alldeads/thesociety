@@ -22,7 +22,7 @@ class SalesOrderSeeder extends Seeder
         $companies = Company::all();
 
         foreach ( $companies as $company ) {
-            for ( $i = 0; $i < rand(3, 10); $i++ ) {
+            for ( $i = 0; $i < rand(10,20); $i++ ) {
                 $total = 0;
                 $sub_total = 0;
                 $discount = rand(0, 100);

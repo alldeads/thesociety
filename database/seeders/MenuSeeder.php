@@ -117,14 +117,14 @@ class MenuSeeder extends Seeder
         // ]);
 
         $header = Header::create([
-            'name'  => 'Sales & Orders',
+            'name'  => 'Payments & Orders',
             'order' => 3
         ]);
 
         $header->menus()->create([
             'name'       => 'Sales Order',
-            'slug'       => 'sales',
-            'url'        => 'sales/view',
+            'slug'       => 'orders',
+            'url'        => 'sales/orders',
             'base'       => 'sale',
             'is_export'  => true,
             'icon'       => 'shopping-bag',
@@ -134,7 +134,7 @@ class MenuSeeder extends Seeder
         $header->menus()->create([
             'name'       => 'Payments',
             'slug'       => 'payments',
-            'url'        => 'payments/view',
+            'url'        => 'sales/payments',
             'icon'       => 'dollar-sign',
             'base'       => 'payment',
             'is_export'  => false,
@@ -144,11 +144,21 @@ class MenuSeeder extends Seeder
         $header->menus()->create([
             'name'       => 'Invoices',
             'slug'       => 'invoices',
-            'url'        => 'invoices/view',
+            'url'        => 'sales/invoices',
             'icon'       => 'file-text',
             'base'       => 'invoice',
             'is_export'  => false,
             'permission' => 'invoice.view'
+        ]);
+
+        $header->menus()->create([
+            'name'       => 'Receipts',
+            'slug'       => 'receipts',
+            'url'        => 'sales/receipts',
+            'icon'       => 'tag',
+            'base'       => 'receipt',
+            'is_export'  => false,
+            'permission' => 'receipt.view'
         ]);
 
         $header = Header::create([

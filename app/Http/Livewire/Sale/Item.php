@@ -15,12 +15,12 @@ class Item extends Component
 
     public function edit()
     {
-        return redirect()->route('sales-edit', ['sales' => $this->item->id]);
+        return redirect()->route('orders.edit', ['order' => $this->item->id]);
     }
 
     public function read()
     {
-        return redirect()->route('sales-read', ['sales' => $this->item->id]);
+        return redirect()->route('orders.show', ['order' => $this->item->id]);
     }
 
     public function render()

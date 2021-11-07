@@ -12,6 +12,7 @@ use App\Models\Customer;
 use App\Models\Product;
 use App\Models\SalesOrder;
 use App\Models\SalesOrderItem;
+use App\Models\PaymentType;
 
 class Edit extends CustomComponent
 {
@@ -19,6 +20,7 @@ class Edit extends CustomComponent
     public $customers;
     public $products;
     public $sales;
+    public $payments;
 
     public $inputs = [
         'customer',
@@ -28,6 +30,7 @@ class Edit extends CustomComponent
     public function mount()
     {
         $this->customers = Customer::where('company_id', $this->company->id)->get();
+        $this->payments  = PaymentType::where('company_id', $this->company->id)->active()->get();
         $this->products  = Product::where([
             'company_id' => $this->company->id,
             'type' => 'product'
@@ -65,7 +68,7 @@ class Edit extends CustomComponent
 
     public function read()
     {
-        return redirect()->route('sales-read', ['sales' => $this->sales->id]);
+        return redirect()->route('orders.show', ['order' => $this->sales->id]);
     }
 
     public function updated($name, $value)
@@ -144,7 +147,7 @@ class Edit extends CustomComponent
         $this->inputs['total']     = number_format($this->sales->total, 2, '.', ',');
         $this->inputs['notes']     = $this->sales->notes;
         $this->inputs['status']    = $this->sales->status;
-        $this->inputs['customer']  = $this->sales->customer_id;
+        $this->inputs['customer']  = $this->sales->customer_id ?? 0;
     }
 
     public function update()

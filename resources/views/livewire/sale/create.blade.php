@@ -26,7 +26,7 @@
                                     {{ __('Sales Order No.') }} <span class="asterisk">*</span>
                                 </label>
 
-                                <input type="text" class="form-control @error('reference') is-invalid @enderror" wire:model="inputs.reference"/>
+                                <input type="text" class="form-control @error('reference') is-invalid @enderror" wire:model.defer="inputs.reference"/>
 
                                 @error('reference')
                                     <span class="invalid-feedback" role="alert">
@@ -42,7 +42,7 @@
                                     {{ __('Customer') }} <span class="asterisk">*</span>
                                 </label>
 
-                                <select class="form-control @error('customer') is-invalid @enderror" id="customer" wire:model="inputs.customer">
+                                <select class="form-control @error('customer') is-invalid @enderror" id="customer" wire:model.defer="inputs.customer">
                                     <option value="0"> {{ __('Guest Customer') }}</option>
                                     @foreach($customers as $customer)
                                         <option value="{{ $customer->id }}"> {{ ucwords($customer->user->profile->name) }}</option>
@@ -63,7 +63,8 @@
                                     {{ __('Status') }} <span class="asterisk">*</span>
                                 </label>
 
-                                <select class="form-control @error('status') is-invalid @enderror" id="status" wire:model="inputs.status">
+                                <select class="form-control @error('status') is-invalid @enderror" id="status" wire:model.defer="inputs.status">
+                                    <option value="pending"> {{ __('Pending') }}</option>
                                     <option value="paid"> {{ __('Paid') }}</option>
                                     <option value="cancelled"> {{ __('Cancelled') }}</option>
                                 </select>
@@ -82,7 +83,7 @@
                                     {{ __('Notes') }}
                                 </label>
 
-                                <textarea class="form-control @error('notes') is-invalid @enderror" wire:model="inputs.notes"/></textarea>
+                                <textarea class="form-control @error('notes') is-invalid @enderror" wire:model.defer="inputs.notes"/></textarea>
 
                                 @error('notes')
                                     <span class="invalid-feedback" role="alert">
@@ -173,67 +174,61 @@
 
                         <div class="col-12 mb-2" style="border-top: 1px solid;"></div>
 
-                        <div class="col-md-3 col-12">
-                            <div class="form-group">
-                                <label class="form-label" for="payment">
-                                    {{ __('Payment Type') }}
-                                </label>
+                        <div class="col-md-12 col-12">
+                            <div class="card-body invoice-product-details">
+                                @foreach($inputs['payments'] as $key => $item)
+                                    <div data-repeater-list="group-g">
+                                        <div class="repeater-wrapper">
+                                            <div class="row">
+                                                <div class="col-12 d-flex product-details-border position-relative pr-0">
+                                                    <div class="row w-100 pr-lg-0 pr-1 ">
+                                                        <div class="col-lg-5 col-12 mb-lg-0 mb-2 mt-2">
+                                                            <p class="card-text col-title mb-md-50 mb-0">Payment Type</p>
 
-                                <select class="form-control @error('payment') is-invalid @enderror" id="payment" wire:model="inputs.payment">
-                                    <option> Select a payment method</option>
+                                                            <select class="form-control" wire:model="inputs.payments.{{ $key }}.payment">
+                                                                <option>Select a payment method</option>
+                                                                
+                                                                @foreach($payments as $payment)
+                                                                    <option value="{{ $payment->id }}"> {{ ucwords($payment->name) }}</option>
+                                                                @endforeach
+                                                            </select>
+                                                        </div>
 
-                                    @foreach($payments as $payment)
-                                        <option value="{{ $payment->id }}"> {{ ucwords($payment->name) }}</option>
-                                    @endforeach
-                                </select>
+                                                        <div class="col-lg-2 col-12 mb-lg-0 mb-2 mt-2">
+                                                            <p class="card-text col-title mb-md-50 mb-0">Transaction #</p>
+                                                            <input type="text" class="form-control" wire:model.defer="inputs.payments.{{ $key }}.transaction"/>
+                                                        </div>
 
-                                @error('payment')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
+                                                        <div class="col-lg-2 col-12 mb-lg-0 mb-2 mt-2">
+                                                            <p class="card-text col-title mb-md-50 mb-0">Amount</p>
+                                                            <input type="number" class="form-control" wire:model="inputs.payments.{{ $key }}.amount"/>
+                                                        </div>
 
-                        <div class="col-md-3 col-12">
-                            <div class="form-group">
-                                <label class="form-label" for="transaction">
-                                    {{ __('Transaction #') }}
-                                </label>
+                                                        <div class="col-lg-2 col-12 mb-lg-0 mb-2 mt-2">
+                                                            <p class="card-text col-title mb-md-50 mb-0">Balance</p>
+                                                            <input type="text" class="form-control" wire:model="inputs.payments.{{ $key }}.balance" readonly />
+                                                        </div>
+                                                    </div>
 
-                                <input type="text" class="form-control @error('transaction') is-invalid @enderror" wire:model="inputs.transaction"/>
+                                                    <div  class="d-flex flex-column align-items-center justify-content-between border-left invoice-product-actions py-50 px-25" wire:ignore>
+                                                        <i class="cursor-pointer font-medium-3" wire:click="deletePayment({{$key}})">
+                                                            <span class="fa fa-times"></span>
+                                                        </i>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                @endforeach
 
-                                @error('transaction')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="col-md-3 col-12">
-                            <div class="form-group">
-                                <label class="form-label" for="amount">
-                                    {{ __('Amount') }}
-                                </label>
-
-                                <input type="number" class="form-control @error('amount') is-invalid @enderror" wire:model="inputs.amount"/>
-
-                                @error('amount')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="col-md-3 col-12">
-                            <div class="form-group">
-                                <label class="form-label" for="change">
-                                    {{ __('Change') }}
-                                </label>
-
-                                <input type="text" class="form-control" wire:model="inputs.change" readonly/>
+                                <div class="row mt-1 text-right">
+                                    <div class="col-12 px-0">
+                                        <button class="btn btn-primary btn-sm" wire:click="createPayment">
+                                            <i class="fa fa-plus mr-25"></i>
+                                            <span class="align-middle">Add Payment</span>
+                                        </button>
+                                    </div>
+                                </div>
                             </div>
                         </div>
 
