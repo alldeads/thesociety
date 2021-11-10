@@ -222,14 +222,18 @@ class Edit extends CustomComponent
     public function update()
     {
         $validator = Validator::make($this->inputs, [
-            'reference'        => ['required'],
-            'customer'         => ['required', 'numeric'],
-            'discount'         => ['required', 'numeric'],
-            'status'           => ['required', 'string'],
-            'notes'            => ['nullable'],
-            'items'            => ['required', 'array'],
-            'items.*.product'  => ['required', 'numeric'],
-            'items.*.qty'      => ['required', 'numeric'],
+            'reference'               => ['required'],
+            'customer'                => ['required', 'numeric'],
+            'discount'                => ['required', 'numeric'],
+            'status'                  => ['required', 'string'],
+            'notes'                   => ['nullable'],
+            'items'                   => ['required', 'array'],
+            'items.*.product'         => ['required', 'numeric'],
+            'items.*.qty'             => ['required', 'numeric'],
+            'payments.*.payment'      => ['required', 'numeric'],
+            'payments.*.transaction'  => ['nullable'],
+            'payments.*.amount'       => ['required', 'numeric'],
+            'payments.*.balance'      => ['required', 'numeric'],
         ])->validate();
 
         try {
