@@ -45,7 +45,6 @@ Route::middleware('auth')->group(function() {
 		Route::resource('orders', Sales\OrderController::class);
 	});
 
-
 	Route::prefix('company')->group( function() {
 		Route::get('details', 'CompanyController@details')->name('company-details');
 		Route::get('edit', 'CompanyController@edit')->name('company-edit');

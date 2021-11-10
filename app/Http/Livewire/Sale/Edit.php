@@ -13,6 +13,7 @@ use App\Models\Product;
 use App\Models\SalesOrder;
 use App\Models\SalesOrderItem;
 use App\Models\PaymentType;
+use App\Models\Payment;
 
 class Edit extends CustomComponent
 {
@@ -21,6 +22,7 @@ class Edit extends CustomComponent
     public $products;
     public $sales;
     public $payments;
+    public $balance;
 
     public $inputs = [
         'customer',
@@ -51,6 +53,36 @@ class Edit extends CustomComponent
         ];
     }
 
+    public function createPayment()
+    {
+        $count = count($this->inputs['payments']);
+
+        if ( $this->balance < 0 ) {
+            $this->inputs['payments'][$count] = [
+                'key'            => 0,
+                'payment'        => '',
+                'transaction'    => '',
+                'amount'         => 0,
+                'balance'        => $this->balance
+            ];
+        }
+    }
+
+    public function deletePayment($key)
+    {
+        $count = count($this->inputs['payments']);
+
+        if ( $count == 1 ) {
+            return;
+        }
+
+        unset($this->inputs['payments'][$key]);
+
+        $this->inputs['payments'] = array_values($this->inputs['payments']);
+
+        $this->calculate();
+    }
+
     public function deleteItem($key)
     {
         $count = count($this->inputs['items']);
@@ -75,7 +107,7 @@ class Edit extends CustomComponent
     {
         $field = explode('.', $name);
 
-        if ( isset($field[2]) && isset($field[3]) ) {
+        if ( isset($field[2]) && isset($field[3]) && $field[1] == 'items' ) {
 
             $pr = $field[3] == 'product' ? $value : $this->inputs['items'][$field[2]]['product'];
 
@@ -114,14 +146,29 @@ class Edit extends CustomComponent
             $sub_total += str_replace(',', '',$item['price']);
         }
 
-        $this->inputs['discount']  = $discount;
-        $this->inputs['subtotal']  = number_format($sub_total, 2, '.', ',');
+        if ( $discount > $sub_total ) {
+            $sub_total = $discount;
+        }
+
         $this->inputs['total']     = number_format($sub_total - $discount, 2, '.', ',');
+
+        $sub = $sub_total - $discount;
+
+        foreach ($this->inputs['payments'] as $key => $payment) {
+            $x = (double) str_replace(',', '',$payment['amount']);
+
+            $sub = $sub < 0 ? abs($sub) : $sub;
+
+            $sub = $this->inputs['payments'][$key]['balance'] = $x - $sub;
+
+            $this->balance = $sub;
+        }
     }
 
     public function resetBtn()
     {
-        $this->inputs = [];
+        $this->inputs  = [];
+        $this->balance = -1;
 
         foreach ($this->sales->items as $item) {
             $this->inputs['items'][] = [
@@ -132,12 +179,34 @@ class Edit extends CustomComponent
             ];
         }
 
+        foreach ($this->sales->payments as $payment) {
+            $this->inputs['payments'][] = [
+                'key'            => $payment->id,
+                'payment'        => $payment->payment_type_id,
+                'transaction'    => $payment->transaction,
+                'amount'         => $payment->amount,
+                'balance'        => $payment->balance,
+            ];
+
+            $this->balance = $payment->balance;
+        }
+
         if ( !isset($this->inputs['items']) ) {
             $this->inputs['items'][0] = [
                 'product' => '',
                 'qty'     => 0,
                 'srp'     => 0,
                 'price'   => 0
+            ];
+        }
+
+        if ( !isset($this->inputs['payments']) ) {
+            $this->inputs['payments'][0] = [
+                'key'            => 0,
+                'payment'        => '',
+                'transaction'    => '',
+                'amount'         => 0,
+                'balance'        => 0
             ];
         }
 
@@ -212,6 +281,24 @@ class Edit extends CustomComponent
                     'quantity'   => $item['qty'],
                     'product_id' => $product->id,
                     'price'      => $product->srp_price,
+                ]);
+            }
+
+            foreach ($this->inputs['payments'] as $payment) {
+                Payment::updateOrCreate([
+                    'id'              => $payment['key'],
+                    'company_id'      => $this->company->id,
+                ],[
+                    'transaction'     => $payment['transaction'] ?? 'PY-' . rand(111111, 999999),
+                    'payment_type_id' => $payment['payment'],
+                    'updated_by'      => auth()->id(),
+                    'created_by'      => auth()->id(),
+                    'sub_total'       => $sub_total,
+                    'discount'        => $discount,
+                    'total'           => $total,
+                    'amount'          => $payment['amount'],
+                    'balance'         => $payment['balance'],
+                    'order_id'        => $sales->id
                 ]);
             }
 
