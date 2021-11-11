@@ -98,22 +98,22 @@
                                                     <div class="row w-100 pr-lg-0 pr-1 ">
                                                         <div class="col-lg-5 col-12 mb-lg-0 mb-2 mt-2">
                                                             <p class="card-text col-title mb-md-50 mb-0">Item</p>
-                                                            <input type="text" class="form-control" value="{{ $item->product->name }}" readonly />
+                                                            <input type="text" class="form-control" value="{{ $item->product->name ?? '' }}" readonly />
                                                         </div>
 
                                                         <div class="col-lg-3 col-12 mb-lg-0 mb-2 mt-2">
                                                             <p class="card-text col-title mb-md-50 mb-0">SRP</p>
-                                                            <input type="text" class="form-control" value="{{ number_format($item->price, 2, '.', ',') }}" readonly />
+                                                            <input type="text" class="form-control" value="{{ number_format($item->price ?? 0, 2, '.', ',') }}" readonly />
                                                         </div>
 
                                                         <div class="col-lg-2 col-12 mb-lg-0 mb-2 mt-2">
                                                             <p class="card-text col-title mb-md-50 mb-0">Qty</p>
-                                                            <input type="number" class="form-control" value="{{ $item->quantity }}" readonly/>
+                                                            <input type="number" class="form-control" value="{{ $item->quantity ?? 0 }}" readonly/>
                                                         </div>
 
                                                         <div class="col-lg-2 col-12 mb-lg-0 mb-2 mt-2">
                                                             <p class="card-text col-title mb-md-50 mb-0">Price</p>
-                                                            <input type="text" class="form-control" value="{{ number_format($item->price * $item->quantity, 2, '.', ',') }}" readonly />
+                                                            <input type="text" class="form-control" value="{{ number_format(($item->price ?? 0) * ($item->quantity ?? 0), 2, '.', ',') }}" readonly />
                                                         </div>
                                                     </div>
                                                 </div>

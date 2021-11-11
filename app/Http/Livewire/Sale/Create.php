@@ -187,7 +187,7 @@ class Create extends CustomComponent
         $this->inputs['amount']    = 0;
         $this->inputs['total']     = 0;
         $this->inputs['customer']  = 0;
-        $this->inputs['status']    = 'pending';
+        $this->inputs['status']    = 'paid';
     }
 
     public function save()
@@ -256,8 +256,14 @@ class Create extends CustomComponent
                     $total = $payment['amount'] - abs($payment['balance']);
                 }
 
+                $transaction = $payment['transaction'] ?? '';
+
+                if ( empty($payment['transaction']) ) {
+                    $transaction = 'PY-' . rand(10000000, 99999999);
+                }
+
                 Payment::create([
-                    'transaction'     => $payment['transaction'] ?? 'PY-' . rand(111111, 999999),
+                    'transaction'     => $transaction,
                     'payment_type_id' => $payment['payment'],
                     'company_id'      => $this->company->id,
                     'created_by'      => auth()->id(),

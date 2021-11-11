@@ -221,14 +221,16 @@
                                     </div>
                                 @endforeach
 
-                                <div class="row mt-1 text-right">
-                                    <div class="col-12 px-0">
-                                        <button class="btn btn-primary btn-sm" wire:click="createPayment">
-                                            <i class="fa fa-plus mr-25"></i>
-                                            <span class="align-middle">Add Payment</span>
-                                        </button>
+                                @if ($balance < -1)
+                                    <div class="row mt-1 text-right">
+                                        <div class="col-12 px-0">
+                                            <button class="btn btn-primary btn-sm" wire:click="createPayment">
+                                                <i class="fa fa-plus mr-25"></i>
+                                                <span class="align-middle">Add Payment</span>
+                                            </button>
+                                        </div>
                                     </div>
-                                </div>
+                                @endif
                             </div>
                         </div>
 

@@ -62,7 +62,7 @@ class Index extends CustomComponent
             $results = $results->whereDate('created_at', '<=', $to );
         }            
 
-        $results  =  $results->with(['customer.user.profile'])
+        $results  =  $results->with(['customer.user.profile', 'payment_balance'])
                             ->orderBy('created_at', 'desc')
                             ->paginate($limit);
                         

@@ -44,6 +44,11 @@ class SalesOrder extends Model
         return $this->hasMany(Payment::class, 'order_id');
     }
 
+    public function payment_balance()
+    {
+        return $this->hasOne(Payment::class, 'order_id')->orderBy('id', 'desc');
+    }
+
     public function user_created()
     {
         return $this->belongsTo(User::class, 'created_by', 'id');

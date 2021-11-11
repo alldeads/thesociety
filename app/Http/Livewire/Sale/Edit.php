@@ -288,12 +288,19 @@ class Edit extends CustomComponent
                 ]);
             }
 
+            $sales->payments()->delete();
+
             foreach ($this->inputs['payments'] as $payment) {
-                Payment::updateOrCreate([
-                    'id'              => $payment['key'],
+
+                $transaction = $payment['transaction'] ?? '';
+
+                if ( empty($payment['transaction']) ) {
+                    $transaction = 'PY-' . rand(10000000, 99999999);
+                }
+
+                Payment::create([
                     'company_id'      => $this->company->id,
-                ],[
-                    'transaction'     => $payment['transaction'] ?? 'PY-' . rand(111111, 999999),
+                    'transaction'     => $transaction,
                     'payment_type_id' => $payment['payment'],
                     'updated_by'      => auth()->id(),
                     'created_by'      => auth()->id(),

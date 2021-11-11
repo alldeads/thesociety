@@ -4,12 +4,30 @@
     <td>{{ $item->quantity }}</td>
     <td>{{ number_format($item->total, 2, '.', ',') }}</td>
 
-    @if ( $item->status == "cancelled" )
-        <td style="color: red;"> {{ ucwords($item->status) }} </td>
-    @elseif ( $item->status == "pending" )
-        <td style="color: blue;"> {{ ucwords($item->status) }} </td>
+    @if ( !isset($item->payment_balance->balance) )
+        <td>
+            <span class="badge badge-light-danger badge-pill"> {{ number_format($item->total, 2, '.', ',') }} </span>
+        </td>
+    @elseif ($item->payment_balance->balance > -1)
+        <td>-</td>
     @else
-        <td style="color: green;"> {{ ucwords($item->status) }} </td>
+        <td>
+            <span class="badge badge-light-danger badge-pill"> {{ number_format(abs($item->payment_balance->balance), 2, '.', ',') }} </span>
+        </td>
+    @endif
+
+    @if ( $item->status == "cancelled" )
+        <td>
+            <span class="badge badge-light-danger badge-pill"> {{ ucwords($item->status) }} </span>
+        </td>
+    @elseif ( $item->status == "pending" )
+        <td>
+            <span class="badge badge-light-primary badge-pill"> {{ ucwords($item->status) }} </span>
+        </td>
+    @else
+        <td>
+            <span class="badge badge-light-success badge-pill"> {{ ucwords($item->status) }} </span>
+        </td>
     @endif
     
     <td>{{ \Carbon\Carbon::parse($item->created_at)->format('F j, Y h:i:s a') }}</td>

@@ -51,7 +51,7 @@ class SalesOrderSeeder extends Seeder
 
                 $stats = ['paid', 'cancelled'];
 
-                $sl = SalesOrder::create([
+                $salesorder = SalesOrder::create([
                     'reference'   => 'SL-' . rand(111111, 999999),
                     'company_id'  => $company->id,
                     'customer_id' => $customer,
@@ -67,10 +67,10 @@ class SalesOrderSeeder extends Seeder
 
                 foreach ($items as $item) {
                     SalesOrderItem::create([
-                        'sales_order_id' => $sl->id,
-                        'product_id'  => $item['product_id'],
-                        'price'       => $item['price'],
-                        'quantity'    => $item['quantity'],
+                        'sales_order_id' => $salesorder->id,
+                        'product_id'     => $item['product_id'],
+                        'price'          => $item['price'],
+                        'quantity'       => $item['quantity'],
                     ]);
 
                     $sl = StockLevel::where([

@@ -12,6 +12,7 @@
                             <th>Customer</th>
                             <th>Quantity</th>
                             <th>Total</th>
+                            <th>Balance</th>
                             <th>Status</th>
                             <th>Created At</th>
                             @if( auth()->user()->can('sale.update') || auth()->user()->can('sale.delete') || auth()->user()->can('sale.read') )
