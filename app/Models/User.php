@@ -2,14 +2,13 @@
 
 namespace App\Models;
 
-use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Spatie\Permission\Traits\HasRoles;
 use Laravel\Sanctum\HasApiTokens;
 
-use App\Models\Header;
+use App\Models\CompanyMenu;
 
 class User extends Authenticatable
 {
@@ -95,19 +94,17 @@ class User extends Authenticatable
 
             $user = auth()->user();
 
-            $headers = Header::with('menus')->get();
+            $menus = CompanyMenu::getCompanyMenus($user->company_id);
 
-            $menus   = [];
+            $arr = [];
 
-            foreach ($headers as $header) {
-                foreach ($header->menus as $menu) {
-                    if ( $user->hasPermissionTo($menu->permission) ) {
-                        $menus[$header->name][] = $menu;
-                    }
+            foreach ($menus as $menu) {
+                if ( $user->hasPermissionTo($menu->menu->permission) ) {
+                    $arr[$menu->menu->header->name][] = $menu->menu;
                 }
             }
 
-            return $menus;
+            return $arr;
         });
     }
 }
