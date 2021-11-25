@@ -315,5 +315,15 @@ class MenuSeeder extends Seeder
             'is_export'  => false,
             'permission' => 'payment_type.view'
         ]);
+
+        $header->menus()->create([
+            'name'       => 'Preferences',
+            'slug'       => 'preference',
+            'url'        => 'company/preferences',
+            'icon'       => 'settings',
+            'base'       => 'preference',
+            'is_export'  => false,
+            'permission' => 'preference.view'
+        ]);
     }
 }
