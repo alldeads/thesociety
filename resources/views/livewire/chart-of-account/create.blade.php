@@ -26,7 +26,7 @@
                                     {{ __('Account Title') }} <span class="asterisk">*</span>
                                 </label>
 
-                                <input type="text" class="form-control @error('account_type') is-invalid @enderror" id="account_title" wire:model.defer="inputs.account_title"/>
+                                <input type="text" class="form-control @error('account_title') is-invalid @enderror" id="account_title" wire:model.defer="inputs.account_title"/>
 
                                 @error('account_title')
                                     <span class="invalid-feedback" role="alert">
