@@ -28,7 +28,7 @@ class UserSeeder extends Seeder
             if ( $role->role_name == "owner" ) {
                 $user = User::create([
                     'company_id' => 1,
-                    'email'      => 'john@test.com',
+                    'email'      => 'demo@test.com',
                     'password'   => bcrypt('password'),
                     'status'     => 'active'
                 ]);
