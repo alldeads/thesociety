@@ -46,6 +46,9 @@ Route::middleware('auth')->group(function() {
 	});
 
 	Route::prefix('company')->group( function() {
+
+		Route::resource('preferences', Company\PreferenceController::class);
+
 		Route::get('details', 'CompanyController@details')->name('company-details');
 		Route::get('edit', 'CompanyController@edit')->name('company-edit');
 
