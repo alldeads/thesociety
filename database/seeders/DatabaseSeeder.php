@@ -37,7 +37,8 @@ class DatabaseSeeder extends Seeder
             StockLevelSeeder::class,
             SalesOrderSeeder::class,
             CovidTableSeeder::class,
-            PaymentTypeSeeder::class
+            PaymentTypeSeeder::class,
+            ExpenseTableSeeder::class
         ]);
     }
 }

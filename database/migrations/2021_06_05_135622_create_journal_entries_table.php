@@ -28,7 +28,7 @@ class CreateJournalEntriesTable extends Migration
             $table->text('description')->nullable();
             $table->text('notes')->nullable();
             $table->text('attachment')->nullable();
-            $table->enum('status', ['confirmed', 'pending', 'hold', 'cancelled'])->default('confirmed');
+            $table->string('status')->default('confirmed');
             $table->softDeletes();
             $table->timestamps();
         });

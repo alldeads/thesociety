@@ -106,15 +106,15 @@ class MenuSeeder extends Seeder
             'permission' => 'tax.view'
         ]);
 
-        // $header->menus()->create([
-        //     'name'       => 'Expenses',
-        //     'slug'       => 'expenses',
-        //     'url'        => 'accounting/expenses',
-        //     'icon'       => 'hash',
-        //     'base'       => 'expense',
-        //     'is_export'  => true,
-        //     'permission' => 'expense.view'
-        // ]);
+        $header->menus()->create([
+            'name'       => 'Expenses',
+            'slug'       => 'expenses',
+            'url'        => 'accounting/expenses',
+            'icon'       => 'trending-down',
+            'base'       => 'expense',
+            'is_export'  => true,
+            'permission' => 'expense.view'
+        ]);
 
         $header = Header::create([
             'name'  => 'Payments & Orders',
