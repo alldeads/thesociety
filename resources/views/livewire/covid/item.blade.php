@@ -1,5 +1,7 @@
 <tr>
-    <td>{{ $item->id }}</td>
+    <td>
+        <a href="#" wire:click.prevent="read"> {{ $item->id }} </a>
+    </td>
     <td>{{ ucwords($item->first_name) }}</td>
     <td>{{ ucwords($item->last_name) }}</td>
     <td>{{ $item->phone }}</td>

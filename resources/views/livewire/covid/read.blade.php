@@ -98,8 +98,7 @@
                     </div>
       
                     <div class="col-12">
-                        <button wire:click.prevent="edit" class="btn btn-primary mr-1">{{ __('Edit') }}</button>
-                        <button wire:click.prevent="create" class="btn btn-outline-secondary">{{ __('Create Another') }}</button>
+                        <button wire:click.prevent="create" class="btn btn-primary">{{ __('Create Another') }}</button>
                     </div>
                 </div>
             </div>

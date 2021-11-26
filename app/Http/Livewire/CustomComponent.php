@@ -28,6 +28,7 @@ class CustomComponent extends Component
     public function __construct()
     {
         $this->to      = Carbon::now()->format('Y-m-d');
+        $this->from    = Carbon::now()->format('Y-m-d');
         $this->limit   = 10;
         $this->search  = "";
         $this->file_types = [
