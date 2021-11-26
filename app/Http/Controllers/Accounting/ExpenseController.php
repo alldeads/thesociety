@@ -59,7 +59,24 @@ class ExpenseController extends Controller
      */
     public function show($id)
     {
-        //
+        $this->authorize('expense.read');
+
+        $expense = Expense::findOrFail($id);
+
+        $breadcrumbs = [
+            ['link' => route('home'), 'name'=>"Dashboard"], 
+            ['link' => route('expenses.index'), 'name' => "Expenses"],
+            ['name' => "View Expense"],
+        ];
+
+        if ($this->getCompany()->id == $expense->company_id) {
+            return view('expense.read', [
+                'breadcrumbs' => $breadcrumbs,
+                'expense'     => $expense
+            ]);
+        }
+
+        return view('errors.403');
     }
 
     /**
@@ -77,7 +94,7 @@ class ExpenseController extends Controller
         $breadcrumbs = [
             ['link' => route('home'), 'name'=>"Dashboard"], 
             ['link' => route('expenses.index'), 'name' => "Expenses"],
-            ['name' => "Edit expense"],
+            ['name' => "Edit Expense"],
         ];
 
         if ($this->getCompany()->id == $expense->company_id) {

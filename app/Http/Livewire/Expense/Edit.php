@@ -50,6 +50,11 @@ class Edit extends CustomComponent
 		$this->emit('resetFile', 'attachment');
     }
 
+    public function read()
+	{
+		return redirect()->route('expenses.show', ['expense' => $this->expense->id]);
+	}
+
     public function submit()
     {
         Validator::make($this->inputs, [

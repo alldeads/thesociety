@@ -158,7 +158,7 @@
 		  
 						<div class="col-12">
 							<button wire:click.prevent="submit" class="btn btn-primary mr-1">{{ __('Update') }}</button>
-                            <button wire:click.prevent="submit" class="btn btn-secondary mr-1">{{ __('View') }}</button>
+                            <button wire:click.prevent="read" class="btn btn-secondary mr-1">{{ __('View') }}</button>
 							<button wire:click.prevent="resetBtn" class="btn btn-outline-secondary">{{ __('Reset') }}</button>
 						</div>
 					</div>

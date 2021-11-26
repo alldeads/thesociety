@@ -27,7 +27,7 @@ class CreateExpensesTable extends Migration
             $table->text('description')->nullable();
             $table->text('notes')->nullable();
             $table->text('attachment')->nullable();
-            $table->string('status')->default('confirmed');
+            $table->string('status')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });
