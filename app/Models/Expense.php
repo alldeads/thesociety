@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Carbon\Carbon;
 
 class Expense extends Model
 {
@@ -48,5 +49,37 @@ class Expense extends Model
     public function user_updated()
     {
         return $this->belongsTo(User::class, 'updated_by', 'id');
+    }
+
+    public function scopePerCompany($query)
+    {
+        $query->where('company_id', auth()->user()->empCard->company_id);
+    }
+
+    public static function getExpensesReport()
+    {
+        return [
+                [
+                    'label' => 'Today\'s Expenses', 
+                    'value' => Expense::getExpenses(Carbon::today(), Carbon::today()),
+                ],
+                [
+                    'label' => 'This Week Expenses', 
+                    'value' => Expense::getExpenses(Carbon::today()->startOfWeek(), Carbon::today()->endOfWeek()),
+                ],
+                [ 
+                    'label' => 'This Month Expenses', 
+                    'value' => Expense::getExpenses(Carbon::today()->startOfMonth(), Carbon::today()->endOfMonth()),
+                ],
+                [ 
+                    'label' => 'Last Month Expenses',
+                    'value' => Expense::getExpenses(Carbon::today()->subMonth()->startOfMonth(), Carbon::today()->subMonth()->endOfMonth()),
+                ]
+        ];
+    }
+
+    public static function getExpenses($date_from, $date_to)
+    {
+        return Expense::perCompany()->whereBetween('posting_date',[$date_from, $date_to])->sum('amount');
     }
 }

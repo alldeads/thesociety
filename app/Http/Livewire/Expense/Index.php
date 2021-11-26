@@ -54,11 +54,11 @@ class Index extends CustomComponent
                     });
 
         if ( !empty($from) ) {
-            $results = $results->whereDate('created_at', '>=', $from );
+            $results = $results->whereDate('posting_date', '>=', $from );
         }
 
         if ( !empty($to) ) {
-            $results = $results->whereDate('created_at', '<=', $to );
+            $results = $results->whereDate('posting_date', '<=', $to );
         }
 
         $results = $results->orderBy('id', 'desc')

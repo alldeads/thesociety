@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Accounting;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 
 use App\Models\Expense;
 
@@ -25,7 +24,8 @@ class ExpenseController extends Controller
 
         return view('expense.index', [
             'breadcrumbs' => $breadcrumbs,
-            'company'     => $this->getCompany()
+            'company'     => $this->getCompany(),
+            'reports'     => Expense::getExpensesReport()
         ]);
     }
 
