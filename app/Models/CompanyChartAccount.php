@@ -27,8 +27,18 @@ class CompanyChartAccount extends Model
     public static function getCompanyCharts()
     {
         return cache()->remember('app-company-charts', 60*60*24*360, function() {
-            return CompanyChartAccount::where('company_id', auth()->user()->empCard->company_id)->get();
+            return CompanyChartAccount::perCompany()->get();
         });
+    }
+
+    public function scopePerCompany($query)
+    {
+        $query->where('company_id', auth()->user()->empCard->company_id);
+    }
+
+    public function scopeExpenses($query)
+    {
+        $query->where('chart_type_id', 5);
     }
 
     public function company()

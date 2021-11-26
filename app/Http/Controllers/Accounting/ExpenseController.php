@@ -34,7 +34,18 @@ class ExpenseController extends Controller
      */
     public function create()
     {
-        //
+        $this->authorize('expense.create');
+
+        $breadcrumbs = [
+            ['link'=> route('home'), 'name'=>"Dashboard"], 
+            ['link'=> route('expenses.index'), 'name'=>"Expenses"], 
+            ['name'=>"New Expense"],
+        ];
+
+        return view('expense.create', [
+            'breadcrumbs' => $breadcrumbs,
+            'company'     => $this->getCompany()
+        ]);
     }
 
     /**

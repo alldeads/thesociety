@@ -65,6 +65,11 @@ class User extends Authenticatable
         return $this->hasOne(UserSetting::class);
     }
 
+    public function scopePerCompany($query)
+    {
+        $query->where('company_id', auth()->user()->empCard->company_id);
+    }
+
     public static function getSetting()
     {
         return cache()->remember('user-setting', 60*60*24, function() {

@@ -27,7 +27,7 @@ class Index extends CustomComponent
 
     public function create()
     {
-        return redirect()->route('expense.create');
+        return redirect()->route('expenses.create');
     }
 
     public function render()
