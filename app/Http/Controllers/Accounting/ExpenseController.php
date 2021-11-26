@@ -14,7 +14,17 @@ class ExpenseController extends Controller
      */
     public function index()
     {
-        //
+        $this->authorize('expense.view');
+
+        $breadcrumbs = [
+            ['link'=> route('home'), 'name'=>"Dashboard"], 
+            ['name'=>"Expenses"],
+        ];
+
+        return view('expense.index', [
+            'breadcrumbs' => $breadcrumbs,
+            'company'     => $this->getCompany()
+        ]);
     }
 
     /**

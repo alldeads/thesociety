@@ -1,23 +1,23 @@
 <?php
 
-namespace App\Http\Livewire\CashFlow;
+namespace App\Http\Livewire\Expense;
 
 use App\Http\Livewire\CustomComponent;
 use Illuminate\Database\Eloquent\Builder;
 
-use App\Models\CashFlow;
+use App\Models\Expense;
 
 class Index extends CustomComponent
 {
     public $listeners = [
-        'refreshCashFlowParent' => '$refresh'
+        'refreshExpenseParent' => '$refresh'
     ];
 
     public function mount()
     {
-        $this->placeholder = "Search account title, type, payee, or payor";
-        $this->permission  = "cashflow";
-        $this->export      = "cash-flow-export";
+        $this->placeholder = "Search title, description, notes, payee, or payor";
+        $this->permission  = "expense";
+        $this->export      = "expense-export";
     }
 
     public function updatingSearch()
@@ -27,7 +27,7 @@ class Index extends CustomComponent
 
     public function create()
     {
-        return redirect()->route('cash-flow.create');
+        return redirect()->route('expense.create');
     }
 
     public function render()
@@ -37,7 +37,7 @@ class Index extends CustomComponent
         $to     = $this->to;
         $limit  = $this->limit ?? 10;
 
-    	$results = CashFlow::where('company_id', $this->company_id)
+    	$results = Expense::where('company_id', $this->company_id)
                     ->where( function (Builder $query) use ($search) {
                         $query->whereHas('user', function($query) use ($search) {
                             return $query->whereHas('profile', function($query) use ($search) {
@@ -65,7 +65,7 @@ class Index extends CustomComponent
                     ->with(['user.profile', 'chart_account.type'])
                     ->paginate($limit);
                         
-        return view('livewire.cash-flow.index', [
+        return view('livewire.expense.index', [
             'results' => $results
         ]);
     }
