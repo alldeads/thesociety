@@ -35,12 +35,12 @@ class Read extends Component
 
     public function create()
     {
-        return redirect()->route('journal-entry-create');
+        return redirect()->route('journal-entry.create');
     }
 
     public function edit()
     {
-        return redirect()->route('journal-entry-edit', ['journal' => $this->journal->id]);
+        return redirect()->route('journal-entry.edit', ['journal_entry' => $this->journal->id]);
     }
 
     public function render()
