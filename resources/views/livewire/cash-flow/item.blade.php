@@ -1,5 +1,9 @@
 <tr>
-	<td>{{ $item->posting_date }}</td>
+	<td>
+		<a href="#" wire:click.prevent="read">
+			{{ $item->posting_date }}
+		</a>
+	</td>
 	<td>{{ $item->user->profile->name }}</td>
 	<td>{{ ucwords($item->chart_account->chart_name) }}</td>
 	<td>
