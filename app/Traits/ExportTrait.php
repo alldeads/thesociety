@@ -2,7 +2,7 @@
 
 namespace App\Traits;
 
-use App\Exports\ChartAccountExport;
+use Carbon\Carbon;
 
 trait ExportTrait 
 {   
@@ -22,6 +22,6 @@ trait ExportTrait
 
         $className = "\\App\\Exports\\" . $class;
 
-        return (new $className($q, $company_id, $from, $to))->download($class . '-' . now()->format('Y-m-d') . '.' . $requested_type);
+        return (new $className($q, $company_id, $from, $to))->download($class . '-' . Carbon::now()->format('Y-m-d') . '.' . $requested_type);
     }
 }
