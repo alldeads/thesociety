@@ -21,20 +21,25 @@ class ExpenseTableSeeder extends Seeder
         $companies = Company::all();
 
         foreach ($companies as $company) {
-        	$coa       = $company->chart_accounts->where('chart_type_id', 5)->random(1)->first()->id;
-        	$employees = $company->employees->random(1)->first()->id;
 
-        	$debit  = rand(10000, 50000);
+            $rand = rand(15,30);
 
-        	$expense = Expense::create([
-        		'company_id'      => $company->id,
-        		'created_by'      => 1,
-        		'updated_by'      => 1,
-        		'account_type_id' => $coa,
-        		'payor'           => $employees,
-        		'amount'          => $debit,
-                'posting_date'    => Carbon::now()->addDays(rand(0, 3))->format('Y-m-d')
-        	]);
+            for ($i = 0; $i < $rand; $i++) {
+                $coa       = $company->chart_accounts->where('chart_type_id', 5)->random(1)->first()->id;
+                $employees = $company->employees->random(1)->first()->id;
+
+                $debit  = rand(10000, 50000);
+
+                $expense = Expense::create([
+                    'company_id'      => $company->id,
+                    'created_by'      => 1,
+                    'updated_by'      => 1,
+                    'account_type_id' => $coa,
+                    'payor'           => $employees,
+                    'amount'          => $debit,
+                    'posting_date'    => Carbon::now()->addDays(rand(0, 3))->format('Y-m-d')
+                ]);
+            }	
         }
     }
 }
