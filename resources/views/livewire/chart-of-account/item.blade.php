@@ -1,5 +1,9 @@
 <tr>
-	<td>{{ $account->code }}</td>
+	<td>
+		<a href="#" wire:click.prevent="edit"> 
+			{{ $account->code }}
+		</a>
+	</td>
 	<td>{{ $account->chart_name }}</td>
 	<td>
 		<span class="badge badge-pill  badge-light-{{ $account->type->color }}">
