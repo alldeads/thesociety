@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Accounting;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
+use App\Models\Expense;
+
 class ExpenseController extends Controller
 {
     /**
@@ -48,16 +50,6 @@ class ExpenseController extends Controller
         ]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
 
     /**
      * Display the specified resource.
@@ -78,19 +70,24 @@ class ExpenseController extends Controller
      */
     public function edit($id)
     {
-        //
-    }
+        $this->authorize('expense.update');
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
+        $expense = Expense::findOrFail($id);
+
+        $breadcrumbs = [
+            ['link' => route('home'), 'name'=>"Dashboard"], 
+            ['link' => route('expenses.index'), 'name' => "Expenses"],
+            ['name' => "Edit expense"],
+        ];
+
+        if ($this->getCompany()->id == $expense->company_id) {
+            return view('expense.edit', [
+                'breadcrumbs' => $breadcrumbs,
+                'expense'     => $expense
+            ]);
+        }
+
+        return view('errors.403');
     }
 
     /**
