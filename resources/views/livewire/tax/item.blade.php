@@ -1,5 +1,9 @@
 <tr>
-	<td>{{ $item->id }}</td>
+	<td>
+		<a href="#" wire:click.prevent="edit">
+			{{ $item->id }}
+		</a>
+	</td>
 	<td>{{ $item->name }}</td>
 	<td>{{ $item->percentage }}</td>
 
