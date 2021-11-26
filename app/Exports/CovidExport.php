@@ -36,7 +36,7 @@ class CovidExport implements FromView
                         ->where(function (Builder $query) use ($search) {
                             return $query->where('first_name', 'like', "%". $search ."%")
                                         ->orWhere('phone', 'like', "%". $search ."%")
-                                        ->orWhere('city', 'like', "%". $search ."%")
+                                        ->orWhere('address', 'like', "%". $search ."%")
                                         ->orWhere('last_name', 'like', "%". $search ."%");
                         });
 
