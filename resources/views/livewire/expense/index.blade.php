@@ -35,5 +35,5 @@
       </div>
     </div>
 
-  {{-- @livewire('cash-flow.delete', ['company_id' => $company_id]) --}}
+    @livewire('expense.delete', ['company_id' => $company_id])
 </div>

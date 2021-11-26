@@ -14,7 +14,7 @@ class Item extends Component
 
 	public function delete()
 	{
-		$this->emit('deleteCashFlowItem', ['cashflow' => $this->item]);
+		$this->emit('deleteExpenseItem', ['expense' => $this->item]);
 	}
 
 	public function read()

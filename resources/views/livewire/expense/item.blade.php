@@ -14,7 +14,7 @@
 		<span class="badge badge-light-danger badge-pill"> {{ number_format($item->amount, 2,'.', ',') }} </span>
 	</td>
 
-	@if( auth()->user()->can('cashflow.update') || auth()->user()->can('cashflow.delete') || auth()->user()->can('cashflow.read') )
+	@if( auth()->user()->can('expense.update') || auth()->user()->can('expense.delete') || auth()->user()->can('expense.read') )
 
 		<td>
 			<div class="dropdown">
@@ -23,21 +23,21 @@
                 </button>
 
                 <div class="dropdown-menu">
-                	@can('cashflow.update')
+                	@can('expense.update')
 	                    <a class="dropdown-item" wire:click="edit" href="javascript:void(0);">
 	                      	<i class="fas fa-pen mr-1"></i>
 	                      	<span>Edit</span>
 	                    </a>
 	                @endcan
 
-	                @can('cashflow.read')
+	                @can('expense.read')
 	                    <a class="dropdown-item" wire:click="read" href="javascript:void(0);">
 	                      	<i class="fas fa-eye mr-1"></i>
 	                      	<span>View</span>
 	                    </a>
 	                @endcan
 
-                    @can('cashflow.delete')
+                    @can('expense.delete')
                         <a class="dropdown-item" wire:click="delete" href="javascript:void(0);">
                             <i class="fas fa-trash mr-1"></i>
                             <span>Delete</span>
