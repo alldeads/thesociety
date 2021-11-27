@@ -21,7 +21,7 @@ class Create extends CustomComponent
 
     public function mount()
     {
-        $this->users    = User::perCompany()->has('empCard')->get();
+        $this->users    = User::perCompany()->doesntHave('empCard')->get();
 
         $this->resetBtn();
     }
