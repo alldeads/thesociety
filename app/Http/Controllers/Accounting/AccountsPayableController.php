@@ -5,6 +5,9 @@ namespace App\Http\Controllers\Accounting;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
+use App\Models\Preference;
+use App\Models\AccountsPayable;
+
 class AccountsPayableController extends Controller
 {
     /**
@@ -24,6 +27,7 @@ class AccountsPayableController extends Controller
         return view('accounts-payable.index', [
             'breadcrumbs' => $breadcrumbs,
             'company'     => $this->getCompany(),
+            'showPage'    => $this->showPage()
             // 'reports'     => Expense::getExpensesReport()
         ]);
     }
@@ -45,7 +49,8 @@ class AccountsPayableController extends Controller
 
         return view('accounts-payable.create', [
             'breadcrumbs' => $breadcrumbs,
-            'company'     => $this->getCompany()
+            'company'     => $this->getCompany(),
+            'showPage'    => $this->showPage()
         ]);
     }
 
@@ -93,5 +98,21 @@ class AccountsPayableController extends Controller
         $this->authorize('accounts_payable.export');
 
         return $this->exportModule($request->all(), 'AccountsPayableExport', $this->getCompany()->id);
+    }
+
+    private function showPage()
+    {
+        $showPage = true;
+
+        $preference = Preference::perCompany()->first();
+
+        if ( !$preference || !$preference->account_payable ) {
+            $showPage = false;
+        }
+
+        return [
+            'showPage'   => $showPage,
+            'preference' => $preference
+        ];
     }
 }

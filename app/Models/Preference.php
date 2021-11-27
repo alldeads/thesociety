@@ -20,4 +20,19 @@ class Preference extends Model
         'account_receivable',
         'expenses',
     ];
+
+    public function company()
+    {
+        return $this->belongsTo(Company::class);
+    }
+
+    public function scopePerCompany($query)
+    {
+        $query->where('company_id', auth()->user()->empCard->company_id);
+    }
+
+    public function payable()
+    {
+        return $this->belongsTo(CompanyChartAccount::class, 'account_payable', 'id');
+    }
 }

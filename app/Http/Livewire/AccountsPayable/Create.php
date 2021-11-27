@@ -8,31 +8,32 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Storage;
 use Carbon\Carbon;
 
-use App\Models\ChartType;
 use App\Models\User;
-use App\Models\CompanyChartAccount;
 use App\Models\AccountsPayable;
 
 class Create extends CustomComponent
 {
     public $company_id;
-    public $accounts;
     public $users;
+    public $preference;
 
     public $inputs = [];
 
     public function mount()
     {
-        $this->accounts = CompanyChartAccount::perCompany()->expenses()->get();
         $this->users    = User::perCompany()->has('empCard')->get();
 
-        $this->inputs['posting_date'] = Carbon::now()->format('Y-m-d');
+        $this->resetBtn();
     }
 
     public function resetBtn()
     {
         $this->inputs = [];
-        $this->inputs['posting_date'] = Carbon::now()->format('Y-m-d');
+
+        $this->inputs['posting_date']  = Carbon::now()->format('Y-m-d');
+        $this->inputs['account_title'] = $this->preference->account_payable;
+        $this->inputs['account_title_label'] = $this->preference->payable->chart_name ?? 'N/A';
+        
         $this->emit('resetFile', 'attachment');
     }
 

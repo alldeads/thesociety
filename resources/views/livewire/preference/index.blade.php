@@ -21,9 +21,9 @@
                                 <label class="form-label" for="account_payable">{{ __('Accounts Payable') }}</label>
 
                                 <select class="form-control @error('account_payable') is-invalid @enderror" id="account_payable" wire:model.defer="inputs.account_payable">
-			            			<option> {{ __('Select Account Type') }}</option>
+			            			<option> {{ __('Select Account Title') }}</option>
 			            			@foreach($accounts as $account)
-										<option value="{{ $account->id }}"> {{ ucwords($account->chart_name) }}</option>
+										<option value="{{ $account->id }}"> {{ "($account->code) - " . ucwords($account->chart_name) }}</option>
 									@endforeach
 			            		</select>
 
@@ -40,9 +40,9 @@
                                 <label class="form-label" for="account_receivable">{{ __('Accounts Receivable') }} </label>
 
                                 <select class="form-control @error('account_receivable') is-invalid @enderror" id="account_receivable" wire:model.defer="inputs.account_receivable">
-			            			<option> {{ __('Select Account Type') }}</option>
+			            			<option> {{ __('Select Account Title') }}</option>
 			            			@foreach($accounts as $account)
-										<option value="{{ $account->id }}"> {{ ucwords($account->chart_name) }}</option>
+                                        <option value="{{ $account->id }}"> {{ "($account->code) - " . ucwords($account->chart_name) }}</option>
 									@endforeach
 			            		</select>
 

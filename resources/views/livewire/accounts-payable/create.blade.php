@@ -36,7 +36,7 @@
 									{{ __('Account Title') }} <span class="asterisk">*</span>
 								</label>
 
-								<input type="text" wire:model.defer="inputs.account_title" id="account_title" class="form-control" readonly>
+								<input type="text" wire:model.defer="inputs.account_title_label" id="account_title" class="form-control" readonly>
 							</div>
 						</div>
 
