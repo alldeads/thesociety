@@ -35,7 +35,18 @@ class AccountsPayableController extends Controller
      */
     public function create()
     {
-        //
+        $this->authorize('accounts_payable.create');
+
+        $breadcrumbs = [
+            ['link'=> route('home'), 'name'=>"Dashboard"], 
+            ['link'=> route('accounts-payable.index'), 'name'=>"Accounts Payable"], 
+            ['name'=>"New Accounts Payable"],
+        ];
+
+        return view('accounts-payable.create', [
+            'breadcrumbs' => $breadcrumbs,
+            'company'     => $this->getCompany()
+        ]);
     }
 
     /**
