@@ -29,7 +29,6 @@ class Index extends CustomComponent
 		$this->inputs = [
             'account_payable'     => $this->preference->account_payable ?? null,
             'account_receivable'  => $this->preference->account_receivable ?? null,
-            'expenses'            => $this->preference->expenses ?? null,
             'company'             => $this->company_id
         ];
 	}
@@ -39,7 +38,6 @@ class Index extends CustomComponent
         Validator::make($this->inputs ?? [], [
             'account_payable'    => ['nullable', 'exists:company_chart_accounts,id'],
             'account_receivable' => ['nullable', 'exists:company_chart_accounts,id'],
-            'expenses'           => ['nullable', 'exists:company_chart_accounts,id'],
         ])->validate();
 
         try {
@@ -48,7 +46,6 @@ class Index extends CustomComponent
             ],[
                 'account_payable'    => $this->inputs['account_payable'] ?? null,
                 'account_receivable' => $this->inputs['account_receivable'] ?? null,
-                'expenses'           => $this->inputs['expenses'] ?? null
             ]);
     
             $this->message('Preferences has been updated.', 'success');

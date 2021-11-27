@@ -53,25 +53,6 @@
                                 @enderror
                             </div>
                         </div>
-
-                        <div class="col-md-6 col-12">
-                            <div class="form-group">
-                                <label class="form-label" for="expenses">{{ __('Expenses') }} </label>
-
-                                <select class="form-control @error('expenses') is-invalid @enderror" id="expenses" wire:model.defer="inputs.expenses">
-			            			<option> {{ __('Select Account Type') }}</option>
-			            			@foreach($accounts as $account)
-										<option value="{{ $account->id }}"> {{ ucwords($account->chart_name) }}</option>
-									@endforeach
-			            		</select>
-
-                                @error('expenses')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
           
                         <div class="col-12">
                             <button wire:click.prevent="submit" class="btn btn-primary mr-1">{{ __('Save Changes') }}</button>
