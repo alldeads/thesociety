@@ -38,6 +38,9 @@ Route::middleware('auth')->group(function() {
 
 		Route::get('expenses/export', 'Accounting\ExpenseController@export')->name('expense-export');
 		Route::resource('expenses', Accounting\ExpenseController::class);
+
+		Route::get('accounts-payable/export', 'Accounting\AccountsPayableController@export')->name('accounts-payable-export');
+		Route::resource('accounts-payable', Accounting\AccountsPayableController::class);
 	});
 
 	Route::prefix('sales')->group( function() {
