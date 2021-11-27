@@ -27,9 +27,9 @@ class Index extends CustomComponent
     public function resetBtn()
 	{
 		$this->inputs = [
-            'account_payable'     => $this->preference->account_payable,
-            'account_receivable'  => $this->preference->account_receivable,
-            'expenses'            => $this->preference->expenses,
+            'account_payable'     => $this->preference->account_payable ?? null,
+            'account_receivable'  => $this->preference->account_receivable ?? null,
+            'expenses'            => $this->preference->expenses ?? null,
             'company'             => $this->company_id
         ];
 	}
