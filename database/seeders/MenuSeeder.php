@@ -77,6 +77,16 @@ class MenuSeeder extends Seeder
         ]);
 
         $header->menus()->create([
+            'name'       => 'Accounts Payable',
+            'slug'       => 'accounts-payable',
+            'url'        => 'accounting/accounts-payable',
+            'base'       => 'accounts_payable',
+            'is_export'  => true,
+            'icon'       => 'minus-square',
+            'permission' => 'accounts_payable.view'
+        ]);
+
+        $header->menus()->create([
             'name'       => 'Journal Entries',
             'slug'       => 'journal-entry',
             'url'        => 'accounting/journal-entry',
