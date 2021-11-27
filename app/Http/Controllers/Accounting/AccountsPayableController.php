@@ -72,25 +72,15 @@ class AccountsPayableController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * Export module
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function export(Request $request)
     {
-        //
-    }
+        $this->authorize('accounts_payable.export');
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+        return $this->exportModule($request->all(), 'AccountsPayableExport', $this->getCompany()->id);
     }
 }
