@@ -3,26 +3,14 @@
 namespace App\Exports;
 
 use App\Models\CompanyRole;
-
+use App\Exports\Export;
 use Illuminate\Contracts\View\View;
 use Maatwebsite\Excel\Concerns\FromView;
-use Maatwebsite\Excel\Concerns\Exportable;
 
 use Illuminate\Database\Eloquent\Builder;
 
-class RoleExport implements FromView
+class RoleExport extends Export implements FromView
 {
-	use Exportable;
-
-	public $search;
-	public $company_id;
-
-    public function __construct($search, $company_id)
-    {
-        $this->search     = $search;
-        $this->company_id = $company_id;
-    }
-
     public function view(): View
     {
         $search = $this->search;

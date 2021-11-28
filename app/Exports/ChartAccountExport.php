@@ -4,22 +4,12 @@ namespace App\Exports;
 
 use App\Models\CompanyChartAccount;
 use App\Exports\Export;
-
 use Illuminate\Contracts\View\View;
 use Maatwebsite\Excel\Concerns\FromView;
-
 use Illuminate\Database\Eloquent\Builder;
 
 class ChartAccountExport extends Export implements FromView
 {
-    public function __construct($search, $company_id, $from, $to)
-    {
-        $this->search     = $search;
-        $this->company_id = $company_id;
-        $this->from       = $from;
-        $this->to         = $to;
-    }
-
     public function view(): View
     {
         $search = $this->search;
