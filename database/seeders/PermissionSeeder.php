@@ -24,7 +24,7 @@ class PermissionSeeder extends Seeder
             'journal_entry', 'ledger', 'branch', 'stock_level',
             'history', 'pos', 'sale', 'covid', 'payment_type',
             'access', 'payment', 'invoice', 'expense', 'receipt',
-            'preference', 'accounts_payable'
+            'preference', 'accounts_payable', 'accounts_receivable'
         ];
 
         foreach ($menus as $menu) {

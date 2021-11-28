@@ -87,6 +87,16 @@ class MenuSeeder extends Seeder
         ]);
 
         $header->menus()->create([
+            'name'       => 'Accounts Receivable',
+            'slug'       => 'accounts-receivable',
+            'url'        => 'accounting/accounts-receivable',
+            'base'       => 'accounts_receivable',
+            'is_export'  => true,
+            'icon'       => 'plus-square',
+            'permission' => 'accounts_receivable.view'
+        ]);
+
+        $header->menus()->create([
             'name'       => 'Journal Entries',
             'slug'       => 'journal-entry',
             'url'        => 'accounting/journal-entry',
