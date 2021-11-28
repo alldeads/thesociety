@@ -27,8 +27,8 @@ class AccountsReceivableController extends Controller
         return view('accounts-receivable.index', [
             'breadcrumbs' => $breadcrumbs,
             'company'     => $this->getCompany(),
-            'showPage'    => $this->showPage()
-            // 'reports'     => Expense::getExpensesReport()
+            'showPage'    => $this->showPage(),
+            'reports'     => AccountsReceivable::getReceivablesReport()
         ]);
     }
 

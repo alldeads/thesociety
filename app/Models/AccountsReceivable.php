@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Carbon\Carbon;
 
 class AccountsReceivable extends Model
 {
@@ -54,5 +55,32 @@ class AccountsReceivable extends Model
     public function scopePerCompany($query)
     {
         $query->where('company_id', auth()->user()->empCard->company_id);
+    }
+
+    public static function getReceivables($date_from, $date_to)
+    {
+        return AccountsReceivable::perCompany()->whereBetween('posting_date',[$date_from, $date_to])->sum('amount');
+    }
+
+    public static function getReceivablesReport()
+    {
+        return [
+            [
+                'label' => 'Today\'s Receivables', 
+                'value' => AccountsReceivable::getReceivables(Carbon::today(), Carbon::today()),
+            ],
+            [
+                'label' => 'This Week Receivables', 
+                'value' => AccountsReceivable::getReceivables(Carbon::today()->startOfWeek(), Carbon::today()->endOfWeek()),
+            ],
+            [ 
+                'label' => 'This Month Receivables', 
+                'value' => AccountsReceivable::getReceivables(Carbon::today()->startOfMonth(), Carbon::today()->endOfMonth()),
+            ],
+            [ 
+                'label' => 'Last Month Receivables',
+                'value' => AccountsReceivable::getReceivables(Carbon::today()->subMonth()->startOfMonth(), Carbon::today()->subMonth()->endOfMonth()),
+            ]
+        ];
     }
 }
