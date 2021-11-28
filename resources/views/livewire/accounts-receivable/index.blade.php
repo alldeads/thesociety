@@ -35,5 +35,5 @@
       </div>
     </div>
 
-    {{-- @livewire('accounts-payable.delete', ['company_id' => $company_id]) --}}
+    @livewire('accounts-receivable.delete', ['company_id' => $company_id])
 </div>
