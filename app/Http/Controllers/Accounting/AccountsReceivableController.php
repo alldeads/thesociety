@@ -5,6 +5,9 @@ namespace App\Http\Controllers\Accounting;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
+use App\Models\Preference;
+use App\Models\AccountsReceivable;
+
 class AccountsReceivableController extends Controller
 {
     /**
@@ -14,14 +17,14 @@ class AccountsReceivableController extends Controller
      */
     public function index()
     {
-        $this->authorize('accounts_payable.view');
+        $this->authorize('accounts_receivable.view');
 
         $breadcrumbs = [
             ['link'=> route('home'), 'name'=>"Dashboard"], 
-            ['name'=>"Accounts Payable"],
+            ['name'=>"Accounts Receivable"],
         ];
 
-        return view('accounts-payable.index', [
+        return view('accounts-receivable.index', [
             'breadcrumbs' => $breadcrumbs,
             'company'     => $this->getCompany(),
             'showPage'    => $this->showPage()
@@ -72,26 +75,19 @@ class AccountsReceivableController extends Controller
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
+    private function showPage()
     {
-        //
-    }
+        $showPage = true;
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+        $preference = Preference::perCompany()->first();
+
+        if ( !$preference || !$preference->account_receivable ) {
+            $showPage = false;
+        }
+
+        return [
+            'showPage'   => $showPage,
+            'preference' => $preference
+        ];
     }
 }

@@ -41,6 +41,9 @@ Route::middleware('auth')->group(function() {
 
 		Route::get('accounts-payable/export', 'Accounting\AccountsPayableController@export')->name('accounts-payable-export');
 		Route::resource('accounts-payable', Accounting\AccountsPayableController::class);
+
+		Route::get('accounts-receivable/export', 'Accounting\AccountsReceivableController@export')->name('accounts-receivable-export');
+		Route::resource('accounts-receivable', Accounting\AccountsReceivableController::class);
 	});
 
 	Route::prefix('sales')->group( function() {
