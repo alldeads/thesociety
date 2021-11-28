@@ -55,17 +55,6 @@ class AccountsReceivableController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
      * Display the specified resource.
      *
      * @param  int  $id
@@ -84,7 +73,25 @@ class AccountsReceivableController extends Controller
      */
     public function edit($id)
     {
-        //
+        $this->authorize('accounts_receivable.update');
+
+        $receivable = AccountsReceivable::findOrFail($id);
+
+        $breadcrumbs = [
+            ['link' => route('home'), 'name'=>"Dashboard"], 
+            ['link' => route('accounts-receivable.index'), 'name' => "Accounts Receivable"],
+            ['name' => "Edit Accounts Receivable"],
+        ];
+
+        if ($this->getCompany()->id == $receivable->company_id) {
+            return view('accounts-receivable.edit', [
+                'breadcrumbs' => $breadcrumbs,
+                'receivable'  => $receivable,
+                'showPage'    => $this->showPage()
+            ]);
+        }
+
+        return view('errors.403');
     }
 
     /**
