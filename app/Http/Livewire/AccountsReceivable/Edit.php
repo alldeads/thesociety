@@ -50,7 +50,7 @@ class Edit extends CustomComponent
 
     public function read()
 	{
-		return redirect()->route('accounts-payable.show', ['accounts_payable' => $this->payable->id]);
+		return redirect()->route('accounts-receivable.show', ['accounts_receivable' => $this->receivable->id]);
 	}
 
     public function submit()

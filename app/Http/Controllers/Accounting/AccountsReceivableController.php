@@ -62,7 +62,25 @@ class AccountsReceivableController extends Controller
      */
     public function show($id)
     {
-        //
+        $this->authorize('accounts_receivable.read');
+
+        $receivable = AccountsReceivable::findOrFail($id);
+
+        $breadcrumbs = [
+            ['link' => route('home'), 'name'=>"Dashboard"], 
+            ['link' => route('accounts-receivable.index'), 'name' => "Accounts Receivable"],
+            ['name' => "View Accounts Receivable"],
+        ];
+
+        if ($this->getCompany()->id == $receivable->company_id) {
+            return view('accounts-receivable.read', [
+                'breadcrumbs' => $breadcrumbs,
+                'receivable'  => $receivable,
+                'showPage'    => $this->showPage()
+            ]);
+        }
+
+        return view('errors.403');
     }
 
     /**
