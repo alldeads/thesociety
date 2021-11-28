@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Carbon\Carbon;
 
 class AccountsPayable extends Model
 {
@@ -54,5 +55,32 @@ class AccountsPayable extends Model
     public function scopePerCompany($query)
     {
         $query->where('company_id', auth()->user()->empCard->company_id);
+    }
+
+    public static function getPayables($date_from, $date_to)
+    {
+        return AccountsPayable::perCompany()->whereBetween('posting_date',[$date_from, $date_to])->sum('amount');
+    }
+
+    public static function getPayablesReport()
+    {
+        return [
+            [
+                'label' => 'Today\'s Payables', 
+                'value' => AccountsPayable::getPayables(Carbon::today(), Carbon::today()),
+            ],
+            [
+                'label' => 'This Week Payables', 
+                'value' => AccountsPayable::getPayables(Carbon::today()->startOfWeek(), Carbon::today()->endOfWeek()),
+            ],
+            [ 
+                'label' => 'This Month Payables', 
+                'value' => AccountsPayable::getPayables(Carbon::today()->startOfMonth(), Carbon::today()->endOfMonth()),
+            ],
+            [ 
+                'label' => 'Last Month Payables',
+                'value' => AccountsPayable::getPayables(Carbon::today()->subMonth()->startOfMonth(), Carbon::today()->subMonth()->endOfMonth()),
+            ]
+        ];
     }
 }

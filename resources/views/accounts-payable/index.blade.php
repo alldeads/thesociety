@@ -3,7 +3,7 @@
 @section('title', 'Accounts Payable')
 
 @section('content')
-	{{-- @include('panels.report') --}}
+	@include('panels.report')
 	
 	@if ($showPage['showPage'] === true)
 		@livewire('accounts-payable.index', ['company_id' => $company->id])

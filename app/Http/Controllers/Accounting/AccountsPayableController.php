@@ -27,8 +27,8 @@ class AccountsPayableController extends Controller
         return view('accounts-payable.index', [
             'breadcrumbs' => $breadcrumbs,
             'company'     => $this->getCompany(),
-            'showPage'    => $this->showPage()
-            // 'reports'     => Expense::getExpensesReport()
+            'showPage'    => $this->showPage(),
+            'reports'     => AccountsPayable::getPayablesReport()
         ]);
     }
 
