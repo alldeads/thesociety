@@ -27,7 +27,8 @@ class AccountsPayable extends Model
         'account_no',
         'check_no',
         'posting_date',
-        'description'
+        'description',
+        'status'
     ];
 
     public function chart_account()

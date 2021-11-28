@@ -62,7 +62,25 @@ class AccountsPayableController extends Controller
      */
     public function show($id)
     {
-        //
+        $this->authorize('accounts_payable.read');
+
+        $payable = AccountsPayable::findOrFail($id);
+
+        $breadcrumbs = [
+            ['link' => route('home'), 'name'=>"Dashboard"], 
+            ['link' => route('accounts-payable.index'), 'name' => "Accounts Payable"],
+            ['name' => "View Accounts Payable"],
+        ];
+
+        if ($this->getCompany()->id == $payable->company_id) {
+            return view('accounts-payable.read', [
+                'breadcrumbs' => $breadcrumbs,
+                'payable'     => $payable,
+                'showPage'    => $this->showPage()
+            ]);
+        }
+
+        return view('errors.403');
     }
 
     /**

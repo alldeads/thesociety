@@ -91,6 +91,7 @@ class Edit extends CustomComponent
                 'notes'            => $this->inputs['notes'] ?? null,
                 'attachment'       => $attachment ?? null,
                 'amount'           => $this->inputs['amount'] ?? null,
+                'status'           => $this->inputs['status'] ?? null,
             ]);
 
             $ap->save();
