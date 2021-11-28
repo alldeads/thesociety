@@ -75,6 +75,19 @@ class AccountsReceivableController extends Controller
         //
     }
 
+    /**
+     * Export module
+     *
+     * @param  Illuminate\Http\Request $request
+     * @return \Illuminate\Http\Response
+     */
+    public function export(Request $request)
+    {
+        $this->authorize('accounts_receivable.export');
+
+        return $this->exportModule($request->all(), 'AccountsReceivableExport', $this->getCompany()->id);
+    }
+
     private function showPage()
     {
         $showPage = true;
