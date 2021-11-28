@@ -98,6 +98,10 @@
 							<div class="form-group">
 								<label class="form-label" for="attachment">{{ __('Attachment') }} (<em>{{ __('optional') }}</em>)</label>
 								<input type="file" id="attachment" class="form-control" wire:model.defer="inputs.attachment">
+
+                                @if ($inputs['old_attachment'])
+									<span> <a href="{{ $inputs['old_attachment'] }}" target="_blank"> View Attachment</a></span>
+								@endif
 							</div>
 						</div>
 
@@ -145,7 +149,8 @@
 						</div>
 		  
 						<div class="col-12">
-							<button wire:click.prevent="submit" class="btn btn-primary mr-1">{{ __('Create') }}</button>
+							<button wire:click.prevent="submit" class="btn btn-primary mr-1">{{ __('Update') }}</button>
+                            <button wire:click.prevent="read" class="btn btn-secondary mr-1">{{ __('View') }}</button>
 							<button wire:click.prevent="resetBtn" class="btn btn-outline-secondary">{{ __('Reset') }}</button>
 						</div>
 					</div>

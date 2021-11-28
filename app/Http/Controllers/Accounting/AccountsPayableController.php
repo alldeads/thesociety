@@ -55,17 +55,6 @@ class AccountsPayableController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
      * Display the specified resource.
      *
      * @param  int  $id
@@ -84,7 +73,25 @@ class AccountsPayableController extends Controller
      */
     public function edit($id)
     {
-        //
+        $this->authorize('accounts_payable.update');
+
+        $payable = AccountsPayable::findOrFail($id);
+
+        $breadcrumbs = [
+            ['link' => route('home'), 'name'=>"Dashboard"], 
+            ['link' => route('accounts-payable.index'), 'name' => "Accounts Payable"],
+            ['name' => "Edit Accounts Payable"],
+        ];
+
+        if ($this->getCompany()->id == $payable->company_id) {
+            return view('accounts-payable.edit', [
+                'breadcrumbs' => $breadcrumbs,
+                'payable'     => $payable,
+                'showPage'    => $this->showPage()
+            ]);
+        }
+
+        return view('errors.403');
     }
 
     /**

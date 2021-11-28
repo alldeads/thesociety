@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire\Expense;
+namespace App\Http\Livewire\AccountsPayable;
 
 use DB;
 use App\Http\Livewire\CustomComponent;
@@ -8,50 +8,49 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Storage;
 use Carbon\Carbon;
 
-use App\Models\ChartType;
 use App\Models\User;
-use App\Models\CompanyChartAccount;
-use App\Models\Expense;
+use App\Models\AccountsPayable;
 
 class Edit extends CustomComponent
 {
-    public $accounts;
+    public $company_id;
     public $users;
-    public $expense;
+    public $preference;
+    public $payable;
 
     public $inputs = [];
 
     public function mount()
     {
-        $this->accounts = CompanyChartAccount::perCompany()->expenses()->get();
-        $this->users    = User::perCompany()->has('empCard')->get();
+        $this->users    = User::perCompany()->doesntHave('empCard')->get();
 
         $this->resetBtn();
     }
 
     public function resetBtn()
     {
-        $expense = $this->expense;
+        $payable = $this->payable;
 
 		$this->inputs = [
-			'posting_date'   => $expense->posting_date,
-			'account_title'  => $expense->account_type_id,
-			'account_number' => $expense->account_no,
-			'check_no'       => $expense->check_no,
-			'amount'         => $expense->amount,
-			'payor'          => $expense->payor,
-			'old_attachment' => $expense->attachment,
-			'description'    => $expense->description,
-			'notes'          => $expense->notes,
-            'status'         => $expense->status
+			'posting_date'   => $payable->posting_date,
+			'account_title'  => $payable->account_type_id,
+            'account_title_label' => $payable->chart_account->chart_name ?? 'N/A',
+			'account_number' => $payable->account_no,
+			'check_no'       => $payable->check_no,
+			'amount'         => $payable->amount,
+			'payor'          => $payable->payor,
+			'old_attachment' => $payable->attachment,
+			'description'    => $payable->description,
+			'notes'          => $payable->notes,
+            'status'         => $payable->status
 		];
-
-		$this->emit('resetFile', 'attachment');
+        
+        $this->emit('resetFile', 'attachment');
     }
 
     public function read()
 	{
-		return redirect()->route('expenses.show', ['expense' => $this->expense->id]);
+		return redirect()->route('accounts-payable.show', ['accounts_payable' => $this->payable->id]);
 	}
 
     public function submit()
@@ -80,11 +79,10 @@ class Edit extends CustomComponent
                 $attachment = Storage::url($this->inputs['attachment']->store('attachments'));
             }
 
-            $exp = Expense::find($this->expense->id);
+            $ap = AccountsPayable::find($this->payable->id);
 
-            $exp->fill([
+            $ap->fill([
                 'updated_by'       => auth()->id(),
-                'account_type_id'  => $this->inputs['account_title'],
                 'account_no'       => $this->inputs['account_number'] ?? null,
                 'check_no'         => $this->inputs['check_no'] ?? null,
                 'posting_date'     => $this->inputs['posting_date'],
@@ -95,15 +93,15 @@ class Edit extends CustomComponent
                 'amount'           => $this->inputs['amount'] ?? null,
             ]);
 
-            $exp->save();
+            $ap->save();
 
             DB::commit();
 
             $this->emit('resetFile', 'attachment');
 
-            $this->message('Expense has been updated', 'success');
+            $this->message('Accounts Payable has been updated', 'success');
 
-            $this->expense = $exp;
+            $this->payable = $ap;
 
         } catch (\Exception $e) {
             DB::rollback();
@@ -114,6 +112,6 @@ class Edit extends CustomComponent
 
     public function render()
     {
-        return view('livewire.expense.edit');
+        return view('livewire.accounts-payable.edit');
     }
 }

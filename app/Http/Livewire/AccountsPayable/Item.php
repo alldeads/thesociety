@@ -19,12 +19,12 @@ class Item extends Component
 
 	public function read()
 	{
-		return redirect()->route('accounts-payable.show', ['accounts-payable' => $this->item->id]);
+		return redirect()->route('accounts-payable.show', ['accounts_payable' => $this->item->id]);
 	}
 
 	public function edit()
 	{
-		return redirect()->route('accounts-payable.edit', ['accounts-payable' => $this->item->id]);
+		return redirect()->route('accounts-payable.edit', ['accounts_payable' => $this->item->id]);
 	}
 
     public function render()
