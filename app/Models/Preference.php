@@ -35,4 +35,9 @@ class Preference extends Model
     {
         return $this->belongsTo(CompanyChartAccount::class, 'account_payable', 'id');
     }
+
+    public function receivable()
+    {
+        return $this->belongsTo(CompanyChartAccount::class, 'account_receivable', 'id');
+    }
 }

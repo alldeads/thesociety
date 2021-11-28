@@ -39,7 +39,19 @@ class AccountsReceivableController extends Controller
      */
     public function create()
     {
-        //
+        $this->authorize('accounts_receivable.create');
+
+        $breadcrumbs = [
+            ['link'=> route('home'), 'name'=>"Dashboard"], 
+            ['link'=> route('accounts-receivable.index'), 'name'=>"Accounts Receivable"], 
+            ['name'=>"New Accounts Receivable"],
+        ];
+
+        return view('accounts-receivable.create', [
+            'breadcrumbs' => $breadcrumbs,
+            'company'     => $this->getCompany(),
+            'showPage'    => $this->showPage()
+        ]);
     }
 
     /**
