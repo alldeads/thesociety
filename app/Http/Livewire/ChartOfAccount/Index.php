@@ -19,6 +19,14 @@ class Index extends CustomComponent
         $this->placeholder = "Search account title, account type, and code";
         $this->permission  = "chart";
         $this->export      = "chart-accounts-export";
+        $this->baseView    = "chart-of-account";
+        
+        $this->columns     = [
+            'Code', 'Title', 'Type'
+        ];
+
+        $this->columnCount    = $this->getColumns();
+        $this->hasPermissions = $this->isUserHasPermissions();
     }
 
     public function updatingSearch()

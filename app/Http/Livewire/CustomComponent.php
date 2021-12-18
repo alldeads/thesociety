@@ -26,6 +26,8 @@ class CustomComponent extends Component
     public $placeholder;
     public $dates;
     public $defined_dates;
+    public $columns;
+    public $default_date;
 
     public function __construct()
     {
@@ -77,5 +79,26 @@ class CustomComponent extends Component
 
         $this->to      = $this->dates['this-month'][1];
         $this->from    = $this->dates['this-month'][0];
+        $this->defined_dates = 'this-month';
+    }
+
+    public function getColumns()
+    {
+        $count = count($this->columns);
+
+        return $this->isUserHasPermissions() ? $count + 1 : $count;
+    }
+
+    public function isUserHasPermissions()
+    {
+        $permissions   = ['read', 'create', 'update'];
+
+        foreach ($permissions as $permission) {
+            if (auth()->user()->can($this->permission . '.' . $permission)) {
+                return true;
+            }
+        }
+
+        return false;
     }
 }

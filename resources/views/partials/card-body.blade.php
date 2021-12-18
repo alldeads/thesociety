@@ -33,28 +33,28 @@
 	</div>
 	<hr>
 	<div class="row">
-		<div class="col-lg-4 col-md-6 col-sm-12 mt-1">
+		<div class="col-lg-4 col-md-6 col-sm-12 col-xl-3 mt-1">
 			<div class="form-group">
 				<label class="form-label" for="search">Search keywords</label>
 	          	<input type="text" class="form-control" id="search" placeholder="{{ $placeholder }}" wire:model="search"/>
 			</div>
 		</div>
 
-		<div class="col-md-2 col-lg-2 col-sm-12 mt-1">
+		<div class="col-md-2 col-lg-2 col-sm-12 col-xl-2 mt-1">
 			<div class="form-group">
 				<label class="form-label" for="date_from">Date From</label>
 	          	<input type="text" class="form-control basicpkr" id="date_from" placeholder="Date From" wire:model="from" />
 			</div>
 		</div>
 
-		<div class="col-md-2 col-lg-2 col-sm-12 mt-1">
+		<div class="col-md-2 col-lg-2 col-sm-12 col-xl-2 mt-1">
 			<div class="form-group">
 				<label class="form-label" for="date_from">Date To</label>
 	          	<input type="text" class="form-control basicpkr" id="date_to" placeholder="Date To" wire:model="to" />
 			</div>
 		</div>
 
-		<div class="col-md-2 col-lg-2 col-sm-12 mt-1">
+		<div class="col-md-2 col-lg-2 col-sm-12 col-xl-2 mt-1">
 			<div class="form-group">
 				<label class="form-label" for="dates">Default Dates</label>
 				<select class="form-control" id="dates" wire:model="defined_dates">
@@ -66,7 +66,7 @@
 			</div>
 		</div>
 
-		<div class="col-lg-2 col-md-10 col-sm-12 mt-1">
+		<div class="col-lg-2 col-md-12 col-sm-12 col-xl-3 mt-1">
 			<div class="form-group">
 				<label class="form-label" for="entries">Entries</label>
 	          	<select class="form-control" id="entries" wire:model="limit">
