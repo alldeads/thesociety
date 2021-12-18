@@ -33,9 +33,9 @@
 	</div>
 	<hr>
 	<div class="row">
-		<div class="col-lg-6 col-md-6 col-sm-12 mt-1">
+		<div class="col-lg-4 col-md-6 col-sm-12 mt-1">
 			<div class="form-group">
-				<label class="form-label" for="search">Date From</label>
+				<label class="form-label" for="search">Search keywords</label>
 	          	<input type="text" class="form-control" id="search" placeholder="{{ $placeholder }}" wire:model="search"/>
 			</div>
 		</div>
@@ -51,6 +51,18 @@
 			<div class="form-group">
 				<label class="form-label" for="date_from">Date To</label>
 	          	<input type="text" class="form-control basicpkr" id="date_to" placeholder="Date To" wire:model="to" />
+			</div>
+		</div>
+
+		<div class="col-md-2 col-lg-2 col-sm-12 mt-1">
+			<div class="form-group">
+				<label class="form-label" for="dates">Default Dates</label>
+				<select class="form-control" id="dates" wire:model="defined_dates">
+
+					@foreach($dates as $x => $date)
+						<option value="{{ $x }}">{{ __(ucwords(str_replace('-', ' ', $x))) }}</option>
+					@endforeach
+				</select>
 			</div>
 		</div>
 

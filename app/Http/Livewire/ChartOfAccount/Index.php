@@ -33,6 +33,11 @@ class Index extends CustomComponent
 
     public function render()
     {
+        if ( $this->defined_dates && isset($this->dates[$this->defined_dates]) ) {
+            $this->from = $this->dates[$this->defined_dates][0] ?? Carbon::now()->format('Y-m-d');
+            $this->to   = $this->dates[$this->defined_dates][1] ?? Carbon::now()->format('Y-m-d');
+        }
+
     	$search = $this->search ?? '';
         $limit  = $this->limit ?? 10;
         $from   = $this->from;

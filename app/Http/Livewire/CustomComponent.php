@@ -24,13 +24,14 @@ class CustomComponent extends Component
     public $export;
     public $file_types;
     public $placeholder;
+    public $dates;
+    public $defined_dates;
 
     public function __construct()
     {
-        $this->to      = Carbon::now()->format('Y-m-d');
-        $this->from    = Carbon::now()->format('Y-m-d');
         $this->limit   = 10;
         $this->search  = "";
+
         $this->file_types = [
             'csv'  => 'CSV',
             'pdf'  => 'PDF',
@@ -38,5 +39,43 @@ class CustomComponent extends Component
             'xlsx' => 'EXCEL (xlsx)',
             'ods'  => 'ODS'
         ];
+
+        $this->dates = [
+            'today' => [
+                Carbon::now()->format('Y-m-d'),
+                Carbon::now()->format('Y-m-d')
+            ],
+            'yesterday' => [
+                Carbon::now()->yesterday()->format('Y-m-d'),
+                Carbon::now()->yesterday()->format('Y-m-d'),
+            ],
+            'this-week' => [
+                Carbon::now()->startOfWeek()->format('Y-m-d'),
+                Carbon::now()->endOfWeek()->format('Y-m-d')
+            ],
+            'last-week' => [
+                Carbon::now()->subWeek()->startOfWeek()->format('Y-m-d'),
+                Carbon::now()->subWeek()->endOfWeek()->format('Y-m-d'),
+            ],
+            'this-month' => [
+                Carbon::now()->startOfMonth()->format('Y-m-d'),
+                Carbon::now()->endOfMonth()->format('Y-m-d'),
+            ],
+            'last-month' => [
+                Carbon::now()->subMonth()->startOfMonth()->format('Y-m-d'),
+                Carbon::now()->subMonth()->endOfMonth()->format('Y-m-d'),
+            ],
+            'last-3-months' => [
+                Carbon::now()->subMonth(3)->startOfMonth()->format('Y-m-d'),
+                Carbon::now()->endOfMonth()->format('Y-m-d'),
+            ],
+            'last-6-months' => [
+                Carbon::now()->subMonth(6)->startOfMonth()->format('Y-m-d'),
+                Carbon::now()->endOfMonth()->format('Y-m-d'),
+            ]
+        ];
+
+        $this->to      = $this->dates['this-month'][1];
+        $this->from    = $this->dates['this-month'][0];
     }
 }
