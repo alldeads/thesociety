@@ -35,25 +35,29 @@
 	<div class="row">
 		<div class="col-lg-6 col-md-6 col-sm-12 mt-1">
 			<div class="form-group">
-	          	<input type="text" class="form-control" placeholder="{{ $placeholder }}" wire:model="search"/>
+				<label class="form-label" for="search">Date From</label>
+	          	<input type="text" class="form-control" id="search" placeholder="{{ $placeholder }}" wire:model="search"/>
 			</div>
 		</div>
 
 		<div class="col-md-2 col-lg-2 col-sm-12 mt-1">
 			<div class="form-group">
-	          	<input type="text" class="form-control basicpkr" placeholder="Date From" wire:model="from" />
+				<label class="form-label" for="date_from">Date From</label>
+	          	<input type="text" class="form-control basicpkr" id="date_from" placeholder="Date From" wire:model="from" />
 			</div>
 		</div>
 
 		<div class="col-md-2 col-lg-2 col-sm-12 mt-1">
 			<div class="form-group">
-	          	<input type="text" class="form-control basicpkr" placeholder="Date To" wire:model="to" />
+				<label class="form-label" for="date_from">Date To</label>
+	          	<input type="text" class="form-control basicpkr" id="date_to" placeholder="Date To" wire:model="to" />
 			</div>
 		</div>
 
 		<div class="col-lg-2 col-md-10 col-sm-12 mt-1">
 			<div class="form-group">
-	          	<select class="form-control" wire:model="limit">
+				<label class="form-label" for="entries">Entries</label>
+	          	<select class="form-control" id="entries" wire:model="limit">
 	          		<option value="10">{{ __('10 entries') }}</option>
 	          		<option value="25">{{ __('25 entries') }}</option>
 	          		<option value="50">{{ __('50 entries') }}</option>
