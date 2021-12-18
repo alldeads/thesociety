@@ -1,5 +1,5 @@
-<div class="table-responsive">
-    <table class="table table-hover">
+<div>
+    <table class="table table-striped table-hover">
         <thead>
             <tr>
                 @foreach($columns as $column)
