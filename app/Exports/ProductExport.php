@@ -21,10 +21,8 @@ class ProductExport extends Export implements FromView
                             ->orWhere('status', 'like', "%". $search . "%");
                     });
 
-        $results = $results->orderBy('id', 'desc')->get();
-
         return view('exports.product', [
-            'products' => $results
+            'products' => $results->orderBy('id', 'desc')->get()
         ]);
     }
 }

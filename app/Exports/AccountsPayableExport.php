@@ -40,11 +40,9 @@ class AccountsPayableExport extends Export implements FromView
         if ( !empty($to) ) {
             $results = $results->whereDate('posting_date', '<=', $to );
         }
-
-        $results = $results->orderBy('id', 'desc')->get();
-
+        
         return view('exports.accounts-payable', [
-            'payables' => $results
+            'payables' => $results->orderBy('id', 'desc')->get()
         ]);
     }
 }

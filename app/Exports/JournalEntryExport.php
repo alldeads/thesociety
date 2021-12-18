@@ -39,11 +39,9 @@ class JournalEntryExport extends Export implements FromView
         if ( !empty($to) ) {
             $results = $results->whereDate('created_at', '<=', $to );
         }
-
-        $results = $results->orderBy('id', 'desc')->get();
-
+        
         return view('exports.journal-entry', [
-            'journalEntries' => $results
+            'journalEntries' => $results->orderBy('id', 'desc')->get()
         ]);
     }
 }

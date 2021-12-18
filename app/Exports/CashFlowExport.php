@@ -41,10 +41,8 @@ class CashFlowExport extends Export implements FromView
             $results = $results->whereDate('created_at', '<=', $to );
         }
 
-        $results = $results->orderBy('id', 'desc')->get();
-
         return view('exports.cash-flow', [
-            'cashflow' => $results
+            'cashflow' => $results->orderBy('id', 'desc')->get()
         ]);
     }
 }

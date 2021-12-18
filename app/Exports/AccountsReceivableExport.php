@@ -40,11 +40,9 @@ class AccountsReceivableExport extends Export implements FromView
         if ( !empty($to) ) {
             $results = $results->whereDate('posting_date', '<=', $to );
         }
-
-        $results = $results->orderBy('id', 'desc')->get();
-
+        
         return view('exports.accounts-receivable', [
-            'receivables' => $results
+            'receivables' => $results->orderBy('id', 'desc')->get()
         ]);
     }
 }

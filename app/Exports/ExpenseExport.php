@@ -40,10 +40,8 @@ class ExpenseExport extends Export implements FromView
             $results = $results->whereDate('posting_date', '<=', $to );
         }
 
-        $results = $results->orderBy('id', 'desc')->get();
-
         return view('exports.expense', [
-            'expenses' => $results
+            'expenses' => $results->orderBy('id', 'desc')->get()
         ]);
     }
 }

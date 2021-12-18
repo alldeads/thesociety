@@ -32,10 +32,8 @@ class CovidExport extends Export implements FromView
             $results = $results->whereDate('created_at', '<=', $to );
         }
 
-        $results = $results->orderBy('id', 'desc')->get();
-
         return view('exports.covid', [
-            'covid' => $results
+            'covid' => $results->orderBy('id', 'desc')->get()
         ]);
     }
 }

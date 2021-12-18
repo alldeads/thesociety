@@ -17,7 +17,7 @@ class Export
     {
         $this->search     = $search;
         $this->company_id = $company_id;
-        $this->from = $from;
-        $this->to = $to;
+        $this->from       = $from;
+        $this->to         = $to;
     }
 }

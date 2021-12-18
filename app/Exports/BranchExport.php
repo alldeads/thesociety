@@ -23,10 +23,8 @@ class BranchExport extends Export implements FromView
                             ->orWhere('address','like', "%" . $search ."%");
                     });
 
-        $results = $results->orderBy('id', 'desc')->get();
-
         return view('exports.branch', [
-            'branches' => $results
+            'branches' => $results->orderBy('id', 'desc')->get()
         ]);
     }
 }

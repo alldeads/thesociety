@@ -37,7 +37,11 @@ class PurchaseOrderExport extends Export implements FromView
             $results = $results->whereDate('created_at', '<=', $to );
         }            
 
-        $results  =  $results->with(['supplier.user.profile', 'status', 'user_approved.profile'])
+        $results  =  $results->with([
+                                'supplier.user.profile', 
+                                'status', 
+                                'user_approved.profile'
+                            ])
                             ->orderBy('id', 'desc')
                             ->get();
 

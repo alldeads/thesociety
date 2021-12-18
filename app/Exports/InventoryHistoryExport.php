@@ -38,10 +38,8 @@ class InventoryHistoryExport extends Export implements FromView
             $results = $results->whereDate('created_at', '<=', $to );
         }
 
-        $results = $results->orderBy('id', 'desc')->get();
-
         return view('exports.inventory-history', [
-            'histories' => $results
+            'histories' => $results->orderBy('id', 'desc')->get()
         ]);
     }
 }

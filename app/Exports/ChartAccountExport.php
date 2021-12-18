@@ -34,10 +34,8 @@ class ChartAccountExport extends Export implements FromView
             $results = $results->whereDate('created_at', '<=', $to );
         }
 
-        $results = $results->with(['type', 'user_created'])->orderBy('code', 'asc')->get();
-
         return view('exports.chart-accounts', [
-            'accounts' => $results
+            'accounts' => $results->with(['type', 'user_created'])->orderBy('code', 'asc')->get()
         ]);
     }
 }
