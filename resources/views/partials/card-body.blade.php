@@ -36,7 +36,7 @@
 		<div class="col-lg-4 col-md-6 col-sm-12 col-xl-3 mt-1">
 			<div class="form-group">
 				<label class="form-label" for="search">Search keywords</label>
-	          	<input type="text" class="form-control" id="search" placeholder="{{ $placeholder }}" wire:model="search"/>
+	          	<input type="text" class="form-control" id="search" placeholder="{{ $placeholder }}" wire:model.debounce.800ms="search"/>
 			</div>
 		</div>
 
