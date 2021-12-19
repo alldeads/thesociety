@@ -7,6 +7,8 @@ use App\Http\Livewire\CustomComponent;
 class Item extends CustomComponent
 {
 	public $account;
+	public $permission;
+	public $hasPermissions;
 
 	public $listeners = [
         'refreshChartItem' => '$refresh'

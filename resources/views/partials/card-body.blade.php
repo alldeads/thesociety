@@ -1,6 +1,5 @@
 <div class="card-body">
 	<div class="d-flex justify-content-between">
-
 		@can($permission . '.create')
 			<button type="button" class="btn btn-primary rounded" wire:click="create" wire:ignore>
 	  			<i data-feather="plus" class="mr-25"></i>
@@ -32,53 +31,37 @@
 	    @endcan   
 	</div>
 	<hr>
-	<div class="row">
-		<div class="col-lg-4 col-md-6 col-sm-12 col-xl-3 mt-1">
-			<div class="form-group">
-				<label class="form-label" for="search">Search keywords</label>
-	          	<input type="text" class="form-control" id="search" placeholder="{{ $placeholder }}" wire:model.debounce.800ms="search"/>
-			</div>
+	<div class="d-flex justify-content-between">
+		<div class="form-group">
+			<label class="form-label" for="dates">Default</label>
+			<select class="form-control" id="dates" wire:model="defined_dates">
+				@foreach($dates as $x => $date)
+					<option value="{{ $x }}">{{ __(ucwords(str_replace('-', ' ', $x))) }}</option>
+				@endforeach
+			</select>
 		</div>
 
-		<div class="col-md-2 col-lg-2 col-sm-12 col-xl-2 mt-1">
-			<div class="form-group">
-				<label class="form-label" for="date_from">Date From</label>
-	          	<input type="text" class="form-control basicpkr" id="date_from" placeholder="Date From" wire:model="from" />
-			</div>
+		<div class="form-group">
+			<label class="form-label" for="date_from">Date From</label>
+			<input type="text" class="form-control basicpkr" id="date_from" placeholder="Date From" wire:model="from" />
 		</div>
 
-		<div class="col-md-2 col-lg-2 col-sm-12 col-xl-2 mt-1">
-			<div class="form-group">
-				<label class="form-label" for="date_from">Date To</label>
-	          	<input type="text" class="form-control basicpkr" id="date_to" placeholder="Date To" wire:model="to" />
-			</div>
+		<div class="form-group">
+			<label class="form-label" for="date_from">Date To</label>
+			<input type="text" class="form-control basicpkr" id="date_to" placeholder="Date To" wire:model="to" />
 		</div>
 
-		<div class="col-md-2 col-lg-2 col-sm-12 col-xl-2 mt-1">
-			<div class="form-group">
-				<label class="form-label" for="dates">Default Dates</label>
-				<select class="form-control" id="dates" wire:model="defined_dates">
-
-					@foreach($dates as $x => $date)
-						<option value="{{ $x }}">{{ __(ucwords(str_replace('-', ' ', $x))) }}</option>
-					@endforeach
-				</select>
-			</div>
-		</div>
-
-		<div class="col-lg-2 col-md-12 col-sm-12 col-xl-3 mt-1">
-			<div class="form-group">
-				<label class="form-label" for="entries">Entries</label>
-	          	<select class="form-control" id="entries" wire:model="limit">
-	          		<option value="10">{{ __('10 entries') }}</option>
-	          		<option value="25">{{ __('25 entries') }}</option>
-	          		<option value="50">{{ __('50 entries') }}</option>
-	          		<option value="100">{{ __('100 entries') }}</option>
-	          		<option value="100">{{ __('250 entries') }}</option>
-	          		<option value="100">{{ __('500 entries') }}</option>
-	          		<option value="100">{{ __('1000 entries') }}</option>
-	          	</select>
-			</div>
+		<div class="form-group">
+			<label class="form-label" for="entries">Entries</label>
+			<select class="form-control" id="entries" wire:model="limit">
+				<option value="10">{{ __('10 entries') }}</option>
+				<option value="25">{{ __('25 entries') }}</option>
+				<option value="50">{{ __('50 entries') }}</option>
+				<option value="100">{{ __('100 entries') }}</option>
+				<option value="100">{{ __('250 entries') }}</option>
+				<option value="100">{{ __('500 entries') }}</option>
+				<option value="100">{{ __('1000 entries') }}</option>
+			</select>
 		</div>
 	</div>
 </div>
