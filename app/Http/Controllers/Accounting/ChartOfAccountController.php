@@ -23,7 +23,7 @@ class ChartOfAccountController extends Controller
             ['name' =>"Chart of Accounts"],
         ];
 
-        return view('chart-account.index', [
+        return view('accounting.chart-account.index', [
             'breadcrumbs' => $breadcrumbs,
             'company'     => $this->getCompany()
         ]);
@@ -44,7 +44,7 @@ class ChartOfAccountController extends Controller
             ['name' => "New Account"],
         ];
 
-        return view('chart-account.create', [
+        return view('accounting.chart-account.create', [
             'breadcrumbs' => $breadcrumbs,
             'company'     => $this->getCompany()
         ]);
@@ -69,7 +69,7 @@ class ChartOfAccountController extends Controller
         ];
 
         if ($this->getCompany()->id == $account->company_id) {
-            return view('chart-account.read', [
+            return view('accounting.chart-account.read', [
                 'breadcrumbs' => $breadcrumbs,
                 'account'     => $account
             ]);
@@ -97,7 +97,7 @@ class ChartOfAccountController extends Controller
         ];
 
         if ($this->getCompany()->id == $account->company_id) {
-            return view('chart-account.edit', [
+            return view('accounting.chart-account.edit', [
                 'breadcrumbs' => $breadcrumbs,
                 'account'     => $account
             ]);
