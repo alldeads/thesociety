@@ -21,17 +21,9 @@ class Index extends CustomComponent
         $this->export      = "chart-accounts-export";
         $this->baseView    = "chart-of-account";
         
-        $this->columns     = [
-            'Code', 'Title', 'Type'
-        ];
-
+        $this->columns        = $this->getFilters();
         $this->columnCount    = $this->getColumns();
         $this->hasPermissions = $this->isUserHasPermissions();
-    }
-
-    public function updatingSearch()
-    {
-        $this->resetPage();
     }
 
     public function create()
@@ -46,30 +38,57 @@ class Index extends CustomComponent
             $this->to   = $this->dates[$this->defined_dates][1] ?? Carbon::now()->format('Y-m-d');
         }
 
-    	$search = $this->search ?? '';
-        $limit  = $this->limit ?? 10;
-        $from   = $this->from;
-        $to     = $this->to;
+        $filters = $this->filters;
+        $limit   = $this->limit ?? 10;
+        $from    = $this->from;
+        $to      = $this->to;
 
     	$results = CompanyChartAccount::where('company_id', $this->company_id)
-					->where(function (Builder $query) use ($search) {
-                        return $query->where('chart_name', 'like', "%" . $this->search ."%")
-								->orWhere('code', $search)
-                                ->orWhereHas('type', function($query) use ($search) {
-                                    return $query->where('name', 'like', "%" . $this->search ."%");
-                                });
+					->where(function (Builder $query) use ($filters) {
+
+                        if ( isset($filters['title']) && !empty($filters['title']) ) {
+                            $query->where('chart_name', 'like', "%" . $filters['title'] ."%");
+                        }
+
+                        if ( isset($filters['code']) && !empty($filters['code']) ) {
+                            $query->where('code', $filters['code']);
+                        }
+
+                        if ( isset($filters['type']) && !empty($filters['type']) ) {
+                            $query->whereHas('type', function($query) use ($filters) {
+                                return $query->where('name', 'like', "%" . $filters['type'] ."%");
+                            });
+                        }
+
+                        return $query;
 					});
 
-        if ( !empty($from) ) {
-            $results = $results->whereDate('created_at', '>=', $from );
-        }
-
-        if ( !empty($to) ) {
-            $results = $results->whereDate('created_at', '<=', $to );
-        }
+        $results->whereDate('created_at', '>=', $from )
+                ->whereDate('created_at', '<=', $to );
 
         return view('livewire.chart-of-account.index', [
             'results' => $results->with('type')->orderBy('code', 'asc')->paginate($limit)
         ]);
+    }
+
+    public function getFilters()
+    {
+        return [
+            [
+                'label'  => 'code',
+                'type'   => 'number'
+            ],
+            [
+                'label'  => 'title',
+                'type'   => 'text'
+            ],
+            [
+                'label'  => 'type',
+                'type'   => 'select',
+                'values' => [
+                    'Assets', 'Liabilities', 'Income', 'Equity', 'Expenses'
+                ]
+            ]
+        ];
     }
 }

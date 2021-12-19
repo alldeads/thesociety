@@ -28,6 +28,7 @@ class CustomComponent extends Component
     public $defined_dates;
     public $columns;
     public $default_date;
+    public $filters;
 
     public function __construct()
     {
@@ -80,6 +81,7 @@ class CustomComponent extends Component
         $this->to      = $this->dates['this-month'][1];
         $this->from    = $this->dates['this-month'][0];
         $this->defined_dates = 'this-month';
+        $this->filters = [];
     }
 
     public function getColumns()
