@@ -22,7 +22,7 @@ class CashFlowController extends Controller
             ['name'=>"Cash Flow"],
         ];
 
-        return view('cash-flow.index', [
+        return view('accounting.cash-flow.index', [
             'breadcrumbs' => $breadcrumbs,
             'company'     => $this->getCompany()
         ]);
@@ -43,7 +43,7 @@ class CashFlowController extends Controller
             ['name'=>"New Entry"],
         ];
 
-        return view('cash-flow.create', [
+        return view('accounting.cash-flow.create', [
             'breadcrumbs' => $breadcrumbs,
             'company'     => $this->getCompany()
         ]);
@@ -68,7 +68,7 @@ class CashFlowController extends Controller
         ];
 
         if ($this->getCompany()->id == $cashflow->company_id) {
-            return view('cash-flow.read', [
+            return view('accounting.cash-flow.read', [
                 'breadcrumbs' => $breadcrumbs,
                 'cashflow'    => $cashflow
             ]);
@@ -96,7 +96,7 @@ class CashFlowController extends Controller
         ];
 
         if ($this->getCompany()->id == $cashflow->company_id) {
-            return view('cash-flow.edit', [
+            return view('accounting.cash-flow.edit', [
                 'breadcrumbs' => $breadcrumbs,
                 'cashflow'    => $cashflow
             ]);
