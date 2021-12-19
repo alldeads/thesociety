@@ -60,7 +60,7 @@ class MenuSeeder extends Seeder
         	'name'       => 'Chart of Accounts',
         	'slug'       => 'chart-accounts',
         	'url'        => 'accounting/chart-accounts',
-        	'icon'       => 'columns',
+        	'icon'       => 'grid',
             'base'       => 'chart',
             'is_export'  => true,
             'permission' => 'chart.view'
