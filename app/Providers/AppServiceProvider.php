@@ -27,7 +27,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         view()->composer(['panels.sidebar'], function ($view) {
-            $view->with('__headers', User::getMenu());
+            $view->with('__menus', User::getMenu());
             $view->with('__avatar', Company::getCompanyAvatar());
         });
 

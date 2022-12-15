@@ -95,21 +95,6 @@ class User extends Authenticatable
 
     public static function getMenu()
     {
-        return cache()->remember('app-menus',60*60*24, function() {
-
-            $user = auth()->user();
-
-            $menus = CompanyMenu::getCompanyMenus($user->company_id);
-
-            $arr = [];
-
-            foreach ($menus as $menu) {
-                if ( $user->hasPermissionTo($menu->menu->permission) ) {
-                    $arr[$menu->menu->header->name][] = $menu->menu;
-                }
-            }
-
-            return $arr;
-        });
+        return Menu::whereNull('parent_menu_id')->get();
     }
 }

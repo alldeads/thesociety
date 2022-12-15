@@ -11,11 +11,6 @@ class Menu extends Model
 
     public function submenus()
     {
-    	return $this->hasMany(Menu::class, 'id', 'parent_menu_id');
-    }
-
-    public function header()
-    {
-        return $this->belongsTo(Header::class, 'header_id');
+    	return $this->hasMany(Menu::class, 'parent_menu_id', 'id');
     }
 }

@@ -15,19 +15,16 @@ class CreateMenusTable extends Migration
     {
         Schema::create('menus', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('header_id')->unsigned();
+            $table->bigInteger('parent_menu_id')->nullable();
             $table->string('name');
             $table->string('slug')->nullable();
             $table->string('url')->nullable();
             $table->string('icon')->nullable();
-            $table->string('badge')->nullable();
             $table->string('base')->nullable();
             $table->boolean('is_export')->default(true);
-            $table->string('badgeClass')->nullable();
-            $table->boolean('newTab')->default(false);
             $table->string('classList')->nullable();
             $table->string('permission');
-            $table->bigInteger('parent_menu_id')->nullable();
+            $table->integer('order')->nullable();
             $table->timestamps();
         });
     }

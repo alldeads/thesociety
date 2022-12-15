@@ -18,32 +18,22 @@
             </li>
         </ul>
     </div>
+    
     <div class="shadow-bottom"></div>
 
     <div class="main-menu-content mt-2">
         <ul class="navigation navigation-main pb-5" id="main-menu-navigation" data-menu="menu-navigation">
+            @foreach($__menus as $menu)
+                <li class="nav-item {{ strrpos(Route::currentRouteName(), $menu->slug) !== false ? 'active' : '' }} {{ $menu->classList }} {{ $menu->submenus()->count() > 0 ? 'has-sub' : '' }}">
+                    <a href="{{ isset($menu->url) ? url($menu->url):'javascript:void(0)' }}" class="d-flex align-items-center" target="{{$menu->newTab ? '_blank':'_self'}}">
+                        <i data-feather="{{ $menu->icon }}"></i>
+                        <span class="menu-title text-truncate">{{ $menu->name }}</span>
+                    </a>
 
-            @foreach($__headers as $key => $header)
-                <li class="navigation-header">
-                    <span>{{ ucwords($key) }}</span>
-                    <i data-feather="more-horizontal"></i>
+                    @if($menu->submenus()->count() > 0)
+                        @include('panels/submenu', ['menu' => $menu->submenus])
+                    @endif
                 </li>
-
-                @foreach($header as $menu) 
-                    <li class="nav-item {{ strrpos(Route::currentRouteName(), $menu->slug) !== false ? 'active' : '' }} {{ $menu->classList }}">
-                        <a href="{{isset($menu->url)? url($menu->url):'javascript:void(0)'}}" class="d-flex align-items-center" target="{{$menu->newTab ? '_blank':'_self'}}">
-                            <i data-feather="{{ $menu->icon }}"></i>
-                            <span class="menu-title text-truncate">{{ $menu->name }}</span>
-                            @if (isset($menu->badge))
-                                <?php $badgeClasses = "badge badge-pill badge-light-primary ml-auto mr-1" ?>
-                                    <span class="{{ isset($menu->badgeClass) ? $menu->badgeClass : $badgeClasses }} ">{{$menu->badge}}</span>
-                            @endif
-                        </a>
-                        @if(isset($menu->submenu))
-                            @include('panels/submenu', ['menu' => $menu->submenu])
-                        @endif
-                    </li>
-                @endforeach
             @endforeach
         </ul>
     </div>
