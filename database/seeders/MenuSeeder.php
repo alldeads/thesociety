@@ -28,9 +28,8 @@ class MenuSeeder extends Seeder
         $menu = Menu::create([
         	'name'       => 'Accounting',
         	'slug'       => 'accounting',
-        	'url'        => '#',
-        	'icon'       => 'home',
-            'base'       => 'dashboard',
+        	'icon'       => 'book',
+            'base'       => 'accounting',
             'is_export'  => false,
             'permission' => 'accounting.view'
         ]);
@@ -40,7 +39,6 @@ class MenuSeeder extends Seeder
         	'name'       => 'Chart of Accounts',
         	'slug'       => 'chart-accounts',
         	'url'        => 'chart-accounts',
-        	'icon'       => 'circle',
             'base'       => 'chart-accounts',
             'is_export'  => false,
             'permission' => 'chart-accounts.view'
@@ -50,7 +48,7 @@ class MenuSeeder extends Seeder
         	'name'       => 'Settings',
         	'slug'       => 'settings',
         	'url'        => 'settings',
-        	'icon'       => 'home',
+        	'icon'       => 'align-justify',
             'base'       => 'settings',
             'is_export'  => false,
             'permission' => 'settings.view'
