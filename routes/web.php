@@ -23,29 +23,6 @@ Route::middleware('auth')->group(function() {
 		Route::resource('covid', Apps\CovidController::class);
 	});
 
-	Route::prefix('accounting')->group( function() {
-		Route::get('chart-accounts/export', 'Accounting\ChartOfAccountController@export')->name('chart-accounts-export');
-		Route::resource('chart-accounts', Accounting\ChartOfAccountController::class);
-
-		Route::get('cash-flow/export', 'Accounting\CashFlowController@export')->name('cash-flow-export');
-		Route::resource('cash-flow', Accounting\CashFlowController::class);
-
-		Route::get('journal-entry/export', 'Accounting\JournalEntryController@export')->name('journal-entry-export');
-		Route::resource('journal-entry', Accounting\JournalEntryController::class);
-
-		Route::get('tax/export', 'Accounting\TaxController@export')->name('tax-export');
-		Route::resource('tax', Accounting\TaxController::class);
-
-		Route::get('expenses/export', 'Accounting\ExpenseController@export')->name('expense-export');
-		Route::resource('expenses', Accounting\ExpenseController::class);
-
-		Route::get('accounts-payable/export', 'Accounting\AccountsPayableController@export')->name('accounts-payable-export');
-		Route::resource('accounts-payable', Accounting\AccountsPayableController::class);
-
-		Route::get('accounts-receivable/export', 'Accounting\AccountsReceivableController@export')->name('accounts-receivable-export');
-		Route::resource('accounts-receivable', Accounting\AccountsReceivableController::class);
-	});
-
 	Route::prefix('sales')->group( function() {
 		Route::get('orders/export', 'Sales\OrderController@export')->name('orders-export');
 		Route::resource('orders', Sales\OrderController::class);

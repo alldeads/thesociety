@@ -38,7 +38,7 @@ class MenuSeeder extends Seeder
             'parent_menu_id' => $menu->id,
         	'name'       => 'Chart of Accounts',
         	'slug'       => 'chart-accounts',
-        	'url'        => 'chart-accounts',
+        	'url'        => 'accounting/chart-accounts',
             'base'       => 'chart-accounts',
             'is_export'  => false,
             'permission' => 'chart-accounts.view'
