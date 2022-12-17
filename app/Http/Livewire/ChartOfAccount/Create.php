@@ -6,7 +6,7 @@ use App\Http\Livewire\CustomComponent;
 use Illuminate\Support\Facades\Validator;
 
 use App\Models\ChartType;
-use App\Models\CompanyChartAccount;
+use App\Models\ChartAccount;
 
 class Create extends CustomComponent
 {
@@ -28,15 +28,14 @@ class Create extends CustomComponent
             'account_type'  => ['required', 'numeric', 'exists:chart_types,id'],
         ])->validate();
 
-        CompanyChartAccount::create([
-			'chart_name'    => ucwords($this->inputs['account_title']),
+        ChartAccount::create([
+			'name'          => ucwords($this->inputs['account_title']),
 			'code'          => $this->inputs['account_code'],
 			'chart_type_id' => $this->inputs['account_type'],
 			'created_by'    => auth()->id(),
+			'updated_by'    => auth()->id(),
 			'company_id'    => $this->company_id
 		]);
-
-		cache()->forget('app-company-charts');
 
         $this->message('New Account has been created', 'success');
 

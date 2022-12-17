@@ -5,7 +5,7 @@ namespace App\Http\Livewire\ChartOfAccount;
 use App\Http\Livewire\CustomComponent;
 use Illuminate\Support\Facades\Validator;
 
-use App\Models\CompanyChartAccount;
+use App\Models\ChartAccount;
 use App\Models\ChartType;
 
 class Edit extends CustomComponent
@@ -29,18 +29,16 @@ class Edit extends CustomComponent
             'account_type'  => ['required', 'numeric', 'exists:chart_types,id'],
         ])->validate();
 
-        $cca = CompanyChartAccount::find($this->account->id);
+        $cca = ChartAccount::find($this->account->id);
 
         $cca->fill([
-			'chart_name'    => ucwords($this->inputs['account_title']),
+			'name'          => ucwords($this->inputs['account_title']),
 			'code'          => $this->inputs['account_code'],
 			'chart_type_id' => $this->inputs['account_type'],
 			'updated_by'    => auth()->id()
 		]);
 
 		$cca->save();
-
-        cache()->forget('app-company-charts');
 
 		$this->emit('refreshChartItem');
 
@@ -52,7 +50,7 @@ class Edit extends CustomComponent
     public function initialize()
     {
         $this->inputs = [
-            'account_title' => $this->account->chart_name,
+            'account_title' => $this->account->name,
             'account_code'  => $this->account->code,
             'account_type'  => $this->account->chart_type_id,
         ];

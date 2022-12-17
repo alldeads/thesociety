@@ -4,7 +4,7 @@ namespace App\Http\Livewire\ChartOfAccount;
 
 use App\Http\Livewire\CustomComponent;
 
-use App\Models\CompanyChartAccount;
+use App\Models\ChartAccount;
 
 class Delete extends CustomComponent
 {
@@ -23,7 +23,7 @@ class Delete extends CustomComponent
 
     public function confirm()
     {
-    	$acc = CompanyChartAccount::find($this->account['account']['id']);
+    	$acc = ChartAccount::find($this->account['account']['id']);
 
     	if ( !$acc ) {
     		$this->message('Oops! Something went wrong upon deletion, please try again!', 'error');

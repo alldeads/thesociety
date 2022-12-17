@@ -15,7 +15,7 @@ class ChartAccount extends Model
      * @var array
      */
     protected $fillable = [
-        'chart_name',
+        'name',
         'code',
         'chart_type_id',
         'company_id',

@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Accounting;
 
 use App\Http\Controllers\Controller;
-use App\Models\CompanyChartAccount;
+use App\Models\ChartAccount;
 
 use Illuminate\Http\Request;
 
@@ -60,12 +60,12 @@ class ChartOfAccountController extends Controller
     {
         $this->authorize('chart.read');
 
-        $account = CompanyChartAccount::findOrFail($id);
+        $account = ChartAccount::findOrFail($id);
 
         $breadcrumbs = [
             ['link' => route('home'), 'name'=>"Dashboard"], 
             ['link' => route('chart-accounts.index'), 'name' => "Chart of Accounts"],
-            ['name' => ucwords($account->chart_name) . " ($account->code)"],
+            ['name' => ucwords($account->name) . " ($account->code)"],
         ];
 
         if ($this->getCompany()->id == $account->company_id) {
@@ -88,12 +88,12 @@ class ChartOfAccountController extends Controller
     {
         $this->authorize('chart.update');
 
-        $account = CompanyChartAccount::findOrFail($id);
+        $account = ChartAccount::findOrFail($id);
 
         $breadcrumbs = [
             ['link' => route('home'), 'name'=>"Dashboard"], 
             ['link' => route('chart-accounts.index'), 'name' => "Chart of Accounts"],
-            ['name' => ucwords($account->chart_name) . " ($account->code)"],
+            ['name' => ucwords($account->name) . " ($account->code)"],
         ];
 
         if ($this->getCompany()->id == $account->company_id) {

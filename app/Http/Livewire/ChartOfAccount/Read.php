@@ -13,7 +13,7 @@ class Read extends CustomComponent
     public function mount()
     {
     	$this->inputs = [
-    		'account_title' => $this->account->chart_name,
+    		'account_title' => $this->account->name,
     		'account_code'  => $this->account->code,
     		'account_type'  => $this->account->type->name ?? "N/A",
     		'created_by'    => $this->account->user_created->profile->name ?? "N/A",
