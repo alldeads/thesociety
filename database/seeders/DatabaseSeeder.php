@@ -21,26 +21,26 @@ class DatabaseSeeder extends Seeder
             RoleSeeder::class,
         	UserSeeder::class,
             MenuSeeder::class,
+            ChartTypeSeeder::class,
             ChartAccountSeeder::class,
             EmployeeSeeder::class,
             CompanyMenuSeeder::class,
-            CompanyChartSeeder::class,
-            CashFlowSeeder::class,
+            // CashFlowSeeder::class,
             CustomerSeeder::class,
             SupplierSeeder::class,
             ProductSeeder::class,
             SupplySeeder::class,
             TaxSeeder::class,
             PurchaseOrderSeeder::class,
-            JournalEntrySeeder::class,
+            // JournalEntrySeeder::class,
             InventoryTypeSeeder::class,
             StockLevelSeeder::class,
             SalesOrderSeeder::class,
             CovidTableSeeder::class,
             PaymentTypeSeeder::class,
-            ExpenseTableSeeder::class,
-            AccountsPayableSeeder::class,
-            AccountsReceivableSeeder::class
+            // ExpenseTableSeeder::class,
+            // AccountsPayableSeeder::class,
+            // AccountsReceivableSeeder::class
         ]);
     }
 }

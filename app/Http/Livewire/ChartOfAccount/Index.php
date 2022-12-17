@@ -6,7 +6,7 @@ use Carbon\Carbon;
 use App\Http\Livewire\CustomComponent;
 use Illuminate\Database\Eloquent\Builder;
 
-use App\Models\CompanyChartAccount;
+use App\Models\ChartAccount;
 
 class Index extends CustomComponent
 {
@@ -43,11 +43,11 @@ class Index extends CustomComponent
         $from    = $this->from;
         $to      = $this->to;
 
-    	$results = CompanyChartAccount::where('company_id', $this->company_id)
+    	$results = ChartAccount::where('company_id', $this->company_id)
 					->where(function (Builder $query) use ($filters) {
 
                         if ( isset($filters['title']) && !empty($filters['title']) ) {
-                            $query->where('chart_name', 'like', "%" . $filters['title'] ."%");
+                            $query->where('name', 'like', "%" . $filters['title'] ."%");
                         }
 
                         if ( isset($filters['code']) && !empty($filters['code']) ) {

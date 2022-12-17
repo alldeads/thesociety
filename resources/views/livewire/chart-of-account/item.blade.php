@@ -4,7 +4,7 @@
 			{{ $account->code }}
 		</a>
 	</td>
-	<td>{{ $account->chart_name }}</td>
+	<td>{{ $account->name }}</td>
 	<td>
 		<span class="badge badge-pill  badge-light-{{ $account->type->color }}">
 			{{ $account->type->name }}
