@@ -35,20 +35,11 @@ Route::middleware('auth')->group(function() {
 		Route::get('details', 'CompanyController@details')->name('company-details');
 		Route::get('edit', 'CompanyController@edit')->name('company-edit');
 
-		Route::prefix('branches')->group( function() {
-			Route::get('view', 'BranchController@index')->name('branches-view');
-			Route::get('create', 'BranchController@create')->name('branches-create');
-			Route::get('edit/{branch}', 'BranchController@edit')->name('branches-edit');
-			Route::get('view/{branch}', 'BranchController@view')->name('branches-read');
-			Route::get('export', 'BranchController@export')->name('branches-export');
-		});
+		Route::resource('branches', BranchController::class);
 
-		Route::prefix('payment-types')->group( function() {
-			Route::get('view', 'PaymentTypeController@index')->name('payment_types-view');
-			Route::get('create', 'PaymentTypeController@create')->name('payment_types-create');
-			Route::get('edit/{payment}', 'PaymentTypeController@edit')->name('payment_types-edit');
-			Route::get('view/{payment}', 'PaymentTypeController@read')->name('payment_types-read');
-		});
+		Route::get('branches/export', 'BranchController@export')->name('branches-export');
+
+		Route::resource('payment-types', PaymentTypeController::class);
 	});
 
 	Route::prefix('employees')->group( function() {

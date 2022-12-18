@@ -44,7 +44,7 @@ class MenuSeeder extends Seeder
             'permission' => 'chart-accounts.view'
         ]);
 
-        Menu::create([
+        $menu = Menu::create([
         	'name'       => 'Settings',
         	'slug'       => 'settings',
         	'url'        => 'settings',
@@ -52,6 +52,26 @@ class MenuSeeder extends Seeder
             'base'       => 'settings',
             'is_export'  => false,
             'permission' => 'settings.view'
+        ]);
+
+        Menu::create([
+            'parent_menu_id' => $menu->id,
+        	'name'       => 'Branches',
+        	'slug'       => 'branch',
+        	'url'        => 'company/branches',
+            'base'       => 'branch',
+            'is_export'  => false,
+            'permission' => 'branch.view'
+        ]);
+
+        Menu::create([
+            'parent_menu_id' => $menu->id,
+        	'name'       => 'Payment Types',
+        	'slug'       => 'payment-type',
+        	'url'        => 'company/payment-types',
+            'base'       => 'payment-type',
+            'is_export'  => false,
+            'permission' => 'payment-type.view'
         ]);
     }
 }

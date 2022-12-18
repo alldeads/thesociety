@@ -6,7 +6,7 @@ use App\Http\Livewire\CustomComponent;
 use Illuminate\Support\Facades\Validator;
 
 use App\Models\Preference;
-use App\Models\CompanyChartAccount;
+use App\Models\ChartAccount;
 
 class Index extends CustomComponent
 {
@@ -17,7 +17,7 @@ class Index extends CustomComponent
 
     public function mount()
     {
-        $this->accounts = CompanyChartAccount::getCompanyCharts();
+        $this->accounts = ChartAccount::getCompanyCharts();
 
         $this->preference = Preference::where('company_id', $this->company_id)->first();
 

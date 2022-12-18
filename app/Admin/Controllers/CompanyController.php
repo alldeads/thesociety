@@ -6,7 +6,6 @@ use App\Models\Company;
 use App\Models\Employee;
 use App\Models\User;
 use App\Models\CompanyRole;
-use App\Models\CompanyChartAccount;
 use App\Models\CompanyMenu;
 use App\Models\Menu;
 use App\Models\Profile;
@@ -153,8 +152,8 @@ class CompanyController extends AdminController
                 $charts = ChartAccount::all();
 
                 foreach( $charts as $chart ) {
-                    CompanyChartAccount::create([
-                        'chart_name'    => $chart->name,
+                    ChartAccount::create([
+                        'name'          => $chart->name,
                         'code'          => $chart->code,
                         'chart_type_id' => $chart->chart_type_id,
                         'company_id'    => $company->id,
