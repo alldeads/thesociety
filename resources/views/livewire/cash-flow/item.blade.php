@@ -5,7 +5,7 @@
 		</a>
 	</td>
 	<td>{{ $item->user->profile->name }}</td>
-	<td>{{ ucwords($item->chart_account->chart_name) }}</td>
+	<td>{{ ucwords($item->chart_account->name) }}</td>
 	<td>
 		{{ ucwords($item->chart_account->type->name) }}
 	</td>

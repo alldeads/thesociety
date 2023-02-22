@@ -10,7 +10,7 @@ use Carbon\Carbon;
 
 use App\Models\ChartType;
 use App\Models\User;
-use App\Models\CompanyChartAccount;
+use App\Models\ChartAccount;
 use App\Models\CashFlow;
 
 class Create extends CustomComponent
@@ -23,7 +23,7 @@ class Create extends CustomComponent
 
 	public function mount()
 	{
-		$this->accounts = CompanyChartAccount::getCompanyCharts();
+		$this->accounts = ChartAccount::getCompanyCharts();
 		$this->users    = User::getCompanyUsers();
 
         $this->inputs['posting_date'] = Carbon::now()->format('Y-m-d');

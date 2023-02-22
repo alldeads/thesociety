@@ -121,7 +121,7 @@ class Company extends Model
 
     public function chart_accounts()
     {
-        return $this->hasMany(CompanyChartAccount::class);
+        return $this->hasMany(ChartAccount::class);
     }
 
     public function products()

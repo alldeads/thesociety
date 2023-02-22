@@ -7,7 +7,7 @@
 	<td>{{ $item->user->profile->name }}</td>
 
 	<td>
-		<span class="badge badge-light-primary badge-pill"> {{ ucwords($item->chart_account->chart_name) }} </span>
+		<span class="badge badge-light-primary badge-pill"> {{ ucwords($item->chart_account->name) }} </span>
 	</td>
 	
 	<td>

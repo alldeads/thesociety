@@ -25,7 +25,7 @@ class DatabaseSeeder extends Seeder
             ChartAccountSeeder::class,
             EmployeeSeeder::class,
             CompanyMenuSeeder::class,
-            // CashFlowSeeder::class,
+            CashFlowSeeder::class,
             CustomerSeeder::class,
             SupplierSeeder::class,
             ProductSeeder::class,

@@ -36,8 +36,8 @@ class Index extends CustomComponent
     public function submit()
     {
         Validator::make($this->inputs ?? [], [
-            'account_payable'    => ['nullable', 'exists:company_chart_accounts,id'],
-            'account_receivable' => ['nullable', 'exists:company_chart_accounts,id'],
+            'account_payable'    => ['nullable', 'exists:chart_accounts,id'],
+            'account_receivable' => ['nullable', 'exists:chart_accounts,id'],
         ])->validate();
 
         try {

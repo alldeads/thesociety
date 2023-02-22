@@ -30,7 +30,7 @@ class ChartAccount extends Model
 
     public static function getCompanyCharts()
     {
-        return CompanyChartAccount::perCompany()->get();
+        return ChartAccount::perCompany()->get();
     }
 
     public function scopePerCompany($query)

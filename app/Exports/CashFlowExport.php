@@ -26,7 +26,7 @@ class CashFlowExport extends Export implements FromView
                                 ->orWhere('last_name', 'like', "%" . $search ."%");
                             });
                         })->orWhereHas('chart_account', function($query) use ($search) {
-                            return $query->where('chart_name', 'like', "%" . $search ."%")
+                            return $query->where('name', 'like', "%" . $search ."%")
                             ->orWhereHas('type', function($query) use ($search) {
                                 return $query->where('name', 'like', "%" . $search ."%");
                             });

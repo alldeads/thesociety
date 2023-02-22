@@ -42,7 +42,7 @@ class CashFlow extends Model
 
     public function chart_account()
     {
-        return $this->belongsTo(CompanyChartAccount::class, 'account_type_id', 'id');
+        return $this->belongsTo(ChartAccount::class, 'account_type_id', 'id');
     }
 
     public function user()

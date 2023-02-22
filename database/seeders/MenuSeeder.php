@@ -36,6 +36,36 @@ class MenuSeeder extends Seeder
 
         Menu::create([
             'parent_menu_id' => $menu->id,
+        	'name'       => 'Cash Flow',
+        	'slug'       => 'cash-flow',
+        	'url'        => 'accounting/cash-flow',
+            'base'       => 'cash-flow',
+            'is_export'  => false,
+            'permission' => 'cash-flow.view'
+        ]);
+
+        Menu::create([
+            'parent_menu_id' => $menu->id,
+        	'name'       => 'Chart of Accounts',
+        	'slug'       => 'chart-accounts',
+        	'url'        => 'accounting/chart-accounts',
+            'base'       => 'chart-accounts',
+            'is_export'  => false,
+            'permission' => 'chart-accounts.view'
+        ]);
+
+        Menu::create([
+            'parent_menu_id' => $menu->id,
+        	'name'       => 'Accounts Receivable',
+        	'slug'       => 'accounts-receivable',
+        	'url'        => 'accounting/accounts-receivable',
+            'base'       => 'accounts-receivable',
+            'is_export'  => false,
+            'permission' => 'accounts_receivable.view'
+        ]);
+
+        Menu::create([
+            'parent_menu_id' => $menu->id,
         	'name'       => 'Chart of Accounts',
         	'slug'       => 'chart-accounts',
         	'url'        => 'accounting/chart-accounts',
