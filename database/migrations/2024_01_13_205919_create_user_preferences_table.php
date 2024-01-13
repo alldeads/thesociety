@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateUserSettingsTable extends Migration
+return new class extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,9 @@ class CreateUserSettingsTable extends Migration
      */
     public function up()
     {
-        Schema::create('user_settings', function (Blueprint $table) {
+        Schema::create('user_preferences', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('user_id')->unsigned();
+            $table->bigInteger('user_id');
             $table->boolean('is_dark')->default(false);
             $table->timestamps();
         });
@@ -28,6 +28,6 @@ class CreateUserSettingsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('user_settings');
+        Schema::dropIfExists('user_preferences');
     }
-}
+};

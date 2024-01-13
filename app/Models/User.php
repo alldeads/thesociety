@@ -60,21 +60,14 @@ class User extends Authenticatable
         return $this->hasOne(Contact::class);
     }
 
-    public function setting()
+    public function preference()
     {
-        return $this->hasOne(UserSetting::class);
+        return $this->hasOne(UserPreference::class);
     }
 
     public function scopePerCompany($query)
     {
         $query->where('company_id', auth()->user()->empCard->company_id);
-    }
-
-    public static function getSetting()
-    {
-        return cache()->remember('user-setting', 60*60*24, function() {
-            return auth()->user()->setting ?? null;
-        });
     }
 
     public static function getUserDetails()
@@ -83,6 +76,13 @@ class User extends Authenticatable
             return User::where('id', auth()->id())
                         ->with(['profile', 'empCard.role'])
                         ->first();
+        });
+    }
+
+    public static function getUserPreference()
+    {
+        return cache()->remember('user-preference', 60*60*24, function() {
+            return auth()->user()->preference ?? null;
         });
     }
 

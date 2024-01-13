@@ -15,16 +15,44 @@ class PermissionSeeder extends Seeder
      */
     public function run()
     {
-        $permissions = ['view', 'read', 'export', 'create', 'update', 'delete'];
+        $permissions = [
+            'create', // Create record
+            'view', // View record
+            'show', // Show module menu
+            'update', // Update record
+            'delete', // Delete record
+            'export', // Export record
+        ];
 
         $menus = [
-            'dashboard', 'company', 'employee', 'role',
-            'chart', 'cashflow', 'customer', 'supplier',
-            'product', 'supply', 'purchase_order', 'tax',
-            'journal_entry', 'ledger', 'branch', 'stock_level',
-            'history', 'pos', 'sale', 'covid', 'payment_type',
-            'access', 'payment', 'invoice', 'expense', 'receipt',
-            'preference', 'accounts_payable', 'accounts_receivable'
+            'dashboard', 
+            // 'company', 
+            // 'employee', 
+            // 'role',
+            // 'chart', 
+            // 'cashflow', 
+            // 'customer', 
+            // 'supplier',
+            // 'product', 
+            // 'supply', 
+            // 'purchase_order', 
+            // 'tax',
+            // 'journal_entry', 
+            // 'ledger', 
+            // 'branch', 
+            // 'stock_level',
+            // 'history', 
+            // 'pos', 
+            // 'sale',
+            // 'payment_type',
+            // 'access', 
+            // 'payment', 
+            // 'invoice', 
+            // 'expense', 
+            // 'receipt',
+            // 'preference', 
+            // 'accounts_payable', 
+            // 'accounts_receivable'
         ];
 
         foreach ($menus as $menu) {

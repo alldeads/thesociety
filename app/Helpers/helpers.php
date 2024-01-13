@@ -82,10 +82,10 @@ class Helper
             }
         }
 
-        $settings = User::getSetting();
+        $preference = User::getUserPreference();
 
-        if ( $settings ) {
-            $data['theme'] = $settings->is_dark ? 'dark' : 'light';
+        if ( $preference ) {
+            $data['theme'] = $preference->is_dark ? 'dark' : 'light';
         }
         
         //layout classes
