@@ -19,3 +19,5 @@ yarn-error.log
 /vuexy-shell-scripts
 supervisord.log
 supervisord.pid
+.DS_Store
+composer.lock
